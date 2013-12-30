@@ -53,11 +53,8 @@ class Website < ActiveRecord::Base
   validates_uniqueness_of :subdomain
   validates_presence_of :subdomain
 
- # def to_liquid(language = nil)
- #   @stored_languages ||= {}
- #   language ||= self.default_language
- #   @stored_languages["#{language}"] ||= generate_liquid(language)
- # end
+  # TODO: move to controller
+  attr_accessible :subdomain, :title
 
   # Could be either subdomain or main domain.
   def main_domain

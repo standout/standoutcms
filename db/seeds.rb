@@ -21,10 +21,6 @@ Language.create(:short_code => 'en', :name => 'English')
 puts "- adding default site"
 w = Website.create!(:title => 'Development', :subdomain => 'development')
 
-# Add some pages
-puts "- adding a start page"
-Page.create(:website_id => w.id)
-
 # Add product categories
 puts "- adding product categories"
 pc1 = ProductCategory.create(:website_id => w.id, :title => 'Books')
