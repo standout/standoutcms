@@ -1,4 +1,5 @@
-# Standout CMS
+
+![Standout CMS Logo](http://standoutcms.se/assets/standout_cms-b5ce16797b6b31186f7b97355aefbb07.png)
 
 ## What is it?
 
