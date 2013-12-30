@@ -1,0 +1,21 @@
+Use this README file to introduce your application and point to useful places in the API for learning more.
+Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+
+=== Development notes
+
+Text (regular text fields)
+Images (regular images. Resizeable and cuttable)
+Plugin content (enter name of plugin? Settings box?)
+
+=== First login
+The migrations should have created a user with e-mail address admin@example.com and password 'admin'.
+Use it to log in and change the password.
+
+=== Plugins or "Extras"
+Plugins or Extras are application add-ons that enables more functionality to the user's webpage. This application does not handle all
+plugin functionality, only uploaded plugin files (publishing through FTP), managing the list of 
+available plugins and which customer who uses which plugin. 
+
+This could be used for billing purposes, since each plugin can have a cost associated with it. 
+All other plugin functionality is maintained through another application called standoutcms-plugins.
+Authentication is handled by sending the customer ID along with an authentication key.

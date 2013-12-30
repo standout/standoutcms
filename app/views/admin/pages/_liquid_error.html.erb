@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title>Error</title>
+	<style type="text/css">
+	body {
+		font-family: verdana;
+		font-size: 78%;
+		color: #333;
+		line-height: 1.5;
+		background: #fff;
+	}
+	</style>
+</head>
+<body>
+	<div class="error liquid_error">
+<h2>Liquid template error</h2>
+<p>
+	<%= liquid_error.message %>
+</p>
+
+<% if @page %>
+<dl>
+	<dt>Page</dt>
+	<dd><%= @page.id %>: <%= @page.title %></dd>
+	
+	<dt>Template</dt>
+	<dd><%= @page.page_template.id %>: <%= @page.page_template.name %></dd>
+</dl>
+<% end %>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<h1><%= t('product_category') %> - <%= @product_category.title %></h1>
+
+<%= render 'form' %>
+<%= render partial: 'admin/shared/product_images', locals: {parent: @product_category} %>
+<%= render partial: 'attachment_files' %>

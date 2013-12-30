@@ -1,0 +1,24 @@
+<%= link_to_function image_tag("close_window.png", :style => "position: absolute; top: 0px; right: 0px;"), "$('#settings').hide(); $('iframe#edit').height($(window).height() - 50); return false;" %>
+
+<div class="edit_field" style="margin-top: 10px;">
+
+  <h3><%= t('menu') %></h3>
+  <%= @page.page_template.name %> &raquo; #<%=h params[:div_id] %> 
+  
+  <%= form_for(@menu) do |f| %>
+	
+  	<p>
+  		<%= f.label :levels, t('number_of_sublevels') %><br />
+  		<%= f.select :levels, [[t('none'), 0], [t('one'), 1], [t('two'), 2], [t('three'), 3], [t('four'), 4]] %>
+  	</p>
+	
+  	<p>
+  		<%= f.label :start_level, t('starting_level') %><br />
+  		<%= f.select :start_level, [[t('ground_level'), 0], [t('subpages'), 1], [t('level', :level => '3'), 2], [t('level', :level => '4'), 3]] %>
+  	</p>
+
+  	<%= f.submit t('save') %>
+
+  <% end %>
+
+</div>

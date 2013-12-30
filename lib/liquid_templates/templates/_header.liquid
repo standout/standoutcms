@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{{ website.title }} - {{ page.title }}</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <meta name="description" content="{{ page.description }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style type="text/css">
+  html {
+      font-size: 100%;
+      overflow-y: scroll;
+  }
+
+  body {
+    margin: 0 auto;
+    background: #eee;
+    color: #333;
+    font-family: Tahoma, Geneva, sans-serif;
+  }
+
+  #container {
+      margin: 0 auto;
+      width: 75%;
+      max-width: 800px;
+      background: #fff;
+      padding: 1em;
+    }
+
+  /* Block HTML5 attributes */
+  header, footer, section, article {
+    display: block; }
+
+  /* Set rules for all header elements */
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  h1 { font-size: 18px; border-bottom: 1px #ccc solid; }
+  h2 { font-size: 16px; border-bottom: 1px #eee solid; }
+  h3 { font-size: 14px; }
+  h4, h5, h6 { font-size: 12px; }
+
+  h2.notice { color: green; }
+  h2.alert { color: red; }
+
+  b, strong { font-weight: bold; }
+
+  blockquote {
+    color: #888;
+    font-style: italic;
+  }
+
+  /* Don't use borders on images per default. Render them nicer in IE. */
+  img { border: 0; -ms-interpolation-mode: bicubic; }
+
+  a { color: #633; }
+  a:hover {
+    text-decoration: underline;
+    color: #933;
+  }
+  p {
+    margin: 0.5em 0;
+    padding: 0.5em 0;
+  }
+
+  form { margin: 0; }
+  fieldset {
+      margin: 0 3px;
+      padding: 15px 15px 0 15px;
+  }
+
+  /* Consistent ul/ol rendering */
+  ul, ol, dd {
+      margin: 1em 0;
+      padding: 0 0 0 1em;
+  }
+
+  /*  Menus, navigation */
+  div.menu ul, div.menu ol, nav ul, nav ol {
+      list-style: none;
+      list-style-image: none;
+      margin: 0;
+      padding: 0;
+  }
+
+  .field {
+      margin-bottom: 15px;
+  }
+
+  label {
+      display: inline-block;
+      width: 120px;
+  }
+
+  label span.req {
+    color: red;
+  }
+
+  div.cart {
+    background: #ddd;
+    border: 1px #ccc solid;
+    padding: 1px;
+  }
+  </style>
+
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $(".display-cart").click(function(){
+      $("#cart_items").toggle('slow');
+    });
+  });
+  </script>
+</head>
+
+<body>
+
+  <div id="container">
+
+    <header>
+
+      {% if flash.notice != "" %}
+        <h2 class="notice">{{ flash.notice }}</h2>
+      {% endif %}
+      {% if flash.alert != "" %}
+        <h2 class="alert">{{ flash.alert }}</h2>
+      {% endif %}
+
+      <h1>Welcome to {{ website.title }}</h1>
+      <nav id="menu" class="menu" data-startlevel="0" data-sublevels="0"></nav>
+
+
+    </header>
+
+    <div id="main" role="main">
+
+      <h2>Product categories</h2>
+      <ul>
+        {% for category in website.product_categories %}
+        <li><a href="{{ category.url }}" title="{{ category.title }}">{{ category.title }}</a></li>
+        {% endfor %}
+      </ul>
+
+      <div class="cart">
+      {% if cart.total_items_count == 0 %}
+       <p>You have no items in your shopping cart.</p>
+      {% else %}
+      <p>
+        You have <a href="#cart_items" class="display-cart">{{ cart.total_items_count }}</a> item(s) in <a href="/cart">your cart</a>.
+      </p>
+      <ol style="display: none;" id="cart_items">
+        {% for item in cart.items %}
+          <li>{{ item.quantity }} x {{ item.title }} - ${{ item.price_including_tax }}</li>
+        {% endfor %}
+      </ol>
+      <strong>Total price: ${{ cart.total_price_including_tax }}</strong>
+     {% endif %}
+      </div>
+
+      <!-- Will be replaced by a menu in the CMS -->
+      <nav id="submenu" class="menu" data-startlevel="1" data-sublevels="3"></nav>

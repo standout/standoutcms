@@ -1,0 +1,8 @@
+<li id="look_<%= look.id %>" class="template-choice <%= look.website.look_id == look.id ? 'active' : 'inactive' %>" style="list-style-type: none; display: block; text-align: center; width: 200px; height: 150px; float: left;">
+	<%= image_tag look.preview_path, :class => 'preview' %>
+  <h3 class = "template-title"><%=h truncate(look.title, :length => 25) || t('untitled') %></h3>
+  <%= link_to t('destroy'), [:admin, look], { :method => :delete, :confirm => 'Are you sure?', :remote => true, :class => 'button destroy' } %>
+   <%= link_to t('edit'), [:edit, :admin, look], :class => 'button edit'
+  %>
+</li>
+

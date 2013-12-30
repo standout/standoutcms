@@ -1,0 +1,12 @@
+<style type="text/css">
+#pages_wrapper {
+  display: block;
+}
+</style>
+<div class="flash_notice"><%= flash[:notice] %></div>
+
+<h2><%= t('log') %></h2>
+
+<ul id="page-notices">
+  <%= render :partial => 'admin/pages/notice', :collection => @notices, :as => :notice %>
+</ul>

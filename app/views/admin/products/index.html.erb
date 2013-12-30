@@ -1,0 +1,35 @@
+<h1><%= t('products') %></h1>
+
+
+<%= link_to t('new_product'), [:new, :admin, :product], :class => 'button add' %>
+<%= link_to t('new_csv_import'), [:new, :admin, :csv_import], :class => 'button add' %>
+
+
+<table class="products-table">
+  <tr>
+    <th></th>
+    <th><%= t('title') %></th>
+    <th><%= t('category') %></th>
+    <th><%= t('price') %></th>
+    <th></th>
+  </tr>
+
+<% @products.each do |product| %>
+  <tr class="<%= cycle('odd', 'even') %>">
+    <td><%= product_thumb(product) %></td>
+    <td><%= link_to product.title, admin_product_path(product) %></td>
+    <td><%= truncate(product.product_categories.collect(&:title).to_sentence, :length => 30) %>
+    <td><%= number_to_currency(product.price, { :locale => :sv, :unit => current_website.currency_unit }) %></td>
+    <td>
+      <%= link_to t('edit'), [:edit, :admin, product], :class => 'button' %>
+      <%= button_to t('duplicate'), [:duplicate, :admin, product], { :class => 'button' } %>
+      <%= link_to t('show'), product.complete_url, { :target => '_blank', :class => 'button' } %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @posts %>
+
+<br />
+

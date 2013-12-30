@@ -1,0 +1,25 @@
+<h1>Ny domän</h1>
+<% @domain = Domain.new(:website_id => @website.id) %>
+
+<% remote_form_for(@domain, :update => "domain_list") do |f| %>
+    <%= f.hidden_field :website_id %>
+
+  <p>
+    <b>Domännamn</b> (exempel: www.example.com)<br />
+    <%= f.text_field :name %> <%= f.submit "+" %>
+  </p>
+<% end %>
+
+			<p>Webbplatsens ID är: <span style="margin-left: 36px" class="api_key"><%= @website.id %></span></p>
+			<p>Webbplatsens API-nyckel: <span class="api_key"><%= @website.api_key %></span></p>
+     <%= render :partial => "users/user", :collection => @website.users, :locals => {:website => @website} %>
+     
+     <%= link_to_function "Add user", "Effect.Appear('form_#{@website.id}')" %>
+     
+     <div id="form_<%= @website.id %>" style="display: none;">
+       <% remote_form_for(User.new, :url => {:controller => :users, :action => :attach, :website_id => @website.id}) do |f| %>
+         <label for="email">E-post</label>
+         <%= text_field_tag :email %>
+         <%= submit_tag "+" %>
+       <% end %>
+     </div>

@@ -1,0 +1,45 @@
+<div class="edit_field">
+  <h1><%= t('remote') %></h1> 
+
+<%= link_to_function image_tag("close_window.png", :style => "position: absolute; top: 0px; right: 0px;"), "$('#settings').hide(); $('iframe#edit').height($(window).height() - 50); return false;" %>
+
+<div>
+	<%= plugin_tab t('settings'), 'plugin_settings' %>
+	<%= plugin_tab t('content'), 'plugin_content' if @content_item.extra.edit_url %>
+</div>
+
+<!-- settings for this plugin -->
+<div id="plugin_settings" class="plugin_tab" style="display: none;">
+	
+	<p><%= t('plugin_information') %></p>
+	
+	<%= form_for(@content_item.extra, { :remote => true }) do |f| %>
+		
+		<p>
+			<%= f.label :display_url, t('display_url') %><br />
+			<% unless @content_item.extra.display_url.to_s.match('http') %>
+			  <span id="extra_domain">http://<%= @content_item.page.website.domain rescue "example.com" %>/</span>
+			<% end %>
+			<%= f.text_field :display_url %>
+		</p>
+
+		<p>
+			<%= f.label :edit_url, t('edit_url') %><br />
+			<% unless @content_item.extra.edit_url.to_s.match('http') %>
+			  <span>http://<%= @content_item.page.website.domain rescue "example.com" %>/</span>
+			<% end %>
+			<%= f.text_field :edit_url %>
+		</p>
+		
+		<%= f.submit t('save') %>
+		
+	<% end %>
+	
+
+		
+</div>
+
+<div id="plugin_content" class="plugin_tab" style="display: block;">
+  <iframe id="plugin_iframe" src="about:blank" style="width: 95%; height: 430px;"></iframe>
+</div>
+</div>

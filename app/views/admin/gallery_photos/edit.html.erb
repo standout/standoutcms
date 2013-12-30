@@ -1,0 +1,28 @@
+<h1>Editing gallery_photo</h1>
+
+<%= form_for(@gallery_photo) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :gallery_id %><br />
+    <%= f.text_field :gallery_id %>
+  </p>
+  <p>
+    <%= f.label :original_path %><br />
+    <%= f.text_field :original_path %>
+  </p>
+  <p>
+    <%= f.label :position %><br />
+    <%= f.text_field :position %>
+  </p>
+  <p>
+    <%= f.label :caption %><br />
+    <%= f.text_field :caption %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @gallery_photo %> |
+<%= link_to 'Back', gallery_photos_path %>

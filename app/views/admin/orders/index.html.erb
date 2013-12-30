@@ -1,0 +1,20 @@
+<h1><%= t('orders') %></h1>
+
+<table id="orders" class="products-table">
+
+  <thead>
+    <tr>
+      <th><%= t('order_number') %></th>
+      <th><%= t('customer') %></th>
+      <th><%= t('date_header') %></th>
+      <th><%= t('price') %> <%= t('incl_vat') %></th>
+      <th><%= t('payment') %></th>
+      <th><%= t('status') %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render @orders %>
+  </tbody>
+</table>

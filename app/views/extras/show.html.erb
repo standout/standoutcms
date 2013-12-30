@@ -1,0 +1,18 @@
+<p>
+  <b>Name:</b>
+  <%=h @extra.name %>
+</p>
+
+<p>
+  <b>Edit url:</b>
+  <%=h @extra.edit_url %>
+</p>
+
+<p>
+  <b>Public:</b>
+  <%=h @extra.public %>
+</p>
+
+
+<%= link_to 'Edit', edit_extra_path(@extra) %> |
+<%= link_to 'Back', extras_path %>

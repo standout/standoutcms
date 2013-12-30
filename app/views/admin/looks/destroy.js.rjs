@@ -1,0 +1,5 @@
+page.remove "look_#{@look.id}"
+if @look.website.looks.size == 0
+  page.replace_html "template_blank_slate", :partial => 'looks/blank'
+  page.visual_effect :appear, "template_blank_slate"
+end

@@ -1,0 +1,14 @@
+<tr class='<%= cycle('odd', 'even') %>'>
+  <td>
+    <%= shipping_cost.from_value %>
+  </td>
+  <td>
+    <%= shipping_cost.to_value %>
+  </td>
+  <td>
+    <%= shipping_cost.cost %>
+  </td>
+  <td>
+    <%= link_to t('edit'), [:edit, :admin, shipping_cost], class: 'button' %>
+  </td>
+</tr>

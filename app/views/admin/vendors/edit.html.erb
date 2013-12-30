@@ -1,0 +1,23 @@
+<%= form_for([:admin, @vendor]) do |f| %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :slug, t('url') %><br>
+    http://<%= @website.main_domain %>/vendors/<%= f.text_field :slug %>
+  </div>
+
+  <div class="field">
+    <%= f.label :logo %><br>
+    <%= f.file_field :logo %>
+
+    <%= image_tag @vendor.logo.url(:small) %>
+
+  </div>
+
+  <%= f.submit %>
+
+<% end %>

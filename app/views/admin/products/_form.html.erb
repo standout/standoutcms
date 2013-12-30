@@ -1,0 +1,80 @@
+<%= form_for([:admin, @product]) do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :url %><br />
+    http://<%= @website.main_domain %>/products/<%= f.text_field :url %>
+  </div>
+
+  <div class="field">
+    <ul>
+    <% @website.product_categories.roots.each do |category| %>
+      <li>
+      <%= check_box_tag "product[product_category_ids][]", category.id, @product.product_categories.include?(category) %>
+      <% if @product.product_categories.first == category %>
+        <strong><%= f.label category.title %></strong>
+      <% else %>
+        <%= f.label category.title %>
+      <% end %>
+
+      <% if category.children.any? %>
+      <ul>
+        <% category.children.each do |child| %>
+        <li>
+          <%= check_box_tag "product[product_category_ids][]", child.id, @product.product_categories.include?(child) %>
+          <% if @product.product_categories.first == child %>
+            <strong><%= f.label child.title %></strong>
+          <% else %>
+            <%= f.label child.title %>
+          <% end %>
+        </li>
+        <% end %>
+      </ul>
+      <% end %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description, :class => 'ckeditor' %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </div>
+  <% @website.product_property_keys.each do |product_property_key| %>
+    <div class='field'>
+      <label><%= product_property_key.name %></label><br>
+      <input name='product_property_values[<%= product_property_key.slug %>]' type='text' value='<%= @product.send(product_property_key.slug) %>'>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :vat_percentage %><br />
+    <%= f.select :vat_percentage, Product::VAT_RATES.collect{|r| ["#{r} %", r]} %>
+  </div>
+
+  <div class="field">
+    <%= f.label :vendor_id %><br />
+    <%= f.select :vendor_id, @website.vendors.collect{ |v| [v.name, v.id]}, :include_blank => true %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

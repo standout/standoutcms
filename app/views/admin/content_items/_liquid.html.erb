@@ -1,0 +1,10 @@
+<div id="content_item_<%= content_item.id %>"  
+	class="content_item cms_liquid standoutcms_unselected" 
+	style="position: relative; overflow: hidden; min-height: 32px; z-index: 1000;" 
+	onclick="parent.select_item(this.id)" 
+	onmouseover="show_delete_button(this);" 
+	onmouseout="hide_delete_button(this)" 
+	ondblclick="parent.load_liquid('<%= content_item.id %>', '<%= content_item.page_id %>')">
+	<%= delete_content_item(content_item.id) %>
+  <%= content_item.content.to_s == "" ? raw("<p>#{t('doubleclick_to_edit')}</p>") : raw(content_item.content) %>
+</div>

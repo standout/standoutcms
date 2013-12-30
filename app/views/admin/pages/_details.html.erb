@@ -1,0 +1,139 @@
+<div class="edit_field">
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+	// Submitting the page details form
+	// TODO: Move into separate javascript file
+	$('#detail_form').submit(function(){
+		$("#details_spinner").show();
+		$.post($(this).attr('action'), $(this).serialize(), function(data){
+			// Update list of pages
+			$("#pages_list").html(data);
+			$("#details_spinner").hide();
+		}, "html");
+		return false;
+	});
+
+	$("a.language_selector").click(function(){
+		$('.language_pane').hide();
+		$('.language_selector').removeClass('selected');
+		$($(this).attr('href')).show();
+		$(this).addClass('selected');
+		return false;
+	});
+
+	$("span.page_address_nice_display").click(function(){
+
+		$(this).next('input').show().focus();
+		$(this).hide();
+
+	});
+
+	$("p.page_address input").focusout(function(){
+		$(this).prev('span.page_address_nice_display').html($(this).val()).show();
+		$(this).hide();
+	});
+
+	$("form.edit_page input.delete").bind('click', function(){
+	  return confirm("Really delete page?");
+	});
+
+});
+</script>
+
+<%= form_for [:admin, @page], :html => {:id => 'detail_form', :method => :put } do %>
+  <%= hidden_field_tag :id, @page.id %>
+
+  <%= submit_tag t('save_changes') %> <span id="details_spinner" style="display: none;"><%= image_tag("spinner.gif") %></span>
+
+	<% if @page.languages.length > 1 %>
+	<div id="language_selectors">
+		<% @page.languages.each do |language| %>
+			<a class="language_selector<%= @page.languages.first == language ? ' selected' : '' %>" href="#language_<%= language.short_code %>"><%= image_tag("flags/#{language.short_code}.png") %></a></li>
+		<% end %>
+	</div>
+	<% end %>
+
+	<% @page.languages.each do |language| %>
+	<div class="language_pane" id="language_<%= language.short_code %>" style="display: <%= @page.languages.first == language ? 'block' : 'none' %>;">
+
+		<p>
+			<label for="page_title_<%= language.short_code %>"><%= t('title')%> (<%= language.name %>)</label>
+			<%= text_field_tag "page[title][#{language.short_code}]", @page.title(language.short_code), :size => 40 %>
+		</p>
+
+			<p>
+				<label for="page_description_<%= language.short_code %>"><%= t('description')%> (<%= language.name %>)</label>
+				<%= text_area_tag "page[description][#{language.short_code}]", @page.description(language.short_code), :rows => 3, :cols => 40 %><br />
+				<small><%= t('seo_description')%></small>
+			</p>
+
+			<p class="page_address">
+		    <label for="page_address_<%= language.short_code %>"><%= t('url')%> (<%= language.name %>)</label>
+		    <%= @page.website.domain rescue "www.example.com" %>/<span class="page_address_nice_display"><%= @page.address(language.short_code) %></span>
+		    <%= text_field_tag "page[address][#{language.short_code}]", @page.address(language.short_code), :style => "display: none;" %>
+		  </p>
+
+      <p>
+        <label for="page_direct_link_<%= language.short_code %>"><%= t('direct_link') %> (<%= language.name %>)</label>
+    		<%= text_field_tag "page[direct_link][#{language.short_code}]", @page.direct_link(language.short_code) %><br />
+    		<small>Om denna är ifylld länkas menyvalet direkt till den adressen istället för att visa innehållet på sidan</small>
+      </p>
+
+      <p>
+        <%= hidden_field_tag "page[show_in_menu][#{language.short_code}]", 0 %>
+        <%= check_box_tag "page[show_in_menu][#{language.short_code}]", 1, @page.show_in_menu(language.short_code) %>
+        <label for="page_show_in_menu_<%= language.short_code %>"><%= t('show_in_menu') %></label>
+      </p>
+
+		</div>
+
+	<% end %>
+
+  <p>
+    <label for="page_seo_title">SEO-<%= t('title')%></label>
+    <%= text_field :page, :seo_title, :size => 40 %><br />
+    <small><%= t('seo_title')%></small>
+  </p>
+
+  <p>
+    <label for="page_parent_id"><%= t('subpage_for') %></label>
+    <%#= select("page", "proposed_parent_id", @page.available_parents.map{|page| [padded_page_name(page,1,"-"), page.id]}, {:include_blank => true, :selected => @page.parent_id}) %>
+    <%= select :page, :parent_id, Page.find(:all, :conditions => ["website_id = ? AND id != ?", @page.website_id, @page.id]).collect{ |p| [p.title, p.id]}, :include_blank => true %>
+  </p>
+
+
+
+  <!--
+  deprecated
+	<p>
+    <%= check_box :page, :blogentry %>
+    <label for="page_blogentry"><%= t('this_page_handles_blogentries') %></label>
+  </p> -->
+
+	<p>
+		<label for="page_page_template_id"><%= t('page_template') %></label>
+		<%= select :page, :page_template_id, @page.website.page_templates.no_partials.collect{ |pt| [pt.name, pt.id] } %>
+	</p>
+
+	<p>
+		<%= check_box :page, :login_required %> <%= link_to_function t('choose_password') + " ...", '$("#page_password_setter").toggle();' %>
+		<label for="page_login_required"><%= t('login_needed') %></label>
+	</p>
+
+	<p id="page_password_setter" style="display: none;">
+	  <label for="page_password"><%= t('password')%></label>
+	  <%= text_field :page, :password %>
+	</p>
+
+  <%= submit_tag t('save_changes') %>
+
+<% end %>
+</div>
+
+<p>
+  <%= form_for [:admin, @page], :html => { :method => :delete } do |f| %>
+    <%= f.submit t('delete'), :class => 'button delete' %>
+  <% end %>
+</p>

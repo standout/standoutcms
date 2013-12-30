@@ -1,0 +1,21 @@
+<%= form_for [:admin, @look, @page_template] do |f| %>
+
+  <p>
+    <%= f.label :slug, t('liquid_name') %><br />
+    <%= f.text_field :slug %>
+  </p>
+  <p>
+    <%= f.label :name, t('name') %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.check_box :default_template %> <%= f.label :default_template %>
+  </p>
+  <p>
+    <%= f.check_box :partial %> <%= f.label :partial %> 
+  </p>
+
+
+	<p><%= f.submit t('save') %></p>
+
+<% end %>

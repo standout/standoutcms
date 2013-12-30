@@ -1,0 +1,8 @@
+page.remove "page_#{@page.id}"
+page['selected_page'].value = ""
+page['remove_page'].disabled = "true"
+page['page_details'].innerHTML = ""
+page.replace_html 'sortable_pages', :partial => 'pages/sortable', :locals => { :website => @page.website }
+if @page.website.pages(true).size == 0
+   page.visual_effect :appear, "pages_blank_slate"
+end

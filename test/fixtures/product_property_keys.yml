@@ -1,0 +1,11 @@
+one:
+  name: 'ISBN'
+  slug: 'isbn'
+  data_type: 'string'
+  website: standout
+
+two:
+  name: 'Pages'
+  slug: 'pages'
+  data_type: 'integer'
+  website: standout

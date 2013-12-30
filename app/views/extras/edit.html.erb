@@ -1,0 +1,23 @@
+<%= form_for(@extra) do |f| %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :edit_url %><br />
+    <%= f.text_field :edit_url %>
+  </p>
+  <p>
+    <%= f.label :display_url %><br />
+    <%= f.text_field :display_url %>
+  </p>
+
+  <p>
+    <%= f.label :public %><br />
+    <%= f.check_box :public %>
+  </p>
+  <p>
+    <%= f.submit "Spara ändringar" %>
+  </p>
+<% end %>

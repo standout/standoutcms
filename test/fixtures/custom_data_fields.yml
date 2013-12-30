@@ -1,0 +1,5 @@
+first_cdf:
+  name: "First"
+  fieldtype: "string"
+  custom_data_list: first_cdl
+  slug: "first"

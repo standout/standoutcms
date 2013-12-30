@@ -1,0 +1,3 @@
+page.replace "look_#{@look.id}", :partial => 'looks/look', :object => @look
+page['look_details'].hide
+page['looks_manager'].show

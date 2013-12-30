@@ -1,0 +1,51 @@
+<script type="text/javascript">
+$(document).ready(function(){
+
+	// Submit look changes via ajax.
+	$("form.edit_look").submit(function(){
+		$.post($(this).attr('action'), $(this).serialize());
+		return false;
+	});
+
+});
+</script>
+
+<%= form_for([:admin, @look]) do |f| %>
+
+	<div id="saving_and_info">
+    <%= f.submit t('save_changes') %>
+
+		<p>
+			<%= f.label :title, t('title') %><br />
+			<%= f.text_field :title %>
+		</p>
+		<p>
+			<%= t('last_changed') %> <%= l(@look.updated_at, :format => :short )%>
+		</p>
+
+	</div>
+
+<% end %>
+
+
+<p>
+
+  <div id="looks_files" style="display: none">
+	<p>
+		Du kan antingen hantera filerna direkt här i CMS:et med hjälp av filuppladdningsfunktionen nedan, eller välja
+		att arbeta direkt mot din FTP-server och sedan hämta in filerna hit.<br />
+		Mappen på servern heter <code><%= @look.image_path %></code>
+	</p>
+
+	<hr />
+
+    <!-- target of file uploads -->
+    <div style="height: 1px; width: 1px; overflow: hidden; text-indent: 10px;">
+      <iframe id="looks_files_iframe" style="width: 1px height: 1px;" src="about:blank" name="looks_files_iframe"></iframe>
+    </div>
+
+  </div>
+</p>
+</div>
+
+<% stylesheet "page_templates" %>

@@ -1,0 +1,16 @@
+<form action="https://www.payson.se/merchant/default.aspx" method="post"> 
+ 
+   <input type="hidden" name="BuyerEmail" value="<%= @order.email %>"> 
+   <input type="hidden" name="AgentID" value="4380"> 
+   <input type="hidden" name="Description" value="<%= @order.product.id %> - <%=h @order.product.title %>"> 
+   <input type="hidden" name="SellerEmail" value="order@mikrobutik.se"> 
+   <input type="hidden" name="Cost" value="<%= number_to_currency(@order.price, :format => "%n") %>"> 
+   <input type="hidden" name="ExtraCost" value="<%= number_to_currency(@order.shipping_cost, :format => "%n") %>"> <!-- shipping --> 
+   <input type="hidden" name="OkUrl" value="<%= @order.payson_ok_url %>"> 
+   <input type="hidden" name="CancelUrl" value="http://mikrobutik.se<%= secret_order_path(@order) %>"> 
+   <input type="hidden" name="RefNr" value="<%= @order.id %>"> 
+   <input type="hidden" name="MD5" value="<%= @order.payson_md5 %>"> 
+   <input type="hidden" name="GuaranteeOffered" value="1"> 
+ 
+   <input type="submit" value="Gå vidare till Payson"> 
+</form>

@@ -1,0 +1,24 @@
+<h1>Listing extras</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Edit url</th>
+    <th>Public</th>
+  </tr>
+
+<% for extra in @extras %>
+  <tr>
+    <td><%=h extra.name %></td>
+    <td><%=h extra.edit_url %></td>
+    <td><%=h extra.public %></td>
+    <td><%= link_to 'Show', extra %></td>
+    <td><%= link_to 'Edit', edit_extra_path(extra) %></td>
+    <td><%= link_to 'Destroy', extra, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New extra', new_extra_path %>

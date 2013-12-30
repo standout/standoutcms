@@ -1,0 +1,24 @@
+{% include 'header' %}
+     <h1>Shopping cart</h1>
+
+     {% if cart.total_items_count == 0 %}
+       <p>You have no items in your shopping cart.</p>
+     {% else %}
+       <p>
+         You have {{ cart.total_items_count }} in your cart.
+       </p>
+
+       <ol>
+         {% for item in cart.items %}
+           <li>{{ item.quantity }} x {{ item.title }} - ${{ item.price_including_tax }}</li>
+         {% endfor %}
+       </ol>
+       <p>Shipping cost: ${{ cart.shipping_cost }}</p>
+       <strong>Total price: ${{ cart.total_price_including_tax | plus: cart.shipping_cost }}</strong>
+     {% endif %}
+
+     <p>
+        Go to <a href="/checkout">checkout</a>
+     </p>
+
+{% include 'footer' %}

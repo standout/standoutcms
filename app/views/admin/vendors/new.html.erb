@@ -1,0 +1,40 @@
+<%= form_for([:admin, @vendor], :html => { :multipart => true }) do |f| %>
+  <% if @vendor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@vendor.errors.count, "error") %> prohibited this vendor from being saved:</h2>
+
+      <ul>
+      <% @vendor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :slug, t('url') %><br>
+    http://<%= current_website.main_domain %>/vendors/<%= f.text_field :slug %>
+  </div>
+
+  <div class="field">
+    <%= f.label :logo %><br>
+    <%= f.file_field :logo %>
+  </div>
+
+  <%= f.submit %>
+
+<% end %>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#vendor_name").stringToSlug({
+    getPut: '#vendor_slug'
+  });
+});
+</script>

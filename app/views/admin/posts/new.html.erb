@@ -1,0 +1,29 @@
+<%= link_to t('back'), [:admin, :posts], :class => 'ajax button' %>
+<h2><%= t('new_blogpost') %></h2>
+
+<%= form_for([:admin, @post]) do |f| %>
+
+	<%= f.hidden_field :website_id %>
+
+  <p>
+    <%= f.label :title, t('title') %><br />
+    <%= f.text_field :title %>
+  </p>
+
+	<p>
+		<%= f.label :blog_category_id, t('category') %><br />
+		<%= f.select :blog_category_id, @website.blog_categories.collect{ |c| [c.name, c.id]} %> <%= link_to t('blogposts.edit_categories'), [:admin, :blog_categories], :class => 'button ajax' %>
+	</p>
+
+  <p>
+    <%= f.label :content, t('content') %><br />
+    <%= f.text_area :content, :class => 'ckeditable' %>
+  </p>
+  <p>
+    <%= f.label :allow_comments, t('allow_comments') %><br />
+    <%= f.check_box :allow_comments %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

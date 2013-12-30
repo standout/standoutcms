@@ -1,0 +1,448 @@
+<%= 
+	begin
+	  
+	  # See if the page is connected to a data list.
+	  custom_data_list = @page.website.custom_data_lists.where(:page_id => @page.id).first
+	  item = custom_data_list.custom_data_rows.first if custom_data_list
+	  
+		if @page.blogentry? && params[:slug]
+			Liquid::Template.parse(@page.look.blogentry).render(
+        'language' => params[:language],
+        'posts' => @page.website.posts, 
+        'post' => @page.website.posts.find_by_slug(params[:slug]),
+        'categories' => @page.website.blog_categories,
+        'breadcrumbs' => @page.breadcrumbs,
+        'page_template_id' => @page.page_template_id)
+		else
+		  stuff = {
+		    'page'              => PageDrop.new(@page, params[:language]),
+		    'language'          => params[:language], 
+			  'posts'             => @page.website.posts, 
+			  'categories'        => @page.website.blog_categories,
+			  'breadcrumbs'       => @page.breadcrumbs,
+			  'page_template_id'  => @page.page_template_id,
+			  'website'           => WebsiteDrop.new(@page.website)
+			}
+			@page.website.custom_data_lists.each do |cdl|
+			  stuff["#{cdl.liquid_name}"] = cdl
+			end
+			stuff["item"] = item if item
+			raw Liquid::Template.parse(@page.page_template.html.gsub("</body>", "").gsub("</html>", "")).render(stuff)
+		end
+   rescue Liquid::SyntaxError => e
+	 		render :partial => 'admin/pages/liquid_error', :locals => { :liquid_error => e }
+   rescue => e
+			render :partial => 'admin/pages/layout_error', :locals => { :error => e }
+	 
+	end
+%>
+
+<div id="cms_toolbar">
+		
+	<p id="cms_add_text_element">
+		<%= image_tag ('edit_text.gif') %> <%= t('text')%>
+	</p>
+	
+	<p id="cms_add_gallery">
+		<%= image_tag 'edit_image.gif' %> <%= t('gallery') %>
+	</p>
+	
+	
+	<p id="cms_add_remote">
+		<%= image_tag 'edit_plugin.gif' %> <%= t('remote') %>
+	</p>
+	
+	<p id="cms_add_liquid">
+	  <%= image_tag 'icon_code.png' %> <%= t('liquid') %>
+	</p>
+
+</div>
+
+<div id="cms_toolbar_tip">
+  <%= t('toolbar_instructions') %>
+</div>
+
+<%= javascript_include_tag 'jquery-ui' %>
+
+<script type="text/javascript">
+  // Make sure that every Ajax request sends the CSRF token
+  function CSRFProtection(xhr) {
+    var token = "<%= Rack::Utils.escape_html(form_authenticity_token) %>";
+    if (token) xhr.setRequestHeader('X-CSRF-Token', token);
+  }
+
+	// Load editables and menus when we are ready to serve this page.
+	$(document).ready(function(){
+		
+
+    // Connect our CSRF-protection when document is ready
+    // If we do it earlier, we could be overwritten later by late jQuery inclusions.
+    if ('ajaxPrefilter' in $) $.ajaxPrefilter(function(options, originalOptions, xhr) { CSRFProtection(xhr); });
+    else $(document).ajaxSend(function(e, xhr) { CSRFProtection(xhr); });
+
+
+    $('.editable, .menu')
+      .attr('unselectable', 'on')
+      .css('-moz-user-select', 'none')
+      .each(function() { 
+        this.onselectstart = function() { return false; };
+      });
+
+		$('#cms_toolbar p').draggable({ revert: 'invalid', helper: "clone", iframeFix: true });
+		
+		// Hide/show toolbar tip
+		$("#cms_toolbar_tip").delay(3000).hide('slow');
+		$("#cms_toolbar").hover(function(){
+		  $("#cms_toolbar_tip").stop(true, true).fadeIn();
+		}, function(){
+		  $("#cms_toolbar_tip").stop(true, true).fadeOut();
+		});
+		
+		load_editables_and_menus();
+		fix_links_to_blog();
+		
+		// Links to items
+		$("a.item").each(function(){
+			$(this).click(function(){
+				parts = $(this).attr('href').split('/');
+				slug = parts[parts.length-1];
+				window.location = '/pages/<%= @page.id %>/custom_data_rows/' + slug;
+				return false;
+			});
+		});
+		
+		$('body').append('<div style="height: 100%; width: 5px; padding: 0; position: fixed; top: 0; left: 100px;"><img src="/images/shadow50.png" alt="" style="height: 100%; width: 5px;"></div>');
+		$('html').css('padding-left', '150px');
+		
+		
+	});
+	
+	function fix_links_to_blog()
+	{
+		$("a.blogpost").each(function(index,element){
+			$(this).click(function(){
+				slug = $(this).attr('href').replace('http://<%= @page.website.domain %>/', '');
+				window.location = String(document.location).replace(/(#|\?).*/, '') + '?itemslug=' + slug;
+				return false;
+			});
+		});
+	}
+	
+	// Load content of each content item with ajax.
+	function load_editables_and_menus()
+	{
+		
+		$('.editable').each(function(index, element) {
+
+			// Make sure the editables has an id
+			if($(this).attr('id') == undefined){
+				$(this).css('background-color', "#c00");
+				$(this).css('text-align', 'center');
+				$(this).css('color', '#fff');
+				$(this).css('min-height', '100px');
+				$(this).html('<p>This .editable needs an HTML id to work. Fix it in the template.</p>');
+				return true;
+			}
+			$(this).css('min-height', '100px');
+			$(this).css('outline', "#333 dashed 1px"); 
+			
+
+			$(this).droppable({
+				activeClass: "cms-ui-state-hover",
+				hoverClass: "cms-ui-state-active",
+				drop: function( event, ui ) {
+				  
+				  // Based on what we are dropping, perform different tasks.				  
+				  switch(ui.draggable.attr('id'))
+          {
+            case "cms_add_text_element":
+              add_new_text_element($(this).attr('id'));
+              break;
+              
+            case "cms_add_gallery": 
+              add_gallery_element($(this).attr('id'));
+              break;
+              
+            case "cms_add_remote":
+              add_remote_element($(this).attr('id'));
+              break;
+              
+            case 'cms_add_liquid':
+              add_liquid_element($(this).attr('id'));
+              break;
+          }
+				}
+			});
+
+			$(this).load(
+			 	'/admin/pages/<%= @page.id %>/content_items/' + $(this).attr('id') + '?language=' + parent.$('#language_setting').val(), 
+			 	function(){ 
+			 	 make_sortable($(this));
+			 	 point_out_galleries($(this));
+			 	}
+			); 
+
+			$(this).bind('click', function(event) {
+			  event.preventDefault();
+				select_element($(this).attr('id'));
+			});
+
+			$(this).bind('mouseenter', function(d){ 
+				$(d).css('outline', "#900 dotted 2px"); 
+				$(d).css('cursor','hand'); 
+			});
+			$(this).bind('mouseleave',  function(d){
+				parent.unselect_element_temp(d.id);
+			});
+
+
+		});
+		
+		// Layout Images: (gallery with specific height/width)
+    $("div.cms-layoutimage").each(function(index, element){
+      default_image = $(this).find('img:last');
+			$(this).load('/admin/pages/<%= @page.id %>/content_items/' + $(this).attr('id') + '?language=' + parent.$('#language_setting').val() + '&imagesize=' + $(this).data('imagesize'), function(){
+			if(default_image.attr('src'))
+			{
+			  if($(this).find('img').size() == 1)
+			  {
+			    $(this).append(default_image);
+			  }
+			} else {
+			  $(this).css('background-image', '/assets/missing.png');
+			}			
+			
+			});
+
+			$(this).bind('click', function(){
+        parent.load_gallery($(this).children('div.content_item:first').attr('id').replace('content_item_', ''));
+        return false;
+      });
+    });
+    
+
+
+    // Menu objects
+    $('.menu').each(function(index, element){
+      $(this).html('Loading ...');
+			$(this).load('/admin/pages/<%= @page.id %>' + 
+			  '/menu_items/?html_id=' + $(this).attr('id') + '&language=' + parent.$('#language_setting').val() 
+			  + '&startlevel=' + $(this).data("startlevel") 
+			  + '&sublevels=' + $(this).data("sublevels"));
+			
+			// Load  menu settings on click
+			$(this).bind('click', function(el){
+			  
+			  parent.load_menu_settings(<%= @page.id %>, $(this).attr('id'));
+			  
+				return false;
+			});
+		
+		});
+		
+		$('.breadcrumbs').each(function(index, element) {
+			$(this).html("<%= @page.breadcrumbs_html %>");
+		});
+
+	}
+
+// Make galleries more visible to the customer if they have no images
+function point_out_galleries(div)
+{
+  div.children('div.cms-gallery').each(function(){
+    if($(this).find('img').size() == 1)
+    {
+      $(this).append("<img src='/assets/missing.png' alt='' />");
+    } 
+  }); 
+}
+
+function make_sortable(div)
+{
+  div.sortable({  zIndex: 9000, items: 'div.content_item', 
+  update: function(event, ui) {
+    $.post('/admin/content_items/order?page_id=<%= @page.id %>&div_id=' + $(div).attr('id'), $(this).sortable('serialize', { key: 'contentitems[]' }));
+  }});
+  
+}
+
+
+function unmark_all_elements()
+{
+  $('.editable').each(function(index, div)
+  {
+		//alert('index:' + index + ' element:' + div);
+    $(div).css('outline', 'grey dotted 1px');
+		try {
+    if(parent.$('#selected_element').val() != div.attr('id'))
+    {
+      $('#' + div.attr('id') + ' .content_item').css('outline', "#334 dotted 1px");
+    } } catch(e) {
+			// do nothing
+		}
+  });
+}
+
+function add_remote_element(element_id)
+{
+	$.post('/admin/content_items/', {'content_item': {'page_id': <%= @page.id %>, 'for_html_id': element_id, 'language': parent.$('#language_setting').val(), 'content_type': 'remote'}}, function(data) {
+		$(data).appendTo('#' + element_id);
+		$('html, body').animate({
+		    scrollTop: $("#" + element_id + ' div.content_item:last').offset().top
+		}, 1000);
+	});
+}
+
+function add_liquid_element(element_id)
+{
+	$.post('/admin/content_items/', {'content_item': {'page_id': <%= @page.id %>, 'for_html_id': element_id, 'language': parent.$('#language_setting').val(), 'content_type': 'liquid'}}, function(data) {
+		$(data).appendTo('#' + element_id);
+		$('html, body').animate({
+		    scrollTop: $("#" + element_id + ' div.content_item:last').offset().top
+		}, 1000);
+	});
+}
+
+
+function add_gallery_element(element_id)
+{
+	$.post('/admin/content_items', {'content_item': {'page_id': <%= @page.id %>, 'for_html_id': element_id, 'language': parent.$('#language_setting').val(), 'content_type': 'gallery'}}, function(data) {
+		$(data).appendTo('#' + element_id);
+	
+		$('html, body').animate({
+		    scrollTop: $("#" + element_id + ' div.content_item:last').offset().top
+		}, 1000);
+	
+	});
+}
+
+function add_new_text_element(element_id)
+{
+	$.post('/admin/content_items/', { 'content_item[for_html_id]': element_id, 'content_item[page_id]': <%= @page.id %>, 'content_item[language]': parent.$('#language_setting').val() }, function(data){
+		$(data).appendTo("#" + element_id);
+		$('html, body').animate({
+		    scrollTop: $("#" + element_id + ' div.content_item:last').offset().top
+		}, 1000);
+	});
+}
+
+
+
+// Remove the standard text that displays when we have an element with no content
+function remove_placeholders(div_id)
+{
+  $('#' + div_id + ' .placeholder').each(function(index, div){
+    div.remove();
+  });
+}
+
+function select_element(div_id)
+{
+	parent.$('#selected_content_item').val(div_id);
+}
+
+function reset_if_no_items_are_left(div_id)
+{
+  items_left = Element.empty(div_id);
+  if(items_left == true)
+  {
+    $(div_id).innerHTML = '<p class="placeholder">Lägg till innehåll i den här rutan genom att klicka på knappen "Text- och bildruta" längst ned på sidan.</p>';
+  }
+}
+
+function show_delete_button(element)
+{
+	$(element).find('div.delete_content_item').show();
+}
+
+function hide_delete_button(element)
+{
+	$(element).find('div.delete_content_item').hide();
+}
+
+</script>
+<style type="text/css">
+  .menu {
+    outline: 1px dotted #333;
+    min-height: 20px;
+  }
+  .editable-background { 
+    background:#222; filter:alpha(opacity=80); height:100%; -khtml-opacity:0.8; -moz-opacity:0.8; opacity:0.8; text-shadow:0 0 0 #000; width:100%;
+  }
+
+  div.standoutcms_selected {
+    outline: 2px dotted #333;
+  }
+
+  div.standoutcms_unselected {
+    outline: 1px dotted #ccc;
+  }
+
+  div.editable {
+    position: relative; 
+    cursor: move;
+    overflow: hidden;
+    border:0; margin: 0; 
+    min-height: 15px;
+  }
+
+  #cms_toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 150px;
+    height: 100%;
+    background: #333;
+    color: #fff;
+    z-index: 9000;
+  }
+
+  #cms_toolbar p {
+    padding: 5px;
+    margin: 5px;
+    cursor: move;
+    color: #eee;
+    background: #444;
+    font-size: 12px;
+    line-height: 12px;
+    font-family: 'lucida sans', 'helvetica', 'arial';
+    font-weight: normal;
+    text-align: left;
+  }
+
+  #cms_toolbar p img {
+    border: 0;
+    vertical-align: middle;
+  }
+  
+  div.cms-layoutimage {
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  
+  #cms_toolbar_tip {
+    position: fixed;
+    top: 50px;
+    left: 150px;
+    background: #FDF2B4;
+    color: #333;
+    font-size: 11px;
+    line-height: 16px;
+    padding: 1em;
+    border: 2px #333 solid;
+    border-left: 0;
+    font-family: 'lucida sans', 'helvetica', sans-serif;
+  }
+
+  .editable.cms-ui-state-active {
+    outline: 2px solid #333 !important;
+    background-color: #C3E68B !important;
+  }
+
+  .cms-ui-state-hover {
+    outline: 2px solid #ccc !important;
+    background-color: #FDF1B4 !important;
+  }
+</style>
+</body>
+</html>

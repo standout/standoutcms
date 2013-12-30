@@ -1,0 +1,22 @@
+<h2><%= t('categories') %></h2>
+<table class="datalist">
+<% for blog_category in @blog_categories %>
+<tr class="<%= cycle('odd', 'even') %>">
+	<td><%=h blog_category.name %></td>
+	<td>
+		<%= link_to t('edit'), [:edit, :admin, blog_category], :class => 'button edit ajax' %>
+		<%= button_to t('destroy'), [:admin, blog_category], :confirm => 'Are you sure?', :method => :delete, :class => 'ajaxdelete button' %>
+	</td>
+</tr>
+<% end %>
+<tr class="<%= cycle('odd', 'even') %>">
+	<td>
+		<%= form_for [:admin, BlogCategory.new(:website_id => @website.id)] do |f| %>
+			<%= f.hidden_field :website_id %>
+			<%= f.label :name, t('name') %><br />
+			<%= f.text_field :name %>
+			<%= f.submit t('add'), :class => 'button' %>
+		<% end %>
+	</td>
+</tr>
+</table>

@@ -1,0 +1,69 @@
+<%= form_for [:admin, @custom_data_list, @custom_data_field] do |f| %>
+	<%= f.hidden_field :custom_data_id %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+	<p>
+		<%= f.check_box :display_in_list %>
+		<%= f.label :display_in_list %>
+	</p>
+  <p>
+    <%= f.label :fieldtype %><br />
+    <%= f.select :fieldtype, CustomDataField::TYPES %>
+  </p>
+
+	<% if @custom_data_field.fieldtype == 'image' %>
+		
+	<p>
+    <%= f.label :image_size_small %><br />
+    <%= f.text_field :image_size_small, :size => 10 %>
+  </p>
+
+	<p>
+    <%= f.label :image_size_medium %><br />
+    <%= f.text_field :image_size_medium, :size => 10 %>
+  </p>
+
+	<p>
+    <%= f.label :image_size_large %><br />
+    <%= f.text_field :image_size_large, :size => 10 %>
+  </p>
+	<% end %>
+	
+  <p id="listconnection_picker" style="display: <%= @custom_data_field.fieldtype == 'listconnection' || @custom_data_field.fieldtype == 'listconnections' ? 'block' : 'none' %>">
+    <%= f.label :listconnection, t('listconnection') %><br />
+    <%= f.select :listconnection, @website.custom_data_lists.collect{ |cd| [cd.title, cd.id] }%>
+  </p>
+  
+  <p><%= f.submit %></p>
+<% end %>
+
+
+<% if @custom_data_field.fieldtype == 'image' %>
+	<h3>Image sizes</h3>
+	<dl>
+		<dt>100x100</dt>
+		<dd>
+			The image will be resized to fit inside 100x100 but the aspect ratio will be kept intact, which means
+			that the tallest side will be exactly 100 pixels.
+		</dd>
+		
+		<dt>100x100#</dt>
+		<dd>Produce an image that is exactly 100x100 pixels by first resizing it and then crop any pixels outside that box. Great for thumbnails
+			or pictures that is a part of the layout and needs to have exact measurements.
+		</dd>
+		
+		<dt>100x100!</dt>
+		<dd>
+			Resize an image to exactly 100x100 pixels. May skew the image since we don't care about the ratio.
+		</dd>
+
+		<dt>100x100></dt>
+		<dd>Resize if the image is larger than 100x100 pixels.</dd>
+
+		<dt>100x100<</dt>
+		<dd>Resize if the image is smaller than 100x100 pixels.</dd>
+	</dl>
+<% end %>

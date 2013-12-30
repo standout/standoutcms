@@ -1,0 +1,18 @@
+# Add application configuration variables here, as shown below.
+
+# Secret key base
+# Generate a new secret key for your app with 'rake secret' and paste it below
+SECRET_KEY_BASE: c35af8696605786662d2129f328eb7668ebfd21d8be663d2de6e467bd0f22f930a3f5dfdbdd394c3ded9918b32345ffb2c6921f33e4d2ce7157154ee7e80f2f4
+
+# Airbrake (for bug tracking)
+AIRBRAKE_API_KEY: e2165fea10a42234b290a2243ad8e4e6
+
+# Amazon S3
+ACCESS_KEY_ID: yourkeyidhere
+SECRET_ACCESS_KEY: yoursecretaccesskeyhere
+
+development:
+  S3_BUCKET: 'standoutcmsdev'
+
+production:
+  S3_BUCKET: 'standoutcms'

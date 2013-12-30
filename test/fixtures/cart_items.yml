@@ -1,0 +1,8 @@
+one:
+  title: 'Test product'
+  quantity: 1
+  cart: one
+  product: product_with_variants
+  product_variant: one
+  price_per_item: 10
+  vat_percentage: 25

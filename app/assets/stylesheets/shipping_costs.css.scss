@@ -1,0 +1,14 @@
+table.shipping_costs {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    border-bottom: 1px rgb(102, 102, 102) solid;
+    text-align: left;
+  }
+
+  td {
+    padding: 4px;
+    line-height: 1.5;
+  }
+}

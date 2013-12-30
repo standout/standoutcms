@@ -1,0 +1,11 @@
+one:
+  string: '978-3-16-148410-0'
+  product_property_key: one
+  product_variant:
+  product: one
+
+two:
+  integer: 250
+  product_property_key: two
+  product_variant:
+  product: one

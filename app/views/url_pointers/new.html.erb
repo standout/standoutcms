@@ -1,0 +1,31 @@
+<h1>New url_pointer</h1>
+
+<%= form_for(@url_pointer) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :path %><br />
+    <%= f.text_field :path %>
+  </p>
+  <p>
+    <%= f.label :website_id %><br />
+    <%= f.text_field :website_id %>
+  </p>
+  <p>
+    <%= f.label :page_id %><br />
+    <%= f.text_field :page_id %>
+  </p>
+  <p>
+    <%= f.label :language %><br />
+    <%= f.text_field :language %>
+  </p>
+  <p>
+    <%= f.label :custom_data_row_id %><br />
+    <%= f.text_field :custom_data_row_id %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', url_pointers_path %>

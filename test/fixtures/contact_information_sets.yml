@@ -1,0 +1,15 @@
+one:
+  first_name: 'Example'
+  last_name: 'One'
+  address_line1: 'Example street'
+  zipcode: '12345'
+  city: 'Example city'
+  order: one
+
+two:
+  first_name: 'Example'
+  last_name: 'Two'
+  address_line1: 'Example street'
+  zipcode: '12345'
+  city: 'Example city'
+  order: two

@@ -1,0 +1,18 @@
+<h2>Edit settings for <%= @website_membership.user.email rescue '-' %></h2>
+
+<%= form_for([:admin, @website_membership]) do |f| %>
+
+  <p>
+    <%= f.check_box :website_admin %> <%= f.label :website_admin, t('admin') %>
+  </p>
+  
+  <p>
+    <%= f.check_box :restricted_user %> <%= f.label :restricted_user, t('restricted_user') %><br />
+    <span class="tiny"><%= t('restricted_user_hint') %></span>
+  </p>
+  
+  <p>
+    <%= f.submit t('save') %>
+  </p>
+<% end %>
+

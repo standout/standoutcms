@@ -1,0 +1,26 @@
+<h1>Listing blog_settings</h1>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Content item</th>
+    <th>Number of posts to display</th>
+    <th>Allow comments</th>
+  </tr>
+
+<% for blog_setting in @blog_settings %>
+  <tr>
+    <td><%=h blog_setting.type %></td>
+    <td><%=h blog_setting.content_item_id %></td>
+    <td><%=h blog_setting.number_of_posts_to_display %></td>
+    <td><%=h blog_setting.allow_comments %></td>
+    <td><%= link_to 'Show', blog_setting %></td>
+    <td><%= link_to 'Edit', edit_blog_setting_path(blog_setting) %></td>
+    <td><%= link_to 'Destroy', blog_setting, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New blog_setting', new_blog_setting_path %>

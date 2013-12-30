@@ -1,0 +1,13 @@
+<p>
+  <b>Website:</b>
+  <%=h @domain.website_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @domain.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_domain_path(@domain) %> |
+<%= link_to 'Back', domains_path %>

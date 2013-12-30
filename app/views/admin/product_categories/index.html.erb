@@ -1,0 +1,23 @@
+<h1><%= t('product_categories')%></h1>
+
+<p class="instructions">
+  <%= t('product_categories_instructions') %>
+</p>
+
+<table id="product_categories" class="products-table">
+  
+  <thead>
+    <tr>
+      <th><%= t('title') %></th>
+      <th><%= t('number_of_products') %></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <%= render @product_categories %>
+  </tbody>
+</table>
+
+<p>
+  <%= link_to t('new_product_category'), [:new, :admin, :product_category], :class => 'button add' %>
+</p>

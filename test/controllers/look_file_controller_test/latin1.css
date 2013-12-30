@@ -1,0 +1,9 @@
+body {
+  color: #fff;
+}
+
+/* en kommentar med å ä och ö. */
+
+.höger {
+  float: right;
+}

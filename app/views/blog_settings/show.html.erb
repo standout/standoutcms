@@ -1,0 +1,23 @@
+<p>
+  <b>Type:</b>
+  <%=h @blog_setting.type %>
+</p>
+
+<p>
+  <b>Content item:</b>
+  <%=h @blog_setting.content_item_id %>
+</p>
+
+<p>
+  <b>Number of posts to display:</b>
+  <%=h @blog_setting.number_of_posts_to_display %>
+</p>
+
+<p>
+  <b>Allow comments:</b>
+  <%=h @blog_setting.allow_comments %>
+</p>
+
+
+<%= link_to 'Edit', edit_blog_setting_path(@blog_setting) %> |
+<%= link_to 'Back', blog_settings_path %>

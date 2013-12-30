@@ -1,0 +1,20 @@
+david:
+  email: 'david@example.org'
+  password_hash: 'abc123'
+  password_salt: '23ljladf'
+
+crash_test_dummy:
+  email: 'dummy@example.org'
+  password_hash: 'abc123'
+  password_salt: 'abc123'
+
+hacker:
+  email: 'hacker@example.org'
+  password_hash: 'abc123'
+  password_salt: 'abc123'
+
+admin_without_site:
+  email: 'admin@example.org'
+  admin: true
+  password_salt: 'abc123'
+  password_hash: 'abc123'

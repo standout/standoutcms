@@ -1,0 +1,28 @@
+<p>
+  <b>Path:</b>
+  <%=h @url_pointer.path %>
+</p>
+
+<p>
+  <b>Website:</b>
+  <%=h @url_pointer.website_id %>
+</p>
+
+<p>
+  <b>Page:</b>
+  <%=h @url_pointer.page_id %>
+</p>
+
+<p>
+  <b>Language:</b>
+  <%=h @url_pointer.language %>
+</p>
+
+<p>
+  <b>Custom data row:</b>
+  <%=h @url_pointer.custom_data_row_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_url_pointer_path(@url_pointer) %> |
+<%= link_to 'Back', url_pointers_path %>

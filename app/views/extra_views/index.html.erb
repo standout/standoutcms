@@ -1,0 +1,24 @@
+<h1>Listing extra_views</h1>
+
+<table>
+  <tr>
+    <th>Plugin</th>
+    <th>Name</th>
+    <th>Url</th>
+  </tr>
+
+<% for extra_view in @extra_views %>
+  <tr>
+    <td><%=h extra_view.plugin_id %></td>
+    <td><%=h extra_view.name %></td>
+    <td><%=h extra_view.url %></td>
+    <td><%= link_to 'Show', extra_view %></td>
+    <td><%= link_to 'Edit', edit_extra_view_path(extra_view) %></td>
+    <td><%= link_to 'Destroy', extra_view, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New extra_view', new_extra_view_path %>

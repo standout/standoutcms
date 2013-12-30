@@ -1,0 +1,78 @@
+<%= form_for [:admin, @look, @page_template] do |f| %>
+
+<div id="saving_and_info">
+  <p><%= f.submit t('save') %>
+    <%= image_tag 'spinner.gif', :id => 'saving_and_info_spinner', :style => 'display: none;' %>
+  </p>
+
+  <p style="display: <%= @page_template.partial? ? 'block' : 'none' %>">
+    <%= f.label :slug, t('liquid_name') %><br />
+    <%= f.text_field :slug %>
+  </p>
+  <p>
+    <%= f.label :name, t('name') %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p style="display: <%= @page_template.partial? ? 'none' : 'block' %>">
+    <%= f.check_box :default_template %> <%= f.label t("default_template") %>
+  </p>
+  <p style="display: <%= @page_template.default_template? ? 'none' : 'block' %>">
+    <%= f.check_box :partial %> <%= f.label :partial %>
+  </p>
+
+  <h3><%= t('versions') %></h3>
+  <% @page_template.versions.reverse[0..4].each do |version| %>
+  <ul class="versions">
+    <li><%= link_to l(version.created_at, :format => :short), edit_admin_look_page_template_path(@look, @page_template, :version => version.number) %></li>
+  </ul>
+  <% end %>
+
+  <p>
+    <%= t("used_on") %><br />
+  </p>
+  <ul class="used_on">
+    <% @page_template.pages.each do |p| %>
+    <li><%= link_to p.title, [:admin, p] %></li>
+    <% end %>
+  </ul>
+</div>
+<div>
+  <%= f.label :html, @page_template.name %><br />
+  <%= f.text_area :html %>
+  <div id='code_editor'></div>
+</div>
+
+<p class="discrete-text">
+  <%= t('edited_by') %>
+  <% if params[:version] %>
+    <% @page_template.versions.each do |v| %>
+      <% if params[:version].to_i == v.number %>
+        <%= v.user.email %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= @page_template.versions.last.user.email rescue t('unknown') %>
+  <% end %>
+  <%= l(@page_template.updated_at, :format => :long) %>
+</p>
+
+<h3><%= t("variables") %></h3>
+
+<dl>
+  <% @website.custom_data_lists.each do |cd| %>
+  <dt><%= cd.liquid_name %></dt>
+  <dd>
+    <% cd.custom_data_fields.each do |field| %>
+    <%= field.name.to_slug %><br />
+    <% end %>
+    url
+  </dd>
+  <% end %>
+
+</dl>
+
+<p>
+  <%= t("variables_help") %>
+</p>
+
+<% end %>

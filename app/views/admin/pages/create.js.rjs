@@ -1,0 +1,10 @@
+if @page.parent_id == nil
+  page.insert_html :bottom, 'pages_list', :partial => 'page'
+else
+  page.replace "page_#{@page.parent_id}", :partial => 'page', :locals => { :page => Page.find(@page.parent_id)} #, :collection => [Page.find(@page.parent_id)]
+end
+page.visual_effect :highlight, "page_#{@page.id}"
+page.replace_html 'sortable_pages', :partial => 'pages/sortable', :locals => { :website => @page.website }
+if @page.website.root_pages.length == 1
+   page.visual_effect :fade, "pages_blank_slate"
+end

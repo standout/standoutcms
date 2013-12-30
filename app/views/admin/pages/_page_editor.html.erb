@@ -1,0 +1,9 @@
+<% page.editors.each do |editor| %>
+<li>
+  <%= editor.user.email %>
+  <% if editor.restricted_user? %>
+  <%= button_to t('destroy'), editor.allowed_page_object_for(page), { :method => :delete, :confirm => 'Really delete?', :remote => true } if editor.restricted_user? %>
+
+  <% end %>
+</li>
+<% end %>

@@ -1,0 +1,24 @@
+<h1>Listing look_files</h1>
+
+<table>
+  <tr>
+    <th>Look</th>
+    <th>Content type</th>
+    <th>Filename</th>
+  </tr>
+
+<% for look_file in @look_files %>
+  <tr>
+    <td><%=h look_file.look_id %></td>
+    <td><%=h look_file.content_type %></td>
+    <td><%=h look_file.filename %></td>
+    <td><%= link_to 'Show', look_file %></td>
+    <td><%= link_to 'Edit', edit_look_file_path(look_file) %></td>
+    <td><%= link_to 'Destroy', look_file, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New look_file', new_look_file_path %>

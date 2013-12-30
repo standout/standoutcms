@@ -1,0 +1,348 @@
+sv:
+  domainaliases: "Domänalias"
+  real_product_attributes:
+    title: 'Rubrik'
+    description: 'Beskrivning'
+    price: 'Pris'
+  product_property_keys:
+    title: 'Anpassade produktegenskaper'
+    new: 'Skapa ny'
+    new_title: 'Skapa ny produktegenskap'
+    edit_title: 'Ändra produktegenskap'
+    types:
+      string: 'Sträng'
+      integer: 'Heltal'
+  reseller: 'Återförsäljare'
+  product_id: 'Produkt-ID'
+  quantity: 'Kvantitet'
+  product_title: 'Produkttitel'
+  price: 'Pris'
+  inquiry: 'Förfrågan'
+  is_inquiry:
+    true: 'Ja'
+    false: 'Nej'
+  webshop_live: 'Webshop live mode'
+  incl_vat: '(inkl. moms)'
+  payment: 'Betalning'
+  paypal_business_email: 'PayPal business epost'
+  webshop_currency: 'Webshop valuta'
+  money_format: 'Pengarformat'
+  money_separator: 'Decimaltecken'
+  order_number: 'Ordernummer'
+  customer: 'Kund'
+  full_name: 'Fullständigt namn'
+  paid: 'Betalad'
+  not_paid: 'Inte betalad'
+  customer: 'Kund'
+  error_payment_method: 'Ange en betalningsmetod.'
+  customer_deleted: 'Kunden raderades.'
+  invalid_order_form: 'Fyll i de obligatoriska fälten i formuläret.'
+  success_order_form: 'Din order har skickats.'
+  payment_types:
+    invoice: 'Faktura'
+    credit_card: 'Betalkort'
+  are_you_sure: "Är du säker?"
+  domain: "Domän"
+  title: "Rubrik"
+  users: "Användare"
+  url: "Webbadress"
+  pages: "Sidor"
+  email: "E-post"
+  admin: "Administratör"
+  remove: "Radera"
+  blog: "Blogg"
+  new_blogpost: "Nytt blogginlägg"
+  date_header: "Datum"
+  comments: "Kommentarer"
+  comment: 'Kommentar'
+  description: "Beskrivning"
+  edit: "Ändra"
+  destroy: "Tag bort"
+  content: "Innehåll"
+  allow_comments: "Tillåt kommentarer"
+  back: "Tillbaka"
+  cancel: "Avbryt"
+  save_changes: "Spara ändringar"
+  category: "Kategori"
+  example_code: "Exempelkod"
+  logout: "Logga ut"
+  categories: "Kategorier"
+  add: "Lägg till"
+  select_a_page_on_the_left_to_edit_it: "Klicka på en sida i listan till vänster för att redigera den."
+  show_in_menu: "Visa den här sidan i menyn"
+  name: "Namn"
+  or: "eller"
+  template_files: "Mallfiler"
+  changes_since_last_publish: "Ändringar sedan förra publiceringen"
+  custom_data: "Listor"
+  liquid_name: "Variabelnamn"
+  rows: "Rader"
+  type: "Typ"
+  publish: "Publicera"
+  untitled: "Namnlös"
+  loading: "Laddar"
+  host: "Serveradress eller IP"
+  username: "Användarnamn"
+  subpage_for: "Undersida till"
+  password: "Lösenord"
+  publish_dir: "Publiceringskatalog"
+  wrong_credentials: "Inloggningen misslyckades, vänligen försök igen."
+  no_servers: "Du har <strong>inga servrar</strong> att publicera till. Lägg till dem nedan för att publicera din webbplats."
+  layout_error: "Layoutfel"
+  layout_error_message: "Sidan du försökte redigera (%{page_title}) kunde inte visas eftersom den saknar en korrekt mallfil. Gå till Meta-tabben och välj en mall där."
+  or: "eller"
+  example: "Exempelvis"
+  add_server: "Lägg till server"
+  click_the_button_to_publish: "Klicka på den gröna pilen för att publicera."
+  publishing_website: "Publicerar sidan. Det här kan ta någon minut ..."
+  visit_the_site: "Besök webbplatsen"
+  blogposts:
+    edit: "Ändra inlägget"
+    really_remove: "Vill du verkligen ta bort blogginlägget?"
+    edit_categories: "Hantera kategorier"
+  language: "Språk"
+  default_language: "Standardspråk"
+  locales:
+    se: "Svenska"
+    en: "Engelska"
+  themes: "Mallar"
+  settings: "Inställningar"
+  doubleclick_to_edit: "Dubbelklicka för att redigera den här texten."
+  force_sync: "Tvingad publicering"
+  slug: "Webbadress"
+  this_page_handles_blogentries: "Den här sidan hanterar bloggen"
+  fields: "Fält"
+  new_field: "Nytt fält"
+  new_look: "Nytt tema"
+  create: "Spara"
+  save: "Spara ändringar"
+  path: "Sökväg"
+  log_out: "Logga ut"
+  replace: "Ersätt"
+  regular_page: "Sida"
+  blog_entry: "Blogginlägg"
+  installed_themes: "Installerade mallar"
+  page_templates: "Sidmallar"
+  look_files: "Mallfiler"
+  blog_category: "Bloggkategori"
+  last_changed: "Senast ändrad"
+  upload: "Ladda upp"
+  upload_new_file: "Ladda upp ny fil"
+  new_custom_data: "Ny lista"
+  add_server: "Lägg till FTP-server"
+  edit_server: "Ändra serverinställningar"
+  browser_combatibility: "Standout CMS fungerar bäst med Firefox"
+  forgot_password: "Glömt lösenord?"
+  password_order_description: "Om du har glömt ditt lösenord, fyll i din e-postadress nedan så skickar vi ett nytt."
+  copied_files_from_server: "%{number} filer hämtades från servern."
+  fetch_files_from_server: "Hämta från FTP"
+  blog_page: "Bloggsida"
+  blog_category_page: "Bloggens kategorisida"
+  page_template: "Sidmall"
+  new_website: "Ny webbplats"
+  your_websites: "Dina webbplatser"
+  you_now_have_access_to_the_following_sites: "Du har nu tillgång till följande webbplatser"
+  login_needed: "Inloggning krävs"
+  direct_link: "Direktlänk"
+  seo_description: "Beskrivningen visas bland annat i sökmotorernas resultatsidor"
+  seo_title: "Du kan välja att ange något annat i rubriken för sidan. Denna rubrik syns inte i menyerna, men syns för sökmotorerna."
+  show_on_all_pages: "Visa på alla sidor"
+  instruction_movie: "Instruktionsfilmer"
+  swedish_manual: "Svensk manual"
+  developer_information: "Information för utvecklare"
+  404_information: "Egna felsidor (404)"
+  login_information: "Genom att logga in via FTP kan du placera en fil som heter"
+  folder: "i samma mapp som"
+  to_be_used: "Då kommer denna att användas istället"
+  click_to_choose_plugin: "Klicka för att välja en plugin"
+  plugin_could_not_load: "Pluginen kunde inte laddas"
+  plugin_information: "En plugin kan ändras på ett ställe och visas på flera olika sätt. Ange webbadressen där du kan ändra i pluginen."
+  sort_by: "Sortera efter"
+  reverse_order: "Omvänd ordning"
+  change: "Ändra"
+  preview: "Förhandsgranska"
+  text: "Text"
+  switch: "Byt ..."
+  gallery: "Galleri"
+  remote: "Fjärrdata"
+  number_of_sublevels: "Antal undermenyer"
+  starting_level: "Startnivå"
+  menu: "Meny"
+  templates: "Mallar"
+  toolbar_instructions: "Drag en byggsten från vänsterkanten in på sidan för att lägga till den."
+  edit_url: "Ändringsadress"
+  display_url: "Hämtningsadress"
+  liquid: "Liquid/HTML"
+  none: "Inga"
+  one: "En"
+  two: "Två"
+  three: "Tre"
+  four: "Fyra"
+  ground_level: "Grundnivån"
+  subpages: "Undersidor"
+  level: "Nivå %{level}"
+  single_page: "Sida för generering av enskilda poster ur listan"
+  used_on: "Används på sidor:"
+  default_template: "Standardmall"
+  delete: "Ta bort"
+  variables: "Variabler"
+  variables_help: "Om detta är standardmallen, så finns variablen <strong>item</strong> som innehåller det matchade objektet"
+  listconnection: "Koppla till lista"
+  continue: "Fortsätt"
+  choose_password: "Välj lösenord"
+  duplicate: "Klona"
+  edited_by: "Ändrad av"
+  files: "Filer"
+  permissions: "Behörighet"
+  permissions_description: "Följande personer har behörighet att ändra på sidan."
+  restricted_user: "Begränsad användare"
+  restricted_user_hint: "Begränsade användare har enbart tillgång till att redigera sidor om du specifikt anger det på respektive sida."
+  new_product_category: "Ny produktkategori"
+  new_product: "Ny produkt"
+
+  stoped_from_beeing_saved: " hindrade %{what} från att sparas"
+  csv_import_what: "importen"
+  csv_import_new: "Importera från CSV-fil"
+  csv_import_submit: "Importera"
+  csv_import_select_key_column: "Välj nyckelkolumn"
+  csv_import_select_key_column_text: "Nyckelkolumnen är den kolumn som används för att avgöra om en produkt skall uppdateras eller skapas. Om värdet i nyckelkolumnen för en viss produkt i CSV-filen redan finns i databasen kommer den produkten att uppdateras, annars skapas den. Välj något som är unikt för varje produkt så som ett artikelnummer eller annat id."
+  csv_import_select_product_category: "Välj kategori"
+  csv_import_select_product_category_text: "Välj vilken kategori de importerade produkterna skall sparas under."
+  csv_import_missing_cols: "Följande columner finns inte i CSV-filen men krävs i databasen: "
+  csv_import_redundant_cols: "Följande columner finns i CSV-filen men inte i databasen: "
+  csv_import_missing_key_col: "Kolumnen du angav som nyckelkolumn saknas i CSV-filen."
+  csv_import_summary_title: "Resultat av importen"
+  csv_import_summary_text: "Antal inlästa produkter: %{rows_count}, varav %{successful_rows_count} importerades (%{created_rows_count} skapades och %{updated_rows_count} uppdaterades) framgångsrikt och %{failed_rows_count} innehöll fel."
+  csv_import_summary_error: "Rad %{row_number} : %{row_text} kunde inte spara och gav följande fel:"
+
+  new_vendor: "Ny leverantör"
+  no_rights_to_edit_page: "Du har inte rätt att ändra sidan."
+  invalid_login: "Nej, det gick minsann inte. Kolla lösenordet."
+  log: "Händelselogg"
+  product_categories: "Produktkategorier"
+  product_categories_instructions: "Instruktioner - produktkategorier"
+  products: "Produkter"
+  orders: "Ordrar"
+  customers: "Kunder"
+  new_password_saved: "Ditt nya lösenord har sparats. Hoppas att du kommer ihåg det."
+  number_of_products: "antal produkter"
+  parent_product_category: "Underkategori till"
+  password_reset_link_expired: "Länken har blivit inaktiv. Beställ lösenordet på nytt."
+  password_reset_link_sent: "Instruktioner har nu skickats till din e-postadress."
+  price: "Pris"
+  product_categories_instructions: "Du kan ha så många produktkategorier som du vill. Lägg till dem här nedanför och se till att du använder en bra rubrik och informativ beskrivning eftersom det kommer att synas i sökmotorerna."
+  product_images: "Produktbilder"
+  product_images_instructions: "Ladda upp en eller flera bilder som kommer att visas på produktsidan. Vi kommer automatiskt att förminska och beskära bilden. Du kan sortera bilderna i valfri ordning genom att dra och släppa dem."
+  product_variants: "Varianter"
+  really_delete: "Vill du ta bort?"
+  remove_product: "Tag bort den här produkten"
+  remove_product_confirm: "Jag förstår, radera den här produkten"
+  remove_product_instructions: "Varning: genom att radera produkten försvinner både produkten och alla produktbilder."
+  remove_related_product: "Tag bort produktrelation"
+  reset_password: "Välj ett nytt lösenord"
+  reset_password_instructions: "Skriv in ett nytt supersäkert lösenord. Detta kommer att bli ditt nya lösenord, så memorera det ordentligt."
+  send_reset_email: "Begär nytt lösenord"
+  show: "Visa"
+  unknown: "Okänd"
+  user_not_found: "Vi kunde inte hitta någon användare med den e-postadressen."
+  vendors: "Leverantörer"
+  versions: "Versioner"
+  website_created: "En ny webbplats har skapats. Ta hand om den!"
+  new_shipping_cost: 'Ny fraktkostnad'
+  col_sep: "Kolumnseparator"
+  delivery_address: 'Leveransadress'
+  attached_files: 'Bifogade filer'
+  order_texts:
+    order_confirmation_title: 'Titel för ordererkännande'
+    order_confirmation_header: 'Sidhuvud för ordererkännande'
+    order_confirmation_footer: 'Sidfot för ordererkännande'
+    payment_confirmation_title: 'Titel för betalningskvitto'
+    payment_confirmation_header: 'Sidhuvud för betalningskvitto'
+    payment_confirmation_footer: 'Sidfot för betalningskvitto'
+    default:
+      order_confirmation_title: 'Ordererkännande'
+      order_confirmation_header: |
+        Tack för din order. När din betalning har godkänts kommer du att få ett betalningskvitto till den här e-postadressen.
+      order_confirmation_footer: 'Vänliga hälsningar'
+      payment_confirmation_title: 'Betalningskvitto'
+      payment_confirmation_header: |
+        Betalningen har gått igenom. Tack för att du handlar hos oss.
+      payment_confirmation_footer: 'Vänliga hälsningar'
+  search:
+    settings:
+      title: "Filtrera bort sökbara kolumner"
+      text: "Välj vilka kolumner användare inte kan söka i. Detta är en ren säkerhetsinställning, vilka fält som faktiskt syns i er webshop kontrolleras via sitens mallar."
+  notices:
+    page_template:
+      created_by_user: "skapade sidmallen %{title}"
+      deleted_by_user: "tog bort sidmallen %{title}"
+      updated_by_user: "uppdaterade sidmallen %{title}"
+    picture:
+      created: "Bilden har laddats upp"
+      upload_failed: "Bilden kunde inte laddas upp"
+      destroyed: "Bilden har tagits bort."
+      not_allowed_to_destroy: "Du har inte rätt att ta bort bilden."
+      saved: "Bilden har sparats"
+    vendor:
+      added: "Leverantören har lagts till"
+    look_file:
+      created: "Filen har lagts till"
+  helpers:
+    select:
+      prompt: "Välj en"
+    submit:
+      create: "Lägg till %{model}"
+      update: "Uppdatera %{model}"
+      submit: "Spara %{model}"
+  activerecord:
+    models:
+      picture: "bild"
+      product: "Produkt"
+      product_category: "Produktkategori"
+      product_relation: "Produktrelation"
+      product_variant: "Variant"
+      vendor: "Leverantör"
+      shipping_cost: 'Fraktkostnad'
+      product_property_key: 'Produktegenskap'
+    attributes:
+      product:
+        description: "Beskrivning"
+        price: "Pris"
+        title: "Produktnamn"
+        url: "Webbadress"
+        vat_percentage: "Moms"
+        vendor_id: "Leverantör"
+      product_category:
+        title: "Namn"
+        description: "Beskrivning"
+      product_variant:
+        size: "Storlek"
+        color: "Färg"
+        material: "Material"
+        inventory: "Antal i lager"
+        price: "Pris (exkl. moms)"
+      vendor:
+        name: "Namn"
+      shipping_cost:
+        cost: 'Kostnad'
+        from_value: 'Från'
+        to_value: 'Till'
+      customer:
+        email: 'E-postadress'
+      contact_information_set:
+        first_name: 'Förnamn'
+        last_name: 'Efternamn'
+        address_line1: 'Adress'
+        address_line2: 'Adressrad 2'
+        zipcode: 'Postnummer'
+        city: 'Ort'
+        phone: 'Telefonnummer'
+        company_name: 'Företagsnamn'
+        vat_identification_number: 'Organisationsnummer'
+      product_property_key:
+        name: 'Namn'
+        slug: 'Variabelnamn'
+        data_type: 'Typ'
+      order:
+        payment_type: 'Betalningsmetod'
+  file: "Fil"

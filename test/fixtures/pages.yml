@@ -1,0 +1,23 @@
+standout_frontpage:
+  website: standout
+  parent_id: 0
+  position: 0
+  page_template: standout_first_pagetemplate
+
+standout_secondpage:
+  website: standout
+  parent_id: 0
+  position: 1
+  page_template: standout_first_pagetemplate
+
+standout_thirdpage:
+  website: standout
+  parent_id: 0
+  position: 2
+  page_template: standout_first_pagetemplate
+
+standout_subpage:
+  website: standout
+  parent: standout_frontpage
+  position: 0
+  page_template: standout_first_pagetemplate

@@ -1,0 +1,15 @@
+<%= form_for([:admin, @picture]) do |f| %>
+
+  <p>
+    <%= image_tag @picture.url %>
+  </p>
+  <p>
+    <%= f.label :title, t('title') %>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.submit t('save') %>
+  </p>
+  <%= link_to "Back", [:edit, :admin, @picture.custom_data_row.custom_data_list, @picture.custom_data_row] %>
+
+<% end %>

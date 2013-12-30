@@ -1,0 +1,11 @@
+<form ng-submit="createWebsiteMembership()">
+  <p>
+    <label><%= t('email') %></label>
+    <input type="email" ng-model="newWM.email">
+
+    <input type="checkbox" value="1" ng-model="newWM.admin">
+    <label><%= t('admin') %></label>
+
+    <input type="submit" value="<%= t('create') %>">
+  </p>
+</form>

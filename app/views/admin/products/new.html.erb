@@ -1,0 +1,14 @@
+<h1><%= t('new_product') %></h1>
+
+<%= render 'form' %>
+
+<hr />
+<%= link_to t('cancel'), [:admin, :products] %>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#product_title").stringToSlug({
+    getPut: '#product_url'
+  });  
+});
+</script>

@@ -1,0 +1,64 @@
+#look_file_text_content {
+  display: none;
+}
+
+#files {
+  position: absolute;
+  left: 0;
+  margin-left: 10px;
+  width: 17%;
+}
+  #files ul {
+    margin: 0 0 0 20px;
+    padding: 0;
+    list-style-type: none;
+  }
+
+    #files a {
+      line-height: 1.5;
+      color: #333;
+      text-decoration: none;
+    }
+
+#html_fields {
+  position: absolute;
+  top: 26px;
+  left: 220px;
+  width: 60%;
+}
+
+#saving_and_info {
+  position: absolute;
+  right: 0;
+  width: 18%;
+  overflow: hidden;
+}
+
+
+span.filesize {
+  font-size: 12px;
+  font-weight: normal;
+  vertical-align: bottom;
+}
+
+span.clipboard {
+  background-image: url('/assets/clipboard.png');
+  background-position: right center;
+  background-repeat: no-repeat;
+  padding-right: 20px;
+}
+
+#clipboard_notice {
+  background: #FEF3A3;
+  color: #333;
+  display: inline;
+  padding: 2px 4px;
+  float: left;
+  width: 250px;
+  margin: 0 1em 0;
+  text-align: center;
+}
+
+#replacement_form {
+  margin: 20px;
+}

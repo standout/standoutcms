@@ -1,0 +1,5 @@
+<a class="cms_filelisting" href="<%= file.url %>">
+  <%= image_tag("extensions/file-#{File.extname(file.filename)[1..-1] rescue ""}.png") %>
+  <%=h file.filename %>
+  <span class="filesize"><%= number_to_human_size(file.size, :precision => 2) %></span>
+</a>

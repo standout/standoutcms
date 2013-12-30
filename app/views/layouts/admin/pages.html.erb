@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>Standout CMS: Pages</title>
+    <%= stylesheet_link_tag 'application', 'pages' %>
+    <%= javascript_include_tag 'application', 'pages' %>
+    <%= csrf_meta_tag %>
+  </head>
+  <body>
+    <div id="wrapper">
+      
+      <div id="overlay-container" style="display: none;"><div id="overlay-content"></div></div>
+      <div id="decorative_second_level"></div>
+
+      <%= render :partial => 'shared/menu', :locals => { :menu_selection => 'none' } %>
+      <%= render :partial => 'admin/pages/menu' %>
+
+      <%= yield  %>
+
+      <form>
+        <select name="language_setting" id="language_setting" onchange="switch_language();">
+          <% Language.all.each do |language| %>
+            <option value="<%= language.short_code %>" <%= @website.default_language == language.short_code ? 'selected' : '' %>><%= language.name %></option>
+          <% end %>
+        </select>
+      </form>
+
+    </div>
+  </body>
+</html>

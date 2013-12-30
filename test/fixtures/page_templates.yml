@@ -1,0 +1,37 @@
+standout_first_pagetemplate:
+  look: standout_look
+  html: "<html><head><title></title></head><body><div class='menu' id='menu' data-startlevel='0' data-sublevels='1'><div></body></html>"
+
+standout_search_pagetemplate:
+  look: standout_look
+  slug: 'search'
+  name: "Search template"
+  html: |
+    <html>
+    <head><title>Search</title></head>
+    <body>
+    <div class='menu' id='menu' data-startlevel='0' data-sublevels='1'></div>
+    <div id='query'>{{ query }}</div>
+    <div id='results'>
+      <ul>
+      {% for product in search_result.products %}
+      <li class="product-result" id="product_{{ product.id }}">{{ product.title }}</li>
+      {% endfor %}
+      </ul>
+    </div>
+    </body>
+    </html>
+
+pagetemplate_with_asset:
+  look: standout_look
+  slug: 'pagetemplate_with_asset'
+  name: 'Page Template With Asset'
+  html: |
+    <html>
+    <head>
+      <title></title>
+    </head>
+    <body>
+      <div id="asset-path-test">{{ 'stylesheet.css' | asset_path }}</div>
+    </body>
+    </html>

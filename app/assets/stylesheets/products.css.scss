@@ -1,0 +1,178 @@
+ul.webshop-menu {
+  overflow: hidden;
+  display: block;
+  margin: 0 0 10px 0;
+  padding: 0;
+
+  li {
+    display: inline;
+    list-style-type: none;
+  }
+
+  li.selected {
+    a {
+      font-weight: bold;
+      color: #333;
+      border-bottom: 4px #ccc solid;
+    }
+  }
+
+  a {
+    display: block;
+    float: left;
+    background: #fff;
+    color: #666;
+    text-decoration: none;
+    padding: 2px;
+    margin: 0 20px;
+  }
+
+  a:hover {
+    border-bottom: 4px #dedede solid;
+  }
+
+  a:first-child {
+    margin-left: 0;
+  }
+}
+
+table.products-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th {
+    border-bottom: 1px #666 solid;
+    text-align: left;
+  }
+
+  td {
+    padding: 4px;
+    line-height: 1.5;
+
+    a {
+      color: #333;
+    }
+  }
+
+  td.paid {
+    color: green;
+  }
+
+  td.not_paid {
+    color: red;
+  }
+
+}
+
+ul.related-products {
+  li {
+    list-style-type: none;
+    border-bottom: 1px #ccc solid;
+    margin-bottom: 3px;
+    img {
+      width: 30px;
+      height: 30px;
+      vertical-align: middle;
+    }
+    a {
+      color: #333;
+      text-decoration: none;
+      line-height: 30px;
+    }
+  }
+}
+
+div.field {
+  margin-top: 1em;
+}
+
+ul#product_images {
+  margin: 10px 0;
+  padding: 0;
+
+  li {
+    margin: 10px 10px 10px 0;
+    position: relative;
+    opacity: 0.7;
+  }
+
+  li:hover {
+    opacity: 0.9;
+  }
+
+  li:first-child {
+    border: 2px green solid;
+    opacity: 1.0;
+  }
+
+  span.product-image-actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #333;
+    display: block;
+    height: 20px;
+    width: 100%;
+
+    img {
+      margin: 0 5px;
+    }
+  }
+
+}
+
+div.webshop-breadcrumbs {
+  font-size: 10px;
+  padding: 6px 6px;
+  border-bottom: 1px #ccc solid;
+  margin: 4px;
+  a {
+    color: #333;
+  }
+}
+
+p.instructions {
+  padding: 1em;
+  border: 1px #ccc solid;
+  margin: 1em 0;
+  max-width: 62em;
+  background: #C8D5E5;
+}
+
+h2.section {
+  border-bottom: 1px #ccc solid;
+  margin-top: 2em;
+}
+
+div.danger-zone {
+  color: #900;
+}
+
+form.new_product_variant {
+  div.field {
+    overflow: hidden;
+    label {
+      float: left;
+      width: 10em;
+      padding-right: 1em;
+      text-align: right;
+      padding-top: 2px;
+    }
+    input {
+      float: left;
+    }
+  }
+}
+
+span.best_in_place {
+  background: #eee;
+  border-radius: 4px;
+  padding: 2px 4px;
+  border: 1px #ccc solid;
+}
+span.best_in_place:hover {
+  background: #C1D55B;
+  border: 1px #999 solid;
+  color: #333;
+  cursor: pointer;
+}

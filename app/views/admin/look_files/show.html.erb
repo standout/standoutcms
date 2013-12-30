@@ -1,0 +1,18 @@
+<p>
+  <b>Look:</b>
+  <%=h @look_file.look_id %>
+</p>
+
+<p>
+  <b>Content type:</b>
+  <%=h @look_file.content_type %>
+</p>
+
+<p>
+  <b>Filename:</b>
+  <%=h @look_file.filename %>
+</p>
+
+
+<%= link_to 'Edit', edit_look_file_path(@look_file) %> |
+<%= link_to 'Back', look_files_path %>

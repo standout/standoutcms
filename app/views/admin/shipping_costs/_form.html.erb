@@ -1,0 +1,32 @@
+<%= form_for([:admin, @shipping_cost]) do |f| %>
+  <% if @shipping_cost.errors.any? %>
+    <div id='error_explanation'>
+      <h2><%= pluralize(@shipping_cost.errors.count, "error") %> prohibited this shipping cost from being saved:</h2>
+      <ul>
+        <% @shipping_cost.errors.full_messages.each do |msg| %>
+          <li>
+            <%= msg %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class='field'>
+    <%= f.label :cost %><br>
+    <%= f.text_field :cost %>
+  </div>
+  <div class='field'>
+    <%= f.label :from_value %><br>
+    <%= f.text_field :from_value %>
+  </div>
+  <div class='field'>
+    <%= f.label :to_value %><br>
+    <%= f.text_field :to_value %>
+  </div>
+  <div class='actions'>
+    <%= f.submit t('save'), class: 'button add' %>
+    <% if @shipping_cost.persisted? %>
+      <%= link_to t('delete'), admin_shipping_cost_path(@shipping_cost), method: :delete, class: 'button destroy', confirm: t('are_you_sure') %>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @product.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= simple_format @product.description %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= number_to_currency(@product.price, { :locale => :sv, :unit => current_website.currency_unit }) %>
+</p>
+
+<p>
+  <b>Vat percentage:</b>
+  <%= @product.vat_percentage %> (%)
+</p>
+
+
+<%= link_to t('edit'), [:edit, :admin, @product] %> |
+<%= link_to t('back'), [:admin, :products] %>

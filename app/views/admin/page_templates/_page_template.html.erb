@@ -1,0 +1,4 @@
+<li>
+  <span class="template-name"><%= link_to raw("#{page_template_icon(page_template)} #{h(page_template.name)}"), [:edit, :admin, @look, page_template] %></span>
+  <span class="remove" data-used_on="<%= page_template.used?.to_s %>"><%= link_to t("delete"), [:admin, @look, page_template] %></span>
+</li>

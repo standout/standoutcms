@@ -1,0 +1,34 @@
+<% if @custom_data_lists.empty? %>
+	<h2>You have no lists</h2>
+	
+	<p>
+		This is where you can manage data in your system. It is pretty flexible, 
+		so you could add almost anything. For example a list of your favourite music,
+		or maybe calendar events.
+	</p>
+	
+	<p>
+		Go ahead, push the button below to create your first list.
+	</p>
+	
+	<p><%= link_to 'New list', [:new, :admin, :custom_data_list], :class => 'button' %></p>
+	
+<% else %>
+<table class="datalist">
+	<tr>
+		<th><%= t('title') %></th>
+		<th><%= t('rows')%></th>
+		<th><%= t('settings')%></th>
+	</tr>
+	
+<% for custom_data_list in @custom_data_lists %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td><%=h custom_data_list.title %></td>
+      <td><%= link_to t('rows'), [:admin, custom_data_list, :custom_data_rows], :class => 'button' %></td>
+      <td><%= link_to t('settings'), [:edit, :admin, custom_data_list], :class => 'button' %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to t('add'), [:new, :admin, :custom_data_list], :class => 'button' %></p>
+<% end %>

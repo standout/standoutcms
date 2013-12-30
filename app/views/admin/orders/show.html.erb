@@ -1,0 +1,68 @@
+<h1><%= t('order') %> #<%= @order.id %></h1>
+
+<table id="order" class="products-table">
+  <thead>
+    <tr>
+      <th><%= t('product_id') %></th>
+      <th><%= t('quantity') %></th>
+      <th><%= t('product_title') %></th>
+      <th><%= t('comment') %></th>
+      <th><%= t('price') %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% for item in @order.cart.cart_items %>
+      <tr>
+        <td>#<%= item.product_id %></td>
+        <td><%= item.quantity %></td>
+        <td><%= link_to item.title, admin_product_path(item.product_id) %></td>
+        <td><%= item.notes %></td>
+        <td><%= number_to_currency(item.price, { :locale => :sv, :unit => current_website.currency_unit }) %></td>
+      </tr>
+      <% if item.product_variant %>
+      <tr>
+        <td colspan="4"><i>Variant: <%= item.product_variant.description %></i></td>
+      </tr>
+      <% end %>
+    <% end %>
+    <tr>
+      <td></td><td></td><td></td><td></td>
+      <td style="border-top: 1px solid grey">
+        <%= number_to_currency(@order.shipping_cost, { :locale => :sv, :unit => current_website.currency_unit }) %>
+        (<%= uncapitalize(t('activerecord.models.shipping_cost')) %>)
+      </tr>
+    </tr>
+    <tr>
+      <td></td><td></td><td></td><td></td>
+      <td style="border-top: 1px solid grey">
+        <%= number_to_currency(@order.total_price + @order.shipping_cost, { :locale => :sv, :unit => current_website.currency_unit }) %>
+      </tr>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+  <%= t('inquiry') %>: <%= t('is_inquiry')[@order.inquiry] %>
+</p>
+
+<% if @order.cart.reseller.to_s.size > 0 %>
+  <p>
+    <%= t('reseller') %>:
+    <%= @order.cart.reseller %>
+  </p>
+<% end %>
+
+<% if @order.cart.notes.to_s.size > 0 %>
+  <p>
+    <%= t('comment') %>:<br>
+    <%= @order.cart.notes %>
+  </p>
+<% end %>
+
+<h2><%= @order.customer_full_name %></h2>
+<%= render 'admin/customers/customer_info', information: @order.customer_information_set.attrs.merge(email: @order.customer.email) %>
+<% if @order.delivery_information_exists? %>
+  <h3><%= t('delivery_address') %></h3>
+  <%= render 'admin/customers/customer_info', information: @order.delivery_information_set.attrs %>
+<% end %>

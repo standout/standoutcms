@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  paid: false
+  paid_at: 2012-02-15 10:58:09
+  paid_price: 1.5
+  order: one
+
+two:
+  paid: false
+  paid_at: 2012-02-15 10:58:09
+  paid_price: 1.5
+  order_id: 1

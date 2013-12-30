@@ -1,0 +1,1 @@
+page.replace_html :page_details, :partial => 'details', :object => @page

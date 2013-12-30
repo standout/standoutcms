@@ -1,0 +1,2 @@
+// Custom javascripts for Pages
+

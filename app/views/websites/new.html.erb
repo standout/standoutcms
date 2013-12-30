@@ -1,0 +1,28 @@
+<div class="edit_field">
+
+  <h1><%= t("new_website") %></h1>
+
+  <%= form_for(@new_website) do |f| %>
+
+    <p>
+      <%= f.label :title, t('title') %>
+      <%= f.text_field :title %>
+    </p>
+    
+    <p>
+      <%= f.label :subdomain, t('subdomain') %>
+      http://<%= f.text_field :subdomain %>.standoutcms.se/
+    </p>
+
+    <p>
+      <%= f.label :default_language, t('default_language') %>
+      <%= f.select :default_language, Language.all.collect{ |l| [l.short_code, l.short_code] } %>
+    </p>
+
+    <p>
+    <%= f.submit t("create") %>
+    </p>
+
+  <% end %>
+
+</div>

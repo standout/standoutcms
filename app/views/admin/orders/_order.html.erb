@@ -1,0 +1,22 @@
+<tr>
+  <td><%= link_to order.id, admin_order_path(order) %></td>
+  <td><%= link_to order.customer.full_name, admin_customer_path(order.customer) %></td>
+  <td><%= order.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+  <td><%= number_to_currency(order.total_price + order.shipping_cost, { :locale => :sv, :unit => current_website.currency_unit }) %></td>
+  <td><%= order.payment_type %></td>
+  <td class="<%= order.payment.paid? ? 'paid' : 'not_paid' %>"><%= order.payment.status %></td>
+  <td>
+    <div style="display: inline-block">
+      <%= form_for order.payment, url: admin_order_payment_path(order, order.payment) do |f| %>
+        <% if order.payment.paid %>
+          <%= f.hidden_field :paid, value: false %>
+          <%= f.submit t('not_paid'), class: 'button destroy', confirm: t('are_you_sure') %>
+        <% else %>
+          <%= f.hidden_field :paid, value: true %>
+          <%= f.submit t('paid'), class: 'button', confirm: t('are_you_sure') %>
+        <% end %>
+      <% end %>
+    </div>
+    <%= link_to t('delete'), admin_order_path(order), method: :delete, class: 'button destroy', confirm: t('are_you_sure') %>
+  </td>
+</tr>

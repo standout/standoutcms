@@ -1,0 +1,17 @@
+<h2>{{ gallery.title }}</h2>
+
+<div class="gallery">
+{% for image in gallery.images %}
+  <a href="{{ image.large }}" title="{{ image.title }}">
+    <img src="{{ image.thumb }}" alt="" />
+  </a>
+{% endfor %}
+</div>
+
+<!--
+
+Include the following files in your template:
+ - http://cms.standout.se/javascripts/gallery/gallery.min.js
+ - http://cms.standout.se/javascripts/gallery/gallery.css
+
+-->

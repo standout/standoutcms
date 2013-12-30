@@ -1,0 +1,46 @@
+<%= form_for([:admin, @product_category]) do |f| %>
+  <% if @product_category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product_category.errors.count, "error") %> prohibited this product_category from being saved:</h2>
+
+      <ul>
+      <% @product_category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :slug, t('url') %><br >
+    http://<%= @website.main_domain %>/categories/<%= f.text_field :slug %>
+  </div>
+
+  <div class="field">
+    <%= f.label :parent_id, t('parent_product_category') %><br>
+    <%= f.select :parent_id, (@website.product_categories.roots - [@product_category]).collect{ |pc| [pc.title, pc.id] }, :include_blank => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit :class => 'button add' %>
+    <% if @product_category.persisted? %>
+      <%= link_to t('delete'), admin_product_category_path(@product_category), method: :delete, class: 'button destroy', confirm: t('are_you_sure') %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= form_for([:admin, @product_category]) do |f| %>
+  <input type="hidden" name="clean_products" value="1">
+  <p>
+    <%= f.submit "Rensa alla produkter i kategorin", :class => 'button' %>
+  </p>
+<% end %>

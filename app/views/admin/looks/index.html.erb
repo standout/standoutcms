@@ -1,0 +1,12 @@
+<h2><%= t('installed_themes') %></h2>
+
+<div class="edit_field">
+	<ul style="overflow: hidden;">
+		<%= render @looks %>
+	</ul>
+	
+	<p>
+		<%= link_to t('add'), [:new, :admin, :look], :class => 'button' %>
+	</p>
+	
+</div>

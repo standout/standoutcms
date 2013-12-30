@@ -1,0 +1,95 @@
+{% include 'header' %}
+
+<h2>Checkout time!</h2>
+
+<div id="form_errors">
+{% for item in errors %}
+  <p class="error" style="color:red;">{{ item }}</p>
+{% endfor %}
+</div>
+
+<form method="post" action="/checkout">
+
+  <fieldset>
+    <legend>Contact details</legend>
+
+    <div class="field">
+      <label for="email">E-mail <span class="req">*</span></label>
+      <input type="email" name="customer[email]" id="email"
+             value="{{ customer.email }}"
+             {% if error_fields contains 'email' %}style="border-color:red;"{% endif %}>
+    </div>
+
+    <div class="field">
+      <label for="first_name">First name <span class="req">*</span></label>
+      <input type="text" name="customer[first_name]" id="first_name"
+             value="{{ customer.first_name }}"
+             {% if error_fields contains 'first_name' %}style="border-color:red;"{% endif %}>
+    </div>
+
+    <div class="field">
+      <label for="last_name">Last name <span class="req">*</span></label>
+      <input type="text" name="customer[last_name]" id="last_name"
+             value="{{ customer.last_name }}"
+             {% if error_fields contains 'last_name' %}style="border-color:red;"{% endif %}>
+    </div>
+
+    <div class="field">
+      <label for="last_name">Address <span class="req">*</span></label>
+      <input type="text" name="customer[address_line1]" id="last_name"
+             value="{{ customer.address_line1 }}"
+             {% if error_fields contains 'address_line1' %}style="border-color:red;"{% endif %}>
+    </div>
+
+    <div class="field">
+      <label for="last_name">Zipcode <span class="req">*</span></label>
+      <input type="text" name="customer[zipcode]" id="last_name"
+             value="{{ customer.zipcode }}"
+             {% if error_fields contains 'zipcode' %}style="border-color:red;"{% endif %}>
+    </div>
+
+    <div class="field">
+      <label for="last_name">City <span class="req">*</span></label>
+      <input type="text" name="customer[city]" id="last_name"
+             value="{{ customer.city }}"
+             {% if error_fields contains 'city' %}style="border-color:red;"{% endif %}>
+    </div>
+
+    <div class="field">
+      <label for="last_name">Phone</label>
+      <input type="text" name="customer[phone]" id="last_name"
+             value="{{ customer.phone }}"
+             {% if error_fields contains 'phone' %}style="border-color:red;"{% endif %}>
+    </div>
+
+    <div class="field">
+      <label for="vat_identification_number">VAT identification number</label>
+      <input type="text" name="customer[vat_identification_number]" id="vat_identification_number"
+             value="{{ customer.vat_identification_number }}"
+             {% if error_fields contains 'vat_identification_number' %}style="border-color:red;"{% endif %}>
+    </div>
+
+  </fieldset>
+
+  <fieldset>
+    <legend>Payment details</legend>
+
+    <div class="field radio">
+      <p>
+        <input type="radio" name="order[payment_type]" id="payment_type_invoice" value="invoice"
+               {% if payment.method == 'invoice' %} checked{% endif %}>
+        <label for="payment_type_invoice">Invoice</label>
+      </p>
+      <p>
+        <input type="radio" name="order[payment_type]" id="payment_type_cc" value="credit_card"
+               {% if payment.method == 'credit_card' %} checked{% endif %}>
+        <label for="payment_type_cc">Credit card</label>
+      </p>
+    </div>
+
+  </fieldset>
+
+  <input type="submit" value="Send my order">
+</form>
+
+{% include 'footer' %}

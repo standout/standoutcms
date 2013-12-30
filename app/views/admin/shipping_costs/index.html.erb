@@ -1,0 +1,25 @@
+<h1>
+  <%= t('activerecord.models.shipping_cost') %>
+</h1>
+<table class='shipping_costs'>
+  <thead>
+    <tr>
+      <th>
+        <%= t('activerecord.attributes.shipping_cost.from_value') %>
+      </th>
+      <th>
+        <%= t('activerecord.attributes.shipping_cost.to_value') %>
+      </th>
+      <th>
+        <%= t('activerecord.attributes.shipping_cost.cost') %>
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @shipping_costs %>
+  </tbody>
+</table>
+<p>
+  <%= link_to t('new_shipping_cost'), [:new, :admin, :shipping_cost], class: 'button add' %>
+</p>

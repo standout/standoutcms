@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  website: standout
+  release_notes: "{ 'pages' => [1, 2, 3]}"
+  user: david
+  created_at: <%= Time.now - 3.days %>

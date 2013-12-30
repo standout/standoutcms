@@ -1,0 +1,76 @@
+<p>
+	<%= link_to t('back'), [:admin, @custom_data_list, :custom_data_rows], :class => 'button' %>
+</p>
+
+<h2><%= t('settings') %></h2>
+<div class="edit_field">
+	<%= render :partial => 'form' %>
+</div>
+
+<% unless @custom_data_list.custom_data_fields.empty? %>
+<h2><%= t('fields') %></h2>
+<div class="edit_field">
+	
+<table class="datalist">
+	<tr>
+		<th><%= t('name')%></th>
+		<th><%= t('liquid_name')%></th>
+		<th><%= t('type')%></th>
+		<th><%= t('settings')%></th>
+	</tr>
+	
+	<% @custom_data_list.custom_data_fields.each do |field| %>
+	<tr class="<%= cycle('odd', 'even') %> <%= 'hidden_field' unless field.display_in_list? %>">
+		<td><%= truncate(field.name.titleize, :length => 25 ) %></td>
+		<td><%= truncate(field.name_to_slug, :length => 20) %></td>
+		<td>
+			<%= field.fieldtype %>
+		</td>
+		<td><%= link_to t('edit'), [:edit, :admin, @custom_data_list, field], :class => 'button' %>
+			<%= button_to t('destroy'), [:admin, @custom_data_list, field], :method => :delete, :class => 'button delete', :confirm => 'Really delete?' %>
+		</td>
+
+	</tr>
+	<% end %>
+</table>	
+</div>
+<% end %>
+
+<h2><%= t('new_field') %></h2>
+<div class="edit_field">
+	<%= render :partial => 'admin/custom_data_fields/form' %>
+</div>
+
+<h2><%= t('example_code') %></h2>
+<div class="edit_field">
+	You can access all items in this collection by using the following Liquid-code.
+	
+	<pre>
+&lt;table>
+{% for item in website.lists['<%= @custom_data_list.liquid_name %>'].items %}
+	&lt;tr&gt;
+	<% @custom_data_list.custom_data_fields.each do |field| %>
+	  <% if field.fieldtype == 'image' -%>
+		&lt;td&gt; &lt;img src="{{ item.<%= field.name_to_slug %>.medium }}" alt="" &gt; &lt;/td&gt; &lt;-- thumb|small|medium|large|original --&gt;
+	  <% elsif field.fieldtype == 'file' -%>
+    &lt;td&gt;
+      &lt;ul&gt;
+        {% for doc in item.bilaga %}
+        &lt;li&gt;&lt;a href=&quot;{{ doc.url }}&quot;&gt;{{ doc.name }}&lt;/a&gt;&lt;/li&gt;
+        {% endfor %}
+      &lt;/ul&gt;
+    &lt;/td&gt;
+	  <% else -%>
+		&lt;td&gt; {{ item.<%= field.name_to_slug %> }} &lt;/td&gt;
+		<% end -%>
+		<% end %>
+	&lt;/tr&gt;		
+{% endfor %}
+&lt;/table>
+	</pre>
+
+</div>
+
+<p>
+	<%= link_to t('destroy'), [:admin, @custom_data_list], :confirm => 'Are you sure? This can not be undone.', :method => :delete, :class => 'button destroy' if current_user.admin? %>
+</p>

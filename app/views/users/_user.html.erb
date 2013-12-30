@@ -1,0 +1,8 @@
+<tr id="user_<%= user.id %>">
+	<td>
+		<%= user.email %>
+	</td>
+	<td>
+		<%= link_to_remote image_tag("delete.png"), :url => { :controller => :users, :action => :detach, :id => user.id, :website_id => @website.id}, :method => :delete %>
+	</td>
+</tr>

@@ -1,0 +1,32 @@
+<% title "Page Template" %>
+
+<p>
+  <strong>Look:</strong>
+  <%=h @page_template.look_id %>
+</p>
+<p>
+  <strong>Slug:</strong>
+  <%=h @page_template.slug %>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%=h @page_template.name %>
+</p>
+<p>
+  <strong>Default Template:</strong>
+  <%=h @page_template.default_template %>
+</p>
+<p>
+  <strong>Partial:</strong>
+  <%=h @page_template.partial %>
+</p>
+<p>
+  <strong>Html:</strong>
+  <%=h @page_template.html %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_page_template_path(@page_template) %> |
+  <%= link_to "Destroy", @page_template, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", page_templates_path %>
+</p>

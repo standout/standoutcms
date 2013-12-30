@@ -1,0 +1,18 @@
+<div class="ajax">
+<%= form_for(User.new) do |f| %>
+  <%= f.error_messages %>
+	<%= hidden_field_tag :website_id, @website.id %>
+
+  <p>
+    <%= f.label :email, t('email') %><br />
+    <%= f.text_field :email %> 
+
+    <%= f.check_box :admin %>
+    <%= f.label :admin, t('admin') %>
+
+    <%= f.submit  %>
+
+  </p>
+
+<% end %>
+</div>

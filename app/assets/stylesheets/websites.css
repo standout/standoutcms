@@ -1,0 +1,48 @@
+#websites {
+  padding: 0px;
+  overflow: auto;
+}
+
+#websites li {
+  display: inline;
+}
+
+#websites li a {
+  text-decoration: none;
+  display: block;
+  width: 150px;
+  height: 100px;
+  float: left;
+  border: 0;
+  margin: 10px 20px 10px 0;
+  text-align: center;
+  font-size: 10px;
+  padding: 10px;
+  filter:alpha(opacity=50);
+  -moz-opacity:0.5;
+  -khtml-opacity: 0.5;
+  opacity: 0.5;
+  color: #000;
+}
+
+#websites li a:hover {
+  color: #333;
+  filter:alpha(opacity=100);
+  -moz-opacity:1.0;
+  -khtml-opacity: 1.0;
+  opacity: 1.0;
+  background: none;
+
+}
+
+#websites li a img {
+  display: block;
+  clear: both;
+  margin: 0 auto 5px auto;
+  width: 100px;
+  height: 65px;
+  border: 0;
+  -moz-box-shadow: 0 0 5px #666;
+	box-shadow: 0 0 5px #666;
+}
+

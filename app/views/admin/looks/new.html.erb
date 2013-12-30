@@ -1,0 +1,18 @@
+<h2><%= t('new_look') %></h2>
+
+<%= form_for([:admin, @look]) do |f| %>
+	<%= f.hidden_field :website_id %>
+
+  <p>
+    <%= f.label :title, t('title') %><br />
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.submit t('create') %>
+  </p>
+<% end %>
+
+<p>
+	<%= link_to t('back'), [:admin, :looks], :class => 'button back' %>
+</p>

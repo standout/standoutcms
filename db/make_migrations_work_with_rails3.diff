@@ -1,0 +1,101 @@
+diff --git a/db/migrate/20090226154540_add_english_attributes_to_page.rb b/db/migrate/20090226154540_add_english_attributes_to_page.rb
+index c5c90a3..1fc0899 100644
+--- a/db/migrate/20090226154540_add_english_attributes_to_page.rb
++++ b/db/migrate/20090226154540_add_english_attributes_to_page.rb
+@@ -3,9 +3,10 @@ class AddEnglishAttributesToPage < ActiveRecord::Migration
+     add_column :pages, :english_title, :string
+     add_column :content_items, :language, :string
+     
+-    for item in ContentItem.find(:all)
+-      item.update_attribute :language, "se"
+-    end
++   # for item in ContentItem.find(:all)
++   #   item.update_attribute :language, "se" rescue puts " - could not update ContentItem"
++   # end
++   
+   end
+ 
+   def self.down
+diff --git a/db/migrate/20090322124550_create_menus.rb b/db/migrate/20090322124550_create_menus.rb
+index bdd2ec9..67292ec 100644
+--- a/db/migrate/20090322124550_create_menus.rb
++++ b/db/migrate/20090322124550_create_menus.rb
+@@ -13,9 +13,9 @@ class CreateMenus < ActiveRecord::Migration
+     add_column :pages, :level, :integer
+     
+     # Update all existing pages with a level
+-    for page in Page.find(:all)
+-      page.save!
+-    end
++    # for page in Page.find(:all)
++    #  page.save!
++    # end
+   end
+ 
+   def self.down
+diff --git a/db/migrate/20110927124148_create_url_pointers.rb b/db/migrate/20110927124148_create_url_pointers.rb
+index 0118fa4..5605dce 100644
+--- a/db/migrate/20110927124148_create_url_pointers.rb
++++ b/db/migrate/20110927124148_create_url_pointers.rb
+@@ -13,7 +13,10 @@ class CreateUrlPointers < ActiveRecord::Migration
+     add_index :content_items, :page_id
+     add_index :content_items, :for_html_id
+     add_index :content_items, :language
+-        
++
++    # The websites subdomain was added later to make the whole migration set work as expected.
++    # Grabbed from branch 'rails2' db/migrate/20110927112515_add_subdomain_to_website.rb
++    add_column :websites, :subdomain, :string        
+   end
+ 
+   def self.down
+@@ -22,5 +25,8 @@ class CreateUrlPointers < ActiveRecord::Migration
+     remove_index :content_items, :page_id
+ 
+     drop_table :url_pointers
++
++    remove_column :websites, :subdomain
++
+   end
+ end
+\ No newline at end of file
+diff --git a/db/migrate/20111216193421_upgrade_vestal_versions_to_rails3.rb b/db/migrate/20111216193421_upgrade_vestal_versions_to_rails3.rb
+index 715d37d..dbf82c5 100644
+--- a/db/migrate/20111216193421_upgrade_vestal_versions_to_rails3.rb
++++ b/db/migrate/20111216193421_upgrade_vestal_versions_to_rails3.rb
+@@ -1,9 +1,33 @@
+ class UpgradeVestalVersionsToRails3 < ActiveRecord::Migration
+   def up
+-    rename_column :versions, :changes, :modifications
++
++  	# Note: this migration has been rewritten to work with the
++  	# Rails3-branch.
++  	# In Rails2 you can find the original migration in 
++  	# db/migrate/20110907112144_create_vestal_versions.rb
++
++    create_table :versions do |t|
++      t.belongs_to :versioned, :polymorphic => true
++      t.belongs_to :user, :polymorphic => true
++      t.string :user_name
++      t.text :modifications
++      t.integer :number
++      t.string :tag
++
++      t.timestamps
++    end
++
++    change_table :versions do |t|
++      t.index [:versioned_id, :versioned_type]
++      t.index [:user_id, :user_type]
++      t.index :user_name
++      t.index :number
++      t.index :tag
++      t.index :created_at
++    end
+   end
+ 
+   def down
+-    rename_column :versions, :modifications, :changes
++    drop_table :versions
+   end
+ end

@@ -1,0 +1,18 @@
+<p>
+  <b>Plugin:</b>
+  <%=h @extra_view.extra_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @extra_view.name %>
+</p>
+
+<p>
+  <b>Url:</b>
+  <%=h @extra_view.url %>
+</p>
+
+
+<%= link_to 'Edit', edit_extra_view_path(@extra_view) %> |
+<%= link_to 'Back', extra_views_path %>

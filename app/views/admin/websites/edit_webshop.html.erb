@@ -1,0 +1,113 @@
+<% javascript "websites"%>
+<h2><%= t('settings')%></h2>
+<div class="edit_field">
+
+  <div class="settings_form">
+
+    <% if @new_website && @new_website.new_record? %>
+      <h1><%= t("new_website") %></h1>
+    <% end %>
+
+    <%= form_for([:admin, current_website]) do |f| %>
+
+      <p>
+        <%= f.submit @new_website && @new_website.new_record? ? t("create") : t("save") %>
+      </p>
+
+      <p>
+        <%= f.label :paypal_business_email, t('paypal_business_email') %>
+        <%= f.text_field :paypal_business_email %>
+      </p>
+
+      <p>
+        <%= f.label :webshop_currency, t('webshop_currency') %>
+        <%= f.select :webshop_currency, Website::CURRENCIES.keys %>
+      </p>
+
+      <p>
+        <%= f.label :money_format, t('money_format') %>
+        <%= f.text_field :money_format %>
+      </p>
+
+      <p>
+        <%= f.label :money_separator, t('money_separator') %>
+        <%= f.text_field :money_separator %>
+      </p>
+
+      <p>
+        <%= f.label :webshop_live, t('webshop_live') %>
+        <%= f.check_box :webshop_live %>
+      </p>
+
+      <p>
+        <%= f.label :order_confirmation_title, t('order_texts.order_confirmation_title') %>
+        <%= order_text_field(f, :text_field, :order_confirmation_title) %>
+      </p>
+
+      <p>
+        <%= f.label :order_confirmation_header, t('order_texts.order_confirmation_header') %>
+        <%= order_text_field(f, :text_area, :order_confirmation_header) %>
+      </p>
+
+      <p>
+        <%= f.label :order_confirmation_footer, t('order_texts.order_confirmation_footer') %>
+        <%= order_text_field(f, :text_area, :order_confirmation_footer) %>
+      </p>
+
+      <p>
+        <%= f.label :payment_confirmation_title, t('order_texts.payment_confirmation_title') %>
+        <%= order_text_field(f, :text_field, :payment_confirmation_title) %>
+      </p>
+
+      <p>
+        <%= f.label :payment_confirmation_header, t('order_texts.payment_confirmation_header') %>
+        <%= order_text_field(f, :text_area, :payment_confirmation_header) %>
+      </p>
+
+      <p>
+        <%= f.label :payment_confirmation_footer, t('order_texts.payment_confirmation_footer') %>
+        <%= order_text_field(f, :text_area, :payment_confirmation_footer) %>
+      </p>
+
+      <fieldset>
+        <legend><%= t('search.settings.title') %></legend>
+        <p><%= t('search.settings.text') %></p>
+        <% @website.filtered_attributes.each do |k,v| %>
+        <p>
+          <%= label_tag("website_settings_filtered_attributes_#{k}", t(:real_product_attributes)[k.to_sym] || @website.product_property_keys.find_by_slug(k).name) %>
+          <%= check_box_tag "website[settings][filtered_attributes][#{k}]", true, v %>
+        </p>
+        <% end %>
+      </fieldset>
+
+      <fieldset>
+        <legend><%= t('product_property_keys.title') %></legend>
+        <table class='products-table'>
+          <tr>
+            <th><%= t('activerecord.attributes.product_property_key.name') %></th>
+            <th><%= t('activerecord.attributes.product_property_key.slug') %></th>
+            <th><%= t('activerecord.attributes.product_property_key.data_type') %></th>
+            <th></th>
+          </tr>
+          <% @website.product_property_keys.each do |product_property_key| %>
+            <tr>
+              <td><%= product_property_key.name %></td>
+              <td><%= product_property_key.slug %></td>
+              <td><%= t('product_property_keys.types')[product_property_key.data_type.to_sym] %></td>
+              <td><%= link_to t('edit'), [:edit, :admin, product_property_key], class: 'button' %></td>
+            </tr>
+          <% end %>
+        </table>
+        <%= link_to t('product_property_keys.new'), [:new, :admin, :product_property_key], class: 'button add' %>
+      </fieldset>
+
+      <input name='website[settings][webshop]' type='hidden' value='true'>
+
+      <p>
+        <%= f.submit @new_website && @new_website.new_record? ? t("create") : t("save") %>
+      </p>
+
+    <% end %>
+  </div>
+
+</div>

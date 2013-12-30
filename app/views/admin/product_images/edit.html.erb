@@ -1,0 +1,31 @@
+<h2><%= t('edit') %></h2>
+
+<%= image_tag @product_image.image(:large), :id => 'cropbox' %>
+
+<%= form_for([:admin, @parent, @product_image]) do |f| %>
+  <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+    <%= f.hidden_field attribute, :id => attribute %>
+  <% end %>
+  <p>
+    <%= f.submit t('save'), :class => 'button' %> <%= link_to t('cancel'), [:edit, :admin, @parent], :class => 'button' %>
+  </p>
+<% end %>
+
+<script type="text/javascript">
+$(function() {
+  $('#cropbox').Jcrop({
+    onChange: update_crop,
+    onSelect: update_crop,
+    setSelect: [0, 0, 400, 300],
+    aspectRatio: 1
+  });
+
+  function update_crop(coords) {
+    var ratio = <%= @product_image.image_geometry(:original).width %> / <%= @product_image.image_geometry(:large).width %>;
+    $('#crop_x').val(coords.x);
+    $('#crop_y').val(coords.y);
+    $('#crop_w').val(coords.w);
+    $('#crop_h').val(coords.h);
+  }
+});
+</script>

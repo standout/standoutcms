@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <title>Standout CMS: Publiceringsverktyg: <%= t('plugins') %></title>
+    <%= stylesheet_link_tag 'admin', 'custom_data_lists', 'jquery.ui.all' %>
+    <%= javascript_include_tag :application %>
+    <%= csrf_meta_tag %>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="custom_data_lists">
+        <ul class="custom_data_list">
+          <%= render :partial => 'admin/custom_data_lists/custom_data_list', :collection => @website.custom_data_lists if @website %>
+          <li><%= link_to "+ " + t('new_custom_data'), [:new, :admin, :custom_data_list] %></li>
+        </ul>
+      </div>
+
+      <%= render :partial => 'shared/menu', :locals => { :menu_selection => 'custom_data_lists' } %>
+
+
+      <div id="page_details" class="new_viewport">
+        <%= yield  %>
+      </div>
+
+
+    </div>
+  </body>
+</html>

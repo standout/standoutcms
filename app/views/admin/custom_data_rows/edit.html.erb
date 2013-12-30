@@ -1,0 +1,9 @@
+<% title "Edit Custom Data Row" %>
+
+<%= render :partial => 'form' %>
+
+<% if @custom_data_row.custom_data_list.page_template %>
+<p>
+	URL: http://<%= @website.domain %>/<%= @custom_data_row.url %>
+</p>
+<% end %>

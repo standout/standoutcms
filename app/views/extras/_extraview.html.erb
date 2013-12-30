@@ -1,0 +1,3 @@
+<li>
+	<%= link_to_remote extraview.name, :url => { :controller => "extra_views", :action => "choose", :id => extraview.id, :content_item_id => @content_item.id } rescue "FEL" %>
+</li>

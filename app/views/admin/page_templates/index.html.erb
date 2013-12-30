@@ -1,0 +1,27 @@
+<% title "Page Templates" %>
+
+<table>
+  <tr>
+    <th>Look</th>
+    <th>Slug</th>
+    <th>Name</th>
+    <th>Default Template</th>
+    <th>Partial</th>
+    <th>Html</th>
+  </tr>
+  <% for page_template in @page_templates %>
+    <tr>
+      <td><%=h page_template.look_id %></td>
+      <td><%=h page_template.slug %></td>
+      <td><%=h page_template.name %></td>
+      <td><%=h page_template.default_template %></td>
+      <td><%=h page_template.partial %></td>
+      <td><%=h page_template.html %></td>
+      <td><%= link_to "Show", page_template %></td>
+      <td><%= link_to "Edit", edit_page_template_path(page_template) %></td>
+      <td><%= link_to "Destroy", page_template, :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<p><%= link_to "New Page Template", new_page_template_path %></p>

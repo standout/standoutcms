@@ -1,0 +1,15 @@
+<h1><%= t('customers') %></h1>
+
+<table id="customers" class="products-table">
+
+  <thead>
+    <tr>
+      <th><%= t('full_name') %></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= render @customers %>
+  </tbody>
+</table>

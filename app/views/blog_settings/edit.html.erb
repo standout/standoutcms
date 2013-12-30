@@ -1,0 +1,27 @@
+<h1>Editing blog_setting</h1>
+
+<%= form_for(@blog_setting) do |f| %>
+
+  <p>
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </p>
+  <p>
+    <%= f.label :content_item_id %><br />
+    <%= f.text_field :content_item_id %>
+  </p>
+  <p>
+    <%= f.label :number_of_posts_to_display %><br />
+    <%= f.text_field :number_of_posts_to_display %>
+  </p>
+  <p>
+    <%= f.label :allow_comments %><br />
+    <%= f.check_box :allow_comments %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @blog_setting %> |
+<%= link_to 'Back', blog_settings_path %>

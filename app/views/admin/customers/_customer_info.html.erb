@@ -1,0 +1,44 @@
+<table cellpadding="5" style="background: #eee">
+  <tr>
+    <td><%= t('activerecord.attributes.contact_information_set.first_name') %>:</td>
+    <td><%= information[:first_name] %></td>
+  </tr>
+  <tr>
+    <td><%= t('activerecord.attributes.contact_information_set.last_name') %>:</td>
+    <td><%= information[:last_name] %></td>
+  </tr>
+  <tr>
+    <td><%= t('activerecord.attributes.contact_information_set.company_name') %>:</td>
+    <td><%= information[:company_name] %></td>
+  </tr>
+  <% if information[:email] %>
+    <tr>
+      <td><%= t('activerecord.attributes.customer.email') %>:</td>
+      <td><%= information[:email] %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td><%= t('activerecord.attributes.contact_information_set.address_line1') %>:</td>
+    <td><%= information[:address_line1] %></td>
+  </tr>
+  <tr>
+    <td><%= t('activerecord.attributes.contact_information_set.address_line2') %>:</td>
+    <td><%= information[:address_line2] %></td>
+  </tr>
+  <tr>
+    <td><%= t('activerecord.attributes.contact_information_set.zipcode') %>:</td>
+    <td><%= information[:zipcode] %></td>
+  </tr>
+  <tr>
+    <td><%= t('activerecord.attributes.contact_information_set.city') %>:</td>
+    <td><%= information[:city] %></td>
+  </tr>
+  <tr>
+    <td><%= t('activerecord.attributes.contact_information_set.phone') %>:</td>
+    <td><%= information[:phone] %></td>
+  </tr>
+  <tr>
+    <td><%= t('activerecord.attributes.contact_information_set.vat_identification_number') %>:</td>
+    <td><%= information[:vat_identification_number] %></td>
+  </tr>
+</table>

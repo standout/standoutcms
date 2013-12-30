@@ -1,0 +1,35 @@
+<html>
+<head>
+	<title>Error</title>
+	<style type="text/css">
+	body {
+		font-family: verdana;
+		font-size: 78%;
+		color: #333;
+		line-height: 1.5;
+		background: #fff;
+	}
+	
+	p.debug {
+	  background: #ccc;
+	  padding: 1em;
+	  border: 1px #333 solid;
+	  margin: 1em;
+	  font-family: monospace;
+	  font-size: 11px;
+	  line-height: 1.2;
+	}
+	</style>
+</head>
+<body>
+<h2><%= t('layout_error') %></h2>
+<p>
+	<%= t('layout_error_message', :page_title => @page.title) if @page %>
+</p>
+
+<p class="debug">
+	<strong><%= error %></strong><br />
+	<%= error.backtrace.join("<br />\n") rescue 'No backtrace available' %>
+</p>
+</body>
+</html>

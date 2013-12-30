@@ -1,0 +1,32 @@
+<%= form_for [:admin, @content_item] do |f| %>
+  <%= f.submit t('save'), :class => 'fancy_save', :style => 'margin: 5px;' %>
+  <%= f.text_area :text_content %>
+  <div id='code_editor'></div>
+<% end %>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  var codeEditor = ace.edit('code_editor'),
+      HTMLMode   = require('ace/mode/html').Mode;
+
+  codeEditor.setTheme('ace/theme/tomorrow');
+  codeEditor.getSession().setMode(new HTMLMode());
+  codeEditor.getSession().setTabSize(2);
+  codeEditor.getSession().setUseSoftTabs(true);
+  codeEditor.getSession().setValue($('#content_item_text_content').val());
+
+  $('form.edit_content_item').submit(function () {
+    $('#content_item_text_content').val(codeEditor.getSession().getValue());
+  });
+});
+</script>
+<style type="text/css">
+#content_item_text_content {
+  display: none;
+}
+
+#code_editor {
+  height: 150px;
+  position: relative;
+}
+</style>

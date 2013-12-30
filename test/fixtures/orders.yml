@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cart: one
+  payment_type: 'invoice'
+  website: standout
+  customer: one
+
+two:
+  website_id: 1
+  customer_id: 1

@@ -1,0 +1,24 @@
+<h1>Listing galleries</h1>
+
+<table>
+  <tr>
+    <th>Website</th>
+    <th>Content item</th>
+    <th>Title</th>
+  </tr>
+
+<% for gallery in @galleries %>
+  <tr>
+    <td><%=h gallery.website_id %></td>
+    <td><%=h gallery.content_item_id %></td>
+    <td><%=h gallery.title %></td>
+    <td><%= link_to 'Show', gallery %></td>
+    <td><%= link_to 'Edit', edit_gallery_path(gallery) %></td>
+    <td><%= link_to 'Destroy', gallery, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New gallery', new_gallery_path %>

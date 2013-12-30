@@ -1,0 +1,13 @@
+<h2><%=h @custom_data.title %></h2>
+
+<div class="edit_field">
+	<strong><%= t('liquid_name') %></strong>
+  <%=h @custom_data.liquid_name %>
+</div>
+
+
+<p>
+  <%= link_to t('edit'), edit_website_custom_data_path(@website, @custom_data), :class => 'button' %> |
+  <%= link_to t('destroy'), [@website, @custom_data], :confirm => 'Are you sure?', :method => :delete, :class => 'button' %> |
+  <%= link_to "View All", [@website, :custom_data_lists] %>
+</p>

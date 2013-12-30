@@ -1,0 +1,16 @@
+<h1><%= t :csv_import_summary_title %></h1>
+
+<p>
+	<%= t(:csv_import_summary_text, rows_count: @csv_import.rows_count, successful_rows_count: @csv_import.successful_rows_count, created_rows_count: @csv_import.created_rows_count, updated_rows_count: @csv_import.updated_rows_count, failed_rows_count: @csv_import.failed_rows_count) %>
+</p>
+
+<% @csv_import.invalid_rows.each do |row, value| %>
+	<p class="<%= cycle("odd", "even") -%>">
+		<%= t(:csv_import_summary_error, row_number: row.to_i+1, row_text: value[0].join(', ')) %>
+		<ul>
+			<% value[1].each do |msg| %>
+				<li><%= msg %></li>
+			<% end %>
+		</ul>
+	</p>
+<% end %>

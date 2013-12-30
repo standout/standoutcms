@@ -1,0 +1,17 @@
+<h2><%= t('files') %> <%= link_to t('back'), admin_custom_data_list_custom_data_rows_path(@custom_data_list), :class => 'button' %></h2>
+
+<ol class="custom_data_file_list">
+<% @custom_data_row.attachment_files.each do |af| %>
+  <li>
+    <%= form_for([:admin, @custom_data_list, @custom_data_row, af]) do |f| %>
+      <span class='in_place_edit_text'><%= af.title %></span>
+      <span class='in_place_edit_field' style="display: none;">
+        <%= f.text_field :title, :value => af.title %>
+      </span>
+    <% end %>
+    <%= link_to image_tag('url.gif'), af.url, :title => "Open #{af.url}" %>
+
+    <%= link_to image_tag("delete.png"), admin_custom_data_list_custom_data_row_attachment_file_path(@custom_data_list, @custom_data_row, af), :method => :delete %>
+  </li>
+<% end %>
+</ol>

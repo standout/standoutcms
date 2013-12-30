@@ -1,0 +1,36 @@
+<h2>Plugins &amp; Extras</h2>
+
+<div id="installed_plugins">
+<%= render :partial => 'extras/installed' %>
+</div>
+
+<h3>Add a new plugin to library</h3>
+<%= form_for(Extra.new(:website_id => @website.id)) do |f| %>
+  <%= f.hidden_field :website_id %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :edit_url, "Url to the main page of your Plugin" %><br />
+    <%= @website.domain rescue "www.example.com" %>/<%= f.text_field :edit_url %>
+  </p>
+  <p>
+    <%= f.label :display_url, "Visningssida" %><br />
+    <%= @website.domain rescue "www.example.com" %>/<%= f.text_field :display_url %>
+  </p>
+  <p>
+    <%= f.check_box :public %>
+    <%= f.label :public, "Other websites may use this plugin, too." %><br />
+  </p>
+  <p>
+    <%= f.submit "Create plugin" %>
+  </p>
+<% end %>
+
+<h3>Add a plugin from the library</h3>
+<p>
+  <% for extra in Extra.find(:all) %>
+    <li><%= link_to_remote h(extra.name), :url => install_website_extra_path(@website, extra) %></li>
+  <% end %>
+</p>

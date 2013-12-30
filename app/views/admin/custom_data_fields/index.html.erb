@@ -1,0 +1,16 @@
+<table class="datalist">
+  <tr>
+    <th><%= t('name')%></th>
+    <th><%= t('type')%></th>
+  </tr>
+  <% for custom_data_field in @custom_data_fields %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td><%=h custom_data_field.name %></td>
+      <td><%=h custom_data_field.fieldtype %></td>
+      <td><%= link_to "Show", [:admin, @custom_data, custom_data_field] %></td>
+      <td><%= link_to "Edit", [:edit, :admin, @custom_data, custom_data_field] %></td>
+      <td><%= link_to "Destroy", [:admin, @custom_data, custom_data_field], :confirm => 'Are you sure?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+

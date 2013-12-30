@@ -1,0 +1,31 @@
+product_with_variants:
+  website: standout
+  title: "Product with variants"
+  description: "Description of product"
+  price: 100.0
+  vat_percentage: 25.0
+  url: 'product-with-variants'
+
+testproduct:
+  product_categories:
+    - one
+  website: standout
+  title: "Testproduct"
+  price: 10.0
+  vat_percentage: 25.0
+
+one:
+  product_categories:
+    - one
+  website: standout
+  title: 'Book'
+  price: 100
+  vat_percentage: 25
+
+two:
+  product_categories:
+    - one
+  website: standout
+  title: 'Testproduct 2'
+  price: 300
+  vat_percentage: 25

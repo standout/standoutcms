@@ -1,0 +1,17 @@
+<tr class="<%= cycle('odd', 'even') %> <%= product_category.parent ? 'subcategory' : 'maincategory' %>">
+  <td>
+    <%= link_to product_category.title, [:edit, :admin, product_category] %>
+  </td>
+  <td>
+    <%= product_category.products.count %> <%= t('products').to_s.downcase %>
+  </td>
+  <td>
+    <%= link_to t('edit'), [:edit, :admin, product_category], :class => 'button' %>
+    <%= link_to t('show'), product_category.complete_url, { :class => 'button', :target => '_blank' } %>
+  </td>
+</tr>
+
+<% if product_category.children.any? %>
+  <%= render :partial => 'product_category', :collection => product_category.children %>
+<% end %>
+  

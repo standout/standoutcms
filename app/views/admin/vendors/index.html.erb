@@ -1,0 +1,23 @@
+<h2><%= t('vendors') %></h2>
+
+<p>
+  <%= link_to t('new_vendor'), [:new, :admin, :vendor], :class => 'button new' %>
+</p>
+
+<table class="products-table">
+  <tr>
+    <th><%= t('name') %></th>
+    <th></th>
+  </tr>
+  
+  <% @vendors.each do |vendor| %>
+  <tr class="<%= cycle('odd', 'even') %>">
+    <td><%= vendor.name %></td>
+    <td>
+      <%= link_to t('edit'), [:edit, :admin, vendor], :class => 'button edit' %>
+      <%= link_to t('destroy'), [:admin, vendor], { :class => 'button destroy', :method => :delete } %>
+    </td>
+  </tr>
+  <% end %>
+  
+</table>

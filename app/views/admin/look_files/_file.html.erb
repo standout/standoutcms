@@ -1,0 +1,4 @@
+<li id="look_file_<%= file.id %>" class="<%= cycle('odd', 'even') %>">
+	<%= look_file_image(file) %> <%= link_to truncate(file.filename, :length => 25), [:edit, :admin, @look, file] %>
+  <span class="remove"><%= link_to t("delete"), [:admin, @look, file] %></span>
+</li>

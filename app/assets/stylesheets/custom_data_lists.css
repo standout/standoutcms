@@ -1,0 +1,76 @@
+#menu {
+	position: fixed;
+	z-index: 9000;
+}
+
+table.datalist th {
+	background: #666;
+	text-align: left;
+	padding: 0.5em 1em;
+	color: #eee;
+	font-size: 10px;
+}
+
+.tag {
+  padding: 2px 4px;
+  background: #555;
+  color: #eee;
+  font-size: 9px;
+  border-radius: 3px;
+}
+
+div#custom_data_lists {
+	position: absolute;
+	left: 0;
+	top: 25px;
+	width: 200px;
+	background: #DFE4EB;
+}
+
+ul.custom_data_list {
+	margin: 0;
+	padding: 0;
+}
+
+div.edit_field {
+	margin: 20px;
+	 -moz-box-shadow: 0 2px 5px #CCCCCC;
+   box-shadow: 0 2px 5px #CCCCCC;
+	padding: 20px;
+}
+
+ul.custom_data_list li {
+	display: block;
+	float: left;
+	width: 200px;
+	height: 24px;
+}
+
+	ul.custom_data_list li a {
+		font-family: 'lucida sans', 'lucida grande', 'helvetica';
+		font-size: 10px;
+		display: block;
+		float: left;
+		color: #fff;
+		line-height: 24px;
+		text-decoration: none;
+		padding-left: 20px;
+		height: 24px;
+		width: 180px;
+		background: #333;
+		color: #333;
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#333333'); /* for IE */
+		background: -webkit-gradient(linear, left top, left bottom, from(#666), to(#333)); /* for webkit browsers */
+		background: -moz-linear-gradient(top,  #ddd,  #eee); /* for firefox 3.6+ */
+		background: #DFE4EB;
+		text-shadow: 0 1px 0 #ccc;
+		
+	}
+		ul.custom_data_list li a:hover {
+			background: -moz-linear-gradient(top,  #ccc,  #ddd); /* for firefox 3.6+ */
+		}
+		
+		ul.custom_data_list li.selected a {
+			background: #666;
+			color: #eee;
+		}

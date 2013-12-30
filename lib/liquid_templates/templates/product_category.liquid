@@ -1,0 +1,9 @@
+{% include 'header' %}
+     <h1>{{ product_category.title }}</h1>  
+     <ul>  
+     {% for product in product_category.products %}  
+       <li><a href="{{ product.url }}">{{ product.title }}</a></li>  
+     {% endfor %}  
+     </ul>  
+
+{% include 'footer' %}

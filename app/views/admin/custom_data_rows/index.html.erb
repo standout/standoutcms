@@ -1,0 +1,112 @@
+<p>
+	<%= link_to t('settings') + ' ...', [:edit, :admin, @custom_data_list], :class => 'button' %>
+</p>
+
+<% if @custom_data_rows.empty? %>
+<h2>There is no data in this list</h2>
+<p>
+	No problem. Just press the 'Add' button below to add some data into the system.
+</p>
+
+
+
+<% else %>
+<p><%= link_to t('add'), [:new, :admin, @custom_data_list, :custom_data_row], :class => 'button' %></p>
+
+<div class="apple_pagination">
+  <% begin %>
+    <%= will_paginate(@custom_data_rows, :container => false) %>
+  <% rescue => e %>
+    Warning: One of more of the items in your list is corrupt or missing data for the sort field.
+  <% end %>
+</div>
+
+<table class="datalist">
+  <tr>
+ 	<% @custom_data_list.visible_fields.each do |field| %>
+		<th><%= field.name.titleize %></th>
+	<% end %>
+	<th>&nbsp;</th>
+ </tr>
+
+  <% for custom_data_row in @custom_data_rows %>
+  <tr class="<%= cycle('odd', 'even') %>">
+
+	 	<% @custom_data_list.visible_fields.each do |field| %>
+			<td>
+				<% if field.fieldtype == 'image' %>
+					<% if custom_data_row.images_for(field).empty? %>
+					 -
+					<% else %>
+						<%= image_tag custom_data_row.images_for(field).last.url(:thumb), :style => "height: 14px; width: 14px;" %>
+					<% end %>
+
+				<% elsif field.fieldtype == 'wysiwyg' %>
+				  <span class="tag">HTML</span>
+				<% elsif field.fieldtype == 'file' %>
+				 <%= link_to custom_data_row.send("#{field.name_to_slug}"), admin_custom_data_list_custom_data_row_attachment_files_path(@custom_data_list, custom_data_row), :class => 'button' %>
+				<% elsif field.fieldtype == 'checkbox' %>
+					<input type="checkbox" disabled="disabled" <%= custom_data_row.send("#{field.name_to_slug}") == '1' ? 'checked' : '' %>>
+				<% elsif field.fieldtype == 'listconnection' || field.fieldtype == 'listconnections' %>
+          <% row_ids = custom_data_row.json[field.name_to_slug.to_sym] %>
+          <%= field.connected_list.custom_data_rows.find(row_ids.to_a).collect(&:first_string_field_name).join(", ") rescue '?' %>
+				<% else %>
+				<%= custom_data_row.send("#{field.name_to_slug}") %>
+				<% end %>
+			</td>
+		<% end %>
+
+      <td>
+				<%= link_to t('edit'), [:edit, :admin, @custom_data_list, custom_data_row], :class => 'button' %>
+				<%= button_to t('destroy'), [:admin, @custom_data_list, custom_data_row], :method => :delete, :class => 'button delete', :confirm => 'Really delete?' %>
+			</td>
+    </tr>
+  <% end %>
+</table>
+<% end %>
+
+<p><%= link_to t('add'), [:new, :admin, @custom_data_list, :custom_data_row], :class => 'button' %></p>
+
+<div class="apple_pagination">
+  <% begin %>
+    <%= will_paginate(@custom_data_rows, :container => false) %>
+  <% rescue => e %>
+    Warning: One of more of the items in your list is corrupt or missing data for the sort field.
+  <% end %>
+</div>
+
+
+<h3>API access</h3>
+<p>
+  If you wish to get this list from a remote location you could access it via our API.
+  Your API-key for this website is <em><%=h @website.api_key %></em>.
+</p>
+
+<dl>
+  <dt>
+    Getting the entire list
+  </dt>
+  <dd>
+    <span class="code">GET http://cms.standout.se/websites/<%= @website.id %>/plugins/<%= @custom_data_list.id %>/rows.json?apikey=<%= @website.api_key %></span>
+  </dd>
+
+  <dt>
+    Adding new content
+  </dt>
+  <dd>
+    <span class="code">
+      POST http://cms.standout.se/websites/<%= @website.id %>/plugins/<%= @custom_data_list.id %>/rows.json?apikey=<%= @website.api_key %><br />
+      Accept: application/json<br />
+      Content-type: application/json<br />
+      Body:
+      <div >
+        { "custom_data_row":
+            { <%= @custom_data_list.custom_data_fields.collect{ |f| "'#{f.name}': 'value'"}.to_sentence(:last_word_connector => ",") %> }
+        }
+      </div>
+    </span>
+
+
+
+  </dd>
+</dl>

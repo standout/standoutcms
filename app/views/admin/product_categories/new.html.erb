@@ -1,0 +1,13 @@
+<h1><%= t('new_product_category') %></h1>
+
+<%= render 'form' %>
+
+<%= link_to t('cancel'), [:admin, :product_categories], :class => 'button cancel' %>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#product_category_title").stringToSlug({
+    getPut: '#product_category_slug'
+  });  
+});
+</script>

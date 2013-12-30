@@ -1,0 +1,18 @@
+<%= javascript_include_tag 'jquery', 'jquery-ui', "ckeditor/ckeditor" %>
+<%= 
+	begin
+			stuff = { 'language' => params[:language], 
+			'posts' => @custom_data_row.custom_data.website.posts, 
+			'categories' => @custom_data_row.custom_data.website.blog_categories,
+			'item' => @custom_data_row,
+			'page_template_id' => @custom_data_row.custom_data.page_template_id }
+			@custom_data_row.custom_data.website.custom_data_lists.each do |custom_data|
+				stuff["#{custom_data.liquid_name}"] = custom_data
+			end
+			Liquid::Template.parse(@custom_data_row.custom_data.page_template.html).render(stuff)
+   rescue Liquid::SyntaxError => e
+	 		render :partial => 'liquid_error', :locals => { :liquid_error => e }
+   rescue => e
+			render :partial => 'layout_error', :locals => { :error => e }
+	end
+%>

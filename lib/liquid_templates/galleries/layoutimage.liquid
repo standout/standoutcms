@@ -1,0 +1,11 @@
+<div class="layoutimagegallery">
+
+  {% for image in gallery.images limit:1 %} 
+    <img src="{{ image.large }}" alt="" title="{{ image.title }}" />
+  {% endfor %}
+
+  {% for image in gallery.images limit:5 offset:1 %} 
+    <img style="display: none" src="{{ image.large }}" alt="" title="{{ image.title }}" />
+  {% endfor %}
+
+</div>

@@ -1,0 +1,9 @@
+<h2><%= t('upload_new_file') %></h2>
+<div class="edit_field">
+
+<%= form_for [:admin, @look, @look_file], :html => { :multipart => true } do |f| %>
+	<%= file_field_tag :uploaded_data %>
+	<%= f.submit t('upload') %>
+<% end %>
+
+</div>

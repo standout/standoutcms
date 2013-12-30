@@ -1,0 +1,59 @@
+<script type="text/javascript">	  
+
+  
+  function setUrl(url) 
+  {  
+		var funcNum = getUrlParam('CKEditorFuncNum');
+		// console.log("URL:" + url);
+		// console.log("funcNum:" + funcNum);
+		window.opener.CKEDITOR.tools.callFunction( funcNum, url );
+
+    window.close();
+  }
+
+	function getUrlParam(paramName)
+	{
+	  var reParam = new RegExp('(?:[\?&]|&amp;)' + paramName + '=([^&]+)', 'i') ;
+	  var match = window.location.search.match(reParam) ;
+
+	  return (match && match.length > 1) ? match[1] : '' ;
+	}
+
+	$(document).ready(function(){
+		$("a.cms_filelisting").live('click', function(){
+				setUrl($(this).attr('href'));
+				return false;
+		});
+	});
+
+</script>
+
+<div style="margin: 1em">
+  <%= form_for([:admin, @website, AttachmentFile.new], :html => { :multipart => true }) do |f| %>
+    <%= f.file_field :data %>
+    <%= f.submit t('add') %>
+  <% end %>
+</div>
+
+<div class="container">
+  <div class="files">
+    <h2>Filer</h2>
+    <%= render :partial=>"file", :collection=>@files %>
+
+  </div>
+  <div class="pages">
+
+    <h2>Sidor</h2>
+    <% for page in @website.pages %>
+
+      <% page.languages.each do |language| %>
+      <a class="cms_filelisting" href="/<%= page.address(language.short_code) %>">
+        <%= image_tag("extensions/file.png") %>
+        <%= image_tag("flags/#{language.short_code}.png") %>
+        <%= page.title(language.short_code) %>
+      </a>
+      <% end %>
+
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<% if menu_page.show_in_menu(@language) %>
+  <li id="page_<%= menu_page.id %>" class="<%= selected(@page, menu_page) %> page" >
+  <a href="#" id="menuitem_<%= menu_page.id %>" class="<%= menu_page.parent ? "subpage" : "root" %> <%= cycle('odd', 'even') %> <%= selected(@page, menu_page) %>" onclick="return false;">
+    <%= truncate(h(menu_page.title(@language)), :length => 40) %>
+  </a>
+  <% if menu_page.children.length > 0 && @number_of_submenus < @menu.levels %>
+    <% @number_of_submenus += 1 %>
+    <ul id="page_<%= menu_page.id %>_children" class="page_children">
+      <%= render :partial => 'admin/pages/menu_page', :collection => menu_page.children %>
+    </ul>
+    <% @number_of_submenus -= 1 %>
+  <% end %>
+  </li>
+<% end %>

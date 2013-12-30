@@ -1,0 +1,7 @@
+one:
+  product: product_with_variants
+  color: "black"
+  size: "large"
+  material: "latex"
+  price: 120.0
+  inventory: 10 

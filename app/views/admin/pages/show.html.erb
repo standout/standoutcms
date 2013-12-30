@@ -1,0 +1,105 @@
+<div id="page_switcher">
+	<strong><%=h truncate(@page.title, :length => 25) %></strong> <%= link_to t('switch'), [:admin, :pages], :class => 'button' %>
+</div>
+
+<ul id="page_tabs">
+	<li><a href="#edit" class="selected"><%= t('content') %></a></li>
+	<li><a href="#page_settings"><%= t('settings')%></a></li>
+	<li><a href="#preview"><%= t('preview') %></a></li>
+</ul>
+
+<div id="page_settings" style="display: none;">
+	<%= render :partial => 'admin/pages/details' %>
+</div>
+
+<div id="editor-layout-container" style="height: 100%; overflow: hidden; clear: left; float: left; width: 100%; position: absolute; top: 50px; left: 0;">
+  
+  <iframe id="edit" class="ui-layout-center" name="edit" src="<%= url_for([:edit, :admin, @page]) %>">
+  	You need iframe support to edit the page.
+  </iframe>
+  
+<div id="bottom_pane" class="ui-layout-south">
+  <!-- Placeholder div for displaying things like menu settings -->
+  <div id="settings" style="display: none;">
+  </div>
+
+  <!--- this is the text editor -->
+  <div id="text_editor">
+    <div id="editor"></div>
+    <div class="buttons">
+      <input type="button" class="button save" value="<%= t('save_changes') %>" onclick="doSave();"/>
+      <a href="#" onclick="cancel_editing(); return false;" class="cancel large"><%= t('cancel') %></a>
+      <!--form style="display: inline; margin: 0; padding: 0;">
+      <p>
+        <input type="checkbox" id="content_item_sticky" /> <%= t('show_on_all_pages') %>
+      </p>
+    </form-->
+
+      <div style="height: 1px; width: 1px; overflow: hidden;">
+        <input type="text" name="selected_element" id="selected_element" value="" />
+        <input type="text" name="selected_content_item" id="selected_content_item" value="" />
+        <input type="text" name="current_page" id="current_page" value="<%= @page.id %>" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+<!-- preview of page is loaded here -->
+<iframe id="preview" name="preview" title="<%= url_for([:preview, :admin, @page])%>" src="about:blank" style="display: none;"></iframe>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#editor-layout-container").height($(window).height() - 50);
+  Editorlayout = $('#editor-layout-container').layout({ applyDefaultStyles: true , south__onresize: 'set_editor_height()', onopen: 'set_editor_height()'});
+  Editorlayout.sizePane("south", '33%');
+  Editorlayout.close('south');
+	
+	$("iframe#edit").height($(window).height() - 50);
+	$("iframe#preview").height($(window).height() - 50);
+	
+	$(window).resize(function(){
+		$("iframe#edit").height($(window).height() - 50);
+		$("iframe#preview").height($(window).height() - 50);
+	});
+	
+	$("#page_tabs a").click(function(){
+    $('#editor-layout-container').css('display', 'none');
+		$("#page_tabs a").removeClass('selected');
+		$(this).addClass('selected');
+		
+		// Hide/show the correct content
+		$("#pages_wrapper").hide();
+		$("#page_switcher").show();
+		$("#edit").hide();
+		$("#settings").hide();
+		$("#preview").hide();
+		$("#text_editor").hide();
+		$($(this).attr('href')).show();
+		
+		if($(this).attr('href').match('edit'))
+		{
+      $('#editor-layout-container').css('display', 'block');
+			$("#text_editor").show();
+		}
+		
+		if($(this).attr('href').match('preview'))
+		{
+		  $("iframe#preview").attr('src', $("iframe#preview").attr('title') + '?language=' + $("#language_setting").val());
+		}
+		
+		return false;
+	});
+	
+	$("#page_switcher a").click(function(){
+		$("#edit").hide();
+		$("#pages_wrapper").show();
+		$("#page_switcher").hide();
+		$("#text_editor").hide();
+		return false;
+	});
+	
+});
+</script>

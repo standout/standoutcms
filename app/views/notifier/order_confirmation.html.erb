@@ -1,0 +1,73 @@
+<div style="font-family: helvetica, arial, sans-serif; font-size: 13px; width: 500px;">
+  <p><%= simple_format(@header) %></p>
+
+  <table cellpadding="5" style="font-size: 13px; width: 500px;">
+    <thead>
+      <tr>
+        <th style="text-align: left;"><%= t('product_id') %></th>
+        <th style="text-align: left;"><%= t('quantity') %></th>
+        <th style="text-align: left;"><%= t('product_title') %></th>
+        <th style="text-align: left;"><%= t('comment') %></th>
+        <th style="text-align: right;"><%= t('payment') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for item in @order.cart.cart_items %>
+        <tr>
+          <td>#<%= item.product.id %></td>
+          <td><%= item.quantity %></td>
+          <td><%= item.title %></td>
+          <td><%= item.notes %></td>
+          <td style="text-align: right;"><%= money_value(item.price_including_tax) %></td>
+        </tr>
+        <% if item.product_variant %>
+          <tr>
+            <td colspan="4"><i>Variant: <%= item.product_variant.description %></i></td>
+          </tr>
+        <% end %>
+      <% end %>
+      <tr>
+        <td></td><td></td><td></td>
+        <td style="border-top: 1px solid grey; text-align: right;">
+          <%= money_value(@order.shipping_cost) %>
+          (<%= uncapitalize(t('activerecord.models.shipping_cost')) %>)
+        </td>
+      </tr>
+      <tr>
+        <td></td><td></td><td></td>
+        <td style="border-top: 1px solid grey; text-align: right;">
+          <%= money_value(@order.total_price + @order.shipping_cost) %>
+          (<%= uncapitalize(t('payment_types')[@order.payment_type.to_sym]) %>)
+        </tr>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    <%= t('inquiry') %>: <%= t('is_inquiry')[@order.inquiry] %>
+  </p>
+
+  <% if @order.cart.reseller.to_s.size > 0 %>
+    <p>
+      <%= t('reseller') %>:
+      <%= @order.cart.reseller %>
+    </p>
+  <% end %>
+
+  <% if @order.cart.notes.to_s.size > 0 %>
+    <p>
+      <%= t('comment') %>:<br>
+      <%= @order.cart.notes %>
+    </p>
+  <% end %>
+
+  <div style='font-size: 13px; width: 500px;'>
+    <%= render 'admin/customers/customer_info', information: @order.customer_information_set.attrs.merge(email: @order.customer.email) %>
+  </div>
+  <% if @order.delivery_information_exists? %>
+    <h3><%= t('delivery_address') %></h3>
+    <%= render 'admin/customers/customer_info', information: @order.delivery_information_set.attrs %>
+  <% end %>
+
+  <p><%= simple_format(@footer) %></p>
+</div>

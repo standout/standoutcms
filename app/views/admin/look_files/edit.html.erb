@@ -1,0 +1,37 @@
+<h2>
+	<%= @look_file.filename %> <span class="filesize"><%= number_to_human_size(File.size("#{Rails.root}/public/#{@look_file.path}")) rescue '0 KB'%></span>
+	<%= button_to t('destroy'), [:admin, @look, @look_file], :method => :delete, :class => 'button delete' %>
+	<%= link_to_function t('replace'), "$('#replacement_form').toggle();", :class => 'button' %>
+</h2>
+
+<p>
+  <%= t('path') %>: <span class="clipboard" id="clipboard"><%= @look_file.path %></span>
+  <span id="clipboard_notice" style="display: none;">Sökvägen kopierad till dina urklipp</span>
+</p>
+
+<%= form_for [:admin, @look, @look_file], :html => { :multipart => true, :id => 'replacement_form', :style => 'display: none;' } do |f| %>
+  <%= f.hidden_field :look_id %>
+  <%= f.file_field :uploaded_data %>
+  <%= f.submit %>
+<% end %>
+
+
+<% if @look_file.content_type.match('image') %>
+  <%= image_tag @look_file.path %>
+<% end %>
+
+<% if %(css js html).include? @look_file.extension %>
+  <%= form_for [:admin, @look, @look_file] do |f| %>
+
+    <%= f.text_area :text_content, :value => @look_file.text_content, 'data-type' => @look_file.extension %>
+    <div id='code_editor'></div>
+
+    <div id="saving_and_info">
+      <%= f.submit t("save_changes") %>
+      <%= image_tag 'spinner.gif', :id => 'saving_and_info_spinner', :style => 'display: none;' %>
+    </div>
+  <% end %>
+<% end %>
+
+<% javascript("look_files") %>
+<% stylesheet "page_templates" %>

@@ -1,0 +1,15 @@
+standout:
+  domain: "standout.se"
+  subdomain: "standout"
+  email: "example@standout.se"
+
+website_without_releases:
+  subdomain: "noreleases"
+
+website-without-search-template:
+  subdomain: "website-without-search-template"
+
+lenhovda:
+  domain: "lenhovda-example.com"
+  subdomain: "lenhovda"
+  email: "lenhovda@example.com"

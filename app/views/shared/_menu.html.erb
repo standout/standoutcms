@@ -1,0 +1,22 @@
+<% if current_website %>
+<div id="menu">
+  <%= link_to image_tag('tab_home.png'), root_url(:subdomain => nil), :id => 'tab_home' %>
+
+  <div class="left <%= "faded" if @new_website %>" >
+    <% unless current_website.new_record? %>
+      <%= link_to t('pages'), [:admin, :pages], :class => (params[:controller] == 'admin/pages' ? 'selected' : '') %>
+      <%= link_to t('blog'), [:admin, :posts], :class => ((params[:controller] == 'admin/posts' || params[:controller] == 'admin/blog_categories') ? 'selected' : '') %>
+      <%= link_to t('custom_data'), [:admin, :custom_data_lists], :id => 'tab_data', :class => (params[:controller].match('custom_data') ? 'selected' : '') %>
+      <%= link_to t('webshop'), [:admin, :product_categories], :id => 'tab_data', :class => (menu_selection == 'webshop' ? 'selected' : '') %>
+      <%= link_to t('themes'), [:admin, :looks], :class => (params[:controller].match('look') ? 'selected' : '') if current_user.admin_for(current_website) %>
+      <% link_to t('publish'), [:new, :admin, :release], :class => (params[:controller] == 'admin/releases' ? 'selected' : '') %>
+      <%= link_to t('settings'), [:edit, :admin, current_website], :class => ("selected" if request.url.match(/\/websites\/\d+\/edit$/)) %>
+    <% end %>
+  </div>
+
+  <div class="right">
+    <%= link_to image_tag('user.png'), edit_user_path(current_user), :class => ("selected" if request.url.match(/\/users\/\d+\/edit/)), :id => 'tab_user' %>
+    <%= link_to t("log_out"), logout_path %>
+  </div>
+</div>
+<% end %>

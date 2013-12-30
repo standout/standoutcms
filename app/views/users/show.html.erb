@@ -1,0 +1,12 @@
+<em>Joined <%= @user.created_at.to_formatted_s(:db) %></em>
+
+<h2>Websites for <%=h @user.email %></h2>
+<ul>
+  <% for website in @user.websites %>
+    <li><%= link_to "#{website.title}", edit_website_path(website) %></li>
+  <% end %>
+</ul>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

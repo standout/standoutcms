@@ -1,0 +1,25 @@
+<h2><%= t('blog')%></h2>
+
+<%= link_to t('new_blogpost') + " ...", [:new, :admin, :post], :class => 'button ajax' %>
+
+
+<table id="blogposts" class="datalist">
+  <tr>
+    <th><%= t('title')%></th>
+		<th><%= t('date_header')%></th>
+    <th><%= t('category') %></th>
+  </tr>
+
+<% for post in @posts %>
+  <tr class="<%= cycle('odd', 'even') %>">
+    <td><%=h post.title %></td>
+    <td><%=h post.created_at.to_s(:short) %></td>
+		<td><%=h post.blog_category.name if post.blog_category %></td>
+    <td><%= link_to t('edit'), [:edit, :admin, post], :class => 'ajax button' %></td>
+    <td><%= button_to t('destroy'), [:admin, post], :method => :delete, :class => 'ajaxdelete button' %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+

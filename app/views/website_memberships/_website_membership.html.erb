@@ -1,0 +1,12 @@
+<tr>
+	<td>
+		<%= website_membership.user.email if website_membership.user %>
+	</td>
+	<td>
+		<%= t('admin') if website_membership.website_admin? %>
+	</td>
+	<td>
+	  <%= link_to t('edit'), [:edit, website_membership], :class => 'button edit' if can? :edit, website_membership %>
+		<%= button_to t('remove'), website_membership, :method => :delete if can? :destroy, website_membership %>
+	</td>
+</tr>

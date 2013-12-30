@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <title>Standout CMS - Webshop</title>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag :application %>
+    <%= csrf_meta_tag %>
+    <%= yield(:head) %>
+  </head>
+  <body>
+    <div id="wrapper">
+      <%= render :partial => 'shared/menu', :locals => { :menu_selection => 'webshop' } %>
+
+      <div id="new_viewport" class="new_viewport">
+
+        <ul class="webshop-menu">
+          <li class="<%= params[:controller] == 'admin/product_categories' ? 'selected' : 'unselected' %>"><%= link_to t('product_categories'), [:admin, :product_categories] %></li>
+          <li class="<%= (params[:controller] == 'admin/products' or params[:controller] == 'admin/csv_imports') ? 'selected' : 'unselected' %>"><%= link_to t('products'), [:admin, :products] %></li>
+          <li class="<%= params[:controller] == 'admin/vendors' ? 'selected' : 'unselected' %>">
+            <%= link_to t('vendors'), [:admin, :vendors] %>
+          </li>
+          <li class="<%= params[:controller] == 'admin/orders' ? 'selected' : 'unselected' %>"><%= link_to t('orders'), [:admin, :orders] %></li>
+          <li class="<%= params[:controller] == 'admin/customers' ? 'selected' : 'unselected' %>"><%= link_to t('customers'), [:admin, :customers] %></li>
+          <li class="<%= params[:controller] == 'admin/shipping_costs' ? 'selected' : 'unselected' %>"><%= link_to t('activerecord.models.shipping_cost'), [:admin, :shipping_costs] %></li>
+          <li class="<%= params[:controller] == 'admin/websites' ? 'selected' : 'unselected' %>"><%= link_to t('settings'), edit_webshop_admin_website_path(current_website) %></li>
+        </ul>
+
+        <%= yield  %>
+      </div>
+    </div>
+  </body>
+</html>

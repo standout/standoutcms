@@ -1,0 +1,87 @@
+<div class="webshop-breadcrumbs">
+  <%= link_to t('products'), [:admin, :products] %> &raquo; <%= @product.title %>
+</div>
+
+<h1><%= t('edit') %>: <%= @product.title %></h1>
+
+<%= render 'form' %>
+<%= render partial: 'admin/shared/product_images', locals: {parent: @product} %>
+
+<h2 class="section"><%= t('product_variants') %></h2>
+<table class="product-variants datalist">
+  <tr>
+    <th><%= t('activerecord.models.product_variant') %></th>
+    <th><%= t('activerecord.attributes.product_variant.price') %></th>
+    <th><%= t('activerecord.attributes.product_variant.inventory') %></th>
+  </tr>
+  <% @product.product_variants.each do |variant| %>
+  <tr class="<%= cycle('odd', 'even') %>">
+    <td>
+      <% [:color, :size, :material].each do |choice| %>
+        <%= best_in_place(variant, choice, :path => [:admin, @product, variant]) %>
+      <% end %>
+    </td>
+    <td><%= best_in_place(variant, :price, :path => [:admin, @product, variant]) %></td>
+    <td><%= best_in_place(variant, :inventory, :path => [:admin, @product, variant]) %></td>
+    <td><%= link_to image_tag('delete.png'), [:admin, @product, variant], { :method => :delete, :confirm => t('really_delete') }%>
+  </tr>
+  <% end %>
+</table>
+
+<%= form_for([:admin, @product, ProductVariant.new], { :class => 'structured-form' }) do |f| %>
+
+  <div class="field">
+    <%= f.label :color %>
+    <%= f.text_field :color %>
+  </div>
+
+  <div class="field">
+    <%= f.label :size %>
+    <%= f.text_field :size %>
+  </div>
+
+  <div class="field">
+    <%= f.label :material %>
+    <%= f.text_field :material %>
+  </div>
+
+  <div class="field">
+    <%= f.label :price %>
+    <%= f.text_field :price, :value => @product.price %>
+  </div>
+
+  <div class="field">
+    <%= f.label :inventory %>
+    <%= f.text_field :inventory, :value => 1 %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
+
+<h2 class="section"><%= t('related_products') %></h2>
+<ul class="related-products">
+<% @product.product_relations.each do |relation| %>
+  <li>
+    <%= product_thumb(relation.related_product) %>
+    <%= link_to relation.related_product.title, [:admin, relation.related_product] %>
+    <%= link_to t('remove_related_product'), [:admin, @product, relation], { :method => :delete, :confirm => 'Remove relationship?', :class => 'button delete' } %>
+  </li>
+<% end %>
+</ul>
+
+<% if @product.related_product_candidates.any? %>
+<%= form_for([:admin, @product, ProductRelation.new]) do |f| %>
+  <%= f.select :related_product_id, @product.related_product_candidates.collect{ |p| [p.title, p.id] } %>
+  <%= f.submit %>
+<% end %>
+<% end %>
+
+<h2 class="section"><%= t('remove_product') %></h2>
+<div class="danger-zone">
+  <p>
+    <%= t('remove_product_instructions') %>
+  </p>
+  <%= form_for([:admin, @product], { :method => :delete, :confirm => 'Really remove this product?' }) do |f| %>
+    <%= f.submit t('remove_product_confirm'), :class => 'button delete' %>
+  <% end %>
+</div>

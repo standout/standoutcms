@@ -1,0 +1,10 @@
+<div id="gallery_photo_<%= photo.id %>" style="position: relative; float: left; height: 150px; width: 110px; margin: 6px; overflow: hidden; padding: 3px; background: white;">
+  <%= link_to image_tag('delete.png'), :remote => true, :class => 'post_image', :url => gallery_photo_path(photo), :method => :delete, :style => 'border: 0; position: absolute; right: 0; top: 0;' %>
+  <%= image_tag photo.photo.url(:thumb), :style => "width: 100px; border: 1px #333 solid;" rescue nil %>
+  <%= form_for(photo) do |f| %>
+    <span class='in_place_edit_text'><%= photo.caption %></span>
+    <span class='in_place_edit_field' style="display: none;">
+      <%= f.text_field :caption, :value => photo.caption %>
+    </span>
+  <% end %>
+</div>

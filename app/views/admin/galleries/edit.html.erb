@@ -1,0 +1,67 @@
+<h1><span id="gallery_title"><%= @gallery.title || t('gallery') %></span> 
+<%= link_to_function image_tag("edit.png"), "$('#edit_gallery_form').toggle(); $('#gallery_photos').toggle();" %></h1>
+<%= link_to_function image_tag("close_window.png", :style => "position: absolute; top: 0px; right: 0px;"), "frames['edit'].load_editables_and_menus(); $('#overlay-container').hide();" %>
+
+<div id="edit_gallery_form" style="display: none;">
+<%= form_for([:admin, @gallery], :html => {:method => :put, :multipart => true, :target => "gallery_upload_iframe"}) do |f| %>
+
+<p>
+  <%= f.label :title, t('title') %><br />
+  <%= f.text_field :title %>
+</p>
+
+<p>
+  <%= f.label :liquid %><br />
+  <%= f.text_area :liquid, :rows => 5 %>
+</p>
+
+<p>
+  <%= f.label :thumbnail_size %><br />
+  <%= f.text_field :thumbnail_size %>
+</p>
+
+<p>
+  <%= f.label :large_size %><br />
+  <%= f.text_field :large_size %>
+</p>
+
+<p>
+  <%= t('templates') %>:<br />
+  <% Gallery::STYLES.each do |style| %>
+  <a href="#" class="gallery-style-selector" onclick="$('#gallery_liquid').val(($(this).next('textarea').val())); return false;"><%= style.titleize %></a>
+  <textarea style="display: none;"><%= File.read("#{Rails.root}/lib/liquid_templates/galleries/#{style}.liquid").to_s %></textarea>
+  <% end %>
+</p>
+
+
+<%= f.submit t('save') %>
+<% end %>
+
+
+
+</div>
+
+
+
+<div id="gallery_photos_container" data-source="<%= url_for(:controller => 'admin/gallery_photos', :action => 'index', :gallery_id => @gallery.id) %>">
+<%= form_for([:admin, GalleryPhoto.new], :format => :js, :html => { :multipart => true, :target => "gallery_upload_iframe" }) do |f| %>
+  <%= f.hidden_field :gallery_id, :value => @gallery.id %>
+  <%= f.file_field :photo %>
+  <%= f.submit t('upload') %>
+<% end %>
+
+
+<div id="admin-gallery-photos">
+  <%= render :partial => "admin/gallery_photos/photo", :collection => @gallery.gallery_photos %>
+</div>
+
+<!-- this receives the upload of oversight images -->
+<div style="height: 0px; width: 0px; overflow: hidden;">
+  <iframe name="gallery_upload_iframe" onload="reload_gallery_photos();"></iframe>
+
+</div>
+
+</div>
+</div>
+
+</div>

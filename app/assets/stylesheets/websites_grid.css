@@ -1,0 +1,38 @@
+html {
+	overflow: auto;
+	height: auto;
+}
+body {
+	text-align: center;
+	color: #333;
+	background: #ccc;
+	height: auto;
+	background-color:rgba(227, 227, 227, 0.5);
+  background-image: -moz-radial-gradient(50% 50%, ellipse closest-side, rgba(227, 227, 227, 0.5), #a3a3a3 100%);
+  background-image: -webkit-radial-gradient(50% 50%, ellipse closest-side, rgba(227, 227, 227, 0.5), #a3a3a3 100%);
+  background-image: -o-radial-gradient(50% 50%, ellipse closest-side, rgba(227, 227, 227, 0.5), #a3a3a3 100%);
+  background-image: -ms-radial-gradient(50% 50%, ellipse closest-side, rgba(227, 227, 227, 0.5), #a3a3a3 100%);
+  background-image: radial-gradient(50% 50%, ellipse closest-side, rgba(227, 227, 227, 0.5), #a3a3a3 100%);
+  font-family: 'lucida grande', 'lucida sans';
+	overflow: auto;
+}
+
+#wrapper {
+	width: 80%;
+	margin: 0 auto;
+	text-align: left;
+}
+
+#menu {
+	display: none;
+}
+
+form {
+	background: #eee;
+	border: 1px #333 solid;
+	padding: 30px;
+	margin: 30px;
+	color: #333;
+}
+
+

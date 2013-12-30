@@ -1,0 +1,5 @@
+<% if notice.page %>
+<li class='activity-row'><%= image_tag notice.user.gravatar_url %> <%= email_to_name(notice.user.email) %> <%= link_to notice.message, [:admin, notice.page] %> <span class="when"><%= time_ago_in_words(notice.created_at) %> ago</span></li>
+<% else %>
+<li class="activity-row"><%= image_tag notice.user.gravatar_url %> <%= email_to_name(notice.user.email) %> <%=h notice.message %> <span class="when"><%= time_ago_in_words(notice.created_at) %> ago</span></li>
+<% end %>

@@ -1,0 +1,284 @@
+en:
+  real_product_attributes:
+    title: 'Title'
+    description: 'Description'
+    price: 'Price'
+  product_property_keys:
+    title: 'Custom product attributes'
+    new: 'Create new'
+    new_title: 'Create new product attribute'
+    edit_title: 'Edit product attribute'
+    types:
+      string: 'String'
+      integer: 'Integer'
+  reseller: 'Reseller'
+  product_id: 'Product ID'
+  quantity: 'Quantity'
+  product_title: 'Product title'
+  price: 'Price'
+  inquiry: 'Inquiry'
+  is_inquiry:
+    true: 'Yes'
+    false: 'No'
+  webshop_live: 'Webshop live mode'
+  incl_vat: '(incl. VAT)'
+  payment: 'Payment'
+  paypal_business_email: 'PayPal business email'
+  webshop_currency: 'Webshop currency'
+  money_format: 'Money format'
+  money_separator: 'Decimal mark'
+  order_number: 'Order number'
+  customer: 'Customer'
+  full_name: 'Full name'
+  paid: 'Paid'
+  not_paid: 'Not paid'
+  customer: 'Customer'
+  error_payment_method: 'Please specify a payment method.'
+  customer_deleted: 'Customer was deleted.'
+  invalid_order_form: 'Please fill out all required fields.'
+  success_order_form: 'Your order has been sent.'
+  payment_types:
+    invoice: 'Invoice'
+    credit_card: 'Credit card'
+  are_you_sure: "Are you sure?"
+  domain: "Domain"
+  title: "Title"
+  users: "User"
+  url: "Page address"
+  pages: "Pages"
+  email: "E-mail"
+  admin: "Administrator"
+  remove: "Delete"
+  blog: "Blog"
+  new_blogpost: "New blogpost"
+  date_header: "Date"
+  comments: "Comments"
+  comment: 'Comment'
+  description: "Description"
+  edit: "Edit"
+  destroy: "Remove"
+  content: "Content"
+  allow_comments: "Allow comments"
+  back: "Back"
+  cancel: "Cancel"
+  logout: "Log out"
+  wrong_credentials: "Login failed, please try again."
+  save_changes: "Save changes"
+  category: "Category"
+  categories: "Categories"
+  show_in_menu: "Show in menu"
+  add: "Add"
+  new_custom_data: "New list ..."
+  name: "Name"
+  template_files: "Template files"
+  changes_since_last_publish: "Changes since last publication"
+  or: "or"
+  custom_data: "Lists"
+  liquid_name: "Variable name"
+  type: "Type"
+  example_code: "Example code"
+  rows: "Rows"
+  publish: "Publish"
+  untitled: "Untitled"
+  select_a_page_on_the_left_to_edit_it: "Please select a page in the left menu to edit it."
+  loading: "Loading"
+  host: "Server or IP"
+  username: "Username"
+  subpage_for: "Parent"
+  password: "Password"
+  publish_dir: "Publish directory"
+  or: "or"
+  example: "For example"
+  add_server: "Add server"
+  logout: "Log out"
+  layout_error: "Layout Error"
+  layout_error_message: "The page (%{page_title}) could not be rendered since it is missing a proper template. Please select a template for the page in the Meta-tab."
+  click_the_button_to_publish: "Click the green arrow to publish the website."
+  publishing_website: "Publishing website. This could take a while ..."
+  visit_the_site: "Visit the site"
+  blogposts:
+    edit: "Change blogpost"
+    really_remove: "Do you really want to remove the blogpost?"
+    edit_categories: "Edit categories"
+  language: "Language"
+  default_language: "Default language"
+  locales:
+    se: "Swedish"
+    en: "English"
+  themes: "Themes"
+  settings: "Settings"
+  doubleclick_to_edit: "Doubleclick to edit this text"
+  force_sync: "Forced sync"
+  slug: "Address"
+  this_page_handles_blogentries: "This page handles the blog"
+  new_field: "New field"
+  fields: "Fields"
+  installed_themes: "Installed themes"
+  new_look: "New theme"
+  create: "Create"
+  save: "Save"
+  page_templates: "Page templates"
+  look_files: "Template files"
+  last_changed: "Last changed"
+  path: "Path"
+  replace: "Replace"
+  regular_page: "Page"
+  blog_entry: "Blog entry"
+  blog_category: "Blog category"
+  upload: "Upload"
+  upload_new_file: "Upload new file"
+  add_server: "Add new FTP server"
+  edit_server: "Edit server settings"
+  browser_combatibility: "Standout CMS works best with Firefox"
+  forgot_password: "Forgotten password?"
+  password_order_description: "If you have forgotten your password, enter your email address below and we'll send a new one."
+  copied_files_from_server: "Copied %{number} files from server"
+  fetch_files_from_server: "Fetch files from FTP"
+  blog_page: "Blog page"
+  blog_category_page: "Blog category page"
+  page_template: "Page template"
+  new_website: "New website"
+  your_websites: "Your websites"
+  you_now_have_access_to_the_following_sites: "You have access to the following sites"
+  login_needed: "Login needed"
+  direct_link: "Page URL"
+  seo_description: "This description is shown for search engines."
+  seo_title: "This title is not shown on the webpage, only for search engines"
+  show_on_all_pages: "Show on all pages"
+  instruction_movie: "Tutorial movie"
+  swedish_manual: "Swedish manual"
+  developer_information: "Information for developers"
+  404_information: "Custom 404 pages"
+  login_information: "You can log in with a FTP cliend and upload the file"
+  folder: "in the same folder as"
+  to_be_used: "The custom file will be used instead"
+  click_to_choose_plugin: "Doubleclick to choose a plugin"
+  plugin_could_not_load: "The plugin could not be loaded"
+  sort_by: "Sort by"
+  reverse_order: "Reverse order"
+  change: "Change"
+  preview: "Preview"
+  text: "Text"
+  switch: "Switch ..."
+  gallery: "Image gallery"
+  remote: "Remote data"
+  number_of_sublevels: "Number of sublevels"
+  starting_level: "Starting level"
+  menu: "Menu"
+  templates: "Templates"
+  toolbar_instructions: "Drag a building block from the left side into the page to add it."
+  edit_url: "Admin URL"
+  display_url: "Fetch URL"
+  liquid: "Liquid/HTML"
+  none: "None"
+  one: "One"
+  two: "Two"
+  three: "Three"
+  four: "Four"
+  ground_level: "Ground Level"
+  subpages: "Subpages"
+  level: "Level %{level}"
+  single_page: "Page for displaying single items"
+  used_on: "Used on pages:"
+  continue: "Continue"
+  default_template: "Default template"
+  delete: "Delete"
+  variables: "Variables"
+  variables_help: "If you have set this template as the default template for a list you will also get the variable <strong>item</strong> that containes the matched object."
+  listconnection: "Connect to list"
+  choose_password: "Choose a password"
+  files: "Files"
+  invalid_login: "Invalid login combination. Check your password."
+  log_out: "Sign out"
+  permissions: "Permissions"
+  permissions_description: "The following editors can edit this page."
+  restricted_user: "Restricted User"
+  restricted_user_hint: "Restricted users does not have access to edit pages unless you specifically allow them in the page settings."
+  no_rights_to_edit_page: "You don't have permission to edit this page."
+  duplicate: "Duplicate"
+  log: "Activity log"
+  new_password_saved: "Your new password has been saved. Now, remember it!"
+  number_of_products: "# of products"
+  password_reset_link_expired: "This link has already been used to generate a new password."
+  password_reset_link_sent: "Check your e-mail for further instructions."
+  product_categories: "Product categories"
+  product_categories_instructions: "You can have as many product categories as you like. Add them below, and be sure to write a good title and informative description because that will be seen by the search engines."
+  product_images: "Photos of this product"
+  product_images_instructions: "Upload one or more pictures to represent this product on your site. We will automatically resize the image you upload for web usage. You can re-order the images by dragging them. The first image will be the main image of this product."
+  products: "Products"
+  new_csv_import: "Import from CSV file"
+  remove_product: "Remove this product"
+  remove_product_confirm: "I understand, remove this product"
+  remove_product_instructions: "Warning: by clicking the button below you will remove this product forever including all product images."
+  remove_related_product: "Remove from related products"
+  reset_password: "Choose a new password"
+  reset_password_instructions: "Pick a new super secure password that you will remember forever."
+  send_reset_email: "Send me an email, chief!"
+  orders: "Orders"
+  customers: "Customers"
+  user_not_found: "No user with that e-mail could be found."
+  versions: "Versions"
+  website_created: "A new website has been created. Take good care of it."
+  new_shipping_cost: 'New shipping cost'
+  col_sep: "Column separator"
+  delivery_address: 'Delivery address'
+  attached_files: 'Attached files'
+  order_texts:
+    order_confirmation_title: 'Order confirmation title'
+    order_confirmation_header: 'Order confirmation header'
+    order_confirmation_footer: 'Order confirmation footer'
+    payment_confirmation_title: 'Payment confirmation title'
+    payment_confirmation_header: 'Payment confirmation header'
+    payment_confirmation_footer: 'Payment confirmation footer'
+    default:
+      order_confirmation_title: 'Order confirmation'
+      order_confirmation_header: |
+        Thank you for your order. You will receive a payment confirmation to this email address as soon as your payment has been approved.
+      order_confirmation_footer: 'Best regards'
+      payment_confirmation_title: 'Payment confirmation'
+      payment_confirmation_header: |
+        The payment has been approved. Thank you for shopping with us.
+      payment_confirmation_footer: 'Best regards'
+  search:
+    settings:
+      title: "Filter searchable columns"
+      text: "Select which columns wont be searchable by users. This is purely a security measure, what fields are actually available in your store is controlled via the templates for the site."
+  notices:
+    page_template:
+      created_by_user: "created page template %{title}"
+      deleted_by_user: "removed page template %{title}"
+      updated_by_user: "updated page template %{title}"
+    picture:
+      created: "The picture has been added"
+      upload_failed: "The picture could not be processed."
+      destroyed: "The image has been removed"
+      not_allowed_to_destroy: "You don't have the right to destroy that image."
+    vendor:
+      added: "A new vendor has been added."
+  activerecord:
+    models:
+      shipping_cost: 'Shipping cost'
+      product_property_key: 'Product attribute'
+    attributes:
+      shipping_cost:
+        cost: 'Cost'
+        from_value: 'From'
+        to_value: 'To'
+      customer:
+        email: 'Email'
+      contact_information_set:
+        first_name: 'First name'
+        last_name: 'Last name'
+        address_line1: 'Address'
+        address_line2: 'Address line 2'
+        zipcode: 'ZIP code'
+        city: 'City'
+        phone: 'Phone number'
+        company_name: 'Company name'
+        vat_identification_number: 'VAT identfication number'
+      product_property_key:
+        name: 'Name'
+        slug: 'Slug'
+        data_type: 'Type'
+      order:
+        payment_type: 'Payment type'

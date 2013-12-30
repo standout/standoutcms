@@ -1,0 +1,26 @@
+<div id="pages_wrapper">
+	<div id="pages">
+
+		 <ul id="pages_list">
+		   <%= render :partial => 'admin/pages/page', :collection => @website.root_pages %>
+		 </ul>
+ 
+		 <div id="pages_blank_slate">
+		   <%= render :partial => 'admin/pages/blank' if @website.root_pages.empty? %>  
+		 </div>
+ 
+	</div>
+
+	<div id="pages_forms">
+	  
+		<%= form_for([:admin, Page.new(:website_id => @website.id)]) do |f| %>
+		  <%= f.hidden_field :website_id, :value => @website.id %>
+		  <%= f.submit "+" %>
+		<% end %>
+
+	</div>
+
+	<div id="sortable_pages">
+	 <%= render :partial => 'admin/pages/sortable', :locals => {:website => @website} %>
+	</div>
+</div>

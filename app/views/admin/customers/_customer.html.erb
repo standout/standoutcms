@@ -1,0 +1,4 @@
+<tr>
+  <td><%= link_to customer.full_name, admin_customer_path(customer) %></td>
+  <td><%= link_to t('delete'), admin_customer_path(customer), method: :delete, class: 'button destroy' %></td>
+</tr>

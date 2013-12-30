@@ -1,0 +1,88 @@
+<% javascript "websites"%>
+<h2><%= t('settings')%></h2>
+<div class="edit_field">
+
+  <div class="settings_form">
+
+    <% if @new_website && @new_website.new_record? %>
+      <h1><%= t("new_website") %></h1>
+    <% end %>
+
+    <%= form_for([:admin, current_website]) do |f| %>
+      <p>
+      <%= f.label :domain, t('domain') %>
+      http://<%= f.text_field :domain, :size => 40 %>/
+      </p>
+
+      <p>
+        <%= f.label :subdomain %>
+        http://<%= f.text_field :subdomain, :size => 20 %>.standoutcms.<%= Rails.env.development? ? "dev" : "se" %>
+      </p>
+
+      <p>
+        <%= f.label :domainaliases, t('domainaliases') %>
+        <%= f.text_field :domainaliases %>
+        <span class="hint">example.com,example.org</span>
+      </p>
+
+      <p>
+      <%= f.label :title, t('title') %>
+      <%= f.text_field :title %>
+      </p>
+
+      <p>
+        <%= f.label :email, t('email') %>
+        <%= f.text_field :email %>
+      </p>
+
+      <p>
+      <%= f.label :default_language, t('default_language') %>
+      <%= f.select :default_language, Language.all.collect{ |l| [l.short_code, l.short_code] } %>
+      </p>
+
+      <p>
+      <%= f.label :blog_page_id, t('blog_page') %>
+      <%= f.select :blog_page_id, (@new_website || current_website).pages.all.collect{ |p| [p.title, p.id] }, :include_blank => true %>
+      </p>
+
+      <p>
+      <%= f.label :blog_category_page_id, t('blog_category_page') %>
+      <%= f.select :blog_category_page_id, (@new_website || current_website).pages.all.collect{ |p| [p.title, p.id] }, :include_blank => true %>
+      </p>
+
+      <p>
+      <%= f.submit @new_website && @new_website.new_record? ? t("create") : t("save") %>
+      </p>
+
+    <% end %>
+  </div>
+
+</div>
+
+
+
+<h2><%= t('users') %></h2>
+<div class="edit_field" ng-controller="WebsiteMembershipsCtrl">
+  <%= render :partial => 'website_memberships/form' if can? :create, @website_membership %>
+
+  <table id="website_users">
+    <tr>
+      <th><%= t('email') %></th>
+      <th><%= t('admin') %></th>
+    </tr>
+    <tr ng-repeat="wm in website_memberships">
+      <td>
+        {{ wm.email }}
+      </td>
+      <td>
+        {{ wm.website_admin }}
+      </td>
+      <td>
+        <button ng-if="wm.editable" class="button edit" ng-click="editWebsiteMembership(wm)"><%= t('edit') %></button>
+
+        <button ng-if="wm.editable" class="button delete" ng-click="deleteWebsiteMembership(wm)"><%= t('delete') %></button>
+      </td>
+    </tr>
+  </table>
+</div>
+

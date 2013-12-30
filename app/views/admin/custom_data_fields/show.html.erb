@@ -1,0 +1,16 @@
+<% title "Custom Data Field" %>
+
+<p>
+  <strong>Name:</strong>
+  <%=h @custom_data_field.name %>
+</p>
+<p>
+  <strong>Type:</strong>
+  <%=h @custom_data_field.fieldtype %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_website_custom_data_custom_data_field_path(@website, @custom_data, @custom_data_field) %> |
+  <%= link_to "Destroy", [@website, @custom_data, @custom_data_field], :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", [@website, @custom_data, :custom_data_fields] %>
+</p>

@@ -1,0 +1,50 @@
+<%= form_for([:admin, @csv_import], :html => {:multipart => true}) do |f| %>
+  <% if not @csv_import.new_record? and (@csv_import.errors.any? or @csv_import.errors?) %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@csv_import.errors.count+@csv_import.error_count, "fel") + t(:stoped_from_beeing_saved, what: t(:csv_import_what)) %></h2>
+
+      <ul>
+      <% if @csv_import.missing_columns %>
+        <li><%= @csv_import.missing_columns %></li>
+      <% end %>
+      <% if @csv_import.redundant_columns %>
+        <li><%=@csv_import.redundant_columns %></li>
+      <% end %>
+      <% if @csv_import.key_missing %>
+        <li><%= @csv_import.key_missing %></li>
+      <% end %>
+      <% @csv_import.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p class="field">
+    <%= f.label :key_col, t(:csv_import_select_key_column), class: "bold" %>
+    <%= f.select(:key_col, @columns, {:prompt => true}) %><br />
+    <span class="italic"><%= t :csv_import_select_key_column_text %></span>
+  </p>
+
+  <p class="field">
+    <%= f.label :category_id, t(:csv_import_select_product_category), class: "bold" %>
+    <%= f.collection_select(:category_id, @categories, :id, :title, {:prompt => true}) %><br />
+    <span class="italic"><%= t :csv_import_select_product_category_text %></span>
+  </p>
+
+  <p class="field">
+    <%= f.label :col_sep, t(:col_sep), class: "bold" %><br>
+    <%= f.text_field :col_sep, value: ',' %>
+  </p>
+
+  <p class="field">
+    <%= f.label :file, t(:file), class: "bold" %>
+    <%= f.file_field :file %><br />
+  </p>
+
+  <%= f.hidden_field :website_id, value: current_website_id %><br />
+
+  <div class="actions">
+    <%= f.submit t :csv_import_submit %>
+  </div>
+<% end %>

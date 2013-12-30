@@ -1,0 +1,1 @@
+<li class="<%= custom_data_list == @custom_data_list || params[:custom_data_list_id].to_s == custom_data_list.id.to_s ? 'selected' : '' %>"><%= link_to h(custom_data_list.title), [:admin, custom_data_list, :custom_data_rows] %></li>

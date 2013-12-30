@@ -1,0 +1,28 @@
+<h1>Listing url_pointers</h1>
+
+<table>
+  <tr>
+    <th>Path</th>
+    <th>Website</th>
+    <th>Page</th>
+    <th>Language</th>
+    <th>Custom data row</th>
+  </tr>
+
+<% @url_pointers.each do |url_pointer| %>
+  <tr>
+    <td><%=h url_pointer.path %></td>
+    <td><%=h url_pointer.website_id %></td>
+    <td><%=h url_pointer.page_id %></td>
+    <td><%=h url_pointer.language %></td>
+    <td><%=h url_pointer.custom_data_row_id %></td>
+    <td><%= link_to 'Show', url_pointer %></td>
+    <td><%= link_to 'Edit', edit_url_pointer_path(url_pointer) %></td>
+    <td><%= link_to 'Destroy', url_pointer, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New url_pointer', new_url_pointer_path %>

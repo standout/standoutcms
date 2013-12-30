@@ -1,0 +1,17 @@
+<h2 class='section'><%= t('attached_files') %></h2>
+<%= form_for [:admin, @product_category, AttachmentFile.new], html: {multipart: true} do |f| %>
+  <%= f.label :data, t('file') %><br>
+  <%= f.hidden_field :product_category_id, value: @product_category.id %>
+  <%= f.file_field :data %>
+  <%= f.submit t('upload') %>
+<% end %>
+<% unless @product_category.attachment_files.empty? %>
+<ul>
+  <% @product_category.attachment_files.each do |attachment_file| %>
+    <li>
+      <%= link_to attachment_file.title, attachment_file.url, target: '_blank' %>
+      <%= link_to t('delete'), admin_product_category_attachment_file_path(@product_category, attachment_file), method: :delete, class: 'button destroy', confirm: t('are_you_sure') %>
+    </li>
+  <% end %>
+</ul>
+<% end %>

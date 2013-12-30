@@ -1,0 +1,29 @@
+
+<h1><%= @gallery.title || t('photo_gallery') %> <%= link_to_function image_tag("edit.png"), "$('#edit_gallery_form').show(); return false;" %></h1>
+<%= link_to_function image_tag("close_window.png", :style => "position: absolute; top: 0px; right: 0px;"), "top.select_page('#{@gallery.content_item.page_id}', '#{form_authenticity_token()}'); $('#gallery').hide();" %>
+
+<div id="edit_gallery_form" style="display: none;">
+<% remote_form_for([:admin, @gallery], :url => admin_gallery_path(@gallery), :complete => "alert('saved!')", :html => {:method => :put}) do |f| %>
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.submit "OK" %>
+  </p>
+<% end %>
+</div>
+
+<%= form_for(GalleryPhoto.new(:gallery_id => @gallery.id), :html => { :multipart => true, :target => "upload_iframe" }) do |f| %>
+  <%= f.hidden_field :gallery_id %>
+  <%= f.file_field :photo %>
+
+  <%= f.submit "Upload photo" %>
+<% end %>
+
+<div style="height: 150px; overflow: auto; text-align: left; width: 90%;">
+  <div  id="long_gallery_photos" style="width: <%= (122 * @gallery.gallery_photos.length) + 10 %>px; overflow: hidden; padding: 0; text-align: left; clear: left;">
+    <%= render :partial => "gallery_photos/photo", :collection => @gallery.gallery_photos %>
+  </div>
+</div>
+

@@ -1,0 +1,23 @@
+.DS_Store
+db/*.sqlite3
+log/*
+tmp/**/*
+public/files/*
+tmp/*.*
+db/production.sql
+public/system/data/*
+public/system/images/*
+public/system/logos/*
+doc/app/*
+coverage/*
+public/assets/*
+db/test.sqlite3-journal
+config/database.yml
+
+# Ignore application configuration
+/config/application.yml
+.bundle/install.log
+bin/rails
+bin/rake
+public/system/vendors/logos/000/000/001/original/apple_logo.jpg
+public/system/vendors/logos/000/000/001/small/apple_logo.jpg

@@ -1,0 +1,88 @@
+<%= form_for [:admin, @custom_data_list, @custom_data_row], :html => {:multipart => true} do |f| %>
+
+	<% @custom_data_list.custom_data_fields.each do |field| %>
+	<p>
+		<% case field.fieldtype
+			when 'text' then %>
+			<%= f.label field.name_to_slug.to_sym %><br />
+			<%= f.text_area field.name_to_slug.to_sym, :rows => 4 %>
+
+		<% when 'image' then %>
+		  <% @custom_data_row.images_for(field).each do |i| %>
+		      <%= link_to image_tag(i.url(:thumb), :height => '30px'), [:edit, :admin, i] %>
+          <%= link_to image_tag("delete.png"), [:admin, i], { :method => :delete, :confirm => t('really_delete') } %>
+      <% end %>
+		  <br>
+
+		
+			<%= f.label field.name_to_slug.to_sym %><br />
+			<%= f.file_field field.name_to_slug.to_sym %>
+
+  	<% when 'file' then %>
+  		<%= f.label field.name_to_slug.to_sym %><br />
+  		<%= f.file_field field.name_to_slug.to_sym %>
+			
+		<% when 'wysiwyg' then %>
+			<%= f.label field.name_to_slug.to_sym %><br />
+			<%= f.text_area field.name_to_slug.to_sym, :rows => 6, :id => "ckeditor_#{field.name_to_slug}" %>
+			
+			<!-- had to insert this inline to load the upload urls -->
+			<script type="text/javascript">
+			CKEDITOR.replace( 'ckeditor_<%= field.name_to_slug %>', {
+    		height : 250 + 'px',
+    		width : '98%',
+    		filebrowserImageUploadUrl: '/ckeditor/create?kind=image',
+    		filebrowserBrowseUrl: '/ckeditor/files',
+    		filebrowserUploadUrl: '/ckeditor/create?kind=file',
+    		filebrowserImageBrowseUrl: '/ckeditor/images',
+    		defaultLanguage : 'sv',
+    		toolbarStartupExpanded : false }
+    	 );
+    	 </script>
+			
+		<% when 'date' then %>
+			<%= f.label field.name_to_slug.to_sym %><br />
+			<%= f.text_field field.name_to_slug.to_sym, :length => 10, :class => 'cms_date' %>
+		
+		<% when 'time' then %>
+			<%= f.label field.name_to_slug.to_sym %><br />
+			<%= f.text_field field.name_to_slug.to_sym, :length => 10, :class => 'cms_time' %>
+
+		<% when 'datetime' then %>
+			<%= f.label field.name_to_slug.to_sym %><br />
+			<%= f.text_field field.name_to_slug.to_sym, :length => 10, :class => 'cms_datetime' %>
+
+		<% when 'language' then %>
+			<%= f.label field.name_to_slug.to_sym %><br />
+			<% @custom_data_row.json[field.name_to_slug.to_sym] = @website.default_language if @custom_data_row.send(field.name_to_slug.to_sym).blank? %>
+			<%= f.select field.name_to_slug.to_sym, @website.languages.collect{|l| [l.name, l.short_code] }, :include_blank => true %>
+			
+		<% when 'checkbox' then %>
+			<%= f.check_box field.name_to_slug.to_sym %>
+			<%= f.label field.name_to_slug.to_sym %><br />
+		
+		<% when 'listconnection' then %>
+		  <%= f.label field.name_to_slug.to_sym %><br />
+		  <%= f.select field.name_to_slug.to_sym, field.connected_list.custom_data_rows.collect { |row| [row.first_string_field_name, row.id.to_s] }, { :include_blank => true }, { :name => "custom_data_row[#{field.name_to_slug.to_sym}][]" } %>
+		  
+  	<% when 'listconnections' then %>
+		  <%= f.label field.name_to_slug.to_sym %><br />
+  		<%= select_tag "custom_data_row[#{field.name_to_slug.to_sym}]", options_for_select(field.connected_list.custom_data_rows.collect { |row| [row.first_string_field_name, row.id.to_s] }.insert(0,""),(@custom_data_row.json.nil? ? [] : @custom_data_row.json[field.name_to_slug.to_sym])), :multiple => true %>
+		<% else 'string' %>
+			<%= f.label field.name_to_slug.to_sym %><br />
+			<%= f.text_field field.name_to_slug.to_sym %>
+		<% end %>
+	</p>
+	<% end %>
+
+  <% unless @custom_data_row.new_record? %>
+  <p class="url-suggestor">
+    <%= f.label :slug, t('slug') %><br>
+    http://<%= @website.main_domain %>/<%= f.text_field :slug %>
+  </p>
+  <% end %>
+
+  <%= f.hidden_field :custom_data_id %>
+
+  <p><%= f.submit t('save') %></p>
+<% end %>

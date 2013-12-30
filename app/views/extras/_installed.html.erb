@@ -1,0 +1,11 @@
+<p>
+  You have <%= @website.extras.length %> plugins installed.
+  Installing plugins is usually done by experienced administrators.
+</p>
+
+<% for extra in @website.extras %>
+  <li>
+    <%= extra.name %><br />
+    <small>http://<%= @website.domain rescue "example.com" %>/plugins<%= extra.edit_url %></small>
+  </li>
+<% end %>

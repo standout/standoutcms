@@ -1,0 +1,7 @@
+<div class="thumbnail <%= "processing" if image.processing? %>" id="picture_<%= image.id %>" data-url="/ckeditor/image/<%= image.id %>">
+  <%= image_tag(image.url(:thumb), :alt=>image.url(:content), :title=>image.filename, :onerror=>"this.src='/assets/missing.png'", :class=> "image" ) %>
+  <div class="filename"><%= image.filename %> <%= image_tag('spinner.gif') if image.processing? %></div>
+  <div class="filedate"><%= I18n.l(image.created_at, :format=>"%d %b %H:%M") %> </div>
+  <div class="filesize"><%= number_to_human_size(image.size, :precision => 2) %>
+  <%= link_to image_tag("delete.png", :style => 'border: 0;'), { :controller => 'ckeditor', :action => :destroy, :id => image.id, :kind => 'image'}, { :method => :delete, :remote => true, :class => "delete-img" } %></div>
+</div>

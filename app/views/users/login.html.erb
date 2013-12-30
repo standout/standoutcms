@@ -1,0 +1,37 @@
+<% javascript "users" %>
+<!-- <p class="warning">
+<strong>Fredag, 15 april 2011</strong><br />
+Just nu har publiceringsverktyget vissa driftstörningar. Vi arbetar på att åtgärda det och räknar med
+att det är ordnat under dagen.<br />
+<em>/ Standout</em>
+</p> -->
+
+<div id="login">
+  <h2>Standout CMS - Publiceringsverktyg</h2>
+  <% form_tag do %>
+    <%= flash_div :error %>
+    <p>
+      <label for="email"><%= t('email') %></label><br />
+      <%= text_field_tag :email %>
+    </p>
+    <p>
+      <label for="password"><%= t('password') %></label><br />
+      <%= password_field_tag :password %>
+      <%= submit_tag "OK", :class => 'submit' %>
+    </p>
+    <p>
+      <%= link_to t('forgot_password'), "#", :class => "forgot"%>
+    </p>
+    <div id="browser_compatibility">
+      <%= link_to image_tag('firefox-logo.png', :size => "100x38"), "http://www.mozilla.com/sv-SE/firefox/" %>
+      <p><%= t 'browser_combatibility' %></p>
+    </div>
+  <% end %>
+  <div id="password_order" style="display: none;">
+    <% form_tag :action => 'send_reset_email'  do %>
+      <p><%= t('password_order_description') %></p>
+      <label for="email">E-post</label><br />
+      <%= text_field_tag :email %> <%= submit_tag "Nollställ lösenord" %>
+    <% end %>
+  </div>
+</div>

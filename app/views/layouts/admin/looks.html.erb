@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" >
+    <title>Standout CMS: Publiceringsverktyg: Plugins</title>
+    <%= stylesheet_link_tag 'admin', 'custom_data_lists', 'looks', 'code_editor' %>
+    <%= javascript_include_tag 'application' %>
+    <%= csrf_meta_tag %>
+    <%= yield(:head) %>
+
+  </head>
+  <body>
+    <div id="wrapper">
+
+      <%= render :partial => 'shared/menu', :locals => { :menu_selection => 'looks' } %>
+
+      <div id="page_details" class="new_viewport">
+
+        <% if @look && !@look.new_record? %>
+          <div id="files">
+            <h3><%= t('page_templates') %> <%= link_to t('add'), [:new, :admin, @look, :page_template], :class => 'button' %></h3>
+            <ul>
+              <%= render :partial => 'admin/page_templates/page_template', :collection => @look.page_templates %>
+            </ul>
+
+            <h3><%= t('look_files') %> <%= link_to t('add') + ' ...', [:new, :admin, @look, :look_file], :class => 'button' %></h3>
+            <ul>
+              <%= render :partial => 'admin/look_files/file', :collection => @look.look_files %>
+            </ul>
+
+          </div>
+        <% end %>
+
+
+        <%= yield  %>
+      </div>
+    </div>
+  </body>
+</html>

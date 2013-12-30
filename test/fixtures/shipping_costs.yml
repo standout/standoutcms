@@ -1,0 +1,20 @@
+one:
+  cost_type: 'price'
+  from_value: ~
+  to_value: 300
+  cost: 45
+  website: standout
+
+two:
+  cost_type: 'price'
+  from_value: 300
+  to_value: 3000
+  cost: 95
+  website: standout
+
+three:
+  cost_type: 'price'
+  from_value: 3000
+  to_value: ~
+  cost: 0
+  website: standout

@@ -1,0 +1,18 @@
+<h2><%= t('releases.new') %></h2>
+
+<h3><%= t('changes_since_last_publish') %></h3>
+
+<%= form_for([:admin, @release]) do |f| %>
+  
+  <%= f.text_field :website_id %>
+  
+  <ul>
+    <% @release.changed_pages.each do |page| %>
+    <li>
+      <%= check_box_tag "includepages[]", page.id, true %> <%= page.title(@website.default_language) %>
+    </li>
+    <% end %>
+  </ul>
+  
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,31 @@
+<h2 class="section"><%= t('product_images') %></h2>
+<p class="instructions">
+  <%= t('product_images_instructions') %>
+</p>
+
+<ul id="product_images" data-updateurl="<%= url_for([:order, :admin, parent, :product_images]) %>">
+<% parent.product_images.each do |image| %>
+  <li id="<%= dom_id(image) %>"><%= image_tag image.image.url(:small) %>
+
+    <span class="product-image-actions">
+      <%= link_to image_tag('edit.png'), [:edit, :admin, parent, image] %>
+      <%= link_to image_tag('delete.png'), [:admin, parent, image], { :method => :delete, :confirm => 'Delete?' } %>
+    </span>
+  </li>
+<% end %>
+</ul>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#product_images").sortable({
+       update: function(event, ui) {
+         $.post($('#product_images').data('updateurl'), $("#product_images").sortable('serialize'));
+       }
+    });
+  });
+</script>
+
+<%= form_for([:admin, parent, ProductImage.new], { :multipart => true }) do |f| %>
+  <%= f.file_field :image %>
+  <%= f.submit t('upload') %>
+<% end %>

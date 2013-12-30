@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Filhanterare: Standout CMS</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="robots" content="noindex, nofollow">	
+  <%= stylesheet_link_tag 'admin', 'assets' %>
+  <%= javascript_include_tag 'jquery', 'assets', 'common' %>
+  <%= csrf_meta_tag %>
+
+  <script type="text/javascript">
+    var CKEditorFuncNum = '<%= params[:CKEditorFuncNum] %>';
+    var CKEditorName = '<%= params[:CKEditor] %>';
+    var CKEDITOR = window.opener.CKEDITOR;
+    var editor = CKEDITOR.instances[CKEditorName];
+  </script>
+</head>
+<body>
+  <%= yield %>
+  <div id="website_id" style="height: 1px; width: 1px; overflow: hidden; position: absolute: top: -2px;"><%= session[:website_id] %></div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% include 'header' %}
+     <h1>{{ product.title }}</h1>  
+     <div class="description">
+       {{ product.description }}
+     </div>
+     <p>
+         Price: $ {{ product.price }}
+     </p>
+
+     {% if product.variants.size == 0 %}
+    <form method="post" action="/cart/add">
+      <input type="hidden" name="product_id" value="{{ product.id }}">
+      <input type="text" name="quantity" value="1" size="3">
+      <input type="submit" value="Add to cart">
+    </form>
+    {% else %}
+    <form method="post" action="/cart/add">
+      <input type="hidden" name="product_id" value="{{ product.id }}">
+      {% for variant in product.variants %}
+      <p>
+        <input type="radio" name="variant_id" id="variant_{{ variant.id }}" value="{{ variant.id }}">
+        <label for="variant_{{ variant.id }}">{{ variant.description }}"></label>
+      </p>
+      {% endfor %}
+      <input type="text" name="quantity" value="1" size="3">
+      <input type="submit" value="Add to cart">
+    </form>
+    {% endif %} 
+
+     <h2>Product images</h2>
+     {% for image in product.images %}  
+       <a href="{{ image.large }}"><img src="{{ image.medium }}" alt="Picture of {{ product.title }}"></a>  
+     {% endfor %}
+
+{% include 'footer' %}

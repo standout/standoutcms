@@ -1,0 +1,45 @@
+<script type="text/javascript">	  
+
+  
+  function setUrl(url) 
+  {  
+		var funcNum = getUrlParam('CKEditorFuncNum');
+		// console.log("URL:" + url);
+		// console.log("funcNum:" + funcNum);
+		window.opener.CKEDITOR.tools.callFunction( funcNum, url );
+
+    window.close();
+  }
+
+	function getUrlParam(paramName)
+	{
+	  var reParam = new RegExp('(?:[\?&]|&amp;)' + paramName + '=([^&]+)', 'i') ;
+	  var match = window.location.search.match(reParam) ;
+
+	  return (match && match.length > 1) ? match[1] : '' ;
+	}
+
+	$(document).ready(function(){
+		$("img.image").live('click', function(){
+			if($(this).parents('div:first').hasClass('processing'))
+			{
+				alert('Wait a minute ...');
+				return false;
+			} else {
+				setUrl($(this).attr('src').replace('/thumb/', '/content/'));
+			}
+		});
+	});
+
+</script>
+
+<div style="margin: 1em">
+  <%= form_for([:admin, @website, Picture.new], :html => { :multipart => true }) do |f| %>
+    <%= f.file_field :data %>
+    <%= f.submit t('add') %>
+  <% end %>
+</div>
+
+<div id="images">
+  <%= render :partial=>"image", :collection=>@images %>
+</div>
