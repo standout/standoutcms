@@ -343,7 +343,7 @@ DEPENDENCIES
   protected_attributes
   query_reviewer!
   rails (= 4.0.2)
-  rake
+  rake (>= 0.9.6)
   rb-fsevent
   remotipart (>= 1.0.1)
   responds_to_parent
