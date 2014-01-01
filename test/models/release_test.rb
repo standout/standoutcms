@@ -34,8 +34,8 @@ class ReleaseTest < ActiveSupport::TestCase
     r.publish_pages = [pages(:standout_secondpage)]
     assert r.save
     
-    assert_equal pages(:standout_secondpage).published_at, r.reload.created_at
-    assert_not_equal pages(:standout_frontpage).published_at, r.reload.created_at
+    assert_equal pages(:standout_secondpage).published_at.to_s, r.reload.created_at.to_s
+    assert_not_equal pages(:standout_frontpage).published_at.to_s, r.reload.created_at.to_s
 
   end
   
