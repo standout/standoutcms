@@ -1,3 +1,5 @@
+![Build Status](https://travis-ci.org/standout/standoutcms.png?branch=master)
+
 
 ![Standout CMS Logo](http://standoutcms.se/assets/standout_cms-b5ce16797b6b31186f7b97355aefbb07.png)
 
