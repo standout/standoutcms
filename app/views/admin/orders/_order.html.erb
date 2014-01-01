@@ -13,10 +13,10 @@
           <%= f.submit t('not_paid'), class: 'button destroy', confirm: t('are_you_sure') %>
         <% else %>
           <%= f.hidden_field :paid, value: true %>
-          <%= f.submit t('paid'), class: 'button', confirm: t('are_you_sure') %>
+          <%= f.submit t('paid'), class: 'button', data: { confirm: t('are_you_sure') } %>
         <% end %>
       <% end %>
     </div>
-    <%= link_to t('delete'), admin_order_path(order), method: :delete, class: 'button destroy', confirm: t('are_you_sure') %>
+    <%= link_to t('delete'), admin_order_path(order), method: :delete, class: 'button destroy', data: { confirm: t('are_you_sure') } %>
   </td>
 </tr>
