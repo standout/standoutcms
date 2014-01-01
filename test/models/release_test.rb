@@ -14,7 +14,7 @@ class ReleaseTest < ActiveSupport::TestCase
     website = websites(:website_without_releases)
     r = Release.new
     r.website_id = website.id
-    assert_equal r.last_released_at, website.created_at
+    assert_equal r.last_released_at.to_date, website.created_at.to_date
   end
   
   test 'release without website should not break' do
