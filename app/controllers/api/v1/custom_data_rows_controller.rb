@@ -3,12 +3,12 @@ class Api::V1::CustomDataRowsController < Api::V1::BaseController
 
   def index
     @custom_data_rows = @custom_data_list.custom_data_rows
-    render json: @custom_data_rows
+    render json: @custom_data_rows.to_json
   end
 
   def show
     @custom_data_row = @custom_data_list.custom_data_rows.find(params[:id])
-    render json: @custom_data_row
+    render json: @custom_data_row.to_json
   end
 
   # Finds the current CustomDataList from the path. This is not necessary on

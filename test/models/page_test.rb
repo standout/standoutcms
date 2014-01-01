@@ -11,7 +11,7 @@ class PageTest < ActiveSupport::TestCase
     html = p.complete_html
     assert html.match(/Växjö/)
     doc = Nokogiri::HTML(html)
-    assert_equal(3, doc.css('#menu li').size)
+    assert_equal(websites(:standout).pages.count, doc.css('#menu li').size)
   end
 
   test 'should show in menu' do

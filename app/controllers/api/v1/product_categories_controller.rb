@@ -4,11 +4,11 @@ class Api::V1::ProductCategoriesController < Api::V1::BaseController
   def index
     @website = Website.find(params[:website_id])
     @product_categories = @website.product_categories.where(parent_id: nil)
-    render json: @product_categories
+    render json: @product_categories.to_json
   end
 
   def show
-    render json: @product_category
+    render json: @product_category.to_json
   end
 
   def parent
@@ -16,7 +16,7 @@ class Api::V1::ProductCategoriesController < Api::V1::BaseController
   end
 
   def children
-    render json: @product_category.children
+    render json: @product_category.children.to_json
   end
 
   def find_product_category

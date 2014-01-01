@@ -11,7 +11,7 @@ class Admin::ProductVariantsController < ApplicationController
     if @product_variant.save
       respond_to do |format|
         format.html { redirect_to [:edit, :admin, @product] }
-        format.json { respond_with @product }
+        format.json { respond_with @product.to_json }
       end
     else
       render :text => 'not saved'
@@ -24,7 +24,7 @@ class Admin::ProductVariantsController < ApplicationController
     if @product_variant.destroy
       respond_to do |format|
         format.html { redirect_to [:edit, :admin, @product] }
-        format.json { respond_with @product_variant }
+        format.json { respond_with @product_variant.to_json }
       end
     end
   end
@@ -33,7 +33,7 @@ class Admin::ProductVariantsController < ApplicationController
     @product = current_website.products.find(params[:product_id])
     @product_variant = @product.product_variants.find(params[:id])
     if @product_variant.update_attributes(params[:product_variant])
-      respond_with(@product_variant)
+      respond_with(@product_variant.to_json)
     end
   end
 

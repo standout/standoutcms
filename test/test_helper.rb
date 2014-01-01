@@ -1,7 +1,5 @@
 require 'rubygems'
-#uncomment the following line to use spork with the debugger
-
-
+require 'mocha/setup'
 
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)

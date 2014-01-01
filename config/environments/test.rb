@@ -19,6 +19,7 @@ StandoutCms::Application.configure do
   config.action_dispatch.show_exceptions = false
 
   config.eager_load = false
+  I18n.enforce_available_locales = false
 
   # Disable request forgery protection in test environment
   config.action_controller.allow_forgery_protection    = false

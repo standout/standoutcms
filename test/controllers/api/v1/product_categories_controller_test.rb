@@ -14,7 +14,7 @@ class Api::V1::ProductCategoriesControllerTest < ActionController::TestCase
 
     get :index, format: :json, website_id: websites(:standout).id
     assert_response :success
-    assert_equal @response.body, expected_response
+    assert_equal expected_response, @response.body
   end
 
   test 'show should return the current product category' do
@@ -23,7 +23,7 @@ class Api::V1::ProductCategoriesControllerTest < ActionController::TestCase
       id: product_categories(:one).id
     )
     assert_response :success
-    assert_equal @response.body, product_categories(:one).to_json
+    assert_equal product_categories(:one).to_json, @response.body
   end
 
   test 'parent should return the parent for the current product category' do
@@ -32,7 +32,7 @@ class Api::V1::ProductCategoriesControllerTest < ActionController::TestCase
       id: product_categories(:three).id
     )
     assert_response :success
-    assert_equal @response.body, product_categories(:one).to_json
+    assert_equal product_categories(:one).to_json, @response.body
   end
 
   test 'children should return the children for the current product category' do
@@ -41,6 +41,6 @@ class Api::V1::ProductCategoriesControllerTest < ActionController::TestCase
       id: product_categories(:one).id
     )
     assert_response :success
-    assert_equal @response.body, product_categories(:one).children.to_json
+    assert_equal product_categories(:one).children.to_json, @response.body
   end
 end

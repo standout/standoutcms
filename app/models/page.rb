@@ -294,7 +294,7 @@ class Page < ActiveRecord::Base
 
     # Menu items
     doc.search(".menu").each do |menu|
-      menu_item = Menu.find_or_create_by_page_template_id_and_for_html_id(self.page_template_id, menu.attributes['id'])
+      menu_item = Menu.where(page_template_id: page_template_id, for_html_id: menu.attributes['id']).first_or_create
       menu_item.start_level = menu.attributes['data-startlevel'] if menu.attributes['data-startlevel'] != ""
       menu_item.levels = menu.attributes['data-sublevels'] if menu.attributes['data-sublevels'] != ""
       menu.inner_html = menu_item.html(self, language)

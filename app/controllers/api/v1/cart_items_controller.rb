@@ -3,7 +3,7 @@ class Api::V1::CartItemsController < Api::V1::BaseController
 
   def index
     @cart = Cart.find_by_api_key(params[:cart_id])
-    render json: @cart.cart_items
+    render json: @cart.cart_items.to_json
   end
 
   def create

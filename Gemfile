@@ -70,7 +70,7 @@ group :development, :test do
 end
 
 gem "bcrypt-ruby", :require => "bcrypt"
-gem "mocha", :group => :test
+gem "mocha", require: false, group: :test
 
 group :development do
   gem 'thin'

@@ -54,8 +54,8 @@ You need the following:
  * bundler `gem install bundler`
  * Run `bundle install`
  * Pow `curl get.pow.cx | sh`. Now open http://standoutcms.dev/ in a browser to get instructions for symlinking.
- * MySQL-settings (see database.yml): `mysql> grant all on standoutcms.* to 'standoutdev'@'localhost' identified by 'dev404';`
  * Generate settings files: `rake bootstrap`
+ * MySQL-settings (see database.yml): `mysql> grant all on standoutcms.* to 'standoutdev'@'localhost' identified by 'dev404';`
  * Set up the database with `rake db:setup`
 
 Now you should be able to access http://standoutcms.dev/ and login with 'admin@example.com' and password 'abc123'.

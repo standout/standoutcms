@@ -18,6 +18,8 @@ StandoutCms::Application.configure do
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
+  I18n.enforce_available_locales = false
+
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
