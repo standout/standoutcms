@@ -59,6 +59,7 @@ end
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
 group :development, :test do
+  gem 'rake'
   gem 'spring'
   gem "nifty-generators"
   gem 'guard'
