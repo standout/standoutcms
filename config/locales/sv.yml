@@ -291,6 +291,8 @@ sv:
     select:
       prompt: "Välj en"
     submit:
+      user:
+        update: 'Spara ändringar'
       create: "Lägg till %{model}"
       update: "Uppdatera %{model}"
       submit: "Spara %{model}"
@@ -345,4 +347,9 @@ sv:
         data_type: 'Typ'
       order:
         payment_type: 'Betalningsmetod'
+      user:
+        email: 'E-postadress'
+        password: 'Lösenord'
+        locale: 'Standardspråk'
+        password_confirmation: 'Bekräfta lösenord'
   file: "Fil"
