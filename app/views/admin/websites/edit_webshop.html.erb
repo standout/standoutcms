@@ -20,6 +20,16 @@
       </p>
 
       <p>
+        <%= f.label :dibs_merchant_id, t('dibs_merchant_id') %>
+        <%= f.text_field :dibs_merchant_id %>
+      </p>
+
+      <p>
+        <%= f.label :dibs_hmac_key, t('dibs_hmac_key') %>
+        <%= f.text_field :dibs_hmac_key %>
+      </p>
+
+      <p>
         <%= f.label :webshop_currency, t('webshop_currency') %>
         <%= f.select :webshop_currency, Website::CURRENCIES.keys %>
       </p>

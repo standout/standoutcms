@@ -25,6 +25,8 @@ sv:
   incl_vat: '(inkl. moms)'
   payment: 'Betalning'
   paypal_business_email: 'PayPal business epost'
+  dibs_hmac_key: 'DIBS HMAC nyckel'
+  dibs_merchant_id: 'DIBS Merchant ID'
   webshop_currency: 'Webshop valuta'
   money_format: 'Pengarformat'
   money_separator: 'Decimaltecken'

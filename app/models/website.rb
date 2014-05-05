@@ -6,6 +6,8 @@ class Website < ActiveRecord::Base
   store :settings, accessors: [
     :webshop_currency,
     :paypal_business_email,
+    :dibs_merchant_id,
+    :dibs_hmac_key,
     :webshop_live,
     :order_confirmation_title,
     :order_confirmation_header,
@@ -61,6 +63,7 @@ class Website < ActiveRecord::Base
                   :blog_page_id,
                   :blog_category_page_id,
                   :paypal_business_email,
+                  :dibs_merchant_id, :dibs_hmac_key,
                   :webshop_currency,
                   :website_money_format,
                   :website_money_separator,
