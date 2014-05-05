@@ -8,6 +8,7 @@ class DibsPayment
     @customer = order.customer
     @website  = order.website
     @cart     = order.cart
+    overrides[:test] = "1" unless @website.webshop_live
     @values = default_params.merge(overrides)
   end
 
