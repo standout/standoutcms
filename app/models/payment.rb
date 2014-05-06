@@ -1,6 +1,8 @@
 class Payment < ActiveRecord::Base
   belongs_to :order
 
+  before_create :generate_token
+
   def update_payment(paid, source = nil)
     if paid == true
       self.update_attributes(
@@ -25,5 +27,11 @@ class Payment < ActiveRecord::Base
 
   def status
     self.paid? ? I18n.t('paid') : I18n.t('not_paid')
+  end
+
+  private
+
+  def generate_token
+    self.token = SecureRandom.hex
   end
 end
