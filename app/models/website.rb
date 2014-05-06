@@ -64,6 +64,7 @@ class Website < ActiveRecord::Base
                   :blog_category_page_id,
                   :paypal_business_email,
                   :dibs_merchant_id, :dibs_hmac_key,
+                  :webshop_live,
                   :webshop_currency,
                   :website_money_format,
                   :website_money_separator,
@@ -156,6 +157,10 @@ class Website < ActiveRecord::Base
     a = (Product.column_names + ProductPropertyKey.where(website_id: self.id).map(&:slug)).flatten
     a -= ["id", "website_id", "vat_percentage", "created_at", "updated_at", "deleted_at", "url", "vendor_id"]
     self.filtered_attributes = Hash[*a.collect {|a| [a, template[a] == true]}.flatten]
+  end
+
+  def webshop_live?
+    webshop_live == "1"
   end
 
   private

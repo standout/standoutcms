@@ -94,7 +94,7 @@ class Cart < ActiveRecord::Base
       })
     end
 
-    if self.website.webshop_live == '1'
+    if self.website.webshop_live?
       "https://www.paypal.com/cgi-bin/webscr?" + values.to_query
     else
       "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query

@@ -3,12 +3,12 @@ class DibsPayment
 
   FakeCartItem = Struct.new(:quantity, :title, :product_id, :price_including_tax)
 
-  def initialize(order, overrides)
+  def initialize(order, overrides = {})
     @order    = order
     @customer = order.customer
     @website  = order.website
     @cart     = order.cart
-    overrides[:test] = "1" unless @website.webshop_live
+    overrides[:test] = "1" unless @website.webshop_live?
     @values = default_params.merge(overrides)
   end
 
