@@ -131,7 +131,7 @@ module ModelSearch
   end
 
   def filter_through_dynamic_attributes(array, hash)
-  	array.delete_if do |r|
+  	array.to_a.delete_if do |r|
       keep = true;
       hash.each do |k,v|
         if v.class == Range
