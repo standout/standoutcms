@@ -24,6 +24,8 @@ en:
   incl_vat: '(incl. VAT)'
   payment: 'Payment'
   paypal_business_email: 'PayPal business email'
+  dibs_hmac_key: 'DIBS HMAC key'
+  dibs_merchant_id: 'DIBS Merchant ID'
   webshop_currency: 'Webshop currency'
   money_format: 'Money format'
   money_separator: 'Decimal mark'

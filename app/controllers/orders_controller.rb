@@ -47,9 +47,15 @@ class OrdersController < ApplicationController
         format.html {
           if @order.payment_type == 'invoice'
             redirect_to '/thank_you'
-          elsif @order.payment_type == 'credit_card'
+          elsif @order.payment_type == 'paypal'
             # Redirect to PayPal for credit card payment
             redirect_to @order.cart.paypal_url(root_url, paypal_notification_url)
+          elsif @order.payment_type == 'dibs'
+            # Render Dibs form for credit card payment
+            @dibs = DibsPayment.new(@order,
+              cancelReturnUrl: cart_url,
+              acceptReturnUrl: thank_you_url)
+            render "orders/dibs", layout: "auto_submit"
           end
         }
         format.json {

@@ -1,0 +1,7 @@
+<form type="button" method="post" action="<%= @dibs.entrypoint %>">
+  <% @dibs.values.each do |name, value| %>
+    <input type="hidden" name="<%= name %>" value="<%= value %>"/>
+  <% end %>
+  <input type="hidden" name="MAC" value="<%= @dibs.hmac %>"/>
+  <input type="submit" value="Gå vidare till Dibs">
+</form>
