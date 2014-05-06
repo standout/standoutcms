@@ -76,6 +76,9 @@ StandoutCms::Application.routes.draw do
     post "checkout" => "orders#create"
     get "checkout/paypal_notification" => 'orders#paypal_notification', :as => :paypal_notification
     get "thank_you" => "orders#thank_you"
+    post "dibs/accept"
+    post "dibs/cancel"
+    post "dibs/callback/:id/:token" => "dibs#callback", as: :dibs_callback
 
     # Administration
     namespace :admin do
