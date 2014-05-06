@@ -33,7 +33,7 @@ gem 'angularjs-rails'
 # Vestal Versions can be found in many versions on Github. This one works
 # with Rails 3 and also fixes a bug with 'alias_table_name' that is not
 # already implemented in the main repository.
-gem 'vestal_versions', :git => 'git://github.com/scottwillson/vestal_versions', branch: 'master'
+gem 'vestal_versions', :git => 'git://github.com/scottwillson/vestal_versions', branch: 'rails_4'
 gem 'will_paginate'
 gem 'therubyracer'
 gem 'remotipart', '>= 1.0.1'

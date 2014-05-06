@@ -22,12 +22,12 @@ GIT
 
 GIT
   remote: git://github.com/scottwillson/vestal_versions
-  revision: ebece7a51398dcfb863e5709f70b373973196d60
-  branch: master
+  revision: 703638e47e4fdaa73cc8d9512b1d17f41e4aacbc
+  branch: rails_4
   specs:
-    vestal_versions (1.3.0)
-      activerecord (>= 3.1)
-      activesupport (>= 3.1)
+    vestal_versions (1.3.1)
+      activerecord (>= 4.0.0)
+      activesupport (>= 4.0.0)
 
 GEM
   remote: http://rubygems.org/
