@@ -1,18 +1,18 @@
 class PageTemplate < ActiveRecord::Base
-  
+
   versioned
-  
+
   attr_accessible :id, :look_id, :slug, :name, :default_template, :partial, :html
   scope :no_partials, -> { where(partial: false) }
   belongs_to :look
-  
+
   has_many :pages
   after_save :touch_pages
-  
+
   def touch_pages
     self.pages.collect(&:touch)
   end
-  
+
   def file_name
     self.partial? ? "_#{self.slug}.liquid" : "#{self.slug}.liquid"
   end
@@ -20,7 +20,7 @@ class PageTemplate < ActiveRecord::Base
   def used?
     pages.length > 0
   end
-  
+
   def website
     self.look.website
   end
