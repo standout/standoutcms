@@ -52,9 +52,13 @@ class OrdersController < ApplicationController
             redirect_to @order.cart.paypal_url(root_url, paypal_notification_url)
           elsif @order.payment_type == 'dibs'
             # Render Dibs form for credit card payment
+            # FIXME camelcase cancelreturnurl when
+            # https://github.com/bjornblomqvist/dibs_hmac/pull/1 is fixed in gem
             @dibs = DibsPayment.new(@order,
-              cancelReturnUrl: cart_url,
-              acceptReturnUrl: thank_you_url)
+              cancelreturnurl: dibs_cancel_url,
+              acceptReturnUrl: dibs_accept_url,
+              callbackUrl: dibs_callback_url(id: @order.id,
+                                             token: @order.payment.token))
             render "orders/dibs", layout: "auto_submit"
           end
         }
