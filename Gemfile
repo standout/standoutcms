@@ -9,7 +9,7 @@ gem 'aws-s3'
 gem 'aws-sdk'
 gem 'best_in_place', git: 'git://github.com/aaronchi/best_in_place.git'
 gem "cancan"
-gem 'capistrano'
+gem 'capistrano', '~> 2.15'
 gem 'ckeditor', :git => 'git://github.com/galetahub/ckeditor.git'
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
