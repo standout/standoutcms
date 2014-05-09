@@ -2,7 +2,6 @@ source 'http://rubygems.org'
 
 gem 'rails', '4.0.2'
 
-gem 'sqlite3'
 gem "airbrake"
 gem 'awesome_nested_set'
 gem 'aws-s3'
@@ -71,6 +70,7 @@ group :development, :test do
   gem 'rb-fsevent', :require => false # if RUBY_PLATFORM =~ /darwin/i
   gem 'guard-minitest'
   gem 'byebug'
+  gem 'sqlite3'
   gem 'tinder'
 end
 
