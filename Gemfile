@@ -9,7 +9,9 @@ gem 'aws-s3'
 gem 'aws-sdk'
 gem 'best_in_place', git: 'git://github.com/aaronchi/best_in_place.git'
 gem "cancan"
-gem 'capistrano', '~> 2.15'
+gem 'capistrano', '~> 3.2.1'
+gem 'capistrano-rails', '~> 1.1.1'
+gem 'capistrano-unicorn-nginx', '~> 2.0.0'
 gem 'ckeditor', :git => 'git://github.com/galetahub/ckeditor.git'
 gem 'delayed_job_active_record'
 gem 'delayed_job_web'
@@ -26,6 +28,7 @@ gem 'jquery-ui-rails'
 gem 'liquid'
 gem "mysql2"
 gem "paperclip", ">= 2.0"
+gem 'unicorn', '~> 4.8.3'
 gem "version"
 gem "active_model_serializers", "~> 0.8.0"
 gem 'angularjs-rails'
