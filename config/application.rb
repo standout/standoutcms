@@ -38,7 +38,7 @@ module StandoutCms
     config.session_store = :active_record_store
     config.session = {
       :key => '_standoutcms_session',
-      :secret      => 'use-your-own-secret-here'
+      :secret => Figaro.env.SECRET_KEY_BASE
     }
 
     # JavaScript files you want as :defaults (application.js is always included).
