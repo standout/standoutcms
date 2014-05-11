@@ -49,11 +49,17 @@ StandoutCms::Application.configure do
     'admin.css',
     'custom_data_lists.css',
     'jquery.Jcrop.css',
+    'jquery.ui.all',
     'ui-lightness/jquery-ui-1.8.10.custom.css',
+    'websites.js',
     'websites.css',
     'looks.css',
     'code_editor.css',
+    'page_templates.js',
     'page_templates.css',
+    'pages.js',
+    'pages.css',
+    'look_files.js',
   ]
   # config.assets.fingerprinting.exclude << "looks/*"
 
