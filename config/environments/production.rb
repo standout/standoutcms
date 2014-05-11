@@ -40,6 +40,9 @@ StandoutCms::Application.configure do
   config.assets.digest = true
   config.assets.debug = false
   config.assets.precompile += Ckeditor.assets
+  config.assets.precompile += [
+    'admin.css',
+  ]
   # config.assets.fingerprinting.exclude << "looks/*"
 
   # Enable serving of images, stylesheets, and javascripts from an asset server
