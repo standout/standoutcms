@@ -51,6 +51,9 @@ StandoutCms::Application.configure do
     'jquery.Jcrop.css',
     'ui-lightness/jquery-ui-1.8.10.custom.css',
     'websites.css',
+    'looks.css',
+    'code_editor.css',
+    'page_templates.css',
   ]
   # config.assets.fingerprinting.exclude << "looks/*"
 
