@@ -41,7 +41,16 @@ StandoutCms::Application.configure do
   config.assets.debug = false
   config.assets.precompile += Ckeditor.assets
   config.assets.precompile += [
+    'scaffold.css',
+    'websites_grid.css',
+    'login.css',
+    'jquery.js',
+    'users.js',
     'admin.css',
+    'custom_data_lists.css',
+    'jquery.Jcrop.css',
+    'ui-lightness/jquery-ui-1.8.10.custom.css',
+    'websites.css',
   ]
   # config.assets.fingerprinting.exclude << "looks/*"
 
