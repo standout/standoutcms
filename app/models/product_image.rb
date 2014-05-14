@@ -2,7 +2,11 @@ class ProductImage < ActiveRecord::Base
   belongs_to :product
   belongs_to :product_category
   acts_as_list
-  has_attached_file :image, :styles => { :small => "100x100>", :medium => "400x300>", :large => "800x600>" }, :processors => [:cropper]
+  has_attached_file :image,
+    styles: { small: "100x100>", medium: "400x300>", large: "800x600>" },
+    processors: [:cropper],
+    path: ":rails_root/public/system/images/:id/:style/:filename",
+    url: "/system/images/:id/:style/:filename"
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   after_update :reprocess_image, :if => :cropping?
 
