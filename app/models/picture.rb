@@ -5,8 +5,8 @@ class Picture < Asset
   belongs_to :custom_data_field
   belongs_to :custom_data_row, :touch => true
   has_attached_file :data,
-                  path: ":rails_root/public/system/data/:id/:style/:slug",
-                  url: "/system/data/:id/:style/:slug",
+                  path: ":rails_root/public/system/data/:id/:style/:filename",
+                  url: "/system/data/:id/:style/:filename",
                   :styles => lambda { |attachment|
                     {
                       :content => '500x500>',
