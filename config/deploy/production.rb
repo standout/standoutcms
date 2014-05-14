@@ -8,7 +8,6 @@ role :app, %w{deploy@standoutcms.se}
 role :web, %w{deploy@standoutcms.se}
 role :db,  %w{deploy@standoutcms.se}
 
-set :branch, 'upgrade-capistrano-again'
 set :rails_env, 'production'
 
 # Extended Server Syntax
