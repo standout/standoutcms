@@ -1,88 +1,63 @@
-require "bundler/capistrano"
-load 'deploy/assets'
+# config valid only for Capistrano 3.2
+lock '3.2.1'
 
-set :application, "standoutcms"
-set :repository,  "git@github.com:standout/standoutcms.git"
+set :application, 'standoutcms'
+set :repo_url, 'git@github.com:standout/standoutcms.git'
 
-set :default_environment, {
-    'PATH' => "/usr/local/rbenv/shims:/usr/local/rbenv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/rvm/bin"
-}
+# Default branch is :master
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
-set :scm, :git
-set :branch, "master"
-# set :deploy_via, :remote_cache
-set :user, 'root'
-set :runner, 'www-data'
-set :git_enable_submodules, 1
+# Default deploy_to directory is /var/www/my_app
+set :deploy_to, "/u/apps/standoutcms"
 
-role :app, "standoutcms.se"
-role :web, "standoutcms.se"
-role :db,  "standoutcms.se", :primary => true
+# Default value for :scm is :git
+# set :scm, :git
 
-desc "Dump database"
-task :mysqldump, :roles => [:app] do
-  run "/usr/bin/mysqldump -u yourdbuser -pyourpassword -B standoutcms > /u/apps/#{application}/backup/production.sql"
-  run "cp /u/apps/#{application}/backup/production.sql /u/apps/#{application}/backup/production-#{Time.now.to_i}.sql"
-end
+# Default value for :format is :pretty
+# set :format, :pretty
 
-before :deploy, "mysqldump"
+# Default value for :log_level is :debug
+# set :log_level, :debug
 
-after :deploy, "deploy:migrate"
-after :deploy, "deploy:cleanup"
-after :deploy, "deploy:dj"
+# Default value for :pty is false
+# set :pty, true
 
-set :keep_releases, 5
+# Default value for :linked_files is []
+set :linked_files, %w{config/database.yml config/application.yml}
+
+# Default value for linked_dirs is []
+# Suggested: bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system
+set :linked_dirs, %w{log tmp/pids tmp/cache public/system public/files}
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
 
 namespace :deploy do
 
-  task :after_update_code, :roles => :app do
-    run "rm -rf #{release_path}/public/.htaccess"
-    run "ln -sf #{shared_path}/database.yml #{release_path}/config/database.yml"
+  desc 'Restart application'
+  task :restart do
+    invoke 'delayed_job:restart'
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+      # execute :touch, release_path.join('tmp/restart.txt')
+    end
+  end
+  after :publishing, :restart
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
   end
 
-  task :dj, :roles => :app do
-    run "cd #{current_path} && /usr/bin/env RAILS_ENV=production script/delayed_job stop"
-    run "cd #{current_path} && /usr/bin/env RAILS_ENV=production script/delayed_job start"
-  end
-
-  # Make sure we have the correct permissions on everything
-  task :after_symlink, :roles => :app do
-
-    # For shared files
-    run "mkdir -p #{shared_path}/files"
-    run "rm -rf #{release_path}/public/files && ln -s #{shared_path}/files #{release_path}/public/files"
-    #run "chown -R www-data:www-data #{shared_path}/files"
-    run "chmod -R 777 #{shared_path}"
-
-    #
-    # # Link paperclip uploads to shared path
-    # run "ln -sf #{shared_path} #{release_path}/public/system"
-    #
-    # Permissions
-    run "chmod -R 755 #{current_path}/tmp"
-    run "chown -R www-data:www-data #{current_path}/"
-    run "chown -R www-data:www-data #{shared_path}/"
-
-    # We need to restart Apache, because we are using imagescience
-    run "sudo /etc/init.d/apache2 reload"
-
-  end
-
-  desc "Restarting mod_rails with restart.txt"
-  task :restart, :roles => :app, :except => { :no_release => true } do
-    run "touch #{current_path}/tmp/restart.txt"
-  end
-
-  [:start, :stop].each do |t|
-    desc "#{t} task is a no-op with mod_rails"
-    task t, :roles => :app do ; end
-  end
 end
 
-Dir[File.join(File.dirname(__FILE__), '..', 'vendor', 'gems', 'hoptoad_notifier-*')].each do |vendored_notifier|
-  $: << File.join(vendored_notifier, 'lib')
-end
+before :deploy, "database:dump"
 
-
-require './config/boot'
-require 'airbrake/capistrano'
+# require 'airbrake/capistrano'

@@ -40,6 +40,27 @@ StandoutCms::Application.configure do
   config.assets.digest = true
   config.assets.debug = false
   config.assets.precompile += Ckeditor.assets
+  config.assets.precompile += [
+    'scaffold.css',
+    'websites_grid.css',
+    'login.css',
+    'jquery.js',
+    'users.js',
+    'admin.css',
+    'custom_data_lists.css',
+    'jquery.Jcrop.css',
+    'jquery.ui.all',
+    'ui-lightness/jquery-ui-1.8.10.custom.css',
+    'websites.js',
+    'websites.css',
+    'looks.css',
+    'code_editor.css',
+    'page_templates.js',
+    'page_templates.css',
+    'pages.js',
+    'pages.css',
+    'look_files.js',
+  ]
   # config.assets.fingerprinting.exclude << "looks/*"
 
   # Enable serving of images, stylesheets, and javascripts from an asset server

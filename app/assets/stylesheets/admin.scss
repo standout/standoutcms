@@ -139,13 +139,13 @@ a {
     }
 
 #pages ul#pages_list li.home {
-	background-image: url(<%= asset_path('home.png')%>);
+	background-image: url(asset-path('home.png'));
 }
 
 #pages ul#pages_list li ul.page_children li:first-child {
   padding: 0 0 0 17px; margin: 0 0 0 5px;
   list-style-type: none;
-  background-image: url(<%= asset_path('document.gif') %>);
+  background-image: url(asset-path('document.gif'));
   background-repeat: no-repeat;
   background-position: 2px 2px;
   display: block;
@@ -159,7 +159,7 @@ a {
     background: #ccc;
     padding: 0px 0 0px 0;
 		margin: 0 0 0 0;
-    background-image: url(<%= asset_path('stripes.gif') %>);
+    background-image: url(asset-path('stripes.gif'));
     border-right: 1px #333 solid;
     height: 100%;
 		overflow: auto;
@@ -172,7 +172,7 @@ a {
     left: 0;
     width: 200px;
     height: 45px;
-    background-image: url(<%= asset_path('darkbluebg.gif') %>);
+    background-image: url(asset-path('darkbluebg.gif'));
     line-height: 45px;
     text-align: center;
     z-index: 9999;
@@ -195,7 +195,7 @@ a {
     #pages li.visible {
         padding: 0 0 0 17px; margin: 0 0 0 5px;
         list-style-type: none;
-        background-image: url(<%= asset_path('document.gif') %>);
+        background-image: url(asset-path('document.gif'));
         background-repeat: no-repeat;
         background-position: 2px 2px;
         display: block;
@@ -204,7 +204,7 @@ a {
   #pages li.hidden, #pages ul#pages_list li ul.page_children li.hidden {
         padding: 0 0 0 17px; margin: 0 0 0 5px;
         list-style-type: none;
-        background-image: url(<%= asset_path('eye.png') %>) !important;
+        background-image: url(asset-path('eye.png')) !important;
         background-repeat: no-repeat;
         background-position: 2px 2px;
         display: block;
@@ -244,7 +244,7 @@ a {
   height: 25px;
   background: #333;
   width: 100%;
-  background-image: url(<%= asset_path('tab_backgrounds.png') %>);
+  background-image: url(asset-path('tab_backgrounds.png'));
   background: #000;
   color: #eee;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#666666', endColorstr='#000000'); /* for IE */
@@ -303,7 +303,7 @@ a {
 	     background: #666;
 		}
     #menu a.selected {
-        background-image: url(<%= asset_path('tab_backgrounds.png') %>);
+        background-image: url(asset-path('tab_backgrounds.png'));
         background-position: 0 -25px;
 				background: #fff;
         color: #333;
@@ -326,7 +326,7 @@ div.viewport {
 
 	#saving_and_info input[type=submit], input.fancy_save {
 		border: 1px #ccc solid;
-		background: url(<%= asset_path('gradient-button.png') %>);
+		background: url(asset-path('gradient-button.png'));
 		background: green;
 		-moz-border-radius: 11px 11px 11px 11px;
 	  -moz-box-sizing: content-box;
@@ -394,7 +394,7 @@ a img {
 
 div.buttons {
     height: 45px;
-    background-image: url(<%= asset_path('darkbluebg.gif') %>);
+    background-image: url(asset-path('darkbluebg.gif'));
     line-height: 45px;
     text-align: center;
 }
@@ -502,7 +502,7 @@ table tr.even td {
 
 .button {
 	border: 1px #ccc solid;
-	background: url(<%= asset_path('gradient-button.png') %>);
+	background: url(asset-path('gradient-button.png'));
 	border-radius: 11px 11px 11px 11px;
 	-moz-border-radius: 11px 11px 11px 11px;
   -moz-box-sizing: content-box;
@@ -521,7 +521,7 @@ table tr.even td {
 
 	.button:hover {
 		border: 1px #000 solid;
-		background: url(<%= asset_path('gradient-button.png') %>);
+		background: url(asset-path('gradient-button.png'));
 		color: #333;
 	}
 

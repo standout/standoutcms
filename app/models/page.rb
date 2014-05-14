@@ -1,7 +1,18 @@
-# encoding: utf-8
 class Page < ActiveRecord::Base
 
   attr_accessor :language, :password
+
+  attr_accessible :address,
+                  :description,
+                  :direct_link,
+                  :language,
+                  :login_required,
+                  :page_template_id,
+                  :parent_id,
+                  :password,
+                  :seo_title,
+                  :show_in_menu,
+                  :title
 
   #acts_as_nested_set :scope => :website_id
   acts_as_tree :order => 'position asc', :scope => 'website_id'
