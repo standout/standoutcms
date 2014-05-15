@@ -202,6 +202,7 @@ GEM
     nifty-generators (0.4.6)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    non-stupid-digest-assets (1.0.4)
     orm_adapter (0.5.0)
     paperclip (3.5.2)
       activemodel (>= 3.0.0)
@@ -358,6 +359,7 @@ DEPENDENCIES
   mysql2
   nifty-generators
   nokogiri
+  non-stupid-digest-assets (~> 1.0.4)
   paperclip (>= 2.0)
   protected_attributes
   query_reviewer!

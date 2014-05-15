@@ -32,6 +32,10 @@ gem "version"
 gem "active_model_serializers", "~> 0.8.0"
 gem 'angularjs-rails'
 
+# In order to use rails 4 assets with digest in production environment
+# galetahub/ckeditor/tree/9e35addb42b42c7d520bbb579ecdb3d89d6a5847#usage-with-rails-4-assets
+gem 'non-stupid-digest-assets', '~> 1.0.4'
+
 # Vestal Versions can be found in many versions on Github. This one works
 # with Rails 3 and also fixes a bug with 'alias_table_name' that is not
 # already implemented in the main repository.
