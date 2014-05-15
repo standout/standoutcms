@@ -12,55 +12,53 @@ StandoutCms::Application.routes.draw do
   post 'send_reset_link' => "users#send_password_reset", :as => :send_password_reset
   get "/delayed_job" => DelayedJobWeb, :anchor => false
 
-  constraints subdomain: :api do
-    scope module: :api do
-      namespace :v1 do
-        resources :custom_data_lists, only: [] do
-          resources :custom_data_rows, only: [:index, :show]
-        end
-        get 'themes' => "themes#index"
-        resources :themes
-
-        resources :websites, only: [] do
-          resources :product_categories, only: :index
-          resources :carts, only: [:create]
-          resources :orders, only: [:create]
-          resources :products, only: [:index]
-        end
-
-        resources :product_categories, only: [:show] do
-          member do
-            get :parent
-            get :children
-          end
-
-          resources :products, only: [:index]
-        end
-
-        resources :products, only: [:show] do
-          resources :product_variants, only: [:index]
-        end
-
-        resources :product_variants, only: [:show]
-
-        resources :carts, only: [:show, :update] do
-          member do
-            get :empty
-          end
-
-          resources :cart_items, only: [:index, :create]
-        end
-
-        resources :cart_items, only: [:update, :destroy]
-
-        # JSONP fallbacks
-        post 'websites/:website_id/carts/create'  => 'carts#create'
-        post 'websites/:website_id/orders/create' => 'orders#create'
-        put 'carts/:id/update'                   => 'carts#update'
-        post 'carts/:cart_id/cart_items/create'   => 'cart_items#create'
-        put 'cart_items/:id/update'              => 'cart_items#update'
-        post 'cart_items/:id/destroy'             => 'cart_items#destroy'
+  scope module: :api do
+    namespace :v1 do
+      resources :custom_data_lists, only: [] do
+        resources :custom_data_rows, only: [:index, :show]
       end
+      get 'themes' => "themes#index"
+      resources :themes
+
+      resources :websites, only: [] do
+        resources :product_categories, only: :index
+        resources :carts, only: [:create]
+        resources :orders, only: [:create]
+        resources :products, only: [:index]
+      end
+
+      resources :product_categories, only: [:show] do
+        member do
+          get :parent
+          get :children
+        end
+
+        resources :products, only: [:index]
+      end
+
+      resources :products, only: [:show] do
+        resources :product_variants, only: [:index]
+      end
+
+      resources :product_variants, only: [:show]
+
+      resources :carts, only: [:show, :update] do
+        member do
+          get :empty
+        end
+
+        resources :cart_items, only: [:index, :create]
+      end
+
+      resources :cart_items, only: [:update, :destroy]
+
+      # JSONP fallbacks
+      post 'websites/:website_id/carts/create'  => 'carts#create'
+      post 'websites/:website_id/orders/create' => 'orders#create'
+      put 'carts/:id/update'                   => 'carts#update'
+      post 'carts/:cart_id/cart_items/create'   => 'cart_items#create'
+      put 'cart_items/:id/update'              => 'cart_items#update'
+      post 'cart_items/:id/destroy'             => 'cart_items#destroy'
     end
   end
 
@@ -258,9 +256,6 @@ StandoutCms::Application.routes.draw do
     get '*path.gif' => 'application#image_rescue'
 
     get 'menu/:action' => 'menu#index'
-    match '/:controller(/:action(/:id))', via: [:get, :post]
-    get ':controller/:action' => '#index'
-    get ':controller/:action.:format' => '#index'
 
   end
 
