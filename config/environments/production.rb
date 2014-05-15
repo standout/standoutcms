@@ -83,8 +83,8 @@ StandoutCms::Application.configure do
 end
 
 ActionMailer::Base.smtp_settings = {
-  :user_name => "yoursmtpusername",
-  :password => "yourpasswordhere",
+  user_name: ENV["SMTP_USER_NAME"],
+  password:  ENV["SMTP_PASSWORD"],
   :domain => "standoutcms.se",
   :address => "smtp.sendgrid.net",
   :port => 587,

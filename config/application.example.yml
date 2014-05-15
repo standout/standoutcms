@@ -16,3 +16,5 @@ development:
 
 production:
   S3_BUCKET: 'standoutcms'
+  SMTP_USER_NAME: yoursmtpusername
+  SMTP_PASSWORD: yourpasswordhere
