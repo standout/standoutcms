@@ -64,8 +64,9 @@ StandoutCms::Application.configure do
     'ckeditor/skins/kama/editor.css',
     'ckeditor/lang/en.js',
     'ckeditor/plugins/embed/plugin.js',
+    'ckeditor/plugins/embed/lang/en.js',
     'ckeditor/plugins/attachment/plugin.js',
-    'ckeditor/plugins/embed/plugin.js',
+    'ckeditor/plugins/attachment/lang/en.js',
   ]
   # config.assets.fingerprinting.exclude << "looks/*"
 
