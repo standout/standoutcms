@@ -2,7 +2,11 @@ class Vendor < ActiveRecord::Base
   validates :slug, uniqueness: true
 
   # attr_accessor :logo_file_name, :logo_content_type, :logo_file_size, :logo_updated_at
-  has_attached_file :logo, :styles => { :small => "120x120" }, :default_url => "/images/missing.png"
+  has_attached_file :logo,
+    styles: { :small => "120x120" },
+    default_url: "/images/missing.png",
+    path: ":rails_root/public/system/logos/:id/:style/:filename",
+    url: "/system/logos/:id/:style/:filename"
 
   has_many      :products
   has_many      :url_pointers, -> { order('created_at asc') }, dependent: :destroy
