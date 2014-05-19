@@ -98,7 +98,7 @@ ul#page_tabs, #page_tabs li {
   font-size: 11px;
   border-radius: 2px 2px 0px 0px;
   -moz-border-radius: 2px 2px 0px 0px;
-  background-image: url(asset-path('/images/second_level_tabs_bg.jpg'));
+  background-image: url(asset-path('second_level_tabs_bg.jpg'));
   background-position: bottom left;
 }
 
@@ -108,7 +108,7 @@ ul#page_tabs, #page_tabs li {
 
 #decorative_second_level {
   height: 25px;
-  background-image: url(asset-path('/images/second_level_tabs_bg.jpg'));
+  background-image: url(asset-path('second_level_tabs_bg.jpg'));
   background-repeat: repeat-x;
   position: absolute;
   top: 25px;

@@ -110,11 +110,10 @@
 				return false;
 			});
 		});
-		
-		$('body').append('<div style="height: 100%; width: 5px; padding: 0; position: fixed; top: 0; left: 100px;"><img src="/images/shadow50.png" alt="" style="height: 100%; width: 5px;"></div>');
+
+    $('body').append('<div style="height: 100%; width: 5px; padding: 0; position: fixed; top: 0; left: 100px;"><img src="<%= asset_path("shadow50.png") %>" alt="" style="height: 100%; width: 5px;"></div>');
 		$('html').css('padding-left', '150px');
-		
-		
+
 	});
 	
 	function fix_links_to_blog()
