@@ -4,7 +4,7 @@ class MenuController < ApplicationController
 
   def edit
     @page = Page.find(params[:page_template_id])
-    @menu = Menu.find(:first, :conditions => ["for_html_id = ? and page_template_id = ?", params[:div_id], @page.page_template_id])
+    @menu = Menu.find_by(for_html_id: params[:div_id], page_template_id: @page.page_template_id)
     render :layout => false
   end
 
