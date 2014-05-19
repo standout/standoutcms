@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :login_required, :except => [:new, :create, :send_password_reset, :password_reset]
 
   def send_password_reset
-    @user = User.all(:conditions => { :email => params[:email] }).first
+    @user = User.find_by(email: params[:email])
     if @user
       Notifier.password_reset_link(@user).deliver
       redirect_to login_path, :notice => t('password_reset_link_sent')
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
       redirect_to root_url, :notice => "Thank you for signing up! You are now logged in."
@@ -45,10 +45,21 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    if @user.update_attributes(params[:user])
+    if @user.update(user_params)
       redirect_to root_url, :notice => "Your profile has been updated."
     else
       render :action => 'edit'
     end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit %i(
+      email
+      password
+      password_confirmation
+      locale
+    )
   end
 end

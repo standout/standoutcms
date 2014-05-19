@@ -11,11 +11,6 @@ class ContentItem < ActiveRecord::Base
   belongs_to :extra_view
   default_scope { where("deleted = ?", false) }
 
-  # TODO: move to controller. Add security tests.
-  attr_accessible :page_id, :for_html_id, :language, :content_type, :website_id,
-                  :width, :height, :text_content, :css, :original_filename, :position, :extra_id,
-                  :sticky, :deleted, :extra_view_id, :display_url
-
   def touch_page
     self.page.touch
   end

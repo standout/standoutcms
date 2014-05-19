@@ -1,5 +1,5 @@
 class MenuController < ApplicationController
-  
+
   before_filter :check_login
 
   def edit
@@ -10,9 +10,22 @@ class MenuController < ApplicationController
 
   def update
     @menu = Menu.find(params[:id])
-    if @menu.update_attributes(params[:menu])
+    if @menu.update(menu_params)
       render :text => "Menu item #{@menu.id} updated."
     end
+  end
+
+  private
+
+  def menu_params
+    params.require(:).permit %i(
+      look_id
+      for_html_id
+      levels
+      start_level
+      show_submenus
+      page_template_id
+    )
   end
 
 end

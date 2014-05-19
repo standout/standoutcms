@@ -63,7 +63,7 @@ class ExtrasController < ApplicationController
   # POST /extras
   # POST /extras.xml
   def create
-    @extra = Extra.new(params[:extra])
+    @extra = Extra.new(extra_params)
 
     respond_to do |format|
       if @extra.save
@@ -83,7 +83,7 @@ class ExtrasController < ApplicationController
     @extra = Extra.find(params[:id])
 
     respond_to do |format|
-      if @extra.update_attributes(params[:extra])
+      if @extra.update(extra_params)
         flash[:notice] = 'Extra was successfully updated.'
         format.html { redirect_to(@extra) }
         format.xml  { head :ok }
@@ -104,5 +104,17 @@ class ExtrasController < ApplicationController
       format.html { redirect_to(extras_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def extra_params
+    params.require(:extra).permit %i(
+      name
+      edit_url
+      public
+      website_id
+      display_url
+    )
   end
 end

@@ -53,7 +53,7 @@ class Admin::ProductCategoriesController < ApplicationController
   # POST /product_categories
   # POST /product_categories.json
   def create
-    @product_category = ProductCategory.new(params[:product_category])
+    @product_category = ProductCategory.new(product_category_params)
     @product_category.website_id = @website.id
 
     respond_to do |format|
@@ -76,7 +76,7 @@ class Admin::ProductCategoriesController < ApplicationController
     end
 
     respond_to do |format|
-      if @product_category.update_attributes(params[:product_category])
+      if @product_category.update(product_category_params)
         format.html { redirect_to [:admin, :product_categories], notice: 'Product category was successfully updated.' }
         format.json { head :ok }
       else
@@ -96,5 +96,17 @@ class Admin::ProductCategoriesController < ApplicationController
       format.html { redirect_to [:admin, :product_categories] }
       format.json { head :ok }
     end
+  end
+
+  private
+
+  def product_category_params
+    params.require(:product_category).permit %i(
+      website_id
+      title
+      description
+      slug
+      parent_id
+    )
   end
 end

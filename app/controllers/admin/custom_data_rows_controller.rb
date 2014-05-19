@@ -181,5 +181,5 @@ class Admin::CustomDataRowsController < ApplicationController
     # replace all none alphanumeric, underscore or perioids with underscore
     just_filename.sub(/[^\w\.\-]/,'_').downcase 
   end
-  
+
 end

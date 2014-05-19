@@ -12,7 +12,7 @@ class Admin::VendorsController < ApplicationController
   end
 
   def create
-    @vendor = Vendor.new(params[:vendor])
+    @vendor = Vendor.new(vendor_params)
     @vendor.website_id = current_website.id
     if @vendor.save
       redirect_to [:admin, :vendors], :notice => t('notices.vendor.added')
@@ -27,7 +27,7 @@ class Admin::VendorsController < ApplicationController
 
   def update
     @vendor = current_website.vendors.find(params[:id])
-    @vendor.update_attributes(params[:vendor])
+    @vendor.update(vendor_params)
     @vendor.website_id = current_website.id
     redirect_to [:admin, :vendors]
   end
@@ -36,6 +36,20 @@ class Admin::VendorsController < ApplicationController
     @vendor = current_website.vendors.find(params[:id])
     @vendor.destroy
     redirect_to [:admin, :vendors]
+  end
+
+  private
+
+  def vendor_params
+    params.require(:vendor).permit %i(
+      name
+      logo
+      slug
+      logo_file_name
+      logo_content_type
+      logo_file_size
+      logo_updated_at
+    )
   end
 
 end

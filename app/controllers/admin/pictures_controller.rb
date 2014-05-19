@@ -20,7 +20,7 @@ class Admin::PicturesController < ApplicationController
   end
 
   def create
-    @picture = Picture.new(params[:picture])
+    @picture = Picture.new(picture_params)
     @picture.website_id = @website.id
     if @picture.save
       redirect_to :back, :notice => I18n.t('notices.picture.created')
@@ -44,10 +44,17 @@ class Admin::PicturesController < ApplicationController
   def update
     @picture = Picture.find(params[:id])
     if @picture && @picture.website_id == current_website.id
-      @picture.title = params[:picture][:title]
-      @picture.save
+      @picture.update(picture_params)
       redirect_to :back, :notice => I18n.t('notices.picture.saved')
     end
+  end
+
+  private
+
+  def picture_params
+    params.require(:picture).permit %i(
+      title data
+    )
   end
 
 end

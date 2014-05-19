@@ -9,7 +9,7 @@ class Admin::ProductPropertyKeysController < ApplicationController
   end
 
   def create
-    @product_property_key = @website.product_property_keys.new(params[:product_property_key])
+    @product_property_key = @website.product_property_keys.new(product_property_key_params)
 
     if @product_property_key.save
       redirect_to edit_webshop_admin_website_path(@website)
@@ -25,7 +25,7 @@ class Admin::ProductPropertyKeysController < ApplicationController
   def update
     @product_property_key = @website.product_property_keys.find(params[:id])
 
-    if @product_property_key.update_attributes(params[:product_property_key])
+    if @product_property_key.update(product_property_key_params)
       redirect_to edit_webshop_admin_website_path(@website)
     else
       render action: :edit
@@ -48,5 +48,15 @@ class Admin::ProductPropertyKeysController < ApplicationController
   def update_filtered_attributes
     @website.update_filtered_attributes(@website.filtered_attributes)
     @website.save
+  end
+
+  private
+
+  def product_property_key_params
+    params.require(:product_property_key).permit %i(
+      name
+      slug
+      data_type
+    )
   end
 end

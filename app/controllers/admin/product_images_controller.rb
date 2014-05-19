@@ -18,7 +18,7 @@ class Admin::ProductImagesController < ApplicationController
 
 
   def create
-    @product_image = @parent.product_images.new(params[:product_image])
+    @product_image = @parent.product_images.new(product_image_params)
     @product_image.save!
     redirect_to [:edit, :admin, @parent]
   end
@@ -37,7 +37,7 @@ class Admin::ProductImagesController < ApplicationController
 
   def update
     @product_image = @parent.product_images.find(params[:id])
-    @product_image.update_attributes(params[:product_image])
+    @product_image.update(product_image_params)
     redirect_to :back
   end
 
@@ -45,6 +45,17 @@ class Admin::ProductImagesController < ApplicationController
     @product_image = @parent.product_images.find(params[:id])
     @product_image.destroy
     redirect_to :back
+  end
+
+  private
+
+  def product_image_params
+    params.require(:product_image).permit %i(
+      crop_x
+      crop_y
+      crop_w
+      crop_h
+    )
   end
 
 end

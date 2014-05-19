@@ -45,7 +45,7 @@ class Admin::LookFilesController < ApplicationController
   # POST /look_files
   # POST /look_files.xml
   def create
-    @look_file = LookFile.new(params[:look_file])
+    @look_file = LookFile.new(look_file_params)
     @look_file.look_id = @look.id
 
     respond_to do |format|
@@ -83,7 +83,7 @@ class Admin::LookFilesController < ApplicationController
         @look_file.remove_file
         save_the_file(@look_file, params[:uploaded_data], true)
       else
-        @look_file.update_attributes(params[:look_file])
+        @look_file.update(look_file_params)
       end
         
       format.html { redirect_to :back }
@@ -126,5 +126,15 @@ class Admin::LookFilesController < ApplicationController
     just_filename = File.basename(file_name) 
     # replace all none alphanumeric, underscore or perioids with underscore
     just_filename.sub(/[^\w\.\-]/,'_').downcase 
+  end
+
+  private
+
+  def look_file_params
+    params.require(:look_file).permit %i(
+      content_type
+      filename
+      text_content
+    )
   end
 end

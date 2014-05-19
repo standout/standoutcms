@@ -49,7 +49,7 @@ class ExtraViewsController < ApplicationController
   # POST /extra_views
   # POST /extra_views.xml
   def create
-    @extra_view = ExtraView.new(params[:extra_view])
+    @extra_view = ExtraView.new(extra_view_params)
     @content_item = ContentItem.find(params[:content_item])
       if @extra_view.save
         render :update do |page|
@@ -68,7 +68,7 @@ class ExtraViewsController < ApplicationController
     @extra_view = ExtraView.find(params[:id])
 
     respond_to do |format|
-      if @extra_view.update_attributes(params[:extra_view])
+      if @extra_view.update(extra_view_params)
         flash[:notice] = 'ExtraView was successfully updated.'
         format.html { redirect_to(@extra_view) }
         format.xml  { head :ok }
@@ -89,5 +89,15 @@ class ExtraViewsController < ApplicationController
       format.html { redirect_to(extra_views_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def extra_view_params
+    params.require(:extra_view).permit %i(
+      extra_id
+      name
+      url
+    )
   end
 end

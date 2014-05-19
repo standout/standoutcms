@@ -33,7 +33,7 @@ class Admin::GalleriesController < ApplicationController
   # POST /galleries
   # POST /galleries.xml
   def create
-    @gallery = Gallery.new(params[:gallery])
+    @gallery = Gallery.new(gallery_params)
     @gallery.website_id = session[:website_id]
     respond_to do |format|
       if @gallery.save
@@ -52,7 +52,7 @@ class Admin::GalleriesController < ApplicationController
   # PUT /galleries/1.xml
   def update
     @gallery = Gallery.find(params[:id])
-    @gallery.update_attributes(params[:gallery])
+    @gallery.update(gallery_params)
     responds_to_parent do
       render :update do |page|
         page.replace_html "gallery_title", @gallery.title
@@ -82,5 +82,21 @@ class Admin::GalleriesController < ApplicationController
     end
     render :text => "ok"
   end
-  
+
+  private
+
+  def gallery_params
+    params.require(:gallery).permit %i(
+      content_item_id
+      title
+      overview_file_name
+      overview_content_type
+      overview_file_size
+      overview_updated_at
+      liquid
+      thumbnail_size
+      large_size
+    )
+  end
+
 end

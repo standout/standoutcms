@@ -14,7 +14,7 @@ class Admin::WebsiteMembershipsController < ApplicationController
   # POST /website_memberships
   # POST /website_memberships.xml
   def create
-    @website_membership = WebsiteMembership.new(params[:website_membership])
+    @website_membership = WebsiteMembership.new(website_membership_params)
     @website_membership.website_id = current_website.id
     authorize! :create, @website_membership
 
@@ -33,7 +33,7 @@ class Admin::WebsiteMembershipsController < ApplicationController
     authorize! :update, @website_membership
 
     respond_to do |format|
-      if @website_membership.update_attributes(params[:website_membership])
+      if @website_membership.update(website_membership_params)
         format.html { redirect_to([:edit, :admin, @website_membership.website], :notice => 'WebsiteMembership was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -49,5 +49,16 @@ class Admin::WebsiteMembershipsController < ApplicationController
     @website_membership.destroy
 
     render json: @website_membership
+  end
+
+  private
+
+  def website_membership_params
+    params.require(:website_membership).permit %i(
+      user_id
+      website_id
+      website_admin
+      restricted_user
+    )
   end
 end

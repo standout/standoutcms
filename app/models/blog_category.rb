@@ -1,6 +1,4 @@
 class BlogCategory < ActiveRecord::Base
-  attr_accessible :website_id, :name
-
   belongs_to :website
   has_many :posts, -> { order(created_at: :desc)}
 

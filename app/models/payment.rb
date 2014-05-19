@@ -5,7 +5,7 @@ class Payment < ActiveRecord::Base
 
   def update_payment(paid, source = nil)
     if paid == true
-      self.update_attributes(
+      self.update(
         paid: true,
         paid_at: DateTime.now,
         paid_price: self.order.total_price,
@@ -17,7 +17,7 @@ class Payment < ActiveRecord::Base
       mail[:to] = self.order.customer.email
       mail.deliver
     else
-      self.update_attributes(
+      self.update(
         paid: false,
         paid_at: nil,
         paid_price: nil,

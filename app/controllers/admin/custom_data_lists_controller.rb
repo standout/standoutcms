@@ -16,7 +16,7 @@ class Admin::CustomDataListsController < ApplicationController
   end
 
   def create
-    @custom_data_list = CustomDataList.new(params[:custom_data_list])
+    @custom_data_list = CustomDataList.new(custom_data_list_params)
     if @custom_data_list.save
       Notice.create(:website_id => @website.id, :user_id => current_user.id, :message => "created list ##{@custom_data_list.id} - #{@custom_data_list.title}")
       flash[:notice] = "Successfully created custom data."
@@ -33,7 +33,7 @@ class Admin::CustomDataListsController < ApplicationController
 
   def update
     @custom_data_list = CustomDataList.find(params[:id])
-    if @custom_data_list.update_attributes(params[:custom_data_list])
+    if @custom_data_list.update(custom_data_list_params)
       Notice.create(:website_id => @website.id, :user_id => current_user.id, :message => "updated settings of list ##{@custom_data_list.id} - #{@custom_data_list.title}")
       flash[:notice] = "Successfully updated list."
       redirect_to [:edit, :admin, @custom_data_list]
@@ -54,5 +54,20 @@ class Admin::CustomDataListsController < ApplicationController
   protected
   def load_website
     @website = current_website
+  end
+
+  private
+
+  def custom_data_list_params
+    params.require(:custom_data_list).permit %i(
+      title
+      liquid_name
+      website_id
+      page_template_id
+      sort_field_id
+      sort_field_order
+      page_id
+      listconnection
+    )
   end
 end

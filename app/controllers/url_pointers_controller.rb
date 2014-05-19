@@ -40,7 +40,7 @@ class UrlPointersController < ApplicationController
   # POST /url_pointers
   # POST /url_pointers.xml
   def create
-    @url_pointer = UrlPointer.new(params[:url_pointer])
+    @url_pointer = UrlPointer.new(url_pointer_params)
 
     respond_to do |format|
       if @url_pointer.save
@@ -59,7 +59,7 @@ class UrlPointersController < ApplicationController
     @url_pointer = UrlPointer.find(params[:id])
 
     respond_to do |format|
-      if @url_pointer.update_attributes(params[:url_pointer])
+      if @url_pointer.update(url_pointer_params)
         format.html { redirect_to(@url_pointer, :notice => 'UrlPointer was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -79,5 +79,21 @@ class UrlPointersController < ApplicationController
       format.html { redirect_to(url_pointers_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def url_pointer_params
+    params.require(:url_pointer).permit %i(
+      path
+      website_id
+      page_id
+      language
+      custom_data_row_id
+      post_id
+      product_id
+      product_category_id
+      vendor_id
+    )
   end
 end

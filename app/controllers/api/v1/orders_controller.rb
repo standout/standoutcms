@@ -3,7 +3,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
     @website = Website.find(params[:website_id])
     @cart = Cart.find_by_api_key(params[:cart_api_key])
 
-    if not @cart or not @cart.update_attributes(filter_cart_params)
+    if not @cart or not @cart.update(filter_cart_params)
       return render_error
     end
 
@@ -46,6 +46,8 @@ class Api::V1::OrdersController < Api::V1::BaseController
     mail[:to] = @customer.email
     mail.deliver
   end
+
+  # TODO use strong parameters instead
 
   def filter_params(input, accessible)
     input.select{ |key, value| accessible.include?(key.to_sym) }

@@ -59,7 +59,7 @@ class Admin::PagesController < ApplicationController
   # POST /pages
   # POST /pages.xml
   def create
-    @page = Page.new(params[:page])
+    @page = Page.new(page_params)
     @website = current_website
     respond_to do |format|
       if @page.save
@@ -78,7 +78,7 @@ class Admin::PagesController < ApplicationController
     @page = @website.pages.find(params[:id])
 
     respond_to do |format|
-      if @page.update_attributes(params[:page])
+      if @page.update(page_params)
         Notice.create(:user_id => current_user.id, :website_id => current_website.id, :page_id => @page.id, :message => "updated page")
         
         format.html { render :partial => 'admin/pages/page', :collection => @page.website.root_pages }
@@ -160,5 +160,23 @@ class Admin::PagesController < ApplicationController
     end
     Notice.create(:user_id => current_user.id, :website_id => current_website.id, :message => 'reordered pages')
     render :status => 200, :nothing => true
+  end
+
+  private
+
+  def page_params
+    params.require(:page).permit %i(
+      address
+      description
+      direct_link
+      language
+      login_required
+      page_template_id
+      parent_id
+      password
+      seo_title
+      show_in_menu
+      title
+    )
   end
 end

@@ -20,7 +20,7 @@ class Admin::ShippingCostsController < ApplicationController
   end
 
   def create
-    @shipping_cost = @website.shipping_costs.new(params[:shipping_cost])
+    @shipping_cost = @website.shipping_costs.new(shipping_cost_params)
 
     if @shipping_cost.save
       redirect_to admin_shipping_costs_path
@@ -36,7 +36,7 @@ class Admin::ShippingCostsController < ApplicationController
   def update
     @shipping_cost = @website.shipping_costs.find(params[:id])
 
-    if @shipping_cost.update_attributes(params[:shipping_cost])
+    if @shipping_cost.update(shipping_cost_params)
       redirect_to admin_shipping_costs_path
     else
       render action: :edit
@@ -46,5 +46,16 @@ class Admin::ShippingCostsController < ApplicationController
   def destroy
     @website.shipping_costs.find(params[:id]).destroy
     redirect_to admin_shipping_costs_path
+  end
+
+  private
+
+  def shipping_cost_params
+    params.require(:shipping_cost).permit %i(
+      cost_type
+      from_value
+      to_value
+      cost
+    )
   end
 end

@@ -41,4 +41,22 @@ class PagesController < ApplicationController
                                                                                          </html>", :status => 404  
   end
 
+  private
+
+  def page_params
+    params.require(:page).permit %i(
+      address
+      description
+      direct_link
+      language
+      login_required
+      page_template_id
+      parent_id
+      password
+      seo_title
+      show_in_menu
+      title
+    )
+  end
+
 end

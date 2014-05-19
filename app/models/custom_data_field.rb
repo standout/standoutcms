@@ -1,5 +1,4 @@
 class CustomDataField < ActiveRecord::Base
-  attr_accessible :name, :fieldtype, :custom_data_id, :display_in_list, :image_size_large, :image_size_medium, :image_size_small, :listconnection
   belongs_to :custom_data_list, :foreign_key => :custom_data_id
   before_save :fix_slug
   after_update :refresh_asset

@@ -55,27 +55,6 @@ class Website < ActiveRecord::Base
   validates_uniqueness_of :subdomain
   validates_presence_of :subdomain
 
-  # TODO: move to controller
-  attr_accessible :domain, :subdomain, :domainaliases,
-                  :title,
-                  :email,
-                  :default_language,
-                  :blog_page_id,
-                  :blog_category_page_id,
-                  :paypal_business_email,
-                  :dibs_merchant_id, :dibs_hmac_key,
-                  :webshop_live,
-                  :webshop_currency,
-                  :website_money_format,
-                  :website_money_separator,
-                  :website_webshop_live,
-                  :order_confirmation_title,
-                  :order_confirmation_header,
-                  :order_confirmation_footer,
-                  :payment_confirmation_title,
-                  :payment_confirmation_header,
-                  :payment_confirmation_footer,
-
   # Could be either subdomain or main domain.
   def main_domain
     if self.domain.to_s == ""

@@ -3,7 +3,6 @@ class ProductCategory < ActiveRecord::Base
   include ModelSearch
   include Tokenizer
 
-  attr_accessible :website_id, :title, :description, :slug, :parent_id
   acts_as_tree :scope => 'website_id'
 
   has_and_belongs_to_many :products

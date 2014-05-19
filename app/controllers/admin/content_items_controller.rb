@@ -69,7 +69,7 @@ class Admin::ContentItemsController < ApplicationController
   # POST /content_items
   # POST /content_items.xml
   def create
-    @content_item = ContentItem.new(params[:content_item])
+    @content_item = ContentItem.new(content_item_params)
     if @content_item.save
       respond_to do |format|
         format.html { render :layout => false, :partial => 'content_item', :collection => [@content_item] }
@@ -87,7 +87,7 @@ class Admin::ContentItemsController < ApplicationController
   # PUT /content_items/1.xml
   def update
     @content_item = ContentItem.find(params[:id])
-    if @content_item.update_attributes(params[:content_item])
+    if @content_item.update(content_item_params)
       Notice.create(:website_id => current_website.id, :user_id => current_user.id, :message => "updated page ##{@content_item.page_id} - #{@content_item.page.title}", :page_id => @content_item.page_id)
       @content_item.check_for_stickies
     end
@@ -121,5 +121,28 @@ class Admin::ContentItemsController < ApplicationController
     g.large_size = params[:imagesize] + "#"
     g.save
 
+  end
+
+  private
+
+  def content_item_params
+    params.require(:content_item).permit %i(
+      page_id
+      for_html_id
+      language
+      content_type
+      website_id
+      width
+      height
+      text_content
+      css
+      original_filename
+      position
+      extra_id
+      sticky
+      deleted
+      extra_view_id
+      display_url
+    )
   end
 end

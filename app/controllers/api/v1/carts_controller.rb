@@ -12,7 +12,7 @@ class Api::V1::CartsController < Api::V1::BaseController
   end
 
   def update
-    if @cart.update_attributes(filter_params)
+    if @cart.update(cart_params)
       render json: @cart
     else
       render json: @cart.errors, status: :unprocessable_entity
@@ -28,8 +28,7 @@ class Api::V1::CartsController < Api::V1::BaseController
     @cart = Cart.find_by_api_key(params[:id])
   end
 
-  def filter_params
-    accessible = [:notes]
-    params.select{ |key, value| accessible.include?(key.to_sym) }
+  def cart_params
+    params.permit(:notes)
   end
 end
