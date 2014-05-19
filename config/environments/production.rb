@@ -49,6 +49,7 @@ StandoutCms::Application.configure do
     'admin.css',
     'custom_data_lists.css',
     'jquery.Jcrop.css',
+    'jquery-ui.js',
     'jquery.ui.all.js',
     'jquery.ui.all.css',
     'ui-lightness/jquery-ui-1.8.10.custom.css',
