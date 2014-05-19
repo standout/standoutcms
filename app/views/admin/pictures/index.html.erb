@@ -8,7 +8,9 @@
   <div class="asset-box picture-insertion">
     <%= image_tag picture.data.url(:thumb), { "data-content" => picture.data.url(:content), :class => 'image' } %>
     <span class="filename"><%= picture.data_file_name %></span>
-    <%= link_to image_tag("delete.png"), "/admin/pictures/#{picture.id}", :method => :delete, :confirm => "Really delete?" %>
+    <%= link_to image_tag("delete.png"), "/admin/pictures/#{picture.id}",
+          method: :delete,
+          data: { confirm: "Really delete?" } %>
   </div>
 
 <% end %>
