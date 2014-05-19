@@ -158,13 +158,13 @@ class Website < ActiveRecord::Base
 
   def setup
     l = Look.create(:website_id => self.id, :title => 'Standard')
-    PageTemplate.create(:look_id => l.id, :slug => 'standard', :name => 'Standard', :html => File.read("#{Rails.root}/lib/liquid_templates/templates/base.liquid"), :default => true)
-    PageTemplate.create(:look_id => l.id, :slug => 'cart', :name => 'Shopping cart', :html => File.read("#{Rails.root}/lib/liquid_templates/templates/cart.liquid"), :default => false)
-    PageTemplate.create(:look_id => l.id, :slug => 'checkout', :name => 'Checkout', :html => File.read("#{Rails.root}/lib/liquid_templates/templates/checkout.liquid"), :default => false)
-    PageTemplate.create(:look_id => l.id, :slug => 'product', :name => 'Product', :html => File.read("#{Rails.root}/lib/liquid_templates/templates/product.liquid"), :default => false)
-    PageTemplate.create(:look_id => l.id, :slug => 'product_category', :name => 'Product category', :html => File.read("#{Rails.root}/lib/liquid_templates/templates/product_category.liquid"), :default => false)
-    PageTemplate.create(:look_id => l.id, :slug => 'header', :name => 'Header', :html => File.read("#{Rails.root}/lib/liquid_templates/templates/_header.liquid"), :default => false, :partial => true)
-    PageTemplate.create(:look_id => l.id, :slug => 'footer', :name => 'Footer', :html => File.read("#{Rails.root}/lib/liquid_templates/templates/_footer.liquid"), :default => false, :partial => true)
+    PageTemplate.create(look_id: l.id, slug: 'standard',         name: 'Standard',         html: File.read("#{Rails.root}/lib/liquid_templates/templates/base.liquid"))
+    PageTemplate.create(look_id: l.id, slug: 'cart',             name: 'Shopping cart',    html: File.read("#{Rails.root}/lib/liquid_templates/templates/cart.liquid"))
+    PageTemplate.create(look_id: l.id, slug: 'checkout',         name: 'Checkout',         html: File.read("#{Rails.root}/lib/liquid_templates/templates/checkout.liquid"))
+    PageTemplate.create(look_id: l.id, slug: 'product',          name: 'Product',          html: File.read("#{Rails.root}/lib/liquid_templates/templates/product.liquid"))
+    PageTemplate.create(look_id: l.id, slug: 'product_category', name: 'Product category', html: File.read("#{Rails.root}/lib/liquid_templates/templates/product_category.liquid"))
+    PageTemplate.create(look_id: l.id, slug: 'header',           name: 'Header',           html: File.read("#{Rails.root}/lib/liquid_templates/templates/_header.liquid"), partial: true)
+    PageTemplate.create(look_id: l.id, slug: 'footer',           name: 'Footer',           html: File.read("#{Rails.root}/lib/liquid_templates/templates/_footer.liquid"), partial: true)
 
     Page.create do |p|
       p.website_id = self.id
