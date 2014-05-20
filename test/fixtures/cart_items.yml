@@ -6,3 +6,4 @@ one:
   product_variant: one
   price_per_item: 10
   vat_percentage: 25
+  api_key: 'a83b76514411f9ce14a320ea9f1701f0'
