@@ -3,8 +3,6 @@ class LookFile < ActiveRecord::Base
   belongs_to :look
   after_destroy :remove_file
 
-  attr_accessible :content, :filename, :text_content
-  
   def remove_file
     File.delete("#{Rails.root}/public/#{path}") rescue nil
   end

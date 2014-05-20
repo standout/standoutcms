@@ -53,7 +53,9 @@ class Admin::PicturesController < ApplicationController
 
   def picture_params
     params.require(:picture).permit %i(
-      title data
+      data
+      title
+      url
     )
   end
 
