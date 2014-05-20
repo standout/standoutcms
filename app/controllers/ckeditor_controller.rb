@@ -36,7 +36,7 @@ class CkeditorController < ApplicationController
       format.xml { render :xml=>@files }
     end
   end
-  
+
   def destroy
     @kind = params[:kind] ||= 'file'
     @record = case @kind.downcase

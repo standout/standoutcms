@@ -48,6 +48,7 @@ StandoutCms::Application.configure do
     'websites_grid.css',
     'login.css',
     'jquery.js',
+    'jquery_ujs.js',
     'users.js',
     'admin.css',
     'custom_data_lists.css',
