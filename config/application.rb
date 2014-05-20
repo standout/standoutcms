@@ -32,8 +32,8 @@ module StandoutCms
     config.i18n.default_locale = :sv
     config.session_store = :active_record_store
     config.session = {
-      :key => '_standoutcms_session',
-      :secret => Figaro.env.SECRET_KEY_BASE
+      key: '_standoutcms_session',
+      secret: ENV["SECRET_KEY_BASE"] || "c35af8696605786662d2129f328eb7668ebfd21d8be663d2de6e467bd0f22f930a3f5dfdbdd394c3ded9918b32345ffb2c6921f33e4d2ce7157154ee7e80f2f4"
     }
 
     # JavaScript files you want as :defaults (application.js is always included).
