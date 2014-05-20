@@ -41,6 +41,9 @@ StandoutCms::Application.configure do
   config.assets.debug = false
   config.assets.precompile += Ckeditor.assets
   config.assets.precompile += [
+    'assets.css',
+    'assets.js',
+    'common.js',
     'scaffold.css',
     'websites_grid.css',
     'login.css',
