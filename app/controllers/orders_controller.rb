@@ -140,7 +140,7 @@ class OrdersController < ApplicationController
     )
   end
 
-  def contact_information_params(input)
+  def contact_information_params
     params.require(:customer).permit %i(
       first_name
       last_name

@@ -55,6 +55,7 @@ class Admin::WebsiteMembershipsController < ApplicationController
 
   def website_membership_params
     params.require(:website_membership).permit %i(
+      email
       user_id
       website_id
       website_admin

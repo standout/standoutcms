@@ -16,7 +16,7 @@ class PicturesControllerTest < ActionController::TestCase
     assert_response :success
     
     apple_logo = Rack::Test::UploadedFile.new("#{Rails.root}/test/fixtures/apple_logo.jpg", "image/jpeg")
-    post :create, :vendor => { :name => 'Apple Inc.', :slug => 'apple', :logo => apple_logo}
+    post :create, picture: { name: 'Apple Inc.', slug: 'apple', logo: apple_logo }
     assert_response :redirect
     assert_redirected_to [:admin, :pictures] 
     assert_equal I18n.t('notices.picture.created'), flash[:notice]

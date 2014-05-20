@@ -71,7 +71,7 @@ class Admin::LooksController < ApplicationController
   # POST /looks.xml
   # TODO: Fix the whole creation of looks.
   def create
-    @look = Look.new(params[:look])
+    @look = Look.new(look_params)
     @look.website_id = @website.id
     if @look.save
       flash[:notice] = t('added_theme')
