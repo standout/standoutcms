@@ -22,7 +22,7 @@ class Admin::PageTemplatesController < ApplicationController
   end
 
   def create
-    @page_template = PageTemplate.new(params[:page_template])
+    @page_template = PageTemplate.new(page_template_params)
     @page_template.look_id = @look.id
     @page_template.updated_by = current_user
     if @page_template.save
@@ -42,7 +42,7 @@ class Admin::PageTemplatesController < ApplicationController
   def update
     @page_template = @look.page_templates.find(params[:id])
     @page_template.updated_by = current_user
-    if @page_template.update_attributes(params[:page_template])
+    if @page_template.update(page_template_params)
       Notice.create(:message => I18n.t('notices.page_template.updated_by_user', :title => @page_template.name), :website_id => current_website.id, :user_id => current_user.id)
       flash[:notice] = "Successfully updated page template."
       redirect_to [:edit, :admin, @look, @page_template]
@@ -57,5 +57,18 @@ class Admin::PageTemplatesController < ApplicationController
     Notice.create(:message => I18n.t('notices.page_template.deleted_by_user', :title => @page_template.name), :website_id => current_website.id, :user_id => current_user.id)
     flash[:notice] = "Successfully destroyed page template."
     redirect_to [:admin, @look]
+  end
+
+  private
+
+  def page_template_params
+    params.require(:page_template).permit %i(
+      look_id
+      slug
+      name
+      default_template
+      partial
+      html
+    )
   end
 end

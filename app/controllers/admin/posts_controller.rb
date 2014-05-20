@@ -14,7 +14,7 @@ class Admin::PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
-    @posts = @website.posts    
+    @posts = @website.posts
 
     respond_to do |format|
       format.html { render :layout => request.xhr? ? false : 'application' } 
@@ -25,7 +25,7 @@ class Admin::PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.xml
   def show
-    @post = Post.find(params[:id])
+    @post = @website.posts.find(params[:id])
 
     respond_to do |format|
       format.html { render :layout => request.xhr? ? false : 'application' } 
@@ -56,7 +56,8 @@ class Admin::PostsController < ApplicationController
   # POST /posts
   # POST /posts.xml
   def create
-    @post = Post.new(params[:post])
+    @post = Post.new(post_params)
+    @post.website = @website
 
     respond_to do |format|
       if @post.save
@@ -76,7 +77,7 @@ class Admin::PostsController < ApplicationController
     @post = @website.posts.find(params[:id])
 
     respond_to do |format|
-      if @post.update_attributes(params[:post])
+      if @post.update(post_params)
         flash[:notice] = 'Post was successfully updated.'
         format.html { redirect_to [:admin, :posts] }
         format.xml  { head :ok }
@@ -99,5 +100,18 @@ class Admin::PostsController < ApplicationController
       format.html { redirect_to [:admin, :posts] }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def post_params
+    params.require(:post).permit %i(
+      title
+      blog_category_id
+      content
+      allow_comments
+      language
+      slug
+    )
   end
 end

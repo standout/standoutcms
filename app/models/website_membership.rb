@@ -1,12 +1,8 @@
 class WebsiteMembership < ActiveRecord::Base
-
-
   cattr_accessor :email
   belongs_to :website
   belongs_to :user
   has_many :allowed_pages
-
-  attr_accessible :email, :website_id
 
   after_create :create_new_user
 

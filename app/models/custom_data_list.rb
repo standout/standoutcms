@@ -1,9 +1,6 @@
 class CustomDataList < ActiveRecord::Base
   self.table_name = :custom_datas # yeah, I know. But it was inherited from a Rails 2 app.
 
-  # TODO: Move to controller
-  attr_accessible :title, :liquid_name, :website_id, :page_template_id, :sort_field_id, :sort_field_order, :page_id, :listconnection
-
   has_many :custom_data_fields, :dependent => :destroy, :foreign_key => :custom_data_id
   has_many :custom_data_rows, :dependent => :destroy, :foreign_key => :custom_data_id
   belongs_to :page

@@ -38,7 +38,7 @@ class WebsitesController < ApplicationController
   # POST /websites
   # POST /websites.xml
   def create
-    @website = Website.new(params[:website])
+    @website = Website.new(website_params)
     @website.users << current_user
     respond_to do |format|
       if @website.save
@@ -62,7 +62,7 @@ class WebsitesController < ApplicationController
     end
 
     respond_to do |format|
-      if @website.update_attributes(params[:website])
+      if @website.update(website_params)
         Notice.create(:website_id => @website.id, :user_id => current_user.id, :message => 'updated website settings')
 
         flash[:notice] = 'Website was successfully updated.'
@@ -99,6 +99,35 @@ class WebsitesController < ApplicationController
     elsif current_user
       @websites = current_user.websites.uniq
     end
+  end
+
+  private
+
+  def website_params
+    params.require(:website).permit %i(
+      domain
+      subdomain
+      domainaliases
+      title
+      email
+      default_language
+      blog_page_id
+      blog_category_page_id
+      paypal_business_email
+      dibs_merchant_id
+      dibs_hmac_key
+      webshop_live
+      webshop_currency
+      website_money_format
+      website_money_separator
+      website_webshop_live
+      order_confirmation_title
+      order_confirmation_header
+      order_confirmation_footer
+      payment_confirmation_title
+      payment_confirmation_header
+      payment_confirmation_footer
+    )
   end
 
 end

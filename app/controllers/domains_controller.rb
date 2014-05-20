@@ -40,7 +40,7 @@ class DomainsController < ApplicationController
   # POST /domains
   # POST /domains.xml
   def create
-    @domain = Domain.new(params[:domain])
+    @domain = Domain.new(domain_params)
 
     respond_to do |format|
       if @domain.save
@@ -60,7 +60,7 @@ class DomainsController < ApplicationController
     @domain = Domain.find(params[:id])
 
     respond_to do |format|
-      if @domain.update_attributes(params[:domain])
+      if @domain.update(domain_params)
         flash[:notice] = 'Domain was successfully updated.'
         format.html { redirect_to(@domain) }
         format.xml  { head :ok }
@@ -79,5 +79,14 @@ class DomainsController < ApplicationController
     render :update do |page|
       page.replace_html :domain_list, :partial => 'domains/domain', :collection => @domain.website.domains
     end
+  end
+
+  private
+
+  def domain_params
+    params.require(:domain).permit %i(
+      website_id
+      name
+    )
   end
 end

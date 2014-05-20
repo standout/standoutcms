@@ -6,7 +6,7 @@ class Admin::ProductVariantsController < ApplicationController
 
   def create
     @product = current_website.products.find(params[:product_id])
-    @product_variant = ProductVariant.new(params[:product_variant])
+    @product_variant = ProductVariant.new(product_variant_params)
     @product_variant.product_id = @product.id
     if @product_variant.save
       respond_to do |format|
@@ -32,9 +32,22 @@ class Admin::ProductVariantsController < ApplicationController
   def update
     @product = current_website.products.find(params[:product_id])
     @product_variant = @product.product_variants.find(params[:id])
-    if @product_variant.update_attributes(params[:product_variant])
+    if @product_variant.update(product_variant_params)
       respond_with(@product_variant.to_json)
     end
+  end
+
+  private
+
+  def product_variant_params
+    params.require(:product_variant).permit %i(
+      product_id
+      color
+      size
+      material
+      price
+      inventory
+    )
   end
 
 end

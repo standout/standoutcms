@@ -2,8 +2,6 @@ class Customer < ActiveRecord::Base
   has_many   :orders, :dependent => :destroy
   belongs_to :website
 
-  attr_accessible :website_id, :email
-
   validates :email, presence: true, format: { with: /@/ }
 
   def contact_information

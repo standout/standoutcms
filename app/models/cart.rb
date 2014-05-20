@@ -6,8 +6,6 @@ class Cart < ActiveRecord::Base
 
   before_create :generate_api_key
 
-  attr_accessible :website_id
-
   # Add a new cart item or increment if this product
   # is already in the cart.
   def add(product, quantity = 1, product_variant = nil, notes = nil)

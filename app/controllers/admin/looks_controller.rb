@@ -71,7 +71,7 @@ class Admin::LooksController < ApplicationController
   # POST /looks.xml
   # TODO: Fix the whole creation of looks.
   def create
-    @look = Look.new(params[:look])
+    @look = Look.new(look_params)
     @look.website_id = @website.id
     if @look.save
       flash[:notice] = t('added_theme')
@@ -87,7 +87,7 @@ class Admin::LooksController < ApplicationController
     @look = Look.find(params[:id])
 
     respond_to do |format|
-      if @look.update_attributes(params[:look])        
+      if @look.update(look_params)
         format.html { redirect_to(@look) }
         format.xml  { head :ok }
         format.js
@@ -111,5 +111,16 @@ class Admin::LooksController < ApplicationController
         render
       }
     end
+  end
+
+  private
+
+  def look_params
+    params.require(:look).permit %i(
+      title
+      html
+      shared
+      blogentry
+    )
   end
 end

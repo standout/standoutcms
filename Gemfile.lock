@@ -210,8 +210,6 @@ GEM
       cocaine (~> 0.5.3)
       mime-types
     polyglot (0.3.3)
-    protected_attributes (1.0.5)
-      activemodel (>= 4.0.1, < 5.0)
     pry (0.9.12.4)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -361,7 +359,6 @@ DEPENDENCIES
   nokogiri
   non-stupid-digest-assets (~> 1.0.4)
   paperclip (>= 2.0)
-  protected_attributes
   query_reviewer!
   rails (= 4.0.2)
   rake (>= 0.9.6)

@@ -17,7 +17,7 @@ class Admin::CustomDataFieldsController < ApplicationController
   end
 
   def create
-    @custom_data_field = CustomDataField.new(params[:custom_data_field])
+    @custom_data_field = CustomDataField.new(custom_data_field_params)
     @custom_data_field.custom_data_id = @custom_data_list.id
     if @custom_data_field.save
       flash[:notice] = "Successfully created custom data field."
@@ -34,7 +34,7 @@ class Admin::CustomDataFieldsController < ApplicationController
   def update
     @custom_data_field = @custom_data_list.custom_data_fields.find(params[:id])
     @custom_data_field.custom_data_id = @custom_data_list.id
-    if @custom_data_field.update_attributes(params[:custom_data_field])
+    if @custom_data_field.update(custom_data_field_params)
       flash[:notice] = "Successfully updated custom data field."
       redirect_to [:edit, :admin, @custom_data_list]
     else
@@ -53,5 +53,20 @@ class Admin::CustomDataFieldsController < ApplicationController
   def load_website_and_custom_data_list
     @website = current_website
     @custom_data_list = @website.custom_data_lists.find(params[:custom_data_list_id])    
+  end
+
+  private
+
+  def custom_data_field_params
+    params.require(:custom_data_field).permit %i(
+      name
+      fieldtype
+      custom_data_id
+      display_in_list
+      image_size_large
+      image_size_medium
+      image_size_small
+      listconnection
+    )
   end
 end

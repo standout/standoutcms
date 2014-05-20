@@ -66,7 +66,7 @@ class Admin::GalleryPhotosController < ApplicationController
     @gallery_photo = GalleryPhoto.find(params[:id])
 
     respond_to do |format|
-      if @gallery_photo.update_attributes(params[:gallery_photo])
+      if @gallery_photo.update(gallery_photo_params)
         format.html { render :text => "GalleryPhoto updated." }
         format.xml  { head :ok }
       else
@@ -84,13 +84,25 @@ class Admin::GalleryPhotosController < ApplicationController
     respond_to do |format|
       format.html { render :text => 'Photo deleted.' }
       format.js
-    end  
+    end
   end
-  
+
   def order
     # TODO: fix ordering
     render :nothing => true
   end
-  
-  
+
+  private
+
+  def gallery_photo_params
+    params.require(:gallery_photo).permit %i(
+      gallery_id
+      filename
+      position
+      caption
+      content_type
+      photo
+    )
+  end
+
 end

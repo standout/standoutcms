@@ -8,9 +8,6 @@ class Order < ActiveRecord::Base
   validates_presence_of :website_id
   validates_presence_of :payment_type
 
-  # TODO: move to controller
-  attr_accessible :website_id, :customer_id, :cart_id, :payment_type, :inquiry
-
   after_create do
     self.create_payment
     self.cart.cart_items.each do |cart_item|

@@ -1,8 +1,6 @@
 class GalleryPhoto < ActiveRecord::Base
-  
-  attr_accessible :gallery_id, :photo, :caption
   belongs_to :gallery
-  
+
   has_attached_file :photo, {
     :styles => lambda { |attachment|
                             { :thumb => attachment.instance.thumbnail_size,

@@ -30,7 +30,7 @@ class BlogSettingsController < ApplicationController
   # POST /blog_settings
   # POST /blog_settings.xml
   def create
-    @blog_setting = BlogSetting.new(params[:blog_setting])
+    @blog_setting = BlogSetting.new(blog_setting_params)
 
     respond_to do |format|
       if @blog_setting.save
@@ -50,7 +50,7 @@ class BlogSettingsController < ApplicationController
     @blog_setting = BlogSetting.find(params[:id])
 
     respond_to do |format|
-      if @blog_setting.update_attributes(params[:blog_setting])
+      if @blog_setting.update(blog_setting_params)
         flash[:notice] = 'BlogSetting was successfully updated.'
         format.html { redirect_to(@blog_setting) }
         format.xml  { head :ok }
@@ -71,5 +71,16 @@ class BlogSettingsController < ApplicationController
       format.html { redirect_to(blog_settings_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def blog_setting_params
+    params.require(:blog_setting).permit %i(
+      type
+      content_item_id
+      number_of_posts_to_display
+      allow_comments
+    )
   end
 end

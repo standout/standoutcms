@@ -11,9 +11,6 @@ class CustomDataRow < ActiveRecord::Base
   before_save :fix_slug
   after_save :reserve_url
 
-  # TODO: move to controller
-  attr_protected :updated_at
-
   def as_json(opts = {})
     json
       .merge(make_json_representation(attachment_files))

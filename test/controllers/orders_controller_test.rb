@@ -57,7 +57,7 @@ class OrdersControllerTest < ActionController::TestCase
     cart.add(products(:testproduct))
     order_count = Order.count
     customer_count = Customer.count
-    post :create, { customer: @customer }
+    post :create, { customer: @customer, order: { inquiry: "true" } }
     assert_equal customer_count, Customer.count
     assert_equal order_count, Customer.count
   end

@@ -1,9 +1,4 @@
 class UrlPointer < ActiveRecord::Base
-
-  attr_accessible :path, :website_id, :page_id, :language, :custom_data_row_id,
-                  :post_id, :product_id, :product_category_id, :vendor_id
-
-
   belongs_to :page
   belongs_to :custom_data_row
   belongs_to :product

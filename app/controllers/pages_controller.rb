@@ -3,7 +3,9 @@ class PagesController < ApplicationController
   # Try to find an asset by request path
   # this could be a Page, a Product, a CustomDataRow or something else.
   def show
-    @website = current_website 
+    unless @website = current_website
+      render404 and return
+    end
     pointer = @website.url_pointers.where(:path => request.env["PATH_INFO"]).first
     if pointer && pointer.page
       render :text => render_the_template(@website, pointer.page.page_template, current_cart, { :page => pointer.page, :language => pointer.language })
@@ -39,6 +41,24 @@ class PagesController < ApplicationController
         </body>                                                                
 
                                                                                          </html>", :status => 404  
+  end
+
+  private
+
+  def page_params
+    params.require(:page).permit %i(
+      address
+      description
+      direct_link
+      language
+      login_required
+      page_template_id
+      parent_id
+      password
+      seo_title
+      show_in_menu
+      title
+    )
   end
 
 end

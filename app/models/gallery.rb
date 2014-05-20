@@ -1,14 +1,14 @@
 class Gallery < ActiveRecord::Base
-    
+
   has_many :gallery_photos, :dependent => :destroy
   belongs_to :website
   belongs_to :content_item
   before_create :check_website
   after_save :set_default_liquid_template
   after_update :touch_page
-  
+
   STYLES = %w{default rotate layoutimage}
-  
+
   # Make sure it does belong to a website
   def check_website
     self.website_id = self.content_item.page.website_id if self.website_id.nil?

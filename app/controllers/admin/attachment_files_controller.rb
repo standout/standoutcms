@@ -7,7 +7,7 @@ class Admin::AttachmentFilesController < ApplicationController
   end
 
   def create
-    @attachment_file = AttachmentFile.new(params[:attachment_file])
+    @attachment_file = AttachmentFile.new(attachment_file_params)
     @attachment_file.website_id = @website.id
     if @attachment_file.save
       redirect_to :back
@@ -22,7 +22,7 @@ class Admin::AttachmentFilesController < ApplicationController
     @custom_data_list = @website.custom_data_lists.find(params[:custom_data_list_id])
     @custom_data_row = @custom_data_list.custom_data_rows.find(params[:custom_data_row_id])
     @attachment_file = @custom_data_row.attachment_files.find(params[:id])
-    @attachment_file.update_attributes(params[:attachment_file])
+    @attachment_file.update(attachment_file_params)
     render :text => 'Attachment File updated.'
   end
 
@@ -54,5 +54,13 @@ class Admin::AttachmentFilesController < ApplicationController
     else
       @website = current_user.websites.find(current_website.id)
     end
+  end
+
+  private
+
+  def attachment_file_params
+    params.require(:attachment_file).permit %i(
+      data
+    )
   end
 end

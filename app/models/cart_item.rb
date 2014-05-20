@@ -5,9 +5,6 @@ class CartItem < ActiveRecord::Base
 
   before_create :set_unset_attrs, :generate_api_key
 
-  attr_accessible :notes, :cart_id, :product_variant_id, :product_id, :title,
-                  :quantity, :price_per_item, :vat_percentage
-
   def price
     self.quantity.to_f * self.price_per_item.to_f
   end

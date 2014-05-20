@@ -51,7 +51,6 @@ gem "query_reviewer", :git => "git://github.com/nesquena/query_reviewer.git"
 gem "acts_as_list"
 gem "acts_as_tree"
 gem "responds_to_parent"
-gem "protected_attributes" # TODO: remove. Rewrite for Rails 4.
 #gem "svn"
 
 # Gems used only for assets and not required

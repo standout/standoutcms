@@ -24,21 +24,20 @@ class PagesControllerTest < ActionController::TestCase
   test 'should render 404 if website is not found on pages controller' do
     @controller = PagesController.new
     request.host = 'blaha.standoutcms.dev'
-    get :show
-    assert :missing
+    get :show, path: "missing-page"
+    assert_response :missing
   end
 
   test 'should render with the correct language on page' do
     @controller = PagesController.new
     page = pages(:standout_secondpage)
-    page.store_translated_attributes('title', 'English', 'en')
-    page.store_translated_attributes('url', 'english-page', 'en')
+    page.store_translated_attributes('title', 'Swedish', 'sv')
+    page.store_translated_attributes('address', 'swedish-page', 'sv')
     page.save!
 
-    request.env["PATH_INFO"] = ["english-page"]
-    get :show
-    assert :success
-
+    request.env["PATH_INFO"] = ["/swedish-page"]
+    get :show, path: "swedish-page"
+    assert_response :success
   end
 
   test 'should not be able to save page order on other websites' do
@@ -62,8 +61,8 @@ class PagesControllerTest < ActionController::TestCase
   test 'should get a 404 error for missing pages' do
     @controller = PagesController.new
 
-    request.env["PATH_INFO"] = ["missing-page"]
-    get :show
+    request.env["PATH_INFO"] = ["/missing-page"]
+    get :show, path: "missing-page"
     assert_response :missing
 
     # Internet Explorer needs at least 512 bytes unless you want it to
@@ -84,8 +83,8 @@ class PagesControllerTest < ActionController::TestCase
     end
 
     # Make the request
-    request.env["PATH_INFO"] = ["missing-page"]
-    get :show
+    request.env["PATH_INFO"] = ["/missing-page"]
+    get :show, path: "missing-page"
     assert_response :missing
     assert_select "div.missing"
   end

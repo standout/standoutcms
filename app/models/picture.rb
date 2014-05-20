@@ -1,7 +1,5 @@
 require 'open-uri'
 class Picture < Asset
-  attr_accessible :data, :title, :url
-
   attr_accessor :image_url
   belongs_to :custom_data_field
   belongs_to :custom_data_row, :touch => true

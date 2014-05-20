@@ -17,7 +17,9 @@ class Admin::CustomDataFieldsControllerTest < ActionController::TestCase
     cdl.website_id = Website.find_by_subdomain('standout').id
     cdl.save
     cdf.save
-    put :update, { :id => cdf.id, :name => 'Something else', :custom_data_list_id => cdl.id }
+    put :update, id: cdf.id,
+      custom_data_list_id: cdl.id,
+      custom_data_field: { name: 'Something else' }
     assert_response :redirect
   end
   

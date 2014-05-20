@@ -2,10 +2,8 @@ class User < ActiveRecord::Base
   include Gravtastic
 
   gravtastic :default => 'identicon', :size => '30'
-  attr_accessible :email, :password, :password_confirmation
 
   attr_accessor :password
-  attr_protected :admin
   has_many :websites, :through => :website_memberships
   has_many :website_memberships, :dependent => :destroy
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/, :message => "doesn't look like a real e-mail address"

@@ -3,7 +3,7 @@ class WebsiteDropTest < ActiveSupport::TestCase
 
   test 'lists should be available through website drop' do
     website = websites(:standout)
-    list = CustomDataList.create!(:name => 'Test', :liquid_name => 'test', :website_id => website.id)
+    list = CustomDataList.create!(title: 'Test', liquid_name: 'test', website_id: website.id)
     wd = WebsiteDrop.new(website)
     assert_equal wd.lists["test"].id.to_s, list.id.to_s
   end

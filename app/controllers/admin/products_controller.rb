@@ -71,7 +71,7 @@ class Admin::ProductsController < ApplicationController
   # POST /products.json
   def create
     params[:product][:product_category_ids] ||= []
-    @product = Product.new(params[:product])
+    @product = Product.new(product_params)
     @product.website_id = @website.id
 
     respond_to do |format|
@@ -93,7 +93,7 @@ class Admin::ProductsController < ApplicationController
     @product.website_id = @website.id
 
     respond_to do |format|
-      if @product.update_attributes(params[:product]) and @product.setup_property_values(params[:product_property_values])
+      if @product.update(product_params) and @product.setup_property_values(params[:product_property_values])
         format.html { redirect_to [:admin, :products], notice: 'Product was successfully updated.' }
         format.json { head :ok }
       else
@@ -120,5 +120,19 @@ class Admin::ProductsController < ApplicationController
       Product.unscoped.where(id: params[:id], website_id: @website.id).first
     raise ActiveRecord::RecordNotFound unless product
     product
+  end
+
+  private
+
+  def product_params
+    params.require(:product).permit %i(
+      title
+      url
+      description
+      price
+      vat_percentage
+      url
+      vendor_id
+    )
   end
 end

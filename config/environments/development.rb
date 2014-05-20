@@ -35,9 +35,5 @@ StandoutCms::Application.configure do
 
   # New in rails 3.2
   config.active_record.auto_explain_threshold_in_seconds = 0.5
-
-  # Is set to :strict by default in 3.2 but not by us, yet:
-  # ActiveModel::MassAssignmentSecurity::Error: Can't mass-assign protected attributes: default
-  config.active_record.mass_assignment_sanitizer = :logger # Should be :strict but major failure
 end
 

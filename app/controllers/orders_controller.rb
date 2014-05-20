@@ -16,9 +16,9 @@ class OrdersController < ApplicationController
     # Make sure a payment type has been set!
     payment_type = params[:order][:payment_type] rescue nil # Kind of ugly fix but it works
 
-    @order = current_website.orders.new((params[:order] or {}).merge(Hash.new({ cart_id: current_cart.id })))
+    @order = current_website.orders.new((order_params or {}).merge(Hash.new({ cart_id: current_cart.id })))
     @order.website_id = current_website.id
-    @customer_information = @order.new_customer_information_set(filter_contact_information(params[:customer]))
+    @customer_information = @order.new_customer_information_set(contact_information_params)
     @customer = current_website.customers.where(email: params[:customer][:email].to_s).first
 
     if @customer.blank?
@@ -132,13 +132,26 @@ class OrdersController < ApplicationController
     @cart = current_cart
   end
 
-  def filter_contact_information(input)
-    input.select do |key, value|
-      [
-        :first_name, :last_name, :company_name, :vat_identification_number,
-        :address_line1, :address_line2, :zipcode, :city, :phone
-      ].include?(key.to_sym)
-    end
+  def order_params
+    params.require(:order).permit %i(
+      cart_id
+      payment_type
+      inquiry
+    )
+  end
+
+  def contact_information_params
+    params.require(:customer).permit %i(
+      first_name
+      last_name
+      company_name
+      vat_identification_number
+      address_line1
+      address_line2
+      zipcode
+      city
+      phone
+    )
   end
 
   def errors

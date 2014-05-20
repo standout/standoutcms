@@ -3,12 +3,7 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 require 'will_paginate/array'
 
-if defined?(Bundler)
-  # If you precompile assets before deploying to production, use this line
-  Bundler.require *Rails.groups(:assets => %w(development test))
-  # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
-end
+Bundler.require(:default, Rails.env)
 
 module StandoutCms
   class Application < Rails::Application
@@ -37,8 +32,8 @@ module StandoutCms
     config.i18n.default_locale = :sv
     config.session_store = :active_record_store
     config.session = {
-      :key => '_standoutcms_session',
-      :secret => Figaro.env.SECRET_KEY_BASE
+      key: '_standoutcms_session',
+      secret: ENV["SECRET_KEY_BASE"] || "c35af8696605786662d2129f328eb7668ebfd21d8be663d2de6e467bd0f22f930a3f5dfdbdd394c3ded9918b32345ffb2c6921f33e4d2ce7157154ee7e80f2f4"
     }
 
     # JavaScript files you want as :defaults (application.js is always included).

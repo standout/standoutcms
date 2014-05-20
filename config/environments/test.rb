@@ -41,9 +41,4 @@ StandoutCms::Application.configure do
 
   # Allow pass debug_assets=true as a query parameter to load pages with unpackaged assets
   config.assets.allow_debugging = true
-
-  # New in rails 3.2
-  # Is set to :strict by default in 3.2 but not by us, yet:
-  # ActiveModel::MassAssignmentSecurity::Error: Can't mass-assign protected attributes: default
-  config.active_record.mass_assignment_sanitizer = :logger
 end

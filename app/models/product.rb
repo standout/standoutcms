@@ -29,8 +29,6 @@ class Product < ActiveRecord::Base
   before_save :check_vat_percentage
   after_save :create_url_pointer
 
-  attr_accessible :title, :url, :website_id, :description, :price, :vat_percentage, :url, :vendor_id
-
   def self.importable_attributes
     ['title']
   end

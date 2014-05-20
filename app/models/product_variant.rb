@@ -4,8 +4,6 @@ class ProductVariant < ActiveRecord::Base
   has_many :product_property_values
   belongs_to :product
 
-  attr_protected :updated_at
-
   def as_json(opts = {})
     attributes.merge dynamic_attributes
   end

@@ -27,7 +27,7 @@ class Admin::BlogCategoriesController < ApplicationController
   end
 
   def create
-    @blog_category = BlogCategory.new(params[:blog_category])
+    @blog_category = BlogCategory.new(blog_category_params)
     @blog_category.website_id = @website.id
     if @blog_category.save
       respond_to do |format|
@@ -48,7 +48,7 @@ class Admin::BlogCategoriesController < ApplicationController
 
   def update
     @blog_category = @website.blog_categories.find(params[:id])
-    if @blog_category.update_attributes(params[:blog_category])
+    if @blog_category.update(blog_category_params)
       flash[:notice] = "Successfully updated blog category."
       redirect_to [:admin, :blog_categories]
     else
@@ -63,5 +63,14 @@ class Admin::BlogCategoriesController < ApplicationController
       format.html { redirect_to [:admin, :blog_categories] }
       format.js { render :text => 'Category removed.' }
     end
+  end
+
+  private
+
+  def blog_category_params
+    params.require(:blog_category).permit %i(
+      website_id
+      name
+    )
   end
 end
