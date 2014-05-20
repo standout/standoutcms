@@ -31,7 +31,7 @@ class Admin::CsvImportsController < ApplicationController
   private
 
   def csv_import_params
-    params.require(:).permit %i(
+    params.require(:csv_import).permit %i(
       key_col
       category_id
       file
