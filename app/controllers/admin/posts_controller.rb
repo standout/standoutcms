@@ -14,7 +14,7 @@ class Admin::PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
-    @posts = @website.posts    
+    @posts = @website.posts
 
     respond_to do |format|
       format.html { render :layout => request.xhr? ? false : 'application' } 
@@ -25,7 +25,7 @@ class Admin::PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.xml
   def show
-    @post = Post.find(params[:id])
+    @post = @website.posts.find(params[:id])
 
     respond_to do |format|
       format.html { render :layout => request.xhr? ? false : 'application' } 
@@ -57,6 +57,7 @@ class Admin::PostsController < ApplicationController
   # POST /posts.xml
   def create
     @post = Post.new(post_params)
+    @post.website = @website
 
     respond_to do |format|
       if @post.save
