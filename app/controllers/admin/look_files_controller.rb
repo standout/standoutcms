@@ -131,7 +131,7 @@ class Admin::LookFilesController < ApplicationController
   private
 
   def look_file_params
-    params.require(:look_file).permit %i(
+    params.fetch(:look_file, {}).slice %i(
       content_type
       filename
       text_content
