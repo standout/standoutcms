@@ -18,7 +18,7 @@ class MenuController < ApplicationController
   private
 
   def menu_params
-    params.require(:).permit %i(
+    params.require(:menu).permit %i(
       look_id
       for_html_id
       levels
