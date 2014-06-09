@@ -51,6 +51,7 @@ class Admin::ProductImagesController < ApplicationController
 
   def product_image_params
     params.require(:product_image).permit %i(
+      image
       crop_x
       crop_y
       crop_w
