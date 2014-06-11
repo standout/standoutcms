@@ -70,8 +70,8 @@ class Admin::ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    params[:product][:product_category_ids] ||= []
     @product = Product.new(product_params)
+    @product.product_category_ids = params_category_ids
     @product.website_id = @website.id
 
     respond_to do |format|
@@ -88,8 +88,8 @@ class Admin::ProductsController < ApplicationController
   # PUT /products/1
   # PUT /products/1.json
   def update
-    params[:product][:product_category_ids] ||= []
     @product = Product.unscoped.find(params[:id])
+    @product.product_category_ids = params_category_ids
     @product.website_id = @website.id
 
     respond_to do |format|
@@ -125,7 +125,7 @@ class Admin::ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit %i(
+    params.require(:product).permit *%i(
       title
       url
       description
@@ -134,5 +134,9 @@ class Admin::ProductsController < ApplicationController
       url
       vendor_id
     )
+  end
+
+  def params_category_ids
+    params.fetch(:product, {}).fetch(:product_category_ids, [])
   end
 end
