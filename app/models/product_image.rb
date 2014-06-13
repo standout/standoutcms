@@ -1,7 +1,7 @@
 class ProductImage < ActiveRecord::Base
   belongs_to :product
   belongs_to :product_category
-  acts_as_list
+  acts_as_list scope: [:product_id, :product_category_id]
   has_attached_file :image,
     styles: { small: "100x100>", medium: "400x300>", large: "800x600>" },
     processors: [:cropper],
