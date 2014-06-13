@@ -166,18 +166,23 @@ class Admin::PagesController < ApplicationController
   private
 
   def page_params
-    params.require(:page).permit %i(
-      address
-      description
-      direct_link
+    params.require(:page).permit *%i(
       language
       login_required
       page_template_id
       parent_id
       password
       seo_title
-      show_in_menu
-      title
-    )
+    ), {
+      title:        languages,
+      description:  languages,
+      address:      languages,
+      direct_link:  languages,
+      show_in_menu: languages,
+    }
+  end
+
+  def languages
+    [:sv, :en, :da, :de, :no, :nl]
   end
 end
