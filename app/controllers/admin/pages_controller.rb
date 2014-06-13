@@ -25,7 +25,7 @@ class Admin::PagesController < ApplicationController
     @page = @website.pages.find(params[:id])
     unless current_user.can_edit?(@page)
       flash[:notice] = t('no_rights_to_edit_page')
-      redirect_to [:admin, :pages] 
+      redirect_to [:admin, :pages]
     end
   end
 
@@ -50,7 +50,7 @@ class Admin::PagesController < ApplicationController
     @page = Page.find(params[:id])
     render :layout => false
   end
-  
+
   def preview
     @page = Page.find(params[:id])
     render :text => @page.complete_html(params[:language].to_s)
@@ -60,6 +60,7 @@ class Admin::PagesController < ApplicationController
   # POST /pages.xml
   def create
     @page = Page.new(page_params)
+    @page.website = current_website
     @website = current_website
     respond_to do |format|
       if @page.save
@@ -80,7 +81,7 @@ class Admin::PagesController < ApplicationController
     respond_to do |format|
       if @page.update(page_params)
         Notice.create(:user_id => current_user.id, :website_id => current_website.id, :page_id => @page.id, :message => "updated page")
-        
+
         format.html { render :partial => 'admin/pages/page', :collection => @page.website.root_pages }
         format.xml  { head :ok }
         format.js { render :partial => 'admin/pages/page', :collection => @page.website.root_pages }
@@ -95,10 +96,10 @@ class Admin::PagesController < ApplicationController
   # DELETE /pages/1.xml
   def destroy
     @page = Page.find(params[:id])
-    
+
     Notice.create(:user_id => current_user.id, :website_id => current_website.id, :page_id => @page.id, :message => "deleted page")
-    
-    
+
+
     @page.destroy
 
     respond_to do |format|
@@ -113,11 +114,11 @@ class Admin::PagesController < ApplicationController
   def menu_items
     @page = Page.find(params[:id])
     @language = params[:language]
-    @parent_ids = @page.all_parent_ids 
+    @parent_ids = @page.all_parent_ids
 
-    # Find or create the menu item. We need this to store settings for a menu.  
+    # Find or create the menu item. We need this to store settings for a menu.
     @menu = Menu.find_or_create_by_page_template_id_and_for_html_id(@page.page_template_id, params[:div_id])
-    
+
     # If we have parameters from the menu page and nothing is set
     @number_of_submenus = 0
     if params[:sublevels] && params[:sublevels] != 'undefined'
