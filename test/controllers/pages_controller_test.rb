@@ -21,6 +21,13 @@ class PagesControllerTest < ActionController::TestCase
 
   end
 
+  test 'should be able to create a page' do
+    assert_difference 'Page.count' do
+      post :create, page: { website_id: websites(:standout).id }
+      assert_response :redirect
+    end
+  end
+
   test 'should render 404 if website is not found on pages controller' do
     @controller = PagesController.new
     request.host = 'blaha.standoutcms.dev'
