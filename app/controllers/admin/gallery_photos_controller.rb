@@ -46,7 +46,7 @@ class Admin::GalleryPhotosController < ApplicationController
   def create
     @gallery_photo = GalleryPhoto.new()
     @gallery_photo.gallery = Gallery.find(params[:gallery_photo][:gallery_id]) # we need to set this before. 
-    @gallery_photo.attributes = params[:gallery_photo]
+    @gallery_photo.attributes = gallery_photo_params
       if @gallery_photo.save
         respond_to do |format|
           format.js {
