@@ -8,7 +8,7 @@ StandoutCms::Application.routes.draw do
   get 'logout' => 'sessions#destroy', :as => :logout
   get 'login' => 'sessions#new', :as => :login
   get 'admin' => 'sessions#new', :as => :admin
-  get 'reset/:id/:code' => 'users#password_reset'
+  match 'reset/:id/:code' => 'users#password_reset', via: [:get, :post]
   post 'send_reset_link' => "users#send_password_reset", :as => :send_password_reset
   get "/delayed_job" => DelayedJobWeb, :anchor => false
 
