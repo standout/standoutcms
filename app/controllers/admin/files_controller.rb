@@ -7,7 +7,7 @@ class Admin::FilesController < ApplicationController
   end
 
   def create
-    @file = AttachmentFile.new(params[:attachment_file])
+    @file = AttachmentFile.new(attachment_file_params)
     @file.website_id = current_website.id
     if @file.save
       redirect_to [:admin, :files]
@@ -22,4 +22,11 @@ class Admin::FilesController < ApplicationController
     redirect_to [:admin, :files]
   end
 
+  private
+
+  def attachment_file_params
+    params.require(:attachment_file).permit *%i(
+      data
+    )
+  end
 end
