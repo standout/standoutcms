@@ -28,9 +28,14 @@ gem 'liquid'
 gem "mysql2"
 gem "paperclip", ">= 2.0"
 gem 'unicorn', '~> 4.8.3'
+gem 'puma'
 gem "version"
 gem "active_model_serializers", "~> 0.8.0"
 gem 'angularjs-rails'
+
+# Uploading multiple files at once
+gem 'jquery-fileupload-rails'
+gem 'delayed_paperclip'
 
 # In order to use rails 4 assets with digest in production environment
 # galetahub/ckeditor/tree/9e35addb42b42c7d520bbb579ecdb3d89d6a5847#usage-with-rails-4-assets
