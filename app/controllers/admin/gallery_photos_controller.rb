@@ -1,5 +1,5 @@
 class Admin::GalleryPhotosController < ApplicationController
-  
+
   before_filter :check_login
   # GET /gallery_photos
   # GET /gallery_photos.xml
@@ -7,7 +7,7 @@ class Admin::GalleryPhotosController < ApplicationController
     @gallery_photos = Gallery.find(params[:gallery_id]).gallery_photos
 
     respond_to do |format|
-      format.html { 
+      format.html {
           render :layout => false
       }
       format.xml  { render :xml => @gallery_photos }
@@ -44,20 +44,12 @@ class Admin::GalleryPhotosController < ApplicationController
   # POST /gallery_photos
   # POST /gallery_photos.xml
   def create
-    @gallery_photo = GalleryPhoto.new()
-    @gallery_photo.gallery = Gallery.find(params[:gallery_photo][:gallery_id]) # we need to set this before. 
-    @gallery_photo.attributes = gallery_photo_params
-      if @gallery_photo.save
-        respond_to do |format|
-          format.js {
-              render # create.js.erb
-          }
-        end
-      else
-        render :text => "Error: #{@gallery_photo.inspect}"
-      end
-  #rescue => e
-   # render :text => "ERROR: #{e.inspect}"
+    params[:gallery_photo][:photo].each do |photo|
+      @gallery_photo = GalleryPhoto.new()
+      @gallery_photo.gallery = Gallery.find(params[:gallery_photo][:gallery_id]) # we need to set this before.
+      @gallery_photo.photo = photo
+      @gallery_photo.save
+    end
   end
 
   # PUT /gallery_photos/1

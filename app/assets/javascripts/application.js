@@ -19,6 +19,7 @@
 //= require angular-resource
 //= require angular-route
 //= require_tree ./angular
+//= require jquery-fileupload/basic
 
 function reload_gallery_photos()
 {
@@ -530,7 +531,3 @@ function toggle_subpages(image, page_id)
   }
 
 }
-
-
-
-

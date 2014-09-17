@@ -1,4 +1,4 @@
-<h1><span id="gallery_title"><%= @gallery.title || t('gallery') %></span> 
+<h1><span id="gallery_title"><%= @gallery.title || t('gallery') %></span>
 <%= link_to_function image_tag("edit.png"), "$('#edit_gallery_form').toggle(); $('#gallery_photos').toggle();" %></h1>
 <%= link_to_function image_tag("close_window.png", :style => "position: absolute; top: 0px; right: 0px;"), "frames['edit'].load_editables_and_menus(); $('#overlay-container').hide();" %>
 
@@ -46,9 +46,11 @@
 <div id="gallery_photos_container" data-source="<%= url_for(:controller => 'admin/gallery_photos', :action => 'index', :gallery_id => @gallery.id) %>">
 <%= form_for([:admin, GalleryPhoto.new], :format => :js, :html => { :multipart => true, :target => "gallery_upload_iframe" }) do |f| %>
   <%= f.hidden_field :gallery_id, :value => @gallery.id %>
-  <%= f.file_field :photo %>
+  <%= f.file_field :photo, multiple: 'true' %>
   <%= f.submit t('upload') %>
 <% end %>
+
+
 
 
 <div id="admin-gallery-photos">
