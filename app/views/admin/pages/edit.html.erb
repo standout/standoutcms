@@ -67,7 +67,7 @@
 <script type="text/javascript">
   // Make sure that every Ajax request sends the CSRF token
   function CSRFProtection(xhr) {
-    var token = "<%= Rack::Utils.escape_html(form_authenticity_token) %>";
+    var token = "<%= form_authenticity_token.html_safe %>";
     if (token) xhr.setRequestHeader('X-CSRF-Token', token);
   }
 
