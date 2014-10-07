@@ -11,7 +11,6 @@
 //= require common
 //= require ckeditor/init
 //= require ckcustom.js
-//= require_tree ./vendor
 //= require string_to_slug
 //= require best_in_place
 //= require products
@@ -20,6 +19,11 @@
 //= require angular-route
 //= require_tree ./angular
 //= require jquery-fileupload/basic
+//= require ace/ace
+//= require ace/worker-html
+//= require ace/worker-css
+//= require ace/theme-tomorrow
+
 
 function reload_gallery_photos()
 {

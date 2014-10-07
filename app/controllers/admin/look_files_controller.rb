@@ -1,14 +1,14 @@
 class Admin::LookFilesController < ApplicationController
-  
+
   before_filter :check_login
   before_filter :load_look_and_website
   layout 'admin/looks'
-  
+
   def load_look_and_website
     @website = current_website
     @look = @website.looks.find(params[:look_id])
   end
-  
+
   # GET /look_files
   # GET /look_files.xml
   def index
@@ -59,7 +59,7 @@ class Admin::LookFilesController < ApplicationController
             render :update do |page|
               page.insert_html :bottom, "template_files", render(:partial => "look_files/file", :object => @look_file)
               page.replace_html "number_of_looks_files", @look_file.look.look_files.length.to_s
-              page['looks_files_upload_form'].reset              
+              page['looks_files_upload_form'].reset
             end # render
           end # responds_to_parent
         end # wants
@@ -77,7 +77,7 @@ class Admin::LookFilesController < ApplicationController
     @look_file = @look.look_files.find(params[:id])
 
     respond_to do |format|
-        
+
       # The files need to be of the same content type.
       if params[:uploaded_data] # && params[:uploaded_data].content_type == @look_file.content_type
         @look_file.remove_file
@@ -85,7 +85,7 @@ class Admin::LookFilesController < ApplicationController
       else
         @look_file.update(look_file_params)
       end
-        
+
       format.html { redirect_to :back }
       format.xml  { head :ok }
     end
@@ -102,17 +102,17 @@ class Admin::LookFilesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   protected
   def save_the_file(look_file, data, replace = false)
-    
+
     unless data.nil?
       look_file.filename = sanitize_filename(data.original_filename) unless replace
 
       path = "#{Rails.root}/public/#{look_file.directory}/"
 
       FileUtils.mkdir_p path
-      File.open(path + look_file.filename, "wb") do |f| 
+      File.open(path + look_file.filename, "wb") do |f|
         f.write(data.read)
       end
       look_file.filename = filename if look_file.filename.nil?
@@ -120,21 +120,21 @@ class Admin::LookFilesController < ApplicationController
       look_file.save
     end
   end
-  
+
   def sanitize_filename(file_name)
     # get only the filename, not the whole path (from IE)
-    just_filename = File.basename(file_name) 
+    just_filename = File.basename(file_name)
     # replace all none alphanumeric, underscore or perioids with underscore
-    just_filename.sub(/[^\w\.\-]/,'_').downcase 
+    just_filename.sub(/[^\w\.\-]/,'_').downcase
   end
 
   private
 
   def look_file_params
-    params.fetch(:look_file, {}).slice %i(
-      content_type
-      filename
-      text_content
+    params.require(:look_file).permit(
+      :content_type,
+      :filename,
+      :text_content
     )
   end
 end

@@ -21,7 +21,7 @@
 <% end %>
 
 <% if %(css js html).include? @look_file.extension %>
-  <%= form_for [:admin, @look, @look_file] do |f| %>
+  <%= form_for [:admin, @look, @look_file], html: { class: 'LookFileContent' } do |f| %>
 
     <%= f.text_area :text_content, :value => @look_file.text_content, 'data-type' => @look_file.extension %>
     <div id='code_editor'></div>
