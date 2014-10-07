@@ -32,6 +32,7 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    ace-rails-ap (3.0.0)
     actionmailer (4.0.2)
       actionpack (= 4.0.2)
       mail (~> 2.5.4)
@@ -325,6 +326,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ace-rails-ap
   active_model_serializers (~> 0.8.0)
   acts_as_list
   acts_as_tree
