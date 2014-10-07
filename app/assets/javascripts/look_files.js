@@ -3,26 +3,26 @@ $(function() {
   var modes = ['js', 'css'];
 
   if (modes.indexOf(extension) >= 0) {
-    var codeEditor = ace.edit('code_editor');
-    var modes = {
-      js: require('ace/mode/javascript').Mode,
-      css: require('ace/mode/css').Mode
-    };
-
-    codeEditor.setTheme('ace/theme/tomorrow');
-    codeEditor.getSession().setMode(new modes[extension]);
+    codeEditor = ace.edit('code_editor');
     codeEditor.getSession().setTabSize(2);
     codeEditor.getSession().setUseSoftTabs(true);
     codeEditor.getSession().setValue($('#look_file_text_content').val());
   }
 
   // Submit look changes via ajax.
-  $("form.edit_look_file").submit(function(){
-    $('#look_file_text_content').val(codeEditor.getSession().getValue());
+  $("form.LookFileContent").submit(function(){
+    $("#look_file_text_content").val(codeEditor.getValue());
+
     $("#saving_and_info_spinner").show();
-    $.post($(this).attr('action'), $(this).serialize(), function(data){
+    $.ajax({
+        type: 'POST',
+        url: $(this).attr('action'),
+        data: $(this).serialize(),
+        dataType: "HTML"
+    }).success(function(json){
       $("#saving_and_info_spinner").hide();
     });
+
     return false;
   });
 
