@@ -1,7 +1,6 @@
 require 'test_helper'
-class PicturesControllerTest < ActionController::TestCase
+class Admin::PicturesControllerTest < ActionController::TestCase
   def setup
-    @controller = Admin::PicturesController.new
     request.host = "standout.standoutcms.dev"
     session[:user_id] = users(:david).id
   end

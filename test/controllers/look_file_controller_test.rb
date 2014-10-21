@@ -1,10 +1,9 @@
 require 'test_helper'
 
-class LookFileControllerTest < ActionController::TestCase
+class Admin::LookFilesControllerTest < ActionController::TestCase
 
   def setup
     request.host = "standout.standoutcms.dev"
-    @controller = Admin::LookFilesController.new
     session[:user_id] = users(:david).id
     @website = websites(:standout)
     @look = looks(:standout_look)

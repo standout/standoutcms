@@ -78,6 +78,10 @@ group :development, :test do
   gem 'guard'
   gem 'terminal-notifier-guard'
   gem 'rb-fsevent', :require => false # if RUBY_PLATFORM =~ /darwin/i
+  # Use Minitest with Spec syntax for testing
+  gem 'minitest-spec-rails'
+  # Use factories instead of fixtures when testing
+  gem 'factory_girl_rails'
   gem 'guard-minitest'
   gem 'byebug'
   gem 'sqlite3'

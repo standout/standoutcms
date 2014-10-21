@@ -1,9 +1,8 @@
 require 'test_helper'
 
-class CustomDataListsControllerTest < ActionController::TestCase
+class Admin::CustomDataListsControllerTest < ActionController::TestCase
 
   def setup
-    @controller = Admin::CustomDataListsController.new
     request.host = "standout.standoutcms.dev"
   end
 
