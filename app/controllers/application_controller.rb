@@ -1,7 +1,12 @@
+require "application_responder"
+
 #render Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  self.responder = ApplicationResponder
+  respond_to :html
+
 
   include ControllerAuthentication
   include UrlHelper

@@ -30,6 +30,7 @@ gem "mysql2"
 gem "paperclip", ">= 2.0"
 gem 'unicorn', '~> 4.8.3'
 gem 'puma'
+gem 'responders'
 gem 'slim-rails'
 gem "version"
 gem "active_model_serializers", "~> 0.8.0"
