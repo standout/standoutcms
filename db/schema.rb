@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140505172346) do
+ActiveRecord::Schema.define(version: 20141021083951) do
 
   create_table "allowed_pages", force: true do |t|
     t.integer  "page_id"
@@ -273,6 +273,26 @@ ActiveRecord::Schema.define(version: 20140505172346) do
     t.boolean  "shared",                       default: false
     t.text     "blogentry",   limit: 16777215
   end
+
+  create_table "members", force: true do |t|
+    t.integer  "website_id"
+    t.boolean  "approved",        default: false
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "username"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "postal_street"
+    t.string   "postal_zip"
+    t.string   "postal_city"
+    t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "members", ["website_id", "email"], name: "index_members_on_website_id_and_email", unique: true, using: :btree
+  add_index "members", ["website_id", "username"], name: "index_members_on_website_id_and_username", unique: true, using: :btree
+  add_index "members", ["website_id"], name: "index_members_on_website_id", using: :btree
 
   create_table "menus", force: true do |t|
     t.integer  "look_id"
