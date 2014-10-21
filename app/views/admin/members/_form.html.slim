@@ -1,0 +1,54 @@
+= form_for [:admin, @member] do |f|
+
+  p
+    label
+      = Member.human_attribute_name :email
+      = f.email_field :email
+
+  p
+    label
+      = Member.human_attribute_name :username
+      = f.text_field :username
+
+  p
+    label
+      = Member.human_attribute_name :approved
+      = f.check_box :approved
+    small
+      =' t("member_approved_email_page_template_info")
+      code> member_approved_email
+      | .
+
+  p
+    label
+      = Member.human_attribute_name :first_name
+      = f.text_field :first_name
+
+  p
+    label
+      = Member.human_attribute_name :last_name
+      = f.text_field :last_name
+
+  p
+    label
+      = Member.human_attribute_name :phone
+      = f.text_field :phone
+
+  p
+    label
+      = Member.human_attribute_name :postal_street
+      = f.text_field :postal_street
+
+  p
+    label
+      = Member.human_attribute_name :postal_zip
+      = f.text_field :postal_zip
+
+  p
+    label
+      = Member.human_attribute_name :postal_city
+      = f.text_field :postal_city
+
+  = submit_tag
+  | &nbsp;|&nbsp;
+  = link_to t("cancel"), [:admin, :members]

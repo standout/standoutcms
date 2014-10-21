@@ -145,6 +145,7 @@ StandoutCms::Application.routes.draw do
         resources :pictures
       end
       resources :website_memberships
+      resources :members
     end
 
     # TODO: most of the ones below should probably be moved into admin namespace

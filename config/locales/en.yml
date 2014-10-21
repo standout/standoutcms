@@ -109,6 +109,10 @@ en:
     en: "English"
   themes: "Themes"
   settings: "Settings"
+  members: "Members"
+  member_approved_email_page_template_info: When you approve an account a
+    welcome email is sent where the member receives their login details. Content
+    of that email can be controlled via a template named
   doubleclick_to_edit: "Doubleclick to edit this text"
   force_sync: "Forced sync"
   slug: "Address"
@@ -259,9 +263,22 @@ en:
       added: "A new vendor has been added."
   activerecord:
     models:
+      member: Member
       shipping_cost: 'Shipping cost'
       product_property_key: 'Product attribute'
     attributes:
+      member:
+        email: Email
+        username: Username
+        approved: Approved?
+        password: Password
+        password_confirmation: Password confirmation
+        first_name: First name
+        last_name: Last name
+        postal_street: Address
+        postal_zip: ZIP code
+        postal_city: City
+        phone: Telefonnummer
       shipping_cost:
         cost: 'Cost'
         from_value: 'From'

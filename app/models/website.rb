@@ -26,6 +26,7 @@ class Website < ActiveRecord::Base
   has_many :pages
   has_many :assets
   has_many :looks, :dependent => :destroy
+  has_many :members
   has_many :users, :through => :website_memberships
   has_and_belongs_to_many :extras, -> { uniq true }
   has_many :servers

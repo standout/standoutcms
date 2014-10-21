@@ -109,6 +109,10 @@ sv:
     en: "Engelska"
   themes: "Mallar"
   settings: "Inställningar"
+  members: "Medlemmar"
+  member_approved_email_page_template_info: När du godkänner ett konto skickas
+    ett välkomstmail ut där medlemmen får sina inloggningsuppgifter. Innehållet
+    i mailet kan styras via mallen
   doubleclick_to_edit: "Dubbelklicka för att redigera den här texten."
   force_sync: "Tvingad publicering"
   slug: "Webbadress"
@@ -220,6 +224,7 @@ sv:
   new_vendor: "Ny leverantör"
   no_rights_to_edit_page: "Du har inte rätt att ändra sidan."
   invalid_login: "Nej, det gick minsann inte. Kolla lösenordet."
+
   log: "Händelselogg"
   product_categories: "Produktkategorier"
   product_categories_instructions: "Instruktioner - produktkategorier"
@@ -300,6 +305,7 @@ sv:
       submit: "Spara %{model}"
   activerecord:
     models:
+      member: "Medlem"
       picture: "bild"
       product: "Produkt"
       product_category: "Produktkategori"
@@ -309,6 +315,18 @@ sv:
       shipping_cost: 'Fraktkostnad'
       product_property_key: 'Produktegenskap'
     attributes:
+      member:
+        email: E-postadress
+        username: Användarnamn
+        approved: Godkänd?
+        password: Lösenord
+        password_confirmation: Lösenordsbekräftelse
+        first_name: Förnamn
+        last_name: Efternamn
+        postal_street: Postadress
+        postal_zip: Postnummer
+        postal_city: Postort
+        phone: Telefonnummer
       product:
         description: "Beskrivning"
         price: "Pris"

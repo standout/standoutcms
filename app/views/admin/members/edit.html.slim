@@ -1,0 +1,9 @@
+.edit_field
+  = render "form"
+
+.edit_field
+  p
+    - confirmation = "Vill du verkligen ta bort medlemmen #{@member.email}?"
+    = link_to [:admin, @member], class: "button destroy",
+      data: { method: "DELETE", confirm: confirmation } do
+      | Ta bort

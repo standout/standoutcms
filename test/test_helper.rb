@@ -20,4 +20,10 @@ class ActiveSupport::TestCase
   def login_as(username)
     session[:user_id] = users(username.to_sym).id
   end
+
+  # immediately imvoked let, just like in rspec
+  def self.let!(symbol, &block)
+    let(symbol, &block)
+    before { send(symbol) }
+  end
 end
