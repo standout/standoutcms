@@ -27,6 +27,42 @@ describe Member do
   end
 end
 
+describe Member, "#password" do
+  let(:website) { websites :standout }
+
+  # This behaviour is achieved via HasSecurePasswordWhenApproved concern
+
+  describe "approved is false" do
+    let(:member) { build :member, approved: false, website: website }
+
+    it "allows nil password_digest" do
+      member.password_digest.must_be_nil
+      assert member.valid?, member.errors.to_yaml
+    end
+  end
+
+  describe "approved is true" do
+    let(:member) { build :member, approved: true, website: website }
+
+    it "wont allow nil password_digest" do
+      member.password_digest.must_be_nil
+      assert member.invalid?, member.errors.to_yaml
+    end
+
+    it "wont be valid without confirmed password" do
+      member.password = "password"
+      member.password_confirmation.must_be_nil
+      assert member.invalid?
+    end
+
+    it "works when password is confirmed" do
+      member.password = "password"
+      member.password_confirmation = "password"
+      assert member.valid?, member.errors.to_yaml
+    end
+  end
+end
+
 describe Member, "#username" do
   let(:website) { websites(:standout) }
 
