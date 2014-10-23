@@ -7,11 +7,19 @@ class Member < ActiveRecord::Base
   validates :username, uniqueness: { scope: :website_id }, allow_nil: true
   validates :website, presence: true
 
+  before_validation :disallow_blank_username
+
   def full_name
     [first_name, last_name].compact.join(" ")
   end
 
   def full_address
     [postal_street, "#{postal_zip} #{postal_city}"].compact.join(", ")
+  end
+
+  private
+
+  def disallow_blank_username
+    self.username = nil if self.username.blank?
   end
 end

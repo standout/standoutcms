@@ -34,4 +34,9 @@ describe Member, "#username" do
     create(:member, username: nil, website: website)
     create(:member, username: nil, website: website)
   end
+
+  it "replaces blank username with nil" do
+    create(:member, username: "", website: website)
+    create(:member, username: "", website: website)
+  end
 end
