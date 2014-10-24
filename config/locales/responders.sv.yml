@@ -15,3 +15,10 @@ sv:
         create:
           notice: Du är nu inloggad och kan se medlemssidor.
           alert: Nej, det gick minsann inte. Kolla lösenordet.
+      signups:
+        create:
+          notice: Tack för din ansökan om medlemskonto. När administratören för
+            sidan har granskat ditt konto får du ett mail med
+            inloggningsuppgifter.
+          alert: Kunde inte skicka in medlemsansökan, kolla felmeddelanden i
+            formuläret.

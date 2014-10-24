@@ -17,6 +17,8 @@ StandoutCms::Application.routes.draw do
     post   "signin",  to: "sessions#create"
     delete "signout", to: "sessions#destroy"
     get    "session", to: "sessions#show"
+    get    "signup",  to: "signups#new"
+    post   "signup",  to: "signups#create"
   end
 
   scope module: :api do

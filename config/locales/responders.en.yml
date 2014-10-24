@@ -15,3 +15,10 @@ en:
         create:
           notice: You are now signed in and able to see member pages.
           alert: Invalid login combination. Check your password.
+      signups:
+        create:
+          notice: Thanks for your membership application. You'll receive an
+            email with login details when the administrator has approved your
+            account.
+          alert: Could not send your membership application. Take a look at the
+            form errors.
