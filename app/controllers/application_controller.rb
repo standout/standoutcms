@@ -23,13 +23,6 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '8d3b55fa38b9b12ecc889fab9fcdec25'
 
-  def default_serializer_options
-    {
-      root: false
-    }
-  end
-
-
   def set_csrf_cookie_for_ng
     cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
   end
