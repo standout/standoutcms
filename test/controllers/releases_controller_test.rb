@@ -1,9 +1,8 @@
 require 'test_helper'
 
-class ReleasesControllerTest < ActionController::TestCase
+class Admin::ReleasesControllerTest < ActionController::TestCase
   
   def setup
-    @controller = Admin::ReleasesController.new
     request.host = "standout.standoutcms.dev"
   end
   

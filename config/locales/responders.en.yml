@@ -1,0 +1,24 @@
+en:
+  flash:
+    actions:
+      create:
+        notice: '%{resource_name} was successfully created.'
+        # alert: '%{resource_name} could not be created.'
+      update:
+        notice: '%{resource_name} was successfully updated.'
+        # alert: '%{resource_name} could not be updated.'
+      destroy:
+        notice: '%{resource_name} was successfully destroyed.'
+        alert: '%{resource_name} could not be destroyed.'
+    members:
+      sessions:
+        create:
+          notice: You are now signed in and able to see member pages.
+          alert: Invalid login combination. Check your password.
+      signups:
+        create:
+          notice: Thanks for your membership application. You'll receive an
+            email with login details when the administrator has approved your
+            account.
+          alert: Could not send your membership application. Take a look at the
+            form errors.

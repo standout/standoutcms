@@ -1,14 +1,18 @@
+require "application_responder"
+
 #render Filters added to this controller apply to all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  self.responder = ApplicationResponder
+  respond_to :html
+
 
   include ControllerAuthentication
   include UrlHelper
 
-
   helper :all # include all helpers, all the time
-  helper_method :current_user, :is_admin?, :current_website_id, :current_website, :current_cart
+  helper_method :current_user, :is_admin?, :current_website_id, :current_website, :current_cart, :current_member
 
   before_filter :set_locale
   after_filter :set_website
@@ -17,13 +21,6 @@ class ApplicationController < ActionController::Base
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '8d3b55fa38b9b12ecc889fab9fcdec25'
-
-  def default_serializer_options
-    {
-      root: false
-    }
-  end
-
 
   def set_csrf_cookie_for_ng
     cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
@@ -114,6 +111,10 @@ class ApplicationController < ActionController::Base
     false
   end
 
+  def current_member
+    @current_member ||= MemberSession.get(session, current_website)
+  end
+
   def current_cart
     Cart.find(session[:cart_id])
   rescue ActiveRecord::RecordNotFound
@@ -154,8 +155,10 @@ class ApplicationController < ActionController::Base
       'page'              => PageDrop.new(page, language),
       'page_template_id'  => page_template.id,
       'website'           => WebsiteDrop.new(website),
+      'current_member'    => current_member && MemberDrop.new(current_member),
       'flash'             => { 'alert' => flash[:alert], 'notice' => flash[:notice] },
-      'params'            => params
+      'params'            => params,
+      "form_authenticity_token" => form_authenticity_token
     }.merge(extra_stuff)
 
     logger.debug "Stuff: #{stuff.inspect}"
@@ -222,4 +225,11 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def render_slug(slug, options = {})
+    if template = current_website.page_templates.find_by(slug: slug)
+      render_the_template(current_website, template, current_cart, options)
+    else
+      "You need a template named #{slug} to render this page"
+    end
+  end
 end

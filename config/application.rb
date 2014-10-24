@@ -45,5 +45,10 @@ module StandoutCms
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
     config.assets.enabled = true
+    config.generators do |g|
+      g.test_framework :mini_test, spec: true, fixture: false
+      g.helper false
+      g.assets false
+    end
   end
 end

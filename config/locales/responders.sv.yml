@@ -1,0 +1,24 @@
+sv:
+  flash:
+    actions:
+      create:
+        notice: '%{resource_name} skapades.'
+        # alert: '%{resource_name} kunde inte skapas.'
+      update:
+        notice: '%{resource_name} uppdaterades.'
+        # alert: '%{resource_name} kunde inte uppdateras.'
+      destroy:
+        notice: '%{resource_name} togs bort.'
+        alert: '%{resource_name} kunde inte tas bort.'
+    members:
+      sessions:
+        create:
+          notice: Du är nu inloggad och kan se medlemssidor.
+          alert: Nej, det gick minsann inte. Kolla lösenordet.
+      signups:
+        create:
+          notice: Tack för din ansökan om medlemskonto. När administratören för
+            sidan har granskat ditt konto får du ett mail med
+            inloggningsuppgifter.
+          alert: Kunde inte skicka in medlemsansökan, kolla felmeddelanden i
+            formuläret.

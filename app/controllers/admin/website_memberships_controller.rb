@@ -1,4 +1,10 @@
 class Admin::WebsiteMembershipsController < ApplicationController
+  # FIXME update angular app to handle wrapped json instead
+  def default_serializer_options
+    {
+      root: false
+    }
+  end
 
   def index
     @website_memberships = current_website.website_memberships

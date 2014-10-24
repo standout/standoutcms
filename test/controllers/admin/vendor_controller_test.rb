@@ -1,7 +1,6 @@
 require 'test_helper'
-class Admin::VendorControllerTest < ActionController::TestCase
+class Admin::VendorsControllerTest < ActionController::TestCase
   def setup
-    @controller = Admin::VendorsController.new
     request.host = "standout.standoutcms.dev"        
     
   end

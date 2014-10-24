@@ -1,0 +1,21 @@
+table.datalist
+  thead
+    th E-postadress
+    th Användarnamn
+    th Godkänd?
+    th Namn
+    th Telefonnummer
+    th Adress
+    th
+  tbody
+    - @members.each do |member|
+      tr
+        td = member.email
+        td = member.username
+        td = member.approved ? "Ja" : "Nej"
+        td = member.full_name
+        td = member.phone
+        td = member.full_address
+        td
+          = link_to [:edit, :admin, member], class: "button" do
+            | Redigera

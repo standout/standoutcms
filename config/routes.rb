@@ -12,6 +12,15 @@ StandoutCms::Application.routes.draw do
   post 'send_reset_link' => "users#send_password_reset", :as => :send_password_reset
   get "/delayed_job" => DelayedJobWeb, :anchor => false
 
+  namespace :members do
+    get    "signin",  to: "sessions#new"
+    post   "signin",  to: "sessions#create"
+    delete "signout", to: "sessions#destroy"
+    get    "session", to: "sessions#show"
+    get    "signup",  to: "signups#new"
+    post   "signup",  to: "signups#create"
+  end
+
   scope module: :api do
     namespace :v1 do
       resources :custom_data_lists, only: [] do
@@ -145,6 +154,7 @@ StandoutCms::Application.routes.draw do
         resources :pictures
       end
       resources :website_memberships
+      resources :members
     end
 
     # TODO: most of the ones below should probably be moved into admin namespace

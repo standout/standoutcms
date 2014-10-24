@@ -30,6 +30,8 @@ gem "mysql2"
 gem "paperclip", ">= 2.0"
 gem 'unicorn', '~> 4.8.3'
 gem 'puma'
+gem 'responders'
+gem 'slim-rails'
 gem "version"
 gem "active_model_serializers", "~> 0.8.0"
 gem 'angularjs-rails'
@@ -77,6 +79,10 @@ group :development, :test do
   gem 'guard'
   gem 'terminal-notifier-guard'
   gem 'rb-fsevent', :require => false # if RUBY_PLATFORM =~ /darwin/i
+  # Use Minitest with Spec syntax for testing
+  gem 'minitest-spec-rails'
+  # Use factories instead of fixtures when testing
+  gem 'factory_girl_rails'
   gem 'guard-minitest'
   gem 'byebug'
   gem 'sqlite3'

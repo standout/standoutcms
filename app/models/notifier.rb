@@ -1,7 +1,5 @@
 # encoding: utf-8
-class Notifier < ActionMailer::Base
-  default :from => 'support@standout.se'
-
+class Notifier < BaseMailer
   def signup(user)
     @user = user
     mail(:to => user.email, :subject => 'Welcome to Standout CMS')
