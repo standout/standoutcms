@@ -21,9 +21,28 @@ class ActiveSupport::TestCase
     session[:user_id] = users(username.to_sym).id
   end
 
+  # Convenience method for signing in as a member factory
+  # Usage:
+  #   before { signin :member }
+  # or:
+  #   let(:member) { create :member }
+  #   before { signin member }
+  def signin(member, options = {})
+    options[:website] ||= websites(:standout)
+    if member.is_a?(Symbol)
+      member = FactoryGirl.create(member, options)
+    end
+    MemberSession.update(session, member)
+    member
+  end
+
   # immediately imvoked let, just like in rspec
   def self.let!(symbol, &block)
     let(symbol, &block)
     before { send(symbol) }
+  end
+
+  def json
+    JSON.parse(response.body)
   end
 end

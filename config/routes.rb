@@ -12,6 +12,13 @@ StandoutCms::Application.routes.draw do
   post 'send_reset_link' => "users#send_password_reset", :as => :send_password_reset
   get "/delayed_job" => DelayedJobWeb, :anchor => false
 
+  namespace :members do
+    get    "signin",  to: "sessions#new"
+    post   "signin",  to: "sessions#create"
+    delete "signout", to: "sessions#destroy"
+    get    "session", to: "sessions#show"
+  end
+
   scope module: :api do
     namespace :v1 do
       resources :custom_data_lists, only: [] do

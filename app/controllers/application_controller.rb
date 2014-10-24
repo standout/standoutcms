@@ -224,4 +224,11 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def render_slug(slug, options = {})
+    if template = current_website.page_templates.find_by(slug: slug)
+      render_the_template(current_website, template, current_cart, options)
+    else
+      "You need a template named #{slug} to render this page"
+    end
+  end
 end
