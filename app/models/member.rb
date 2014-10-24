@@ -4,11 +4,17 @@ class Member < ActiveRecord::Base
 
   belongs_to :website
 
+  validates :email, presence: true
+  validates :email, format: { with: /.+@.+\..+/i }
   validates :email,    uniqueness: { scope: :website_id }
   validates :username, uniqueness: { scope: :website_id }, allow_nil: true
   validates :website, presence: true
 
   before_validation :disallow_blank_username
+
+  def email=(value)
+    super value.to_s.downcase
+  end
 
   def full_name
     [first_name, last_name].compact.join(" ")

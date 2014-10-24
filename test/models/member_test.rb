@@ -76,3 +76,26 @@ describe Member, "#username" do
     create(:member, username: "", website: website)
   end
 end
+
+describe Member, "#email" do
+  let(:website) { websites :standout }
+  it "defaults to valid" do
+    build(:member, website: website).must_be :valid?
+  end
+
+  it "wont be valid when @ is missing" do
+    build(:member, website: website, email: "blaha").must_be :invalid?
+  end
+
+  it "wont be valid when already taken" do
+    email = "member@example.com"
+    create(:member, website: website, email: email).must_be :persisted?
+    build(:member, website: website, email: email).must_be :invalid?
+  end
+
+  it "becomes downcased" do
+    email = "MeMbEr@example.COM"
+    build(:member, website: website, email: email).email
+      .must_equal(email.downcase)
+  end
+end
