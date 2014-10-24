@@ -157,7 +157,8 @@ class ApplicationController < ActionController::Base
       'website'           => WebsiteDrop.new(website),
       'current_member'    => current_member && MemberDrop.new(current_member),
       'flash'             => { 'alert' => flash[:alert], 'notice' => flash[:notice] },
-      'params'            => params
+      'params'            => params,
+      "form_authenticity_token" => form_authenticity_token
     }.merge(extra_stuff)
 
     logger.debug "Stuff: #{stuff.inspect}"
