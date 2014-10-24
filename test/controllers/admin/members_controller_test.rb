@@ -35,10 +35,26 @@ describe Admin::MembersController do
       before { login_as(:david) }
 
       it "must update" do
-        patch :update, id: member.id, member: {
-          first_name: "Glenn"
-        }
+        patch :update, id: member.id, member: { first_name: "Glenn" }
         assert_redirected_to admin_members_path
+      end
+
+      it "sends email when changing to approved: true" do
+        member.approved.must_equal(false);
+        patch :update, id: member.id, member: { approved: true }
+        assert_difference "ActionMailer::Base.deliveries.count", +1 do
+          Delayed::Worker.new.work_off
+        end
+        assigns(:member).approved.must_equal(true);
+      end
+
+      it "wont send another email when updating again" do
+        member.update!(approved: true, password: "password",
+                      password_confirmation: "password")
+        patch :update, id: member.id, member: { approved: true }
+        assert_no_difference "ActionMailer::Base.deliveries.count", +1 do
+          Delayed::Worker.new.work_off
+        end
       end
     end
 

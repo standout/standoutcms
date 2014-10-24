@@ -14,7 +14,7 @@ class Admin::MembersController < ApplicationController
   end
 
   def update
-    @member.update(permitted_params)
+    UpdateMember.call(@member, permitted_params)
     respond_with :admin, @member
   end
 
