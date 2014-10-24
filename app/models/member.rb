@@ -23,4 +23,12 @@ class Member < ActiveRecord::Base
   def disallow_blank_username
     self.username = nil if self.username.blank?
   end
+
+  def generate_password
+    password_digest.present? and return
+    # Generate a friendly string randomly to be used as password
+    self.password = SecureRandom.base64(4).tr('+/=lIO0', 'pqrsxyz')
+    self.password_confirmation = password
+    password
+  end
 end

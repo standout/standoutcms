@@ -80,6 +80,8 @@ The application has a test suite using Test::Unit. It should be working, so plea
 During development you can use guard to make the tests run when you change your code. `bundle exec guard start`.
 If you have Growl installed it will use that to display messages about the tests.
 
+Use `rake jobs:work` to start a delayed job worker in development.
+
 ## API
 
 Documentation on the API is in doc/api.md.
