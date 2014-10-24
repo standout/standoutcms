@@ -11,9 +11,8 @@ class ApplicationController < ActionController::Base
   include ControllerAuthentication
   include UrlHelper
 
-
   helper :all # include all helpers, all the time
-  helper_method :current_user, :is_admin?, :current_website_id, :current_website, :current_cart
+  helper_method :current_user, :is_admin?, :current_website_id, :current_website, :current_cart, :current_member
 
   before_filter :set_locale
   after_filter :set_website
@@ -112,6 +111,10 @@ class ApplicationController < ActionController::Base
     false
   end
 
+  def current_member
+    @current_member ||= MemberSession.get(session, current_website)
+  end
+
   def current_cart
     Cart.find(session[:cart_id])
   rescue ActiveRecord::RecordNotFound
@@ -152,6 +155,7 @@ class ApplicationController < ActionController::Base
       'page'              => PageDrop.new(page, language),
       'page_template_id'  => page_template.id,
       'website'           => WebsiteDrop.new(website),
+      'current_member'    => current_member && MemberDrop.new(current_member),
       'flash'             => { 'alert' => flash[:alert], 'notice' => flash[:notice] },
       'params'            => params
     }.merge(extra_stuff)
