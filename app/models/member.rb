@@ -21,7 +21,8 @@ class Member < ActiveRecord::Base
   end
 
   def full_address
-    [postal_street, "#{postal_zip} #{postal_city}"].compact.join(", ")
+    zipcity = [postal_zip, postal_city].map(&:presence).compact.join(" ")
+    [postal_street, zipcity].map(&:presence).compact.join(", ")
   end
 
   private
