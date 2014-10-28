@@ -372,6 +372,8 @@ sv:
         password: 'Lösenord'
         locale: 'Standardspråk'
         password_confirmation: 'Bekräfta lösenord'
+      website:
+        member_signup_enabled: Medlemsregistrering aktiverat
   file: "Fil"
   member_mailer:
     approved: "Ditt medlemskonto på %{title} är nu godkänt"

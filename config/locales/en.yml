@@ -301,6 +301,8 @@ en:
         data_type: 'Type'
       order:
         payment_type: 'Payment type'
+      website:
+        member_signup_enabled: Member signup enabled
   member_mailer:
     approved: "Your membership account at %{title} is now approved"
     password_reset_link: "Reset of password at %{title}"

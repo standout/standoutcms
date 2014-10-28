@@ -23,6 +23,8 @@ en:
           notice: You are now signed in and able to see member pages.
           alert: Invalid login combination. Check your password.
       signups:
+        new:
+          alert: Sorry, member signup is disabled on this website
         create:
           notice: Thanks for your membership application. You'll receive an
             email with login details when the administrator has approved your

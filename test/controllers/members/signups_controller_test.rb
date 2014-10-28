@@ -4,6 +4,7 @@ describe Members::SignupsController do
   let(:website) { websites :standout }
   let(:look) { looks :standout_look }
   before { request.host = "standout.standoutcms.dev" }
+  before { website.update(member_signup_enabled: "1") }
 
   describe "GET #new" do
     describe "as guest" do
@@ -49,6 +50,25 @@ describe Members::SignupsController do
           email: "new.member@example.com"
         }
         assert_redirected_to stupid_url
+      end
+
+      describe "when signups is disabled" do
+        before { website.update(member_signup_enabled: "0") }
+
+        it "flashes an alert that signup is disabled" do
+          post :create, member: {
+            email: "wont.work@example.com"
+          }
+          assert_redirected_to root_url
+          flash[:alert].must_be :present?
+        end
+
+        it "forbids signup via json" do
+          post :create, format: :json, member: {
+            email: "wont.work@example.com"
+          }
+          assert_response :forbidden
+        end
       end
     end
   end

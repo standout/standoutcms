@@ -147,6 +147,7 @@ class Admin::WebsitesController < ApplicationController
       payment_confirmation_title
       payment_confirmation_header
       payment_confirmation_footer
+      member_signup_enabled
     )
   end
 

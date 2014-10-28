@@ -51,6 +51,11 @@
       </p>
 
       <p>
+        <%= f.label :member_signup_enabled %>
+        <%= f.check_box :member_signup_enabled %>
+      </p>
+
+      <p>
       <%= f.submit @new_website && @new_website.new_record? ? t("create") : t("save") %>
       </p>
 
