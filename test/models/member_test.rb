@@ -60,6 +60,12 @@ describe Member, "#password" do
       member.password_confirmation = "password"
       assert member.valid?, member.errors.to_yaml
     end
+
+    it "wont be valid when blank" do
+      member.password = ""
+      member.password_confirmation = ""
+      assert member.invalid?, member.errors.to_yaml
+    end
   end
 end
 
