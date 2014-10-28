@@ -1,0 +1,21 @@
+{% include 'header' %}
+
+<form accept-charset="UTF-8" action="/members/signup" method="post">
+  <div style="margin:0;padding:0;display:inline">
+    <input name="utf8" type="hidden" value="✓">
+    <input name="authenticity_token" type="hidden" value="{{form_authenticity_token}}">
+  </div>
+
+  <p>
+    <label for="member_email">E-postadress</label><br>
+    <input id="member_email" name="member[email]" type="text" value="{{member.email}}"
+      {% if member.errors contains 'email' %} class="error"{% endif %}>
+    {% for error in member.errors.email %}
+    <small>{{error}}</small>
+    {% endfor %}
+  </p>
+
+  <input class="submit" name="commit" type="submit" value="OK">
+</form>
+
+{% include 'footer' %}

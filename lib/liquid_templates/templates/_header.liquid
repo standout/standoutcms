@@ -103,6 +103,10 @@
     border: 1px #ccc solid;
     padding: 1px;
   }
+
+  .inline-block {
+    display: inline-block;
+  }
   </style>
 
   <script type="text/javascript">
@@ -130,6 +134,15 @@
       <h1>Welcome to {{ website.title }}</h1>
       <nav id="menu" class="menu" data-startlevel="0" data-sublevels="0"></nav>
 
+      <p>
+        {% if current_member %}
+          Inloggad som {{current_member.email}}
+          {% include 'member_signout_form' %}
+        {% else %}
+          <a href="/members/signin">Logga in</a>
+          <a href="/members/signup">Registrera dig</a>
+        {% endif %}
+      </p>
 
     </header>
 

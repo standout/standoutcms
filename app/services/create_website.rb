@@ -26,9 +26,23 @@ class CreateWebsite < Struct.new(:website)
 
     create_template("product_category")
 
+    create_template("member_signin")
+
+    create_template("member_signup")
+
+    create_template("member_password_reset_new")
+
+    create_template("member_password_reset_edit")
+
     create_partial("header")
 
     create_partial("footer")
+
+    create_partial("member_approved_email")
+
+    create_partial("member_password_reset_email")
+
+    create_partial("member_signout_form")
 
     Page.create do |p|
       p.website = website

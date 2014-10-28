@@ -1,0 +1,10 @@
+<form accept-charset="UTF-8" action="/members/signout" method="post" class="inline-block">
+  <div style="margin:0;padding:0;display:inline">
+    <input name="utf8" type="hidden" value="✓">
+    <input name="_method" type="hidden" value="delete">
+    <input name="authenticity_token" type="hidden" value="{{form_authenticity_token}}">
+    <input name="redirect_to" type="hidden" value="/members/signin">
+  </div>
+
+  <input class="submit" name="commit" type="submit" value="Logga ut">
+</form>
