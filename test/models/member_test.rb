@@ -99,3 +99,15 @@ describe Member, "#email" do
       .must_equal(email.downcase)
   end
 end
+
+describe Member, "#password_reset_url" do
+  let(:website) { websites :standout }
+  let(:member) do
+    Member.new(id: 123, password_reset_token: 'abc', website: website)
+  end
+
+  it "returns a url with id and token" do
+    member.password_reset_url
+      .must_equal("http://standout.se/members/passwords/123/abc")
+  end
+end

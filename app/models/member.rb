@@ -25,6 +25,11 @@ class Member < ActiveRecord::Base
     [postal_street, zipcity].map(&:presence).compact.join(", ")
   end
 
+  def password_reset_url
+    path = "/members/passwords/#{id}/#{password_reset_token}"
+    "http://#{website.main_domain}#{path}"
+  end
+
   private
 
   def disallow_blank_username
