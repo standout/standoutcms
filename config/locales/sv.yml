@@ -373,3 +373,6 @@ sv:
         locale: 'Standardspråk'
         password_confirmation: 'Bekräfta lösenord'
   file: "Fil"
+  member_mailer:
+    approved: "Ditt medlemskonto på %{title} är nu godkänt"
+    password_reset_link: "Återställning av lösenord på %{title}"

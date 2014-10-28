@@ -10,4 +10,9 @@ class BaseMailer < ActionMailer::Base
       "You need a template named #{slug} to modify this email body"
     end
   end
+
+  def subject(subject_symbol, options = {})
+    mailer = self.class.to_s.underscore
+    I18n.t("#{mailer}.#{subject_symbol}", options)
+  end
 end

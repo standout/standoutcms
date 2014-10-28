@@ -16,5 +16,10 @@ FactoryGirl.define do
       slug "member_approved_email"
       html "Hej {{member.email}}"
     end
+
+    factory :member_password_reset_email_page_template do
+      slug "member_password_reset_email"
+      html "Klicka <a href=\"{{member.password_reset_url}}\">här</a>"
+    end
   end
 end

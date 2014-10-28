@@ -301,3 +301,6 @@ en:
         data_type: 'Type'
       order:
         payment_type: 'Payment type'
+  member_mailer:
+    approved: "Your membership account at %{title} is now approved"
+    password_reset_link: "Reset of password at %{title}"
