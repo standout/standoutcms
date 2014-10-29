@@ -232,4 +232,14 @@ class ApplicationController < ActionController::Base
       "You need a template named #{slug} to render this page"
     end
   end
+
+  def pagination_meta_for(collection)
+    {
+      current_page: collection.current_page,
+      next_page:    collection.next_page,
+      prev_page:    collection.previous_page,
+      total_pages:  collection.total_pages,
+      total_count:  collection.total_entries
+    }
+  end
 end

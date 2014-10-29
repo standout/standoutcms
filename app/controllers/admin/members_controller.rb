@@ -5,8 +5,10 @@ class Admin::MembersController < ApplicationController
   responders :collection
 
   def index
-    @members = current_website.members.load
-    respond_with :admin, @members
+    @members = current_website.members.paginate(
+      page: params[:page],
+      per_page: params[:per_page] || 50)
+    respond_with :admin, @members, meta: pagination_meta_for(@members)
   end
 
   def edit

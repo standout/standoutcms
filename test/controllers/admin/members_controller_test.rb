@@ -5,12 +5,21 @@ describe Admin::MembersController do
   before { request.host = "standout.standoutcms.dev" }
 
   describe "GET #index" do
+    before { create :member, website: website }
+
     describe "as admin" do
       before { login_as(:david) }
 
       it "must get index" do
         get :index
         assert_response :success
+      end
+
+      it "returns pagination meta along with json" do
+        get :index, format: :json
+        assert_response :success
+        json["members"].first.wont_be_nil
+        json["meta"]["total_pages"].wont_be_nil
       end
     end
   end
