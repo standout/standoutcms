@@ -251,6 +251,7 @@ class Page < ActiveRecord::Base
       'categories'				=> self.website.blog_categories,
       'breadcrumbs'				=> self.breadcrumbs,
       'page_template_id'	=> self.page_template_id,
+      'current_member' => current_member ? MemberDrop.new(current_member) : nil,
       'website'           => WebsiteDrop.new(self.website) }
 
     self.website.custom_data_lists.each do |custom_data|

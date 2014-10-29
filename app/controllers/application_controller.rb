@@ -155,7 +155,7 @@ class ApplicationController < ActionController::Base
       'page'              => PageDrop.new(page, language),
       'page_template_id'  => page_template.id,
       'website'           => WebsiteDrop.new(website),
-      'current_member'    => current_member && MemberDrop.new(current_member),
+      'current_member'    => current_member ? MemberDrop.new(current_member) : nil,
       'flash'             => { 'alert' => flash[:alert], 'notice' => flash[:notice] },
       'params'            => params,
       "form_authenticity_token" => form_authenticity_token
