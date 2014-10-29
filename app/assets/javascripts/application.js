@@ -23,6 +23,9 @@
 //= require ace/worker-html
 //= require ace/worker-css
 //= require ace/theme-tomorrow
+//= require ace/mode-liquid
+//= require ace/mode-javascript
+//= require ace/mode-css
 
 
 function reload_gallery_photos()
