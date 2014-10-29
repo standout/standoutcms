@@ -11,7 +11,7 @@ class PagesController < ApplicationController
       render :text => render_the_template(@website, pointer.page.page_template, current_cart, { :page => pointer.page, :language => pointer.language })
     elsif pointer && pointer.product
       # TODO: why are we using another method to generate products?
-      render :text => pointer.product.complete_html(@website.default_language, current_cart.id)
+      render :text => pointer.product.complete_html(current_member, @website.default_language, current_cart.id)
     elsif pointer && pointer.product_category
       render :text => render_the_template(@website, pointer.product_category.page_template, current_cart, { 'product_category'  => ProductCategoryDrop.new(pointer.product_category) })
     elsif pointer && pointer.custom_data_row

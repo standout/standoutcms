@@ -8,8 +8,8 @@ class PageTest < ActiveSupport::TestCase
     p = pages(:standout_frontpage)
     p.title = "Växjö"
     assert p.save
-    html = p.complete_html
-    assert html.match(/Växjö/)
+    html = p.complete_html(build :member)
+    html.must_match(/Växjö/)
     doc = Nokogiri::HTML(html)
     assert_equal(websites(:standout).pages.count, doc.css('#menu li').size)
   end

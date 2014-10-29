@@ -50,8 +50,8 @@ class Post < ActiveRecord::Base
     self.website.blog_page
   end
   
-  def complete_html
-    self.page.complete_html(self.language, { 'post' => self, 'page' => { 'title' => self.title.to_s, 'description' => self.content.to_s.gsub(/<\/?[^>]*>/, "")[0..255] } })
+  def complete_html(current_member)
+    self.page.complete_html(current_member, self.language, { 'post' => self, 'page' => { 'title' => self.title.to_s, 'description' => self.content.to_s.gsub(/<\/?[^>]*>/, "")[0..255] } })
   end
   
 end
