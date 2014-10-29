@@ -242,7 +242,7 @@ class Page < ActiveRecord::Base
     @website_liquid = liquid
   end
 
-  def complete_html(language = 'sv', extra_stuff = {}, keep_liquid = false)
+  def complete_html(current_member, language = 'sv', extra_stuff = {}, keep_liquid = false)
     stuff = {
       'cart'              => CartDrop.new(extra_stuff.delete(:cart)),
 			'page'							=> PageDrop.new(self, language),

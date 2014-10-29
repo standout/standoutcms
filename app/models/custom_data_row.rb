@@ -58,9 +58,9 @@ class CustomDataRow < ActiveRecord::Base
     ]
   end
 
-  def complete_html
-	  self.custom_data_list.page.complete_html(self.language, { "item" => self })
-	end
+  def complete_html(current_member)
+    self.custom_data_list.page.complete_html(current_member, self.language, { "item" => self })
+  end
 
   def page
     custom_data_list.page if custom_data_list

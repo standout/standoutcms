@@ -100,7 +100,7 @@ class Product < ActiveRecord::Base
     "http://#{self.website.main_domain}/products/#{self.url}"
   end
 
-  def complete_html(language = 'sv', cart_id = nil)
+  def complete_html(current_member, language = 'sv', cart_id = nil)
 
     if self.page_template.nil?
       return "You need a page templated called 'product' to render this page."
@@ -113,6 +113,7 @@ class Product < ActiveRecord::Base
       'language'          => self.website.default_language,
       'posts'             => self.website.posts,
       'categories'        => self.website.blog_categories,
+      'current_member' => current_member ? MemberDrop.new(current_member) : nil,
       'website'           => WebsiteDrop.new(self.website) }
 
     self.website.custom_data_lists.each do |custom_data|

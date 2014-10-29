@@ -53,7 +53,7 @@ class Admin::PagesController < ApplicationController
 
   def preview
     @page = Page.find(params[:id])
-    render :text => @page.complete_html(params[:language].to_s)
+    render :text => @page.complete_html(current_member, params[:language].to_s)
   end
 
   # POST /pages
