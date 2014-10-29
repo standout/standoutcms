@@ -131,6 +131,7 @@ class Admin::LookFilesController < ApplicationController
   private
 
   def look_file_params
+    return {} unless params[:look_file]
     params.require(:look_file).permit(
       :content_type,
       :filename,

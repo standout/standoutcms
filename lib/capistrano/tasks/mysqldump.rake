@@ -15,8 +15,11 @@ namespace :db do
     db = config['production']['database']
     us = config['production']['username']
     pw = config['production']['password']
-    run "#{dump} -u #{us} -p#{pw} -B #{db} > #{backup_to}/production.sql"
-    run "cp #{backup_to}/production.sql #{backup_to}/production-#{time}.sql"
+    backup_to = "#{deploy_to}/backup"
+    on roles(:app), in: :sequence do
+      execute "#{dump} -u #{us} -p#{pw} -B #{db} > #{backup_to}/production.sql"
+      execute "cp #{backup_to}/production.sql #{backup_to}/production-#{time}.sql"
+    end
   end
 
 end

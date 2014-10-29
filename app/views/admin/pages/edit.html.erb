@@ -11,6 +11,7 @@
         'posts' => @page.website.posts, 
         'post' => @page.website.posts.find_by_slug(params[:slug]),
         'categories' => @page.website.blog_categories,
+        'current_member' => current_member ? MemberDrop.new(current_member) : nil,
         'breadcrumbs' => @page.breadcrumbs,
         'page_template_id' => @page.page_template_id)
 		else
@@ -20,6 +21,7 @@
 			  'posts'             => @page.website.posts, 
 			  'categories'        => @page.website.blog_categories,
 			  'breadcrumbs'       => @page.breadcrumbs,
+        'current_member' => current_member ? MemberDrop.new(current_member) : nil,
 			  'page_template_id'  => @page.page_template_id,
 			  'website'           => WebsiteDrop.new(@page.website)
 			}

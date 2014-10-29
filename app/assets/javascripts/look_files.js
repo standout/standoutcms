@@ -1,9 +1,18 @@
 $(function() {
   var extension = $('#look_file_text_content').data('type');
-  var modes = ['js', 'css'];
+  var mode;
+  switch (extension) {
+    case 'js':
+      mode = 'javascript';
+      break;
+    case 'css':
+      mode = 'css';
+  }
 
-  if (modes.indexOf(extension) >= 0) {
+  if (mode) {
     codeEditor = ace.edit('code_editor');
+    codeEditor.setTheme('ace/theme/tomorrow');
+    codeEditor.getSession().setMode('ace/mode/' + mode);
     codeEditor.getSession().setTabSize(2);
     codeEditor.getSession().setUseSoftTabs(true);
     codeEditor.getSession().setValue($('#look_file_text_content').val());
