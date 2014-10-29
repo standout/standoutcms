@@ -68,6 +68,10 @@ class WebsiteDrop < Liquid::Drop
     @website.money_separator
   end
 
+  def main_domain
+    @website.main_domain
+  end
+
 end
 
 class CustomDataDrop < Liquid::Drop

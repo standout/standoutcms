@@ -1,0 +1,18 @@
+<h1>Hej {{member.email}}</h1>
+
+<p>
+  Du har nu blivit medlem på {{website.title}}.
+</p>
+
+{% if member.password %}
+<p>
+  Här är ditt lösenord: {{member.password}}
+</p>
+{% endif %}
+
+<p>
+  Du kan logga in här:
+  <a href="http://{{website.main_domain}}/members/signin">
+    http://{{website.main_domain}}/members/signin
+  </a>
+</p>

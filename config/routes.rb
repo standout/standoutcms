@@ -19,6 +19,11 @@ StandoutCms::Application.routes.draw do
     get    "session", to: "sessions#show"
     get    "signup",  to: "signups#new"
     post   "signup",  to: "signups#create"
+
+    get   "passwords/new",        to: "passwords#new"
+    post  "passwords",            to: "passwords#create"
+    get   "passwords/:id/:token", to: "passwords#edit"
+    patch "passwords/:id/:token", to: "passwords#update"
   end
 
   scope module: :api do

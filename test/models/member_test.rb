@@ -60,6 +60,12 @@ describe Member, "#password" do
       member.password_confirmation = "password"
       assert member.valid?, member.errors.to_yaml
     end
+
+    it "wont be valid when blank" do
+      member.password = ""
+      member.password_confirmation = ""
+      assert member.invalid?, member.errors.to_yaml
+    end
   end
 end
 
@@ -97,5 +103,17 @@ describe Member, "#email" do
     email = "MeMbEr@example.COM"
     build(:member, website: website, email: email).email
       .must_equal(email.downcase)
+  end
+end
+
+describe Member, "#password_reset_url" do
+  let(:website) { websites :standout }
+  let(:member) do
+    Member.new(id: 123, password_reset_token: 'abc', website: website)
+  end
+
+  it "returns a url with id and token" do
+    member.password_reset_url
+      .must_equal("http://standout.se/members/passwords/123/abc")
   end
 end

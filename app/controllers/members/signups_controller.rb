@@ -1,4 +1,6 @@
 class Members::SignupsController < ApplicationController
+  before_filter :check_signups_enabled
+
   respond_to :html, :json
 
   def new
@@ -27,5 +29,15 @@ class Members::SignupsController < ApplicationController
   def permitted_params
     params.require(:member).permit %i(email username approved first_name
     last_name phone postal_street postal_zip postal_city)
+  end
+
+  def check_signups_enabled
+    unless current_website.member_signup_enabled?
+      flash[:alert] = t("flash.members.signups.new.alert")
+      respond_to do |format|
+        format.json { head :forbidden }
+        format.html { redirect_to root_url }
+      end
+    end
   end
 end

@@ -11,11 +11,21 @@ sv:
         notice: '%{resource_name} togs bort.'
         alert: '%{resource_name} kunde inte tas bort.'
     members:
+      passwords:
+        create:
+          notice: Vi skickar ett mail med en återställningslänk till din
+            e-postadress %{email}
+          alert: Måste ange en giltig e-postadress
+        update:
+          notice: Ditt lösenord har nu uppdaterats
+          alert: Kunde inte uppdatera lösenordet
       sessions:
         create:
           notice: Du är nu inloggad och kan se medlemssidor.
           alert: Nej, det gick minsann inte. Kolla lösenordet.
       signups:
+        new:
+          alert: Medlemsregistrering är inaktiverat på den här webbplatsen
         create:
           notice: Tack för din ansökan om medlemskonto. När administratören för
             sidan har granskat ditt konto får du ett mail med

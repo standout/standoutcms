@@ -13,6 +13,11 @@ FactoryGirl.define do
     factory :approved_member do
       approved true
       password_digest "$2a$10$ykaAaxHyeXCQRszLn5Rp5ewYOHlSwgk3NgB34vOfGxIMNaM6Si4y6"
+
+      factory :member_with_password_token do
+        password_reset_token "e2U7NN5ej4AaP7VwMq3VhQ"
+        password_reset_sent_at 1.seconds.ago
+      end
     end
   end
 end

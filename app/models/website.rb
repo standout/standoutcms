@@ -17,6 +17,7 @@ class Website < ActiveRecord::Base
     :payment_confirmation_footer,
     :money_format,
     :money_separator,
+    :member_signup_enabled,
     :filtered_attributes
   ]
 
@@ -50,7 +51,6 @@ class Website < ActiveRecord::Base
 
   before_create :generate_api_key
   after_initialize :create_default_settings
-  after_create  :setup
   belongs_to :blog_page, :class_name => 'Page'
 
   validates_uniqueness_of :subdomain
@@ -143,6 +143,10 @@ class Website < ActiveRecord::Base
     webshop_live == "1"
   end
 
+  def member_signup_enabled?
+    member_signup_enabled == "1"
+  end
+
   private
 
   def generate_api_key
@@ -154,22 +158,8 @@ class Website < ActiveRecord::Base
     self.webshop_live     ||= '0'
     self.money_format     ||= '%n %u'
     self.money_separator  ||= ','
+    self.member_signup_enabled ||= "0"
     update_filtered_attributes unless self.filtered_attributes
-  end
-
-  def setup
-    l = Look.create(:website_id => self.id, :title => 'Standard')
-    PageTemplate.create(look_id: l.id, slug: 'standard',         name: 'Standard',         html: File.read("#{Rails.root}/lib/liquid_templates/templates/base.liquid"))
-    PageTemplate.create(look_id: l.id, slug: 'cart',             name: 'Shopping cart',    html: File.read("#{Rails.root}/lib/liquid_templates/templates/cart.liquid"))
-    PageTemplate.create(look_id: l.id, slug: 'checkout',         name: 'Checkout',         html: File.read("#{Rails.root}/lib/liquid_templates/templates/checkout.liquid"))
-    PageTemplate.create(look_id: l.id, slug: 'product',          name: 'Product',          html: File.read("#{Rails.root}/lib/liquid_templates/templates/product.liquid"))
-    PageTemplate.create(look_id: l.id, slug: 'product_category', name: 'Product category', html: File.read("#{Rails.root}/lib/liquid_templates/templates/product_category.liquid"))
-    PageTemplate.create(look_id: l.id, slug: 'header',           name: 'Header',           html: File.read("#{Rails.root}/lib/liquid_templates/templates/_header.liquid"), partial: true)
-    PageTemplate.create(look_id: l.id, slug: 'footer',           name: 'Footer',           html: File.read("#{Rails.root}/lib/liquid_templates/templates/_footer.liquid"), partial: true)
-
-    Page.create do |p|
-      p.website_id = self.id
-    end
   end
 
   def search_class

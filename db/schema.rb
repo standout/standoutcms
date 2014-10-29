@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141021083951) do
+ActiveRecord::Schema.define(version: 20141024132822) do
 
   create_table "allowed_pages", force: true do |t|
     t.integer  "page_id"
@@ -276,7 +276,7 @@ ActiveRecord::Schema.define(version: 20141021083951) do
 
   create_table "members", force: true do |t|
     t.integer  "website_id"
-    t.boolean  "approved",        default: false
+    t.boolean  "approved",               default: false
     t.string   "email"
     t.string   "password_digest"
     t.string   "username"
@@ -288,6 +288,8 @@ ActiveRecord::Schema.define(version: 20141021083951) do
     t.string   "phone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
   add_index "members", ["website_id", "email"], name: "index_members_on_website_id_and_email", unique: true, using: :btree

@@ -41,7 +41,7 @@ class WebsitesController < ApplicationController
     @website = Website.new(website_params)
     @website.users << current_user
     respond_to do |format|
-      if @website.save
+      if CreateWebsite.call(@website)
         Notice.create(:website_id => @website.id, :user_id => current_user.id, :message => 'created website')
         format.html { redirect_to root_url, :notice => t('website_created') }
         format.xml  { render :xml => @website, :status => :created, :location => @website }
@@ -127,6 +127,7 @@ class WebsitesController < ApplicationController
       payment_confirmation_title
       payment_confirmation_header
       payment_confirmation_footer
+      member_signup_enabled
     )
   end
 

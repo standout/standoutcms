@@ -11,11 +11,20 @@ en:
         notice: '%{resource_name} was successfully destroyed.'
         alert: '%{resource_name} could not be destroyed.'
     members:
+      passwords:
+        create:
+          notice: We'll send a password reset link to your email %{email}
+          alert: Must be a valid email
+        update:
+          notice: Your password was successfully updated
+          alert: Could not update your password
       sessions:
         create:
           notice: You are now signed in and able to see member pages.
           alert: Invalid login combination. Check your password.
       signups:
+        new:
+          alert: Sorry, member signup is disabled on this website
         create:
           notice: Thanks for your membership application. You'll receive an
             email with login details when the administrator has approved your

@@ -1,11 +1,13 @@
 class Member < ActiveRecord::Base
+  EMAIL_REGEXP = /.+@.+\..+/i
+
   has_secure_password validations: false
   include HasSecurePasswordWhenApproved
 
   belongs_to :website
 
   validates :email, presence: true
-  validates :email, format: { with: /.+@.+\..+/i }
+  validates :email, format: { with: EMAIL_REGEXP }
   validates :email,    uniqueness: { scope: :website_id }
   validates :username, uniqueness: { scope: :website_id }, allow_nil: true
   validates :website, presence: true
@@ -23,6 +25,11 @@ class Member < ActiveRecord::Base
   def full_address
     zipcity = [postal_zip, postal_city].map(&:presence).compact.join(" ")
     [postal_street, zipcity].map(&:presence).compact.join(", ")
+  end
+
+  def password_reset_url
+    path = "/members/passwords/#{id}/#{password_reset_token}"
+    "http://#{website.main_domain}#{path}"
   end
 
   private

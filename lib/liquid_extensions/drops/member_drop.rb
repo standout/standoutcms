@@ -1,7 +1,7 @@
 class MemberDrop < Liquid::Drop
   delegate :id, :approved, :email, :username, :first_name, :last_name,
     :postal_street, :postal_zip, :postal_city, :phone, :full_name,
-    :full_address, to: :member
+    :full_address, :password_reset_url, to: :member
 
   attr_accessor :password
 
