@@ -56,7 +56,7 @@ class Admin::PageTemplatesController < ApplicationController
     @page_template.destroy
     Notice.create(:message => I18n.t('notices.page_template.deleted_by_user', :title => @page_template.name), :website_id => current_website.id, :user_id => current_user.id)
     flash[:notice] = "Successfully destroyed page template."
-    redirect_to [:admin, @look]
+    redirect_to [:edit, :admin, @look]
   end
 
   private
