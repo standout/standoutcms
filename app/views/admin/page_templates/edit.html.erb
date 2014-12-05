@@ -2,8 +2,10 @@
   <h2 style="display: inline-block">
     <%= @page_template.name %>
   </h2>
-  <%= link_to t("delete"), [:admin, @page_template.look, @page_template],
-    method: "delete", data: { confirm: t("really_delete") } %>
+  <% unless @page_template.used? %>
+    <%= link_to t("delete"), [:admin, @page_template.look, @page_template],
+      method: "delete", data: { confirm: t("really_delete") } %>
+  <% end %>
 </div>
 <%= render :partial => 'form' %>
 
