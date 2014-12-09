@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '4.0.2'
 
 gem "airbrake"
+gem 'libv8'
 gem 'awesome_nested_set'
 gem 'aws-s3'
 gem 'aws-sdk'
@@ -60,6 +61,10 @@ gem "acts_as_list"
 gem "acts_as_tree"
 gem "responds_to_parent"
 #gem "svn"
+
+# JSON rendering
+gem 'rabl'
+gem 'oj'
 
 # Gems used only for assets and not required
 # in production environments by default.

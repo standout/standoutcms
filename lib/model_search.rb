@@ -1,5 +1,7 @@
 module ModelSearch
 
+  # Example usage: GET /v1/websites/:website_id/products.json?query_string=title_formosa
+  # to match every product with the title 'Formosa'
   def search_and_filter(query_hash)
     if query_hash.class.name == "ActionController::Parameters"
       query_hash = request_params_to_search_hash(query_hash)
@@ -12,10 +14,10 @@ module ModelSearch
       search_result = (search_result + search_in_dynamic_attributes(query_hash[:query][:string])).uniq
       search_result = filter_through_dynamic_attributes(search_result, query_hash[:filter]) if query_hash[:filter].length > 0
     elsif query_hash[:filter].length > 0
-      search_result = self.products.where(filter_hash_to_where_string(query_hash[:filter]))
+      search_result = self.products.where(filter_hash_to_where_string(query_hash[:filter])).includes(:product_categories, :product_images)
       search_result = filter_through_dynamic_attributes(search_result, query_hash[:filter])
     else
-      search_result = self.products
+      search_result = self.products.includes(:product_categories, :product_images)
     end
     return search_result.select{ |product| product }
   end
@@ -98,9 +100,9 @@ module ModelSearch
 
   def search_in_text(string)
     if searchable_free_text_attributes.size > 0
-      self.products.where(free_text_search(string))
+      self.products.where(free_text_search(string)).includes(:product_categories, :product_images)
     else
-      self.products.where('FALSE')
+      self.products.where('FALSE').includes(:product_categories, :product_images)
     end
   end
 
