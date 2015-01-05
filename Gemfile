@@ -103,3 +103,6 @@ group :development do
   gem "binding_of_caller"
   # gem "rb-readline"
 end
+
+# Add rake db:dump, rake db:restore and cap db:pull
+gem 'rails_db_dump_restore', '~> 0.0.4'
