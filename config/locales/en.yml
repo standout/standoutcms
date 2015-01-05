@@ -249,6 +249,7 @@ en:
     settings:
       title: "Filter searchable columns"
       text: "Select which columns wont be searchable by users. This is purely a security measure, what fields are actually available in your store is controlled via the templates for the site."
+    products: "Search products"
   notices:
     page_template:
       created_by_user: "created page template %{title}"

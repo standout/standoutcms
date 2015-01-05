@@ -31,7 +31,12 @@ class Admin::ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = @website.products.paginate(page: params[:page])
+    unless params[:search].blank?
+      @search = Search.new(@website)
+      @products = @search.products(params[:search]).all.paginate(page: params[:page])
+    else
+      @products = @website.products.paginate(page: params[:page])
+    end
 
     respond_to do |format|
       format.html # index.html.erb

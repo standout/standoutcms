@@ -279,6 +279,7 @@ sv:
     settings:
       title: "Filtrera bort sökbara kolumner"
       text: "Välj vilka kolumner användare inte kan söka i. Detta är en ren säkerhetsinställning, vilka fält som faktiskt syns i er webshop kontrolleras via sitens mallar."
+    products: "Sök produkter"
   notices:
     page_template:
       created_by_user: "skapade sidmallen %{title}"
