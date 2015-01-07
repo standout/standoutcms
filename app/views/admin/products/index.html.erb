@@ -4,6 +4,10 @@
 <%= link_to t('new_product'), [:new, :admin, :product], :class => 'button add' %>
 <%= link_to t('new_csv_import'), [:new, :admin, :csv_import], :class => 'button add' %>
 
+<%= form_tag admin_products_path, :method => 'get', :class => "search" do %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag t('search.products'), :name => nil, :class => 'button add' %>
+<% end %>
 
 <table class="products-table">
   <tr>
