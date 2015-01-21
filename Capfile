@@ -27,6 +27,7 @@ require 'capistrano/rails'
 require 'capistrano/bundler'
 require 'capistrano/unicorn_nginx'
 # require 'capistrano/safe_deploy_to'
+require 'capistrano/rails_db_dump_restore'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
