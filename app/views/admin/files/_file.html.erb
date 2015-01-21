@@ -2,5 +2,6 @@
   <%= image_tag("extensions/file-#{File.extname(file.filename)[1..-1] rescue ""}.png") %>
   <%=h file.filename %>
   <span class="filesize"><%= number_to_human_size(file.size, :precision => 2) %></span>
-  <%= link_to image_tag("delete.png"), "/admin/files/#{file.id}", :method => :delete, :confirm => "Really delete?" %>
+  <%= link_to image_tag("delete.png"), "/admin/files/#{file.id}",
+      data: { method: :delete, confirm: "Really delete?" } %>
 </a>
