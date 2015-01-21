@@ -10,7 +10,7 @@ class Admin::FilesController < ApplicationController
     @file = AttachmentFile.new(attachment_file_params)
     @file.website_id = current_website.id
     if @file.save
-      redirect_to [:admin, :files]
+      redirect_to :back
     else
       render :action => 'new'
     end
