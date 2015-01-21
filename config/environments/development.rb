@@ -32,8 +32,5 @@ StandoutCms::Application.configure do
   config.eager_load = false
 
   config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
-
-  # New in rails 3.2
-  config.active_record.auto_explain_threshold_in_seconds = 0.5
 end
 
