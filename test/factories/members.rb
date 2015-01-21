@@ -7,8 +7,10 @@ FactoryGirl.define do
     last_name "Glennsson"
     approved false
     postal_street "Västergatan 6"
-    postal_zip 35237
+    postal_zip 35230
     postal_city "Växjö"
+    username "glenn"
+    phone "012-345 67 89"
 
     factory :approved_member do
       approved true

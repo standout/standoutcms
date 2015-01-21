@@ -66,6 +66,8 @@ StandoutCms::Application.configure do
     'pages.js',
     'pages.css',
     'look_files.js',
+    'members.js',
+    'members.css',
     'ckeditor/config.js',
     'ckeditor/skins/kama/editor.css',
     'ckeditor/skins/kama/dialog.css',
