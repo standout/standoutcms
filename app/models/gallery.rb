@@ -28,7 +28,8 @@ class Gallery < ActiveRecord::Base
   end
   
   def to_liquid
-    { "id" => self.id.to_s, "title" => self.title.to_s, "images" => self.gallery_photos }
+    { "id" => self.id.to_s, "title" => self.title.to_s,
+      "images" => self.gallery_photos.order("position") }
   end
   
   def large_size

@@ -4,7 +4,8 @@ class Admin::GalleryPhotosController < ApplicationController
   # GET /gallery_photos
   # GET /gallery_photos.xml
   def index
-    @gallery_photos = Gallery.find(params[:gallery_id]).gallery_photos
+    @gallery_photos = Gallery.find(params[:gallery_id]).
+      gallery_photos.order("position")
 
     respond_to do |format|
       format.html {
@@ -12,6 +13,14 @@ class Admin::GalleryPhotosController < ApplicationController
       }
       format.xml  { render :xml => @gallery_photos }
     end
+  end
+  # POST /admin/gallery_photos/sort?gallery_id=1
+  def sort
+    gallery_photos = Gallery.find(params[:gallery_id]).gallery_photos
+    params[:gallery_photo].each_with_index do |id, index|
+      gallery_photos.update_all({position: index + 1}, {id: id})
+    end
+    render nothing: true
   end
 
   # GET /gallery_photos/1
