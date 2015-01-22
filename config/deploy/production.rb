@@ -9,6 +9,7 @@ role :web, %w{deploy@standoutcms.se}
 role :db,  %w{deploy@standoutcms.se}
 
 set :rails_env, 'production'
+set :branch, "beta-1.4.2"
 
 # Extended Server Syntax
 # ======================
