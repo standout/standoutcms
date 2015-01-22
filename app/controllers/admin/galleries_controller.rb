@@ -1,11 +1,12 @@
 class Admin::GalleriesController < ApplicationController
-  
   before_filter :check_login
-  
+  layout "admin/responsive"
+  respond_to :html, :json
+
   # GET /galleries/1
   # GET /galleries/1.xml
   def show
-    @gallery = Gallery.find(params[:id])
+    @gallery = current_website.galleries.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,8 +27,8 @@ class Admin::GalleriesController < ApplicationController
 
   # GET /galleries/1/edit
   def edit
-    @gallery = Gallery.find_or_create_by_content_item_id(params[:id])
-    render :layout => false #if request.xhr?
+    @gallery = current_website.galleries.find(params[:id])
+    @page = @gallery.content_item.page
   end
 
   # POST /galleries
@@ -45,7 +46,6 @@ class Admin::GalleriesController < ApplicationController
         format.xml  { render :xml => @gallery.errors, :status => :unprocessable_entity }
       end
     end
-    
   end
 
   # PUT /galleries/1
@@ -53,12 +53,7 @@ class Admin::GalleriesController < ApplicationController
   def update
     @gallery = Gallery.find(params[:id])
     @gallery.update(gallery_params)
-    responds_to_parent do
-      render :update do |page|
-        page.replace_html "gallery_title", @gallery.title
-        page.visual_effect :fade, "edit_gallery_form"
-      end
-    end
+    respond_with :admin, @gallery, location: edit_admin_gallery_path(@gallery)
   end
 
   # DELETE /galleries/1

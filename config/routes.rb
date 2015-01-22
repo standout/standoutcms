@@ -109,7 +109,9 @@ StandoutCms::Application.routes.draw do
         resources :page_templates
       end
       resources :galleries
-      resources :gallery_photos
+      resources :gallery_photos do
+        post :sort, on: :collection
+      end
       resources :orders do
         resources :payments
       end

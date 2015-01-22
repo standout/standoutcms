@@ -15,6 +15,8 @@ class GalleryPhoto < ActiveRecord::Base
 
   process_in_background :photo, only_process: [:large]
 
+  acts_as_list
+
   def slug
     if self.created_at && self.created_at <= Date.parse("2011-08-09")
       self.photo_file_name

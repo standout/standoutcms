@@ -1,0 +1,15 @@
+doctype html
+html ng-app="app"
+  head
+    meta http-equiv="content-type" content="text/html;charset=UTF-8"
+    title Standout CMS [#{Version.current}]
+    = stylesheet_link_tag 'admin', 'custom_data_lists', 'jquery.Jcrop.css', 'ui-lightness/jquery-ui-1.8.10.custom.css'
+    = javascript_include_tag :application
+    = csrf_meta_tag
+    = yield(:head)
+  body(style="padding-left: 0")
+    #wrapper
+      = render partial: 'shared/menu', locals: { menu_selection: 'none' }
+      = render partial: 'pages/menu' if params[:controller] == 'pages'
+      #viewport(style="margin:0 auto;max-width:1200px;padding:20px")
+        = yield

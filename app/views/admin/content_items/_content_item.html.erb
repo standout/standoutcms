@@ -48,12 +48,12 @@
     </div>
   <%
   when "gallery" then %>
+      <% gallery = Gallery.find_or_create_by_content_item_id(content_item.id) %>
       <div id="content_item_<%= content_item.id %>"  class="content_item cms-gallery standoutcms_unselected" style="position: relative; overflow: hidden;  min-height: 32px;" 
         onclick="parent.select_item(this.id)" onmouseover="show_delete_button(this);" 
         onmouseout="hide_delete_button(this)" 
-        ondblclick="parent.load_gallery('<%= content_item.id %>')">
-      	<%= delete_content_item(content_item.id) %>
-        <% gallery = Gallery.find_or_create_by_content_item_id(content_item.id) %>
+        ondblclick="this.style.cursor = 'progress'; parent.location.pathname = '/admin/galleries/<%= gallery.id %>/edit'">
+       <%= delete_content_item(content_item.id) %>
         <%= raw gallery.content %>
       </div>
     <% else %>
