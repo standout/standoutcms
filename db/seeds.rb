@@ -38,3 +38,19 @@ w.shipping_costs.create(:cost_type => 'price', :from_value => 300, :cost => 0)
 
 puts "---------------"
 puts "Done."
+
+51.times do |n|
+  Member.create! do |m|
+    m.website = w
+    m.email         = Faker::Internet.safe_email
+    m.first_name    = Faker::Name.first_name
+    m.last_name     = Faker::Name.last_name
+    m.approved      = [true, false].sample
+    m.postal_street = Faker::Address.street_name
+    m.postal_zip    = Faker::Address.zip_code
+    m.postal_city   = Faker::Address.city
+    m.username      = Faker::Internet.user_name
+    m.phone         = Faker::PhoneNumber.phone_number
+    m.password_digest = "$2a$10$ykaAaxHyeXCQRszLn5Rp5ewYOHlSwgk3NgB34vOfGxIMNaM6Si4y6"
+  end
+end

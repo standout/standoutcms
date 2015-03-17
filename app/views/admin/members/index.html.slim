@@ -1,24 +1,56 @@
 .apple_pagination
   = will_paginate(@custom_data_rows, :container => false)
 
-table.datalist
-  thead
-    th E-postadress
-    th Användarnamn
-    th Godkänd?
-    th Namn
-    th Telefonnummer
-    th Adress
-    th
-  tbody
-    - @members.each do |member|
+  /= form_tag admin_members_path, method: "get", class: "search" do
+  /  = text_field_tag :search, params[:search]
+  /  = submit_tag t("search.products"), name: nil, class: "button add"
+
+= javascript_include_tag "members"
+= stylesheet_link_tag "members"
+
+javascript:
+  $(MemberSearch);
+
+= form_tag admin_members_path({}), method: "get",
+  class: "MemberSearch", id: "member_search" do
+  = hidden_field_tag :order,    params[:order]
+  = hidden_field_tag :order_by, params[:order_by]
+  table.datalist
+    thead
       tr
-        td = member.email
-        td = member.username
-        td = member.approved ? "Ja" : "Nej"
-        td = member.full_name
-        td = member.phone
-        td = member.full_address
-        td
-          = link_to [:edit, :admin, member], class: "button" do
-            | Redigera
+        th(data-order-by="email")    E-postadress
+        th(data-order-by="username") Användarnamn
+        th(data-order-by="approved") Godkänd?
+        th(data-order-by="name")     Namn
+        th(data-order-by="phone")    Telefonnummer
+        th(data-order-by="postal")   Adress
+        th
+      tr
+        - options = [["Nej", "0"], ["Ja", "1"]]
+        - selected = options.find { |arr| arr[1] == params[:approved] }
+        - text = t("search.placeholder")
+        th = search_field_tag :email,    params[:email],    placeholder: text
+        th = search_field_tag :username, params[:username], placeholder: text
+        th = select_tag :approved,
+          options_for_select(options, selected: selected),
+          prompt: ""
+        th = search_field_tag :name,   params[:name],   placeholder: text
+        th = search_field_tag :phone,  params[:phone],  placeholder: text
+        th = search_field_tag :postal, params[:postal], placeholder: text
+        th = submit_tag t("search.members"), name: nil
+    tbody
+      - if @members.empty?
+        tr
+          td
+            | Inga medlemmar hittades
+      - @members.each do |member|
+        tr
+          td = member.email
+          td = member.username
+          td = member.approved ? "Ja" : "Nej"
+          td = member.full_name
+          td = member.phone
+          td = member.full_address
+          td
+            = link_to [:edit, :admin, member], class: "button" do
+              | Redigera

@@ -92,6 +92,7 @@ group :development, :test do
   gem 'byebug'
   gem 'sqlite3'
   gem 'tinder'
+  gem 'faker'
 end
 
 gem "bcrypt-ruby", :require => "bcrypt"
