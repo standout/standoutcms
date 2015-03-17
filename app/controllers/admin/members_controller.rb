@@ -2,7 +2,6 @@ class Admin::MembersController < ApplicationController
   before_action :check_login
   before_action :find_member, only: %w(edit update destroy)
   before_action :load_website, only: %w(index)
-  before_action :unset_blank_params, only: %w(index)
   respond_to :json, :html
   responders :collection
 
@@ -45,12 +44,6 @@ class Admin::MembersController < ApplicationController
       @website = current_website
     else
       @website = current_user.websites.find(current_website.id)
-    end
-  end
-
-  def unset_blank_params
-    %i(email username approved name phone postal).each do |attr|
-      params.delete(attr) if params[attr].blank?
     end
   end
 
