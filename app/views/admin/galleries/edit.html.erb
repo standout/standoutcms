@@ -1,9 +1,59 @@
+<%= link_to admin_page_path(@page) do %>
+  &larr; Tillbaka till <%= @page.title %>
+<% end %>
+
+<script>
+  $(function () {
+    new GalleryPhotoSorter('#gallery_photos');
+    function GalleryPhotoSorter(selector) {
+      this.gallery = $(selector);
+
+      this.gallery.sortable({
+        handle: '.handle',
+        placeholder: 'GalleryItem placeholder',
+        update: updateGalleryPhoto
+      });
+
+      function updateGalleryPhoto() {
+        $.post($(this).data('update-url'), $(this).sortable('serialize'))
+      }
+    }
+  });
+</script>
+
+<style type="text/css">
+  #gallery_photos {
+    overflow: hidden;
+  }
+  #gallery_photos .handle {
+    cursor: move;
+  }
+  .GalleryItem {
+    float: left;
+  }
+  .GalleryItem.photo {
+    height: 150px;
+    width: 110px;
+    margin: 6px;
+    padding: 3px;
+  }
+  .GalleryItem.placeholder {
+    width: 100px;
+    height: 100px;
+    margin: 7px 17px 57px 7px;
+    padding: 0;
+    border: 2px dashed #444;
+    border-radius: 4px;
+    background: #ddd;
+  }
+</style>
+
 <h1><span id="gallery_title"><%= @gallery.title || t('gallery') %></span>
 <%= link_to_function image_tag("edit.png"), "$('#edit_gallery_form').toggle(); $('#gallery_photos').toggle();" %></h1>
 <%= link_to_function image_tag("close_window.png", :style => "position: absolute; top: 0px; right: 0px;"), "frames['edit'].load_editables_and_menus(); $('#overlay-container').hide();" %>
 
 <div id="edit_gallery_form" style="display: none;">
-<%= form_for([:admin, @gallery], :html => {:method => :put, :multipart => true, :target => "gallery_upload_iframe"}) do |f| %>
+<%= form_for([:admin, @gallery], html: {method: "put", multipart: true}) do |f| %>
 
 <p>
   <%= f.label :title, t('title') %><br />
@@ -12,7 +62,7 @@
 
 <p>
   <%= f.label :liquid %><br />
-  <%= f.text_area :liquid, :rows => 5 %>
+  <%= f.text_area :liquid, :rows => 5, "ng-non-bindable" => "true" %>
 </p>
 
 <p>
@@ -29,7 +79,7 @@
   <%= t('templates') %>:<br />
   <% Gallery::STYLES.each do |style| %>
   <a href="#" class="gallery-style-selector" onclick="$('#gallery_liquid').val(($(this).next('textarea').val())); return false;"><%= style.titleize %></a>
-  <textarea style="display: none;"><%= File.read("#{Rails.root}/lib/liquid_templates/galleries/#{style}.liquid").to_s %></textarea>
+  <textarea style="display: none;" ng-non-bindable=""><%= File.read("#{Rails.root}/lib/liquid_templates/galleries/#{style}.liquid").to_s %></textarea>
   <% end %>
 </p>
 
@@ -50,11 +100,8 @@
   <%= f.submit t('upload') %>
 <% end %>
 
-
-
-
-<div id="admin-gallery-photos">
-  <%= render :partial => "admin/gallery_photos/photo", :collection => @gallery.gallery_photos %>
+<div id="gallery_photos" data-update-url="<%= sort_admin_gallery_photos_path(gallery_id: @gallery) %>">
+  <%= render partial: "admin/gallery_photos/photo", collection: @gallery.gallery_photos.order("position") %>
 </div>
 
 <!-- this receives the upload of oversight images -->
