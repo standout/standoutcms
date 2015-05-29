@@ -26,6 +26,7 @@ class Website < ActiveRecord::Base
 
   has_many :pages
   has_many :assets
+  has_many :attachment_files
   has_many :looks, :dependent => :destroy
   has_many :members
   has_many :users, :through => :website_memberships

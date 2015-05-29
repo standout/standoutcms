@@ -102,30 +102,34 @@ class CustomDataRow < ActiveRecord::Base
   end
 
   def images_for(field)
-     @stored_images_for ||= {}
-     @stored_images_for["#{field}"] ||= generate_images_for(field)
-   end
+    @stored_images_for ||= {}
+    @stored_images_for["#{field}"] ||= generate_images_for(field)
+  end
 
-   def generate_images_for(field)
-     self.pictures.find_all_by_custom_data_field_id(field.id)
-   end
+  def generate_images_for(field)
+    self.pictures.find_all_by_custom_data_field_id(field.id)
+  end
 
-   def files_for(field)
-     @stored_files_for ||= {}
-     @stored_files_for["#{field}"] ||= generate_files_for(field)
-   end
+  def files_for(field)
+    @stored_files_for ||= {}
+    @stored_files_for["#{field}"] ||= generate_files_for(field)
+  end
 
-   def generate_files_for(field)
-     self.attachment_files.find_all_by_custom_data_field_id(field.id).collect{ |f| { "title" => f.title, "name" => f.data_file_name, "url" => f.url, "type" => f.content_type } }
-   end
+  def files_for_data(field)
+    files_for(field).collect{ |f| { "title" => f.title, "name" => f.data_file_name, "url" => f.url, "type" => f.content_type } }
+  end
 
-   def fields
-     self.custom_data_list.nil? ? [] : self.custom_data_list.cached_custom_data_fields
-   end
+  def generate_files_for(field)
+    self.attachment_files.find_all_by_custom_data_field_id(field.id)
+  end
 
-   def field_names
-     @field_names ||= self.fields.collect(&:name_to_slug)
-   end
+  def fields
+    self.custom_data_list.nil? ? [] : self.custom_data_list.cached_custom_data_fields
+  end
+
+  def field_names
+    @field_names ||= self.fields.collect(&:name_to_slug)
+  end
 
   # We need to override respond_to? to be able to mass assign attributes
   # http://coderrr.wordpress.com/2008/07/11/solving-the-method_missing-respond_to-problem/
