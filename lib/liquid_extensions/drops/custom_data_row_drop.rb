@@ -19,7 +19,7 @@ class CustomDataRowDrop < Liquid::Drop
 
         # Files
         if field.fieldtype == 'file'
-          return @row.files_for(field)
+          return @row.files_for_data(field)
 
         elsif field.fieldtype == 'password'
           return Digest::SHA256.hexdigest(@row.custom_data_list.website.api_key.to_s + self.json[field.name_to_slug.to_sym].to_s)
