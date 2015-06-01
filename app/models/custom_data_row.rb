@@ -112,7 +112,7 @@ class CustomDataRow < ActiveRecord::Base
 
   def files_for(field)
     @stored_files_for ||= {}
-    @stored_files_for["#{field}"] ||= generate_files_for(field)
+    @stored_files_for["#{field}"] ||= generate_files_for(field) if field
   end
 
   def files_for_data(field)
