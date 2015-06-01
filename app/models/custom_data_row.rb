@@ -116,7 +116,9 @@ class CustomDataRow < ActiveRecord::Base
   end
 
   def files_for_data(field)
-    files_for(field).collect{ |f| { "title" => f.title, "name" => f.data_file_name, "url" => f.url, "type" => f.content_type } }
+    return [] unless files = files_for(field)
+    files.collect { |f| { "title" => f.title, "name" => f.data_file_name,
+                          "url" => f.url, "type" => f.content_type } }
   end
 
   def generate_files_for(field)
