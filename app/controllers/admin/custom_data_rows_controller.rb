@@ -129,7 +129,7 @@ class Admin::CustomDataRowsController < ApplicationController
               file.custom_data_row_id = @custom_data_row.id
               file.custom_data_field_id = @custom_data_row.fields.find_by_slug(key.to_s).id
               file.save
-              @custom_data_row.send("#{key}=", @custom_data_row.files_for(@custom_data_row.fields.find_by_name(key.to_s)).length)
+              @custom_data_row.send("#{key}=", @custom_data_row.files_for_data(@custom_data_row.fields.find_by_name(key.to_s)).length)
           else
             @custom_data_row.send("#{key}=", value)
           end

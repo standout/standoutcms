@@ -37,6 +37,8 @@ class Admin::AttachmentFilesController < ApplicationController
       parent = @website.product_categories.find(params[:product_category_id])
     end
 
+    parent ||= @website
+
     @attachment_file = parent.attachment_files.find(params[:id])
 
     if @attachment_file.destroy
