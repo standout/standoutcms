@@ -11,7 +11,6 @@ if User.all.size < 1
   user.save
 end
 
-
 # Languages
 puts "- adding languages"
 Language.create(:short_code => 'sv', :name => 'Svenska')
@@ -19,7 +18,9 @@ Language.create(:short_code => 'en', :name => 'English')
 
 # Create a site
 puts "- adding default site"
-w = Website.create!(:title => 'Development', :subdomain => 'development')
+w = Website.new(:title => 'Development', :subdomain => 'development')
+w.users << user
+w.save!
 
 # Add product categories
 puts "- adding product categories"
