@@ -17,9 +17,12 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
+set :output, {:error => "cron_error_log.log", :standard => "cron_log.log"}
+env :PATH, '/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/usr/lib'
+
 # Process all images with thumbs not uploaded to s3, every minute.
 every 1.minute do 
-  runner "Picture.process_all", output: nil
+  runner "Picture.process_all"
 end
 
 every 1.day do 
