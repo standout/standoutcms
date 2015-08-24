@@ -36,6 +36,7 @@ gem 'slim-rails'
 gem "version"
 gem "active_model_serializers", "~> 0.8.0"
 gem 'angularjs-rails'
+gem 'whenever'
 
 # Uploading multiple files at once
 gem 'jquery-fileupload-rails'
