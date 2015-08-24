@@ -23,8 +23,8 @@ class AttachmentFile < Asset
 
   def to_liquid
     {
-      name: title,
-      url: url
+      'name' => title,
+      'url' => url
     }
   end
 
