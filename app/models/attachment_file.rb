@@ -21,6 +21,13 @@ class AttachmentFile < Asset
     self[:title].to_s != "" ? self[:title] : self.data_file_name
   end
 
+  def to_liquid
+    {
+      name: title,
+      url: url
+    }
+  end
+
 end
 
 Paperclip.interpolates :slug  do |attachment, style|
