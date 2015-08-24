@@ -19,7 +19,7 @@
 
 # Process all images with thumbs not uploaded to s3, every minute.
 every 1.minute do 
-  runner "Picture.process_all"
+  runner "Picture.process_all", output: nil
 end
 
 every 1.day do 
