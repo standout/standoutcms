@@ -25,7 +25,7 @@ class PageTemplate < ActiveRecord::Base
   end
 
   def delete_version?
-    true
+    false
   end
 
   def create_destroyed_version

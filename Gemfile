@@ -21,7 +21,6 @@ gem 'daemons'
 gem 'dibs_hmac', '~> 0.1.2'
 gem 'nokogiri', '~>1.8.2'
 gem 'execjs'
-# gem 'fileutils'
 gem 'figaro', '>= 1.0.0'
 gem 'gravtastic'
 gem 'hpricot'
@@ -51,7 +50,6 @@ gem 'non-stupid-digest-assets', '~> 1.0.4'
 # Vestal Versions can be found in many versions on Github. This one works
 # with Rails 3 and also fixes a bug with 'alias_table_name' that is not
 # already implemented in the main repository.
-#gem 'vestal_versions', :git => 'git://github.com/ericgoodwin/vestal_versions.git', branch: 'rails4'
 gem 'vestal_versions', :git => 'git://github.com/safetypins/vestal_versions.git', branch: 'rails_4_2'
 gem 'will_paginate'
 gem 'therubyracer'
