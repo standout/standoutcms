@@ -132,7 +132,7 @@ class Admin::PagesController < ApplicationController
       @pages = current_website.root_pages
     else
       # We are starting lower in the tree. Return all pages in the tree and down to the correct level.
-      pages = Page.find(:all, :conditions => ["website_id = ? and level = ?", params[:website_id], @menu.start_level])
+      pages = Page.where(website_id: params[:website_id]).where(level: @menu.start_level)
       # logger.info(@menu.to_yaml)
       for page in pages
         if page.self_and_siblings.include?(@page) || page.children.include?(@page) || page.ancestors.include?(@page) || @page.child_of?(page)

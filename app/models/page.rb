@@ -136,7 +136,7 @@ class Page < ActiveRecord::Base
 
   def content_items_with_language
     self.language = self.website.default_language if self.language.nil? || self.language.blank?
-    self.content_items.find(:all, :conditions => ["language = ?", self.language])
+    self.content_items.where(language: self.language)
   end
 
   # Override delete method to avoid complete deletion, and keep
@@ -229,7 +229,7 @@ class Page < ActiveRecord::Base
   # Returns the template as one big chunk with the partials included
   def complete_liquid_template
     html = self.page_template.html.to_s
-    html.gsub(/\{%\sinclude\s['|"](\w{1,60})['|"]\s%\}/) {|match| self.page_template.look.page_templates.find(:first, :conditions => ["slug = ?", $1]).html }
+    html.gsub(/\{%\sinclude\s['|"](\w{1,60})['|"]\s%\}/) {|match| self.page_template.look.page_templates.where(slug: $1).first.html }
   end
 
   # Caching website liquid is a must since it can be really slow
@@ -405,9 +405,9 @@ class Page < ActiveRecord::Base
 
   def available_parents
     if new_record?
-      self.class.find(:all, :order => "lft", :conditions => ["website_id = ?", self.website_id])
+      self.class.where(website_id: self.website_id).order(:lft)
     else
-      self.class.find(:all, :order => "lft", :conditions => ["id not in(#{[id].concat(all_children_ids).join(",")}) AND website_id = #{self.website_id}"])
+      self.class.where(website_id: self.website_id).where.not(id: [id].concat(all_children_ids)).order(:lft)
     end
   end
 
