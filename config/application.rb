@@ -4,7 +4,6 @@ require 'rails/all'
 require 'will_paginate/array'
 
 Bundler.require(:default, Rails.env)
-#  TEST Bundler.require(*Rails.groups)
 
 module StandoutCms
   class Application < Rails::Application
@@ -51,8 +50,8 @@ module StandoutCms
       g.test_framework :mini_test, spec: true, fixture: false
       g.helper false
       g.assets false
+    end
 
     config.active_record.raise_in_transactional_callbacks = true
-    end
   end
 end
