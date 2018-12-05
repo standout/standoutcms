@@ -278,7 +278,7 @@ class Page < ActiveRecord::Base
     # Content items
     doc.search(".editable").each do |element|
       out = ""
-      for item in self.content_items.find_all_by_for_html_id_and_page_id_and_language("#{element.attributes['id']}", self.id, language)
+      for item in self.content_items.where(for_html_id: "#{element.attributes['id']}").where(page_id: self.id).where(language: language)
         if keep_liquid
           out << item.text_content.to_s
         else
@@ -308,7 +308,7 @@ class Page < ActiveRecord::Base
     # Layout images
     doc.search(".cms-layoutimage").each do |li|
       out = ""
-      for item in self.content_items.find_all_by_for_html_id_and_page_id_and_language("#{li.attributes['id']}", self.id, language)
+      for item in self.content_items.where(for_html_id: "#{li.attributes['id']}").where(page_id: self.id).where(language: language)
         out << item.produce_output
       end
       li.inner_html = out
