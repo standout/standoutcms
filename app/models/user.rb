@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(email, password)
-    user = User.first(:conditions => { :email => email })
+    user = User.where(:email => email).first
     if user.blank? || BCrypt::Engine.hash_secret(password, user.password_salt) != user.password_hash
       user = nil
     end

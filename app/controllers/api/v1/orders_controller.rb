@@ -3,7 +3,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
     @website = Website.find(params[:website_id])
     @cart = Cart.find_by_api_key(params[:cart_api_key])
 
-    if not @cart or not @cart.update(filter_cart_params)
+    if not @cart or not @cart.update(cart_params)
       return render_error
     end
 
@@ -14,17 +14,17 @@ class Api::V1::OrdersController < Api::V1::BaseController
       return render_error
     end
 
-    @order = @website.orders.new(filter_order_params)
+    @order = @website.orders.new(order_params)
     @order.payment_type = 'invoice'
     @order.cart = @cart
     @order.customer = @customer
     @customer_information = @order
-      .new_customer_information_set(filter_customer_params)
+      .new_customer_information_set(customer_params)
 
     if params[:delivery_address]
       @delivery_information = @order
         .new_delivery_information_set(
-          filter_customer_params(params[:delivery_address])
+          customer_params(params[:delivery_address])
         )
       return render_error unless @delivery_information.save
     end
@@ -47,32 +47,28 @@ class Api::V1::OrdersController < Api::V1::BaseController
     mail.deliver
   end
 
-  # TODO use strong parameters instead
+  private
 
-  def filter_params(input, accessible)
-    input.select{ |key, value| accessible.include?(key.to_sym) }
+  def order_params
+    params.permit(:inquiry)
   end
 
-  def filter_customer_params(input = nil)
+  def cart_params
+    params.permit(:notes, :reseller)
+  end
+
+  def customer_params(input = nil)
     input ||= params
-    filter_params(input, [
-      :first_name,
-      :last_name,
-      :company_name,
-      :address_line1,
-      :address_line2,
-      :zipcode,
-      :city,
-      :phone,
-      :vat_identification_number
-    ])
-  end
-
-  def filter_order_params
-    filter_params params, [:inquiry]
-  end
-
-  def filter_cart_params
-    filter_params params, [:notes, :reseller]
+    params.permit %i(
+      first_name
+      last_name
+      company_name
+      address_line1
+      address_line2
+      zipcode
+      city
+      phone
+      vat_identification_number
+    )
   end
 end

@@ -15,7 +15,7 @@ class Api::V1::CartsControllerTest < ActionController::TestCase
   test 'show should return a cart' do
     get :show, format: :json, id: carts(:one).api_key
     assert_response :success
-    assert_equal @response.body, carts(:one).to_json
+    assert_equal @response.body, Cart.find(carts(:one).id).to_json
   end
 
   test 'update should update a cart and return it' do

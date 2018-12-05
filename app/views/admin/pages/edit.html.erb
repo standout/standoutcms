@@ -1,14 +1,14 @@
-<%= 
+<%=
 	begin
-	  
+
 	  # See if the page is connected to a data list.
 	  custom_data_list = @page.website.custom_data_lists.where(:page_id => @page.id).first
 	  item = custom_data_list.custom_data_rows.first if custom_data_list
-	  
+
 		if @page.blogentry? && params[:slug]
 			Liquid::Template.parse(@page.look.blogentry).render(
         'language' => params[:language],
-        'posts' => @page.website.posts, 
+        'posts' => @page.website.posts,
         'post' => @page.website.posts.find_by_slug(params[:slug]),
         'categories' => @page.website.blog_categories,
         'current_member' => current_member ? MemberDrop.new(current_member) : nil,
@@ -17,8 +17,8 @@
 		else
 		  stuff = {
 		    'page'              => PageDrop.new(@page, params[:language]),
-		    'language'          => params[:language], 
-			  'posts'             => @page.website.posts, 
+		    'language'          => params[:language],
+			  'posts'             => @page.website.posts,
 			  'categories'        => @page.website.blog_categories,
 			  'breadcrumbs'       => @page.breadcrumbs,
         'current_member' => current_member ? MemberDrop.new(current_member) : nil,
@@ -35,25 +35,25 @@
 	 		render :partial => 'admin/pages/liquid_error', :locals => { :liquid_error => e }
    rescue => e
 			render :partial => 'admin/pages/layout_error', :locals => { :error => e }
-	 
+
 	end
 %>
 
 <div id="cms_toolbar">
-		
+
 	<p id="cms_add_text_element">
 		<%= image_tag ('edit_text.gif') %> <%= t('text')%>
 	</p>
-	
+
 	<p id="cms_add_gallery">
 		<%= image_tag 'edit_image.gif' %> <%= t('gallery') %>
 	</p>
-	
-	
+
+
 	<p id="cms_add_remote">
 		<%= image_tag 'edit_plugin.gif' %> <%= t('remote') %>
 	</p>
-	
+
 	<p id="cms_add_liquid">
 	  <%= image_tag 'icon_code.png' %> <%= t('liquid') %>
 	</p>
@@ -75,7 +75,7 @@
 
 	// Load editables and menus when we are ready to serve this page.
 	$(document).ready(function(){
-		
+
 
     // Connect our CSRF-protection when document is ready
     // If we do it earlier, we could be overwritten later by late jQuery inclusions.
@@ -86,12 +86,12 @@
     $('.editable, .menu')
       .attr('unselectable', 'on')
       .css('-moz-user-select', 'none')
-      .each(function() { 
+      .each(function() {
         this.onselectstart = function() { return false; };
       });
 
 		$('#cms_toolbar p').draggable({ revert: 'invalid', helper: "clone", iframeFix: true });
-		
+
 		// Hide/show toolbar tip
 		$("#cms_toolbar_tip").delay(3000).hide('slow');
 		$("#cms_toolbar").hover(function(){
@@ -99,10 +99,10 @@
 		}, function(){
 		  $("#cms_toolbar_tip").stop(true, true).fadeOut();
 		});
-		
+
 		load_editables_and_menus();
 		fix_links_to_blog();
-		
+
 		// Links to items
 		$("a.item").each(function(){
 			$(this).click(function(){
@@ -117,7 +117,7 @@
 		$('html').css('padding-left', '150px');
 
 	});
-	
+
 	function fix_links_to_blog()
 	{
 		$("a.blogpost").each(function(index,element){
@@ -128,11 +128,11 @@
 			});
 		});
 	}
-	
+
 	// Load content of each content item with ajax.
 	function load_editables_and_menus()
 	{
-		
+
 		$('.editable').each(function(index, element) {
 
 			// Make sure the editables has an id
@@ -145,29 +145,29 @@
 				return true;
 			}
 			$(this).css('min-height', '100px');
-			$(this).css('outline', "#333 dashed 1px"); 
-			
+			$(this).css('outline', "#333 dashed 1px");
+
 
 			$(this).droppable({
 				activeClass: "cms-ui-state-hover",
 				hoverClass: "cms-ui-state-active",
 				drop: function( event, ui ) {
-				  
-				  // Based on what we are dropping, perform different tasks.				  
+
+				  // Based on what we are dropping, perform different tasks.
 				  switch(ui.draggable.attr('id'))
           {
             case "cms_add_text_element":
               add_new_text_element($(this).attr('id'));
               break;
-              
-            case "cms_add_gallery": 
+
+            case "cms_add_gallery":
               add_gallery_element($(this).attr('id'));
               break;
-              
+
             case "cms_add_remote":
               add_remote_element($(this).attr('id'));
               break;
-              
+
             case 'cms_add_liquid':
               add_liquid_element($(this).attr('id'));
               break;
@@ -176,21 +176,21 @@
 			});
 
 			$(this).load(
-			 	'/admin/pages/<%= @page.id %>/content_items/' + $(this).attr('id') + '?language=' + parent.$('#language_setting').val(), 
-			 	function(){ 
+			 	'/admin/pages/<%= @page.id %>/content_items/' + $(this).attr('id') + '?language=' + parent.$('#language_setting').val(),
+			 	function(){
 			 	 make_sortable($(this));
 			 	 point_out_galleries($(this));
 			 	}
-			); 
+			);
 
 			$(this).bind('click', function(event) {
 			  event.preventDefault();
 				select_element($(this).attr('id'));
 			});
 
-			$(this).bind('mouseenter', function(d){ 
-				$(d).css('outline', "#900 dotted 2px"); 
-				$(d).css('cursor','hand'); 
+			$(this).bind('mouseenter', function(d){
+				$(d).css('outline', "#900 dotted 2px");
+				$(d).css('cursor','hand');
 			});
 			$(this).bind('mouseleave',  function(d){
 				parent.unselect_element_temp(d.id);
@@ -198,7 +198,7 @@
 
 
 		});
-		
+
 		// Layout Images: (gallery with specific height/width)
     $("div.cms-layoutimage").each(function(index, element){
       default_image = $(this).find('img:last');
@@ -211,8 +211,8 @@
 			  }
 			} else {
 			  $(this).css('background-image', '/assets/missing.png');
-			}			
-			
+			}
+
 			});
 
 			$(this).bind('click', function(){
@@ -220,27 +220,27 @@
         return false;
       });
     });
-    
+
 
 
     // Menu objects
     $('.menu').each(function(index, element){
       $(this).html('Loading ...');
-			$(this).load('/admin/pages/<%= @page.id %>' + 
-			  '/menu_items/?html_id=' + $(this).attr('id') + '&language=' + parent.$('#language_setting').val() 
-			  + '&startlevel=' + $(this).data("startlevel") 
+			$(this).load('/admin/pages/<%= @page.id %>' +
+			  '/menu_items/?html_id=' + $(this).attr('id') + '&language=' + parent.$('#language_setting').val()
+			  + '&startlevel=' + $(this).data("startlevel")
 			  + '&sublevels=' + $(this).data("sublevels"));
-			
+
 			// Load  menu settings on click
 			$(this).bind('click', function(el){
-			  
+
 			  parent.load_menu_settings(<%= @page.id %>, $(this).attr('id'));
-			  
+
 				return false;
 			});
-		
+
 		});
-		
+
 		$('.breadcrumbs').each(function(index, element) {
 			$(this).html("<%= @page.breadcrumbs_html %>");
 		});
@@ -254,17 +254,17 @@ function point_out_galleries(div)
     if($(this).find('img').size() == 1)
     {
       $(this).append("<img src='/assets/missing.png' alt='' />");
-    } 
-  }); 
+    }
+  });
 }
 
 function make_sortable(div)
 {
-  div.sortable({  zIndex: 9000, items: 'div.content_item', 
+  div.sortable({  zIndex: 9000, items: 'div.content_item',
   update: function(event, ui) {
     $.post('/admin/content_items/order?page_id=<%= @page.id %>&div_id=' + $(div).attr('id'), $(this).sortable('serialize', { key: 'contentitems[]' }));
   }});
-  
+
 }
 
 
@@ -309,11 +309,11 @@ function add_gallery_element(element_id)
 {
 	$.post('/admin/content_items', {'content_item': {'page_id': <%= @page.id %>, 'for_html_id': element_id, 'language': parent.$('#language_setting').val(), 'content_type': 'gallery'}}, function(data) {
 		$(data).appendTo('#' + element_id);
-	
+
 		$('html, body').animate({
 		    scrollTop: $("#" + element_id + ' div.content_item:last').offset().top
 		}, 1000);
-	
+
 	});
 }
 
@@ -367,7 +367,7 @@ function hide_delete_button(element)
     outline: 1px dotted #333;
     min-height: 20px;
   }
-  .editable-background { 
+  .editable-background {
     background:#222; filter:alpha(opacity=80); height:100%; -khtml-opacity:0.8; -moz-opacity:0.8; opacity:0.8; text-shadow:0 0 0 #000; width:100%;
   }
 
@@ -380,10 +380,10 @@ function hide_delete_button(element)
   }
 
   div.editable {
-    position: relative; 
+    position: relative;
     cursor: move;
     overflow: hidden;
-    border:0; margin: 0; 
+    border:0; margin: 0;
     min-height: 15px;
   }
 
@@ -415,12 +415,12 @@ function hide_delete_button(element)
     border: 0;
     vertical-align: middle;
   }
-  
+
   div.cms-layoutimage {
     background-repeat: no-repeat;
     background-position: center center;
   }
-  
+
   #cms_toolbar_tip {
     position: fixed;
     top: 50px;

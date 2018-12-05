@@ -35,9 +35,9 @@ class Page < ActiveRecord::Base
 	  end
 	end
 
-	def page_template
-		self.original_page_template || self.website.page_templates.first(:conditions => { :default_template => true }) || self.website.page_templates.first
-	end
+  def page_template
+    self.original_page_template || self.website.page_templates.where(:default_template => true).first || self.website.page_templates.first
+  end
 
 
   # Always encrypt the page password
@@ -63,7 +63,7 @@ class Page < ActiveRecord::Base
         end
       end
       # Add the root page
-      page = self.website.pages.first(:conditions => { :position => 0 })
+      page = self.website.pages.where(:position => 0).first
       output << [page.title, page.address, page.id] if page
     end
     output.reverse

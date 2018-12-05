@@ -24,4 +24,11 @@ class PageTemplate < ActiveRecord::Base
     self.look.website
   end
 
+  def delete_version?
+    true
+  end
+
+  def create_destroyed_version
+    #
+  end
 end

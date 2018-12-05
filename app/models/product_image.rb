@@ -7,6 +7,8 @@ class ProductImage < ActiveRecord::Base
     processors: [:cropper],
     path: ":rails_root/public/system/images/:id/:style/:filename",
     url: "/system/images/:id/:style/:filename"
+  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   after_update :reprocess_image, :if => :cropping?
 

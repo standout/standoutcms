@@ -1,14 +1,14 @@
 class Admin::PageTemplatesController < ApplicationController
-  
+
   before_filter :check_login
   before_filter :load_website_and_look
   layout 'admin/looks'
-  
+
   def load_website_and_look
     @website = current_website
     @look = @website.looks.find(params[:look_id])
   end
-  
+
   def index
     @page_templates = @look.page_templates
   end
