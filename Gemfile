@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '4.2.5.1'
+gem 'rails', '4.2.11'
 
 gem 'airbrake', '~> 4.3.4'
 gem 'libv8'
