@@ -28,7 +28,7 @@ class Look < ActiveRecord::Base
        src = img.attributes['src']
        path = src.split(/\//).pop
 
-       look_file = self.look_files.find(:first, :conditions => ["filename = ?", path])
+       look_file = self.look_files.where(filename: path).first
        unless look_file.blank?
          begin
            img.raw_attributes = img.attributes.merge("src" => look_file.path)

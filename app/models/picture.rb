@@ -16,7 +16,8 @@ class Picture < Asset
                     }
                   }
 
-	validates_attachment_size :data, :less_than => 20.megabytes
+  validates_attachment_size :data, :less_than => 20.megabytes
+  validates_attachment_content_type :data, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
 	before_validation :download_remote_image, :if => :image_url_provided?
   after_create :reprocess
 
@@ -80,7 +81,7 @@ class Picture < Asset
   end
 
   def self.process_all
-    Picture.all(:conditions => ["processing = ?", true]).collect(&:perform)
+    Picture.where(processing: true).collect(&:perform)
   end
 
   private

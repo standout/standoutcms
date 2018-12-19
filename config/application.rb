@@ -51,5 +51,7 @@ module StandoutCms
       g.helper false
       g.assets false
     end
+
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end

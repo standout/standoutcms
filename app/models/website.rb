@@ -93,7 +93,7 @@ class Website < ActiveRecord::Base
   end
 
   def languages
-    Language.all(:order => 'name')
+    Language.order(name: :asc)
   end
 
   def self.find_by_domainaliases(aliases)

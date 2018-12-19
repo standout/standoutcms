@@ -1,16 +1,17 @@
 source 'http://rubygems.org'
 
-gem 'rails', '4.0.2'
+gem 'rails', '4.2.5.1'
 
-gem "airbrake"
+gem 'airbrake', '~> 4.3.4'
 gem 'libv8'
 gem 'awesome_nested_set'
 gem 'aws-s3'
-gem 'aws-sdk'
-gem 'best_in_place', git: 'git://github.com/aaronchi/best_in_place.git'
+gem 'aws-sdk', '< 2.0'
+gem 'best_in_place', '>= 3.1.0'
 gem "cancan"
-gem 'capistrano', '~> 3.2.1'
+gem 'capistrano', '~> 3.4'
 gem 'capistrano-rails', '~> 1.1.1'
+gem 'capistrano-rbenv', '~> 2.1'
 gem 'capistrano-unicorn-nginx', '~> 2.0.0'
 gem 'ckeditor', :git => 'git://github.com/galetahub/ckeditor.git'
 gem 'delayed_job_active_record'
@@ -18,21 +19,21 @@ gem 'delayed_job_web'
 gem 'ace-rails-ap'
 gem 'daemons'
 gem 'dibs_hmac', '~> 0.1.2'
-gem 'nokogiri'
+gem 'nokogiri', '~>1.8.2'
 gem 'execjs'
-gem 'fileutils'
-gem 'figaro'
+gem 'figaro', '>= 1.0.0'
 gem 'gravtastic'
 gem 'hpricot'
 gem 'jquery-rails', '>= 1.0.12'
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '~> 4.2.1'
 gem 'liquid'
-gem "mysql2"
-gem "paperclip", ">= 2.0"
+gem 'mysql2', '~> 0.3.18'
+gem 'paperclip', '>= 5.2.0'
 gem 'unicorn', '~> 4.8.3'
 gem 'puma'
 gem 'responders'
 gem 'slim-rails'
+gem 'sprockets-rails', '2.3.3'
 gem "version"
 gem "active_model_serializers", "~> 0.8.0"
 gem 'angularjs-rails'
@@ -49,7 +50,7 @@ gem 'non-stupid-digest-assets', '~> 1.0.4'
 # Vestal Versions can be found in many versions on Github. This one works
 # with Rails 3 and also fixes a bug with 'alias_table_name' that is not
 # already implemented in the main repository.
-gem 'vestal_versions', :git => 'git://github.com/ericgoodwin/vestal_versions.git', branch: 'rails4'
+gem 'vestal_versions', :git => 'git://github.com/safetypins/vestal_versions.git', branch: 'rails_4_2'
 gem 'will_paginate'
 gem 'therubyracer'
 gem 'remotipart', '>= 1.0.1'
@@ -96,7 +97,7 @@ group :development, :test do
   gem 'faker'
 end
 
-gem "bcrypt-ruby", :require => "bcrypt"
+gem "bcrypt", :require => "bcrypt"
 gem "mocha", require: false, group: :test
 
 group :development do

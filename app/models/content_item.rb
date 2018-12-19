@@ -46,7 +46,7 @@ class ContentItem < ActiveRecord::Base
 
   def remove_stickies
     if self.sticky == true
-      for item in ContentItem.find(:all, :conditions => ["parent_id = ?", self.id])
+      for item in ContentItem.where(parent_id: self.id)
         item.destroy
       end
     end
@@ -73,11 +73,11 @@ class ContentItem < ActiveRecord::Base
       # Make sure one exists for each page
       # We might want to do this more effective later on by finding all contentItems directly instead
       # of looking for the page.
-      for page in self.page.website.pages.find(:all, :conditions => ["id != ?", self.page_id])
+      for page in self.page.website.pages.where.not(id: self.page_id)
         if self.parent_id.blank? || self.parent_id.nil? || self.parent_id.to_i == 0
-          stickycopy = ContentItem.find(:first, :conditions => ["parent_id = ? and page_id = ? and language = ?", self.id, page.id, self.language])
+          stickycopy = ContentItem.where(parent_id: self.id).where(page_id: page.id).where(language: self.language).first
         else
-          stickycopy = ContentItem.find(:first, :conditions => ["parent_id = ? and page_id = ? and language = ?", self.parent_id, page.id, self.language])
+          stickycopy = ContentItem.where(parent_id: self.parent_id).where(page_id: page.id).where(language: self.language).first
         end
         if stickycopy.blank?
           ContentItem.create(:extra_id => self.extra_id, :sticky => true, :content_type => self.content_type, :page_id => page.id, :parent_id => self.id, :language => self.language, :text_content => self.text_content, :for_html_id => self.for_html_id, :extra_view_id => self.extra_view_id)

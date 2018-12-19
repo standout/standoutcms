@@ -2,22 +2,22 @@ class Include < Liquid::Include
   def initialize(tag_name, markup, tokens)
     super
   end
-  
+
   def render(context)
-    partial = Liquid::Template.parse(PageTemplate.find(context['page_template_id']).look.page_templates.find(:first, :conditions => { :slug => @template_name.gsub(/\W/, '') }).html)      
+    partial = Liquid::Template.parse(PageTemplate.find(context['page_template_id']).look.page_templates.where(slug: @template_name.gsub(/\W/, '')).first.html)
     variable = context[@variable_name || @template_name[1..-2]]
-    
+
     context.stack do
       @attributes.each do |key, value|
         context[key] = context[value]
       end
 
       if variable.is_a?(Array)
-        variable.collect do |variable|            
+        variable.collect do |variable|
           context[@template_name[1..-2]] = variable
           partial.render(context)
         end
-      else      
+      else
         context[@template_name[1..-2]] = variable
         partial.render(context)
       end

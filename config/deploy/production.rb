@@ -10,6 +10,10 @@ role :db,  %w{deploy@standoutcms.se}
 
 set :rails_env, 'production'
 
+set :rbenv_type, :user # or :system, depends on your rbenv setup
+set :rbenv_ruby, File.read('.ruby-version').strip
+set :rbenv_map_bins, %w{rake gem bundle ruby rails}
+
 # Extended Server Syntax
 # ======================
 # This can be used to drop a more detailed server definition into the

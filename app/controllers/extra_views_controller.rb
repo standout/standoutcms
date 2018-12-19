@@ -53,7 +53,7 @@ class ExtraViewsController < ApplicationController
     @content_item = ContentItem.find(params[:content_item])
       if @extra_view.save
         render :update do |page|
-          page.replace_html "plugin_views", :partial => "extras/extraview", :collection => ExtraView.find(:all, :conditions => ["extra_id = ?", @extra_view.extra_id])
+          page.replace_html "plugin_views", :partial => "extras/extraview", :collection => ExtraView.where(extra_id: @extra_view.extra_id)
         end
       else
         render :update do |page|

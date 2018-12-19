@@ -3,11 +3,12 @@ require "test_helper"
 describe MemberSession, "#update" do
   let(:website) { websites :standout }
   let(:member) { create :member, website: website }
-  let(:session) do
+  let(:current_session) do
     {}
   end
 
   it "updates session" do
+    session = current_session
     MemberSession.update(session, member).must_equal(member)
     session[:member_id].must_equal(member.id)
     session[:member_website_id].must_equal(member.website_id)
@@ -18,7 +19,7 @@ end
 describe MemberSession, "#destroy" do
   let(:website) { websites :standout }
   let(:member) { create :member, website: website }
-  let(:session) do
+  let(:current_session) do
     {
       member_id: member.id,
       member_website_id: website.id,
@@ -27,16 +28,16 @@ describe MemberSession, "#destroy" do
   end
 
   it "returns member" do
-    MemberSession.destroy(session).must_be_nil
-    session[:member_id].must_be_nil
-    session[:member_website_id].must_be_nil
+    MemberSession.destroy(current_session).must_be_nil
+    current_session[:member_id].must_be_nil
+    current_session[:member_website_id].must_be_nil
   end
 end
 
 describe MemberSession, "#get" do
   let(:website) { websites :standout }
   let(:member) { create :member, website: website }
-  let(:session) do
+  let(:current_session) do
     {
       member_id: member.id,
       member_website_id: website.id,
@@ -45,11 +46,11 @@ describe MemberSession, "#get" do
   end
 
   it "returns member" do
-    MemberSession.get(session, website).must_equal(member)
+    MemberSession.get(current_session, website).must_equal(member)
   end
 
   it "must return nil when website has changed" do
     website = websites(:lenhovda)
-    MemberSession.get(session, website).must_be_nil
+    MemberSession.get(current_session, website).must_be_nil
   end
 end

@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.2
-lock '3.2.1'
+lock '3.11.0'
 
 set :application, 'standoutcms'
 set :repo_url, 'git@github.com:standout/standoutcms.git'
@@ -42,20 +42,20 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     invoke 'delayed_job:restart'
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
-    end
+    # on roles(:app), in: :sequence, wait: 5 do
+    #   # Your restart mechanism here, for example:
+    #   # execute :touch, release_path.join('tmp/restart.txt')
+    # end
   end
   after :publishing, :restart
 
   after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
+    # on roles(:web), in: :groups, limit: 3, wait: 10 do
+    #   # Here we can do anything such as:
+    #   # within release_path do
+    #   #   execute :rake, 'cache:clear'
+    #   # end
+    # end
   end
 
 end

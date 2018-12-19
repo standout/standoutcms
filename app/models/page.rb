@@ -35,9 +35,9 @@ class Page < ActiveRecord::Base
 	  end
 	end
 
-	def page_template
-		self.original_page_template || self.website.page_templates.first(:conditions => { :default_template => true }) || self.website.page_templates.first
-	end
+  def page_template
+    self.original_page_template || self.website.page_templates.where(:default_template => true).first || self.website.page_templates.first
+  end
 
 
   # Always encrypt the page password
@@ -63,7 +63,7 @@ class Page < ActiveRecord::Base
         end
       end
       # Add the root page
-      page = self.website.pages.first(:conditions => { :position => 0 })
+      page = self.website.pages.where(:position => 0).first
       output << [page.title, page.address, page.id] if page
     end
     output.reverse
@@ -136,7 +136,7 @@ class Page < ActiveRecord::Base
 
   def content_items_with_language
     self.language = self.website.default_language if self.language.nil? || self.language.blank?
-    self.content_items.find(:all, :conditions => ["language = ?", self.language])
+    self.content_items.where(language: self.language)
   end
 
   # Override delete method to avoid complete deletion, and keep
@@ -229,7 +229,7 @@ class Page < ActiveRecord::Base
   # Returns the template as one big chunk with the partials included
   def complete_liquid_template
     html = self.page_template.html.to_s
-    html.gsub(/\{%\sinclude\s['|"](\w{1,60})['|"]\s%\}/) {|match| self.page_template.look.page_templates.find(:first, :conditions => ["slug = ?", $1]).html }
+    html.gsub(/\{%\sinclude\s['|"](\w{1,60})['|"]\s%\}/) {|match| self.page_template.look.page_templates.where(slug: $1).first.html }
   end
 
   # Caching website liquid is a must since it can be really slow
@@ -278,7 +278,7 @@ class Page < ActiveRecord::Base
     # Content items
     doc.search(".editable").each do |element|
       out = ""
-      for item in self.content_items.find_all_by_for_html_id_and_page_id_and_language("#{element.attributes['id']}", self.id, language)
+      for item in self.content_items.where(for_html_id: "#{element.attributes['id']}").where(page_id: self.id).where(language: language)
         if keep_liquid
           out << item.text_content.to_s
         else
@@ -308,7 +308,7 @@ class Page < ActiveRecord::Base
     # Layout images
     doc.search(".cms-layoutimage").each do |li|
       out = ""
-      for item in self.content_items.find_all_by_for_html_id_and_page_id_and_language("#{li.attributes['id']}", self.id, language)
+      for item in self.content_items.where(for_html_id: "#{li.attributes['id']}").where(page_id: self.id).where(language: language)
         out << item.produce_output
       end
       li.inner_html = out
@@ -405,9 +405,9 @@ class Page < ActiveRecord::Base
 
   def available_parents
     if new_record?
-      self.class.find(:all, :order => "lft", :conditions => ["website_id = ?", self.website_id])
+      self.class.where(website_id: self.website_id).order(:lft)
     else
-      self.class.find(:all, :order => "lft", :conditions => ["id not in(#{[id].concat(all_children_ids).join(",")}) AND website_id = #{self.website_id}"])
+      self.class.where(website_id: self.website_id).where.not(id: [id].concat(all_children_ids)).order(:lft)
     end
   end
 

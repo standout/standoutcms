@@ -15,7 +15,7 @@ class Menu < ActiveRecord::Base
     if self.start_level == 0
       pages = thepage.website.root_pages
     else
-      tmppages = Page.find(:all, :conditions => ["website_id = ? and level = ?", thepage.website_id, self.start_level])
+      tmppages = Page.where(website_id: thepage.website_id).where(level: self.start_level)
 
       # Walk through all pages and see if the page we are visiting is included in the tree
       for page in tmppages

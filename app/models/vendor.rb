@@ -8,6 +8,8 @@ class Vendor < ActiveRecord::Base
     path: ":rails_root/public/system/logos/:id/:style/:filename",
     url: "/system/logos/:id/:style/:filename"
 
+  validates_attachment_content_type :logo, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+
   has_many      :products
   has_many      :url_pointers, -> { order('created_at asc') }, dependent: :destroy
   belongs_to    :website

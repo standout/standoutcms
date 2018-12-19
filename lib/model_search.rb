@@ -132,8 +132,9 @@ module ModelSearch
     website_relation.filtered_attributes.select{ |k, v| v }.map{ |k, v| k }
   end
 
-  def filter_through_dynamic_attributes(array, hash)
-  	array.delete_if do |r|
+  def filter_through_dynamic_attributes(mixed, hash)
+    mixed = mixed.to_a unless mixed.kind_of?(Array)
+    mixed.to_a.delete_if do |r|
       keep = true;
       hash.each do |k,v|
         if v.class == Range

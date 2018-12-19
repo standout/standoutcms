@@ -107,7 +107,7 @@ class CustomDataRow < ActiveRecord::Base
   end
 
   def generate_images_for(field)
-    self.pictures.find_all_by_custom_data_field_id(field.id)
+    self.pictures.where(custom_data_field_id: field.id)
   end
 
   def files_for(field)
@@ -120,7 +120,7 @@ class CustomDataRow < ActiveRecord::Base
   end
 
   def generate_files_for(field)
-    self.attachment_files.find_all_by_custom_data_field_id(field.id)
+    self.attachment_files.where(custom_data_field_id: field.id)
   end
 
   def fields

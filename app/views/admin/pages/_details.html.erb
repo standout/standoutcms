@@ -100,10 +100,8 @@ $(document).ready(function(){
   <p>
     <label for="page_parent_id"><%= t('subpage_for') %></label>
     <%#= select("page", "proposed_parent_id", @page.available_parents.map{|page| [padded_page_name(page,1,"-"), page.id]}, {:include_blank => true, :selected => @page.parent_id}) %>
-    <%= select :page, :parent_id, Page.find(:all, :conditions => ["website_id = ? AND id != ?", @page.website_id, @page.id]).collect{ |p| [p.title, p.id]}, :include_blank => true %>
+		<%= select :page, :parent_id, Page.where(website_id: @page.website_id).where.not(id: @page.id).collect{ |p| [p.title, p.id]}, :include_blank => true %>
   </p>
-
-
 
   <!--
   deprecated

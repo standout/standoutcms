@@ -14,6 +14,8 @@ set -e
 TIMEOUT=${TIMEOUT-60}
 APP_ROOT=<%= current_path %>
 PID=<%= fetch(:unicorn_pid) %>
+USER=<%= fetch(:unicorn_user) %>
+PATH="/home/$USER/.rbenv/shims:/home/$USER/.rbenv/bin:$PATH"
 
 CMD="cd $APP_ROOT && <%= bundle_unicorn("-D -c", fetch(:unicorn_config), "-E", fetch(:stage)) %>"
 

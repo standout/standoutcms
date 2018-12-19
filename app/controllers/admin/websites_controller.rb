@@ -115,7 +115,7 @@ class Admin::WebsitesController < ApplicationController
   protected
   def load_websites
     if current_user.admin?
-      @websites = Website.all(:order => 'title asc')
+      @websites = Website.order(title: :asc)
     else
       @websites = current_user.websites.uniq
     end
