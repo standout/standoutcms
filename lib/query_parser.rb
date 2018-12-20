@@ -36,7 +36,7 @@ module QueryParser
   end
 
 	# Hooks in and acts as method missing, argument is the method that was really called
-	def before_method(method_name)
+  def liquid_method_missing(method_name)
     if @instance.respond_to? :search_and_filter
       results = @instance.search_and_filter(tokenizer(method_name.sub("filter__",""))) if method_name.start_with?("filter__")
       results = @instance.search_and_filter(tokenizer(method_name.sub("search__",""))) if method_name.start_with?("search__")
