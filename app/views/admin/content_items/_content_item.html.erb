@@ -2,7 +2,7 @@
 
   # TODO: This is a quick fix for handling both plugins and remotes. Should probably be fixed in db later.
   if content_item.content_type == 'plugin'
-    content_item.content_type = 'remote' 
+    content_item.content_type = 'remote'
   end
 
   case "#{content_item.content_type}"
@@ -12,32 +12,32 @@
     <%= render :partial => 'liquid', :locals => { :content_item => content_item } %>
   <%
   when "remote" then %>
-    <div id="content_item_<%= content_item.id %>"  
-			class="content_item plugin standoutcms_unselected" 
-			style="position: relative; overflow: hidden; min-height: 32px; z-index: 1000;" 
-			onclick="parent.select_item(this.id)" 
-			onmouseover="show_delete_button(this);" 
-			onmouseout="hide_delete_button(this)" 
+    <div id="content_item_<%= content_item.id %>"
+			class="content_item plugin standoutcms_unselected"
+			style="position: relative; overflow: hidden; min-height: 32px; z-index: 1000;"
+			onclick="parent.select_item(this.id)"
+			onmouseover="show_delete_button(this);"
+			onmouseout="hide_delete_button(this)"
 			ondblclick="parent.load_remote('<%= content_item.id %>', '<%= content_item.page_id %>')">
 		<%= delete_content_item(content_item.id) %>
     <% extra = Extra.find(content_item.extra_id) if content_item.extra_id rescue nil %>
 
-     <% 
+     <%
 			unless extra.nil?
-				begin 
+				begin
 					if content_item.display_url.match('http://')
 						text = Net::HTTP.get_response(URI.parse(content_item.display_url))
 					else
 						text = Net::HTTP.get_response(URI.parse("http://#{content_item.page.website.domain}/#{content_item.display_url}?page_id=#{content_item.page_id}"))
 					end
- 				
+
 					%>
 				<%= raw(text.body) %>
 				<%
 				rescue
 					%>
 					 <p><%= t('plugin_could_not_load') %>.</p>
-					<% 
+					<%
 					end
 			else
 		%>
@@ -48,20 +48,20 @@
     </div>
   <%
   when "gallery" then %>
-      <% gallery = Gallery.find_or_create_by_content_item_id(content_item.id) %>
-      <div id="content_item_<%= content_item.id %>"  class="content_item cms-gallery standoutcms_unselected" style="position: relative; overflow: hidden;  min-height: 32px;" 
-        onclick="parent.select_item(this.id)" onmouseover="show_delete_button(this);" 
-        onmouseout="hide_delete_button(this)" 
+      <% gallery = Gallery.find_or_create_by(content_item_id: content_item.id) %>
+      <div id="content_item_<%= content_item.id %>"  class="content_item cms-gallery standoutcms_unselected" style="position: relative; overflow: hidden;  min-height: 32px;"
+        onclick="parent.select_item(this.id)" onmouseover="show_delete_button(this);"
+        onmouseout="hide_delete_button(this)"
         ondblclick="this.style.cursor = 'progress'; parent.location.pathname = '/admin/galleries/<%= gallery.id %>/edit'">
        <%= delete_content_item(content_item.id) %>
         <%= raw gallery.content %>
       </div>
     <% else %>
-    <div 
+    <div
 			id="content_item_<%= content_item.id %>"
-			style="position: relative; overflow: hidden; min-height: 32px;" 
-			class="content_item standoutcms_unselected" 
-			onmouseover="show_delete_button(this);" 
+			style="position: relative; overflow: hidden; min-height: 32px;"
+			class="content_item standoutcms_unselected"
+			onmouseover="show_delete_button(this);"
 			onmouseout="hide_delete_button(this);"
 			ondblclick="parent.load_texteditor('content_item_<%= content_item.id %>', '<%= content_item.sticky == true ? '1' : '0' %>'); return false;">
    			<%= delete_content_item(content_item.id) %>
