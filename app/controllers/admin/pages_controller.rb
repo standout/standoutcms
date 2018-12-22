@@ -117,7 +117,7 @@ class Admin::PagesController < ApplicationController
     @parent_ids = @page.all_parent_ids
 
     # Find or create the menu item. We need this to store settings for a menu.
-    @menu = Menu.find_or_create_by_page_template_id_and_for_html_id(@page.page_template_id, params[:div_id])
+    @menu = Menu.find_or_create_by(page_template_id: @page.page_template_id, for_html_id: params[:div_id])
 
     # If we have parameters from the menu page and nothing is set
     @number_of_submenus = 0
