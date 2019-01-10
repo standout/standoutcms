@@ -76,10 +76,6 @@ GEM
     arel (6.0.4)
     awesome_nested_set (3.1.4)
       activerecord (>= 4.0.0, < 5.3)
-    aws-s3 (0.6.3)
-      builder
-      mime-types
-      xml-simple
     aws-sdk (1.67.0)
       aws-sdk-v1 (= 1.67.0)
     aws-sdk-core (2.11.202)
@@ -386,7 +382,6 @@ GEM
     whenever (0.10.0)
       chronic (>= 0.6.3)
     will_paginate (3.1.6)
-    xml-simple (1.1.5)
 
 PLATFORMS
   ruby
@@ -399,7 +394,6 @@ DEPENDENCIES
   airbrake (~> 4.3.4)
   angularjs-rails
   awesome_nested_set
-  aws-s3
   aws-sdk (~> 1)
   aws-sdk-resources (~> 2)
   bcrypt
