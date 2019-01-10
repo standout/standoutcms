@@ -1,13 +1,17 @@
+require 'aws-sdk'
+require 'aws-sdk-resources'
+
 class AttachmentFile < Asset
   has_attached_file :data,
 	                  :s3_credentials => {
                       :access_key_id => ENV['ACCESS_KEY_ID'],
                       :secret_access_key => ENV['SECRET_ACCESS_KEY']},
-	                  :storage => :s3,
+                    :storage => :s3,
                     :bucket => ENV['S3_BUCKET'],
                     :path => "files/:id/:style/:slug"
 
   validates_attachment_size :data, :less_than => 40.megabytes
+  do_not_validate_attachment_file_type :data
 
   def slug
     if self.created_at && self.created_at <= Date.parse("2011-08-09")
