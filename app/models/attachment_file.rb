@@ -7,6 +7,7 @@ class AttachmentFile < Asset
                       :access_key_id => ENV['ACCESS_KEY_ID'],
                       :secret_access_key => ENV['SECRET_ACCESS_KEY']},
                     :storage => :s3,
+                    :s3_region => 'us-east-1',
                     :bucket => ENV['S3_BUCKET'],
                     :path => "files/:id/:style/:slug"
 
