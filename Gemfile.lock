@@ -82,9 +82,15 @@ GEM
       xml-simple
     aws-sdk (1.67.0)
       aws-sdk-v1 (= 1.67.0)
+    aws-sdk-core (2.11.202)
+      aws-sigv4 (~> 1.0)
+      jmespath (~> 1.0)
+    aws-sdk-resources (2.11.202)
+      aws-sdk-core (= 2.11.202)
     aws-sdk-v1 (1.67.0)
       json (~> 1.4)
       nokogiri (~> 1)
+    aws-sigv4 (1.0.3)
     bcrypt (3.1.12)
     best_in_place (3.1.1)
       actionpack (>= 3.2)
@@ -186,6 +192,7 @@ GEM
     httpclient (2.8.3)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
+    jmespath (1.4.0)
     jquery-fileupload-rails (1.0.0)
       actionpack (>= 3.1)
       railties (>= 3.1)
@@ -393,7 +400,8 @@ DEPENDENCIES
   angularjs-rails
   awesome_nested_set
   aws-s3
-  aws-sdk (< 2.0)
+  aws-sdk (~> 1)
+  aws-sdk-resources (~> 2)
   bcrypt
   best_in_place (>= 3.1.0)
   better_errors
