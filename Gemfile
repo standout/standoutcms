@@ -7,7 +7,7 @@ gem 'libv8'
 gem 'awesome_nested_set'
 gem 'aws-sdk', '~> 1'
 gem 'aws-sdk-resources', '~> 2'
-gem 'best_in_place', '>= 3.1.0'
+gem 'best_in_place', github:'widernet/best_in_place', branch: 'rails-4'
 gem "cancan"
 gem 'capistrano', '~> 3.4'
 gem 'capistrano-rails', '~> 1.1.1'
