@@ -21,6 +21,15 @@ GIT
       activerecord (>= 3.0.0)
       activesupport (>= 3.0.0)
 
+GIT
+  remote: git://github.com/widernet/best_in_place.git
+  revision: 964f3f36fe24cd7cd304b44f4ffac2ee1de3cd1e
+  branch: rails-4
+  specs:
+    best_in_place (2.0.3)
+      jquery-rails
+      rails (~> 4)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -88,9 +97,6 @@ GEM
       nokogiri (~> 1)
     aws-sigv4 (1.0.3)
     bcrypt (3.1.12)
-    best_in_place (3.1.1)
-      actionpack (>= 3.2)
-      railties (>= 3.2)
     better_errors (2.5.0)
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
@@ -397,7 +403,7 @@ DEPENDENCIES
   aws-sdk (~> 1)
   aws-sdk-resources (~> 2)
   bcrypt
-  best_in_place (>= 3.1.0)
+  best_in_place!
   better_errors
   binding_of_caller
   byebug
