@@ -12,7 +12,7 @@
 
   <p>
     <%= f.label :page_id, t('single_page') %><br />
-    <%= f.select :page_id, @website.pages.order(:position).all.collect{ |pt| ["-" * pt.level.to_i + pt.title.to_s, pt.id] } %>
+    <%= f.select :page_id, @website.pages.order(position: :desc).all.collect{ |pt| ["-" * pt.level.to_i + pt.title.to_s, pt.id] } %>
 
     <span class="tip">
       Where in the hierarchy does this belong?
@@ -22,13 +22,13 @@
 	<!--p>
 		<%= f.label :page_template_id, t('page_template') %><br />
 		<%= f.select :page_template_id, @website.page_templates.collect{ |pt| [pt.name, pt.id] }, :include_blank => true %><br />
-		
+
 		<span class="tip">
 			If a page template is selected, each item in this list will be given a unique url (<%= @website.domain %>/{liquid_name}/{id}) and rendered on the website.
 		</span>
-		
+
 	</p-->
-	
+
 	<p>
 		<%= f.label :sort_field_id, t('sort_by') %><br />
 		<%= f.select :sort_field_id, @custom_data_list.custom_data_fields.collect{ |field| [field.name.titleize, field.id] } %> <%= f.check_box :sort_field_order %> <%= f.label :sort_field_order, t('reverse_order') %>
