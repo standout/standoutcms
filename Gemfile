@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '4.2.11'
+gem 'rails', '4.2.11.1'
 
 gem 'airbrake', '~> 4.3.4'
 gem 'libv8'
@@ -19,7 +19,7 @@ gem 'delayed_job_web'
 gem 'ace-rails-ap'
 gem 'daemons'
 gem 'dibs_hmac', '~> 0.1.2'
-gem 'nokogiri', '~>1.8.2'
+gem 'nokogiri', '~>1.10.9'
 gem 'execjs'
 gem 'figaro', '>= 1.0.0'
 gem 'gravtastic'
