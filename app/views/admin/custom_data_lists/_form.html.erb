@@ -9,11 +9,11 @@
 		<span class="tip">This is used when programming your site. Normally using lowercase of the name of your list. <br />
 		A list of 'Medical Students' would be called 'medical_students' in this field.</span>
   </p>
-  
+
   <p>
     <%= f.label :page_id, t('single_page') %><br />
-    <%= f.select :page_id, @website.pages.all(:order => :position).collect{ |pt| ["-" * pt.level.to_i + pt.title.to_s, pt.id] } %>
-    
+    <%= f.select :page_id, @website.pages.order(:position).all.collect{ |pt| ["-" * pt.level.to_i + pt.title.to_s, pt.id] } %>
+
     <span class="tip">
       Where in the hierarchy does this belong?
     </span>
